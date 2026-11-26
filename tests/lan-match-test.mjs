@@ -10,7 +10,7 @@ const server = spawn("node", ["serve.mjs"], { env: { ...process.env, PORT: Strin
 await new Promise((r) => setTimeout(r, 2000));
 const browser = await chromium.launch({ args: ["--use-gl=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"] });
 const out = [];
-const snap = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__?.getClientLogic?.(); if (!l) return null; return { seat: l._localSeat, turn: JSON.stringify(l.turn), phase: l.gamePhase, moves: l.moveCount, over: !!l.gameOver, names: window.__LAN_PARAMS__ }; });
+const snap = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__?.getClientLogic?.(); if (!l) return null; return { seat: l._localSeat, turn: JSON.stringify(l.turn), phase: l.gamePhase, sel: (() => { try { return !!l.worldMap.tanksSelected(true); } catch (e) { return null; } })(), over: !!l.gameOver, names: window.__LAN_PARAMS__ }; });
 for (const game of GAMES) {
   const vp = game === "brawlbots" ? { width: 860, height: 412 } : { width: 412, height: 860 };
   const errors = [];
@@ -58,8 +58,9 @@ for (const game of GAMES) {
       res.actions.push(await act(B.page, 1)); await A.page.waitForTimeout(8000);
     }
     res.end = { A: await snap(A.page), B: await snap(B.page) };
-    res.steps.sameState = !!res.end.A && !!res.end.B && res.end.A.turn === res.end.B.turn && res.end.A.phase === res.end.B.phase && res.end.A.moves === res.end.B.moves;
-    res.steps.movesAdvanced = game === "pool" ? null : (res.end.A.moves > (res.start.A.moves || 0) && res.end.B.moves > (res.start.B.moves || 0));
+    res.steps.sameState = !!res.end.A && !!res.end.B && res.end.A.turn === res.end.B.turn && res.end.A.phase === res.end.B.phase && res.end.A.sel === res.end.B.sel;
+    const chg = (x, y) => x.turn !== y.turn || x.sel !== y.sel || x.phase !== y.phase;
+    res.steps.movesAdvanced = game === "pool" ? null : (chg(res.end.A, res.start.A) && chg(res.end.B, res.start.B));
     await A.page.screenshot({ path: `shots/lan-${game}-host.png` });
     await B.page.screenshot({ path: `shots/lan-${game}-guest.png` });
     await A.ctx.close(); await B.ctx.close();
