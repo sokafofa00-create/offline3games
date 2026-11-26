@@ -750,9 +750,12 @@ export async function launchPlatoOfflineSession({
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / Math.max(1, rect.width);
     const scaleY = canvas.height / Math.max(1, rect.height);
+    // The game's InputManager computes y = surfaceHeight - y itself. Measured on this runtime (tap-scan CI run, and the
+    // user's phone report "to press something at the bottom I tap at the top"): top-down CSS y reaches the game mirrored,
+    // so hand it the already-mirrored y.
     return {
       x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY,
+      y: canvas.height - (clientY - rect.top) * scaleY,
     };
   }
 
