@@ -69,6 +69,29 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       };
     });
     res.steps.hud1 = (await page.textContent("#turn-text"))?.trim();
+    // Pass-the-phone cover (REAL controls): visible at start for hidden-info games, never for Pool.
+    const coverVisible = async () => (await page.locator("#pass-cover").isVisible());
+    res.cover = { expected: sc.game !== "pool", atStart: await coverVisible() };
+    if (res.cover.atStart) {
+      res.cover.title = (await page.textContent("#pass-cover-title"))?.trim();
+      await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1b-cover.png` });
+      await page.click("#pass-cover-btn");
+      res.cover.hiddenAfterTap = !(await coverVisible());
+    }
+    res.cover.ok = res.cover.atStart === res.cover.expected && (!res.cover.expected || res.cover.hiddenAfterTap);
+    if (sc.game === "brawlbots") {
+      // REAL control: the visible "switch player" button should move the active seat and re-show the cover.
+      const seatOf = () => page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._localSeat);
+      const before = await seatOf();
+      await page.click("#switch-seat-btn");
+      await page.waitForTimeout(2500);
+      res.switch = { before, after: await seatOf(), coverShown: await coverVisible(), hud: (await page.textContent("#turn-text"))?.trim() };
+      if (res.switch.coverShown) await page.click("#pass-cover-btn");
+    }
+    if (sc.game === "monsters") {
+      const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
+      res.monstersBefore = await snap();
+    }
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1-start.png` });
     const box = await page.locator("#game-canvas").boundingBox();
     if (box) {
@@ -78,8 +101,10 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       await page.mouse.up();
     }
     await page.waitForTimeout(3000);
+    if (sc.game === "monsters") res.monstersAfter = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
     res.steps.hud2 = (await page.textContent("#turn-text"))?.trim();
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-2-after-input.png` });
+    if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn");
     await page.click("#menu-btn");
     await page.waitForTimeout(500);
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-3-menu.png` });
@@ -102,5 +127,5 @@ await browser.close();
 server.kill();
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Smoke results\n```json\n" + JSON.stringify(results, null, 1).slice(0, 60000) + "\n```\n");
 console.log("SMOKE_RESULTS " + JSON.stringify(results, null, 1));
-const bad = results.filter((r) => r.errors.length || r.externalRequests.length || !r.steps.rematchClicked);
+const bad = results.filter((r) => r.errors.length || r.cover?.ok === false || r.externalRequests.length || !r.steps.rematchClicked);
 if (bad.length) { console.log("FAILED: " + bad.map((b) => b.name).join(", ")); process.exit(1); }
