@@ -1,7 +1,9 @@
 package com.local.offlinegames
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -126,6 +128,15 @@ class MainActivity : ComponentActivity() {
     }
 
     class AndroidHostBridge(private val context: Context) {
+        // Per-game orientation: Brawlbots is a landscape game, Pool and Match Monsters stay portrait.
+        @JavascriptInterface
+        fun setOrientation(mode: String) {
+            val act = context as? Activity ?: return
+            val target = if (mode == "landscape") ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+                         else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+            act.runOnUiThread { act.requestedOrientation = target }
+        }
+
         @JavascriptInterface
         fun vibrate(durationMs: Long) {
             val ms = durationMs.coerceIn(5L, 300L)
