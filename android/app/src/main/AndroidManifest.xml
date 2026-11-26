@@ -2,10 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- إزالة أذونات الإنترنت والشبكة قسراً لضمان كون التطبيق أوفلاين 100% -->
-    <uses-permission android:name="android.permission.INTERNET" tools:node="remove" />
+    <!-- الشبكة المحلية فقط (لوبي ومباريات بين جهازين على نفس الشبكة). لا إنترنت ولا خدمات خارجية:
+         الكود الأصلي يرفض أي عنوان خارج النطاقات الخاصة. ACCESS_NETWORK_STATE غير مطلوب عمداً. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" tools:node="remove" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" tools:node="remove" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" tools:node="remove" />
 
     <!-- إذن الاهتزاز فقط لتأثيرات ضرب الكرات -->
     <uses-permission android:name="android.permission.VIBRATE" />
