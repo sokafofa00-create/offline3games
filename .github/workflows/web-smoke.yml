@@ -31,6 +31,9 @@ jobs:
         run: node tests/verify-assets.mjs pool_assets
       - name: Run smoke test (load, start, input, menu, rematch)
         run: node tests/smoke.mjs
+      - name: Computer-player test (bot seat acts by itself; internal-API human seat)
+        if: always()
+        run: node tests/bots-test.mjs
       - name: Renderer comparison (Mesa GL via Xvfb, same scenarios)
         if: always()
         run: |
