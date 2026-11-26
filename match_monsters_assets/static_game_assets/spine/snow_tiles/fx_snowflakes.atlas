@@ -1,0 +1,9 @@
+fx_snowflakes.png
+size:144,144
+filter:Linear,Linear
+snowball
+bounds:73,115,27,27
+snowflakes_1
+bounds:2,73,69,69
+snowflakes_2
+bounds:2,2,69,69
