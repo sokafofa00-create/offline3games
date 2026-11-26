@@ -143,6 +143,7 @@ function poolAct(l, seat, diff, st) {
   const ang = pick.ang + rnd(-err, err);
   const breaking = typeof l.isBreaking === "function" && l.isBreaking();
   const strength = breaking ? 0.95 : Math.max(0.3, Math.min(0.95, 0.38 + 0.55 * (pick.total / span)));
+  st.last = { ang: Math.round(ang * 1000) / 1000, strength: Math.round(strength * 100) / 100, cue: [Math.round(cx * 100) / 100, Math.round(cy * 100) / 100], blocked: pick.blocked };
   l.requestShot(strength, ang, [0, 0]);
   return true;
 }
@@ -171,7 +172,7 @@ export function startBots({ getLogic, botSeats, difficulty, game }) {
       else if (game === "brawlbots") acted = brawlbotsAct(l, seat, difficulty);
       else if (game === "pool") acted = poolAct(l, seat, difficulty, poolState);
     } catch (e) { log.push({ err: String(e && e.message).slice(0, 120), seat }); }
-    if (log.length < 200) log.push({ t: now, seat, acted, phase: l.gamePhase });
+    if (log.length < 200) log.push({ t: now, seat, acted, phase: l.gamePhase, shot: game === "pool" ? poolState.last : undefined });
     lastKey = key; lastAt = now;
   };
   const id = setInterval(tick, 350);
