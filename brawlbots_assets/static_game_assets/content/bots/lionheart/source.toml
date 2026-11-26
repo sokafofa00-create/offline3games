@@ -1,0 +1,31 @@
+[stats]
+health = 9
+accuracy = 6
+weight = 8
+
+[selection]
+scale = 0.88
+x = 0.62
+y = 0.75
+
+[physics]
+height = 125
+offset = [-8, -138]
+display_offset = [-128, -16]
+display_scale = 0.5
+
+[[spine]]
+uri = "~/content/bots/lionheart/Lionheart.json"
+[[spine]]
+uri = "~/_revamp/content/bots/lionheart/Lionheart.atlas"
+[[spine]]
+uri = "~/_revamp/content/bots/lionheart/Lionheart.webp"
+
+[[abilities]]
+id = "505"
+cooldown = 2
+animation = "skill_1"
+
+[[abilities]]
+id = "3019"
+cooldown = 3

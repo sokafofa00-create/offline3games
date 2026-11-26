@@ -1,0 +1,81 @@
+[[roster]]
+name = "PANZER"
+sku = 0
+uri = "~/content/bots/panzer/source.toml"
+
+[[roster]]
+name = "NANO"
+sku = 0
+uri = "~/content/bots/nano/source.toml"
+
+[[roster]]
+name = "RAPTOR"
+sku = 0
+uri = "~/content/bots/raptor/source.toml"
+
+[[roster]]
+name = "XEBES"
+sku = 1000
+uri = "~/content/bots/xebes/source.toml"
+
+[[roster]]
+name = "REX"
+sku = 1001
+uri = "~/content/bots/rex/source.toml"
+
+[[roster]]
+name = "MJÖLNIR"
+sku = 1002
+uri = "~/content/bots/mjolnir/source.toml"
+
+[[roster]]
+name = "PEACEMAKER"
+sku = 1003
+uri = "~/content/bots/peacemaker/source.toml"
+
+[[roster]]
+name = "SHINOBI"
+sku = 1004
+uri = "~/content/bots/shinobi/source.toml"
+
+[[roster]]
+name = "RIPTIDE"
+sku = 1005
+uri = "~/content/bots/riptide/source.toml"
+
+[[roster]]
+name = "SENTINEL"
+sku = 1006
+uri = "~/content/bots/sentinel/source.toml"
+
+[[roster]]
+name = "LIONHEART"
+sku = 1007
+uri = "~/content/bots/lionheart/source.toml"
+
+[[roster]]
+name = "BLOODWING"
+sku = 1008
+uri = "~/content/bots/bloodwing/source.toml"
+
+[[roster]]
+name = "BAISHE"
+sku = 1009
+uri = "~/content/bots/baishe/source.toml"
+
+[[roster]]
+name = "JOLLY RUDDERS"
+sku = 1010
+uri = "~/content/bots/jolly_rudders/source.toml"
+
+[[roster]]
+name = "ELDRITCH"
+sku = 1011
+uri = "~/content/bots/eldritch/source.toml"
+
+[[roster]]
+name = "CAT-APULT"
+# Sku must be UNIQUE (the bot roster is keyed by sku). 1012 is its premium release sku.
+# It is auto-unlocked in dev builds for testing (see TSMainPanel spine lock: !plato.is_develop).
+sku = 1012
+uri = "~/content/bots/catapult/source.toml"
