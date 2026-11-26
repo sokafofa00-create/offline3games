@@ -445,9 +445,18 @@ export async function launchPlatoOfflineSession({
     // - Simultaneous phases (Brawlbots / Match Monsters draft): pick first seat in `turns` not yet in `actedInSimultaneousRound`
     let targetSeat = turns[0];
     if (turns.length > 1) {
-      const pending = turns.find((s) => !actedInSimultaneousRound.has(s));
-      targetSeat = pending !== undefined ? pending : turns[0];
-      if (manualSeatOverride !== null && turns.includes(manualSeatOverride) && !actedInSimultaneousRound.has(manualSeatOverride)) targetSeat = manualSeatOverride;
+      // A seat that has already locked in its action (tank chosen / shot ready) is done for this round.
+      const seatDone = (s) => {
+        if (actedInSimultaneousRound.has(s)) return true;
+        const l = clientLogic;
+        if (typeof l.canSelectTank === "function" && typeof l.canShoot === "function") {
+          try { return l.worldMap && l.worldMap.tanksSelected(true) ? !l.canShoot(s, true) : !l.canSelectTank(s, 0); } catch (_e) { return false; }
+        }
+        return false;
+      };
+      const pendingSeat = turns.find((s) => !seatDone(s));
+      targetSeat = pendingSeat !== undefined ? pendingSeat : turns[0];
+      if (manualSeatOverride !== null && turns.includes(manualSeatOverride) && !seatDone(manualSeatOverride)) targetSeat = manualSeatOverride;
     }
 
     if (clientLogic._localSeat !== targetSeat) {
@@ -621,6 +630,8 @@ export async function launchPlatoOfflineSession({
         for (let s = 0; s < numSeats; s++) {
           clientLogic.enter(s);
         }
+        // Simultaneous phases: make sure the logic really acts as the seat we switched to.
+        if (Array.isArray(msg.turns) && msg.turns.length > 1) clientLogic._localSeat = activeLocalSeat;
         scheduleHotseatSeatSync();
         renderRequested = true;
         return;
