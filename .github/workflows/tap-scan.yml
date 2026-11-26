@@ -22,11 +22,12 @@ jobs:
           npm i --no-save --no-package-lock playwright@1.49.1
           npx playwright install --with-deps chrome
       - name: Tap scan, Monsters combat popup
-        run: mkdir -p shots && SCEN=monsters-normal TAPSCAN=1 node --import ./tests/chrome-shim.mjs tests/smoke.mjs | grep -A60 '"realTouch"' | head -90
+        run: mkdir -p shots && SCEN=monsters-normal node --import ./tests/chrome-shim.mjs tests/smoke.mjs | grep -A60 '"realTouch"' | head -90
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: tap-scan-shots2
+          name: tap-scan-shots3
           path: shots/*.png
 # rerun mirrored
+# rerun after y fix
