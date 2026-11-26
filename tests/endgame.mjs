@@ -59,6 +59,25 @@ for (const sc of scenarios) {
       res.tapAttempts.push({ mode, gameOver: sn.gameOver, bar: sn.barVisible, pt: await page.evaluate(() => (window.__pt || []).splice(0).slice(0, 8)) });
       if (sn.gameOver || sn.barVisible) break;
     }
+    res.grid = [];
+    if (["pool-8ball", "monsters-normal", "brawlbots-2p"].includes(sc.name)) {
+      const gs = await snap(page);
+      if (!gs.gameOver && !gs.barVisible) {
+        for (const y of [330, 400, 460, 520, 580, 640, 700, 760]) for (const x of [90, 160, 230, 300, 360]) {
+          await page.evaluate(() => { window.__pt = []; });
+          await page.touchscreen.tap(x, y);
+          await page.waitForTimeout(1200);
+          const sn = await snap(page);
+          if (sn.gameOver || sn.barVisible) { res.grid.push({ hit: [x, y] }); await page.screenshot({ path: `shots-end/${sc.name}-grid-hit.png` }); break; }
+          // reopen popup if a miss closed it
+          await page.click("#menu-btn").catch(() => {});
+          await page.waitForTimeout(400);
+          for (const b of await page.$$("#game-menu-items button")) { const t = ((await b.textContent()) || "").trim(); if (/استسلام/.test(t)) { await b.click().catch(() => {}); break; } }
+          await page.waitForTimeout(1000);
+        }
+        if (!res.grid.length) res.grid.push({ hit: null });
+      }
+    }
     let over = null;
     for (let w = 0; w < 12; w++) { await page.waitForTimeout(1000); over = await snap(page); if (over.gameOver || over.barVisible) break; }
     res.afterConfirm = over;
