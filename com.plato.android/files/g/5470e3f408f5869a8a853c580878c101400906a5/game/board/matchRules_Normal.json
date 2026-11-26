@@ -1,0 +1,35 @@
+{
+    "max_free_moves": 1,
+    "powers": [
+        {
+            "event": "Match 4",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                }
+            ]
+        },
+        {
+            "event": "Match 5",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                }
+            ]
+        },
+        {
+            "event": "Match Max",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                }
+            ]
+        }
+    ]
+}

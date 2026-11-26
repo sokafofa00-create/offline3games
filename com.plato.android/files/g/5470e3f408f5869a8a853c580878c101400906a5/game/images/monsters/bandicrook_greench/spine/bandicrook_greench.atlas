@@ -1,0 +1,121 @@
+bandicrook_greench.webp
+size:727,727
+filter:Linear,Linear
+Arm
+bounds:291,129,117,115
+rotate:90
+Ball 1
+bounds:568,152,55,64
+rotate:90
+Ball 1 ON
+bounds:405,13,73,81
+offsets:1,1,75,83
+rotate:90
+Ball 2
+bounds:606,318,56,58
+Ball 2 ON2
+bounds:624,501,74,75
+offsets:1,1,76,77
+rotate:90
+Ball 3
+bounds:568,88,62,68
+rotate:90
+Ball 3 ON
+bounds:408,88,79,86
+offsets:1,1,81,88
+rotate:90
+Face hair 1
+bounds:499,180,97,67
+rotate:90
+L ear
+bounds:502,378,47,99
+rotate:90
+L foot
+bounds:562,287,89,42
+rotate:90
+L hair face
+bounds:626,17,49,69
+L leg
+bounds:399,274,78,120
+R foot
+bounds:697,433,66,28
+rotate:90
+R leg 1
+bounds:684,229,47,41
+rotate:90
+R leg 2
+bounds:620,378,65,51
+R_ear
+bounds:479,279,81,97
+R_star
+bounds:664,278,52,59
+rotate:90
+R_star ON
+bounds:488,12,68,74
+offsets:1,1,70,76
+Star
+bounds:502,427,116,125
+Star ON
+bounds:156,157,133,142
+offsets:1,1,135,144
+Tail 1
+bounds:269,537,185,188
+Tail 2
+bounds:2,473,265,252
+Tail 3
+bounds:2,203,268,152
+rotate:90
+Torso
+bounds:456,554,166,171
+Tummy
+bounds:156,301,170,129
+rotate:90
+ball 2 ON
+bounds:496,97,70,70
+offsets:1,1,72,72
+ball 2-1
+bounds:634,167,52,52
+bell 1
+bounds:631,221,51,55
+bell 2
+bounds:677,12,40,43
+bow 1
+bounds:620,431,68,75
+offsets:2,0,70,75
+rotate:90
+bow 2
+bounds:287,368,109,167
+bow 3
+bounds:664,332,44,61
+rotate:90
+butt
+bounds:624,577,148,97
+rotate:90
+eye
+bounds:2,2,20,33
+eye ball
+bounds:677,57,40,56
+eye lid
+bounds:568,209,61,76
+gift
+bounds:144,14,141,145
+rotate:90
+gift_1
+bounds:291,38,112,89
+gift_2
+bounds:408,169,103,89
+rotate:90
+hat 1
+bounds:398,396,139,102
+rotate:90
+hat 2
+bounds:291,248,118,106
+rotate:90
+head
+bounds:2,37,164,140
+rotate:90
+star 2
+bounds:638,115,50,50
+star 2 ON
+bounds:558,21,66,65
+offsets:1,1,68,67

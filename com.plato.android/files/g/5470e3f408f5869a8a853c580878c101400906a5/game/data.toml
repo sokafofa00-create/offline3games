@@ -1,0 +1,1074 @@
+# Generic Powers
+
+[[powers]]
+name = "Attack"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+action_type = "Monster Attack Player"
+effect_type = "Player Life Reduce"
+intl_key = "Power Attack"
+value_x = 1
+
+[[powers]]
+name = "Heal"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+action_type = "Monster Heal Player"
+effect_type = "Player Life Restore"
+intl_key = "Power Heal"
+value_x = 1
+
+[[powers]]
+name = "Add Status"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+action_type = "Add Player Status"
+effect_type = "Player Status Add"
+value_x = 1
+
+[[powers]]
+name = "Add Monster Status"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Status Add"
+effect_type = "Monster Status Add"
+
+[[powers]]
+name = "Add Monsters Status"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "Monsters Status Add"
+effect_type = "Monsters Status Add"
+
+[[powers]]
+name = "Status Add Berries"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Status Add Berries"
+intl_key = "Add Berries"
+effect_type = "Player Berries Add"
+
+[[powers]]
+name = "Convert Tiles"
+seat_target = "None"
+monster_target = "None"
+tile_target = "Random Except Tile Type"
+action_type = "Harvest Tiles"
+effect_type = "Convert Tiles"
+intl_key = "Power Convert"
+value_x = 1
+tile_type = "Berry Tile"
+
+# types of tile_target:
+#   "Random Column", "Random Row", "Random Column And Row", "Random Except Tile Type",
+#   "Random Grid"
+# types of intl_key:
+#   "Power Column", "Power Columns", "Power Row", "Power Column And Row",
+#   Power Match Tiles"
+[[powers]]
+name = "Harvest Random Tiles"
+seat_target = "None"
+monster_target = "None"
+action_type = "Harvest Tiles"
+effect_type = "Harvest Tiles"
+
+[[powers]]
+name = "Monster Give Mana"
+seat_target = "Self"
+monster_target = "Ally"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Give Monster Mana"
+intl_key = "Power Mana"
+effect_type = "Monster Mana Add"
+
+[[powers]]
+name = "Monster Steal Mana"
+seat_target = "Opponent"
+monster_target = "Most Mana"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Mana Steal"
+intl_key = "Steal Mana"
+effect_type = "Monster Mana Steal"
+
+[[powers]]
+name = "Harvest All Ruptured"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "None"
+intl_key = "Power Rupture N"
+effect_type = "Harvest All Ruptured"
+
+[[powers]]
+name = "Monster Steal Berries"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Berries Steal"
+intl_key = "Steal Berry"
+effect_type = "Monster Berries Steal"
+
+[[powers]]
+name = "Drain Mana"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Attack Monsters"
+intl_key = "Power Drain"
+effect_type = "Monsters Mana Reduce"
+
+[[powers]]
+name = "Frostbite"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+value_y = 2
+action_type = "None"
+status = "Flesh To Ice Status"
+effect_type = "Frostbite"
+
+[[powers]]
+name = "Flower Power"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+action_type = "None"
+effect_type = "Flower Power"
+intl_key = "FlowerPower1"
+
+[[powers]]
+name = "Add Berries"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+action_type = "None"
+effect_type = "Player Berries Add"
+value_x = 1
+
+[[powers]]
+name = "Grant Berry"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "None"
+status = "Grant Berry"
+effect_type = "Grant Berry"
+
+[[powers]]
+name = "ShootAmmo"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 5
+value_y = 10
+action_type = "None"
+status = "Ammo"
+effect_type = "ShootAmmo"
+
+[[powers]]
+name = "None"
+seat_target = "None"
+monster_target = "None"
+tile_target = "None"
+action_type = "None"
+effect_type = "None"
+
+[[powers]]
+name = "Swap Monster"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+action_type = "None"
+effect_type = "Swap Monster"
+
+[[powers]]
+name = "Flesh To Ice Post"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+value_y = 1
+action_type = "None"
+status = "Ice To Flesh Status"
+effect_type = "Flesh To Ice Post"
+
+[[powers]]
+name = "Flesh To Ice"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 5
+value_y = 1
+action_type = "None"
+effect_type = "Flesh To Ice"
+
+[[powers]]
+name = "Change Flower Status"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+action_type = "None"
+effect_type = "Change Flower Status"
+
+[[powers]]
+name = "Electric Honey"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 5
+value_y = 2
+action_type = "None"
+status = "Electric Honey"
+intl_key = "Electric Honey"
+effect_type = "Electric Honey"
+
+[[powers]]
+name = "Increase Electric Honey"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 2
+value_y = 3
+action_type = "None"
+status = "Electric Honey"
+effect_type = "Increase Electric Honey"
+
+[[powers]]
+name = "Add Monster Status On Match Harvest Tiles From Match"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Status Add"
+status = "On Match Harvest Tiles From Match"
+effect_type = "Monster Status Add"
+
+[[powers]]
+name = "Rupture Tiles 6"
+seat_target = "None"
+monster_target = "None"
+tile_target = "None"
+value_x = 6
+action_type = "None"
+effect_type = "RuptureTiles"
+
+[[powers]]
+name = "Harvest Tiles From Match"
+seat_target = "Self"
+monster_target = "Ally"
+tile_target = "None"
+value_x = 1
+value_y = 2
+action_type = "None"
+effect_type = "Harvest Tile From Match"
+
+[[powers]]
+name = "Harvest Tiles From Match 2"
+seat_target = "Self"
+monster_target = "Ally"
+tile_target = "None"
+value_x = 2
+value_y = 2
+action_type = "None"
+intl_key = "Harvest Tiles From Match"
+effect_type = "Harvest Tile From Match"
+
+[[powers]]
+name = "Monster Status Reduce Mana For 1"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "None"
+effect_type = "Status Reduce Mana"
+
+[[powers]]
+name = "Monster Status Reduce Mana For 2"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 2
+action_type = "None"
+effect_type = "Status Reduce Mana"
+
+[[powers]]
+name = "On Ally Match Status Reduce Mana For 1"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "None"
+effect_type = "On Ally Match Status Reduce Mana"
+
+[[powers]]
+name = "On Ally Match Status Reduce Mana For 2"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 2
+action_type = "None"
+effect_type = "On Ally Match Status Reduce Mana"
+
+[[powers]]
+name = "Status Heal For 5"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 5
+action_type = "Status Heal Player"
+intl_key = "Power Heal"
+effect_type = "Player Life Restore"
+
+[[powers]]
+name = "Status Heal For 10"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 10
+action_type = "Status Heal Player"
+intl_key = "Power Heal"
+effect_type = "Player Life Restore"
+
+[[powers]]
+name = "Status Bonus Move 1"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Status Add Move Count Max"
+intl_key = "Power Move Add"
+effect_type = "Add Move Count Max"
+
+[[powers]]
+name = "Status Reduce Move 1"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Status Add Move Count Max"
+status = "Reduce Move 1"
+intl_key = "Power Move Reduce"
+effect_type = "Reduce Move Count Max"
+
+[[powers]]
+name = "Add Opponent Status Reduce Move 1 For 1"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Add Player Status"
+status = "Reduce Opponent Move 1"
+intl_key = "Status Opponents Turn Begin"
+effect_type = "Player Status Add"
+
+[[powers]]
+name = "Status Disable Monster"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 0
+action_type = "Disable Monster"
+effect_type = "Disable Monster"
+
+[[powers]]
+name = "Status Enable Monster"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 0
+action_type = "Enable Monster"
+effect_type = "Enable Monster"
+
+[[powers]]
+name = "Status Chill Monster"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 3
+action_type = "Chill Monster"
+effect_type = "Chill Monster"
+
+[[powers]]
+name = "Status Unchill Monster"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 0
+action_type = "Unchill Monster"
+effect_type = "Unchill Monster"
+
+[[powers]]
+name = "Status Damage Self"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 5
+value_y = 0
+action_type = "None"
+intl_key = "On Ability Damage Self"
+effect_type = "Status Damage Player"
+
+[[powers]]
+name = "Damage Player By Status Charges"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 5
+action_type = "None"
+effect_type = "Damage Player By Status Charges"
+
+[[powers]]
+name = "HarvestAllEcho5"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 5
+action_type = "None"
+effect_type = "HarvestAllEchos"
+
+[[powers]]
+name = "DropEcho"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "None"
+effect_type = "DropEcho"
+
+[[powers]]
+name = "AddMonsterStatusCharge"
+seat_target = "Self"
+monster_target = "Self"
+tile_target = "None"
+value_x = 1
+action_type = "Monster Status Add"
+status = "Charge"
+effect_type = "Monster Status Add"
+
+[[powers]]
+name = "PourTea"
+seat_target = "Opponent"
+monster_target = "None"
+tile_target = "None"
+value_x = 10
+value_y = 3
+action_type = "None"
+effect_type = "PourTea"
+
+[[powers]]
+name = "Match 2x2"
+seat_target = "None"
+monster_target = "None"
+action_type = "Harvest Tiles"
+effect_type = "Harvest Tiles"
+tile_target = "Random Grid"
+value_x = 2
+value_y = 2
+intl_key = "Power Grid"
+
+[[powers]]
+name = "Status Add Berries"
+seat_target = "Self"
+monster_target = "None"
+tile_target = "None"
+value_x = 1
+action_type = "Status Add Berries"
+intl_key = "Add Berries"
+effect_type = "Player Berries Add"
+
+[[powers]]
+name = "Max Berries Reduce"
+action_type = "None"
+effect_type = "Max Berries Reduce"
+value_x = 1
+
+[[powers]]
+name = "Shuffle Tile Type"
+action_type = "None"
+effect_type = "Shuffle Tile Type"
+
+[[powers]]
+name = "Tile Attack"
+action_type = "None"
+effect_type = "Tile Attack"
+value_x = 5
+
+[[powers]]
+name = "Poison Berries"
+action_type = "None"
+effect_type = "Poison Berries"
+
+[[powers]]
+name = "Spawn Bombs"
+action_type = "None"
+effect_type = "Spawn Bombs"
+
+[[powers]]
+name = "Refill Bombs"
+action_type = "None"
+effect_type = "Refill Bombs"
+
+[[powers]]
+name = "Spawn Wild Tiles"
+action_type = "None"
+effect_type = "Spawn Wild Tiles"
+
+[[powers]]
+name = "Get Random Tiles"
+custom_data = { amount = 0 }
+effect_type = "Get Random Tiles"
+action_type = "None"
+
+[[powers]]
+name = "Debug Test Random Tiles"
+custom_data = { amount = 5, exclude = ["Bomb"]}
+effect_type = "Get Random Tiles"
+action_type = "None"
+
+[[powers]]
+name = "Trigger Countdown"
+effect_type = "Trigger Countdown"
+action_type = "None"
+
+[[powers]]
+name = "Bomb Countdown"
+effect_type = "Bomb Countdown"
+action_type = "None"
+
+[[powers]]
+name = "Bomb Explode"
+effect_type = "Bomb Explode"
+action_type = "None"
+
+
+[[powers]]
+name = "Add Tile Effect"
+custom_data = { effect = "None", tiles = [] }
+effect_type = "Add Tile Effect"
+action_type = "None"
+
+[[powers]]
+name = "Remove Tile Effect"
+custom_data = { effect = "None", tiles = [] }
+effect_type = "Remove Tile Effect"
+action_type = "None"
+
+[[powers]]
+name = "Get Monster Amount By ID"
+custom_data = { monsters = [] }
+effect_type = "Get Monster Amount By ID"
+action_type = "None"
+
+[[powers]]
+name = "Multiply"
+custom_data = { a = 1, b = 1 }
+effect_type = "Multiply"
+action_type = "None"
+
+[[powers]]
+name = "Subtract"
+custom_data = { a = 1, b = 1 }
+effect_type = "Subtract"
+action_type = "None"
+
+[[powers]]
+name = "Min"
+custom_data = { a = 1, b = 1 }
+effect_type = "Min"
+action_type = "None"
+
+[[powers]]
+name = "Get Tiles By Tile Types"
+custom_data = { tiles = [] }
+effect_type = "Get Tiles By Tile Types"
+action_type = "None"
+
+[[powers]]
+name = "Get Tiles By Effect Types"
+custom_data = { types = [] }
+effect_type = "Get Tiles By Effect Types"
+action_type = "None"
+
+[[powers]]
+name = "Get Status Charges"
+seat_target = "Self"
+monster_target = "Self"
+status = "None"
+action_type = "None"
+effect_type = "Get Status Charges"
+
+[[powers]]
+name = "Update Monster Status"
+seat_target = "Self"
+monster_target = "Self"
+status = "None"
+action_type = "None"
+effect_type = "Update Monster Status"
+
+[[statuses]]
+name = "Shield"
+icon_sprite = "~/images/statuses/shield.webp"
+trigger = "None"
+reduce_trigger = "Your Turn Begin"
+powers_on_trigger = ["None"]
+max_charges = 8
+
+[[statuses]]
+name = "NoReflectShield"
+icon_sprite = "~/images/statuses/umbrellashield.webp"
+trigger = "None"
+reduce_trigger = "Your Turn Begin"
+powers_on_trigger = ["None"]
+
+[[statuses]]
+name = "Grant Berry"
+icon_sprite = "~/images/statuses/grant_berry.webp"
+trigger = "Your Turn Begin"
+reduce_trigger = "None"
+powers_on_trigger = ["Grant Berry"]
+
+[[statuses]]
+name = "Ammo"
+icon_sprite = "~/images/statuses/ammo.webp"
+trigger = "None"
+powers_on_trigger = ["None"]
+
+[[statuses]]
+name = "Change Flower Status Red"
+icon_sprite = "~/images/statuses/change_flower_status_red.webp"
+trigger = "Match Tiles Post"
+reduce_trigger = "None"
+powers_on_trigger = ["Change Flower Status"]
+
+[[statuses]]
+name = "Change Flower Status Blue"
+icon_sprite = "~/images/statuses/change_flower_status_blue.webp"
+trigger = "Match Tiles Post"
+reduce_trigger = "None"
+powers_on_trigger = ["Change Flower Status"]
+
+[[statuses]]
+name = "Change Flower Status Green"
+icon_sprite = "~/images/statuses/change_flower_status_green.webp"
+trigger = "Match Tiles Post"
+reduce_trigger = "None"
+powers_on_trigger = ["Change Flower Status"]
+
+[[statuses]]
+name = "Change Flower Status Purple"
+icon_sprite = "~/images/statuses/change_flower_status_purple.webp"
+trigger = "Match Tiles Post"
+reduce_trigger = "None"
+powers_on_trigger = ["Change Flower Status"]
+
+[[statuses]]
+name = "Change Flower Status Yellow"
+icon_sprite = "~/images/statuses/change_flower_status_yellow.webp"
+trigger = "Match Tiles Post"
+reduce_trigger = "None"
+powers_on_trigger = ["Change Flower Status"]
+
+[[statuses]]
+name = "On Match Harvest Tiles From Match 2"
+icon_sprite = "~/images/statuses/on_match_harvest_tiles_from_match.webp"
+trigger = "Match Tiles Pre"
+reduce_trigger = "Your Move End"
+powers_on_trigger = ["Harvest Tiles From Match 2"]
+
+[[statuses]]
+name = "On Match Harvest Tiles From Match"
+icon_sprite = "~/images/statuses/on_match_harvest_tiles_from_match.webp"
+trigger = "Match Tiles Pre"
+reduce_trigger = "None"
+powers_on_trigger = ["Harvest Tiles From Match"]
+
+[[statuses]]
+name = "On Move Status Reduce Mana For 1"
+icon_sprite = "~/images/statuses/on_move_status_reduce_mana.webp"
+trigger = "Your Move End"
+reduce_trigger = "Your Move End"
+powers_on_trigger = ["Monster Status Reduce Mana For 1"]
+
+[[statuses]]
+name = "On Move Status Reduce Mana For 2"
+icon_sprite = "~/images/statuses/on_move_status_reduce_mana.webp"
+trigger = "Your Move End"
+reduce_trigger = "Your Move End"
+powers_on_trigger = ["Monster Status Reduce Mana For 2"]
+
+[[statuses]]
+name = "On Match Tiles Monster Status Reduce Mana For 1"
+icon_sprite = "~/images/statuses/on_match_tiles_monster_status_reduce_mana.webp"
+trigger = "Match Tiles"
+reduce_trigger = "Your Turn End"
+powers_on_trigger = ["On Ally Match Status Reduce Mana For 1"]
+
+[[statuses]]
+name = "On Match Tiles Monster Status Reduce Mana For 2"
+icon_sprite = "~/images/statuses/on_match_tiles_monster_status_reduce_mana.webp"
+trigger = "Match Tiles"
+reduce_trigger = "Your Turn End"
+powers_on_trigger = ["On Ally Match Status Reduce Mana For 2"]
+
+[[statuses]]
+name = "Regen For 5"
+icon_sprite = "~/images/statuses/regen.webp"
+trigger = "Your Turn End"
+powers_on_trigger = ["Status Heal For 5"]
+
+[[statuses]]
+name = "Regen For 10"
+icon_sprite = "~/images/statuses/regen.webp"
+trigger = "Your Turn End"
+powers_on_trigger = ["Status Heal For 10"]
+
+[[statuses]]
+name = "Add Bonus Move 1"
+icon_sprite = "~/images/statuses/add_bonus_move.webp"
+trigger = "Your Turn Begin"
+powers_on_trigger = ["Status Bonus Move 1"]
+
+[[statuses]]
+name = "Reduce Move 1"
+icon_sprite = "~/images/statuses/reduce_move.webp"
+trigger = "Your Turn Begin"
+powers_on_trigger = ["Status Reduce Move 1"]
+
+[[statuses]]
+name = "Add Berries 1"
+icon_sprite = "~/images/statuses/add_berries.webp"
+trigger = "Your Turn Begin"
+  [[statuses.powers_on_trigger]]
+	name = "Status Add Berries"
+	value_x = 1
+
+[[statuses]]
+name = "Add Berries 2"
+icon_sprite = "~/images/statuses/add_berries.webp"
+trigger = "Your Turn Begin"
+  [[statuses.powers_on_trigger]]
+	name = "Status Add Berries"
+	value_x = 2
+
+[[statuses]]
+name = "Reduce Opponent Move 1"
+icon_sprite = "~/images/statuses/reduce_opponent_move.webp"
+trigger = "Your Turn Begin"
+powers_on_trigger = ["Status Reduce Move 1"]
+
+[[statuses]]
+name = "Disable Monster While Active"
+icon_sprite = "~/images/statuses/disable_monster_while_active.webp"
+trigger = "Your Move End"
+powers_on_add = ["Status Disable Monster"]
+powers_on_trigger = ["Status Enable Monster"]
+
+[[statuses]]
+name = "On Ability Damage Self For 10"
+icon_sprite = "~/images/statuses/on_ability_damage_self.webp"
+trigger = "Max Mana"
+reduce_trigger = "Your Turn End"
+  [[statuses.powers_on_trigger]]
+	name = "Status Damage Self"
+	value_x = 10
+  value_y = 2000
+
+[[statuses]]
+name = "On Ability Damage Self For 15"
+icon_sprite = "~/images/statuses/on_ability_damage_self.webp"
+trigger = "Max Mana"
+reduce_trigger = "Your Turn End"
+  [[statuses.powers_on_trigger]]
+	name = "Status Damage Self"
+	value_x = 15
+  value_y = 2000
+
+[[statuses]]
+name = "Chill Monster While Active"
+icon_sprite = "~/images/statuses/chill_monster_while_active.webp"
+trigger = "Your Turn End"
+powers_on_add = ["Status Chill Monster"]
+powers_on_trigger = ["Status Unchill Monster"]
+
+[[statuses]]
+name = "Electric Honey"
+icon_sprite = "~/images/statuses/electric_honey.webp"
+trigger = "Your Turn End"
+reduce_trigger = "None"
+powers_on_trigger = ["Increase Electric Honey"]
+
+[[statuses]]
+name = "Echo"
+icon_sprite = "~/images/statuses/echo.webp"
+trigger = "Your Turn End"
+reduce_trigger = "None"
+  [[statuses.powers_on_trigger]]
+  name = "Get Status Charges"
+  status = "Echo"
+  output = "charges"
+  [[statuses.powers_on_trigger]]
+  name = "Get Random Tiles"
+  custom_data = { amount = "$charges", exclude = ["Bomb"], excludeEffects = ["Echo", "GlitchGoo"] }
+  output = "tiles"
+  [[statuses.powers_on_trigger]]
+  name = "Add Tile Effect"
+  custom_data = { effect = "Echo", tiles = "$tiles" }
+
+[[statuses]]
+name = "Consume"
+icon_sprite = "~/images/statuses/consume.webp"
+trigger = "Your Turn End"
+reduce_trigger = "Your Turn End"
+powers_on_trigger = ["Match 2x2"]
+
+[[statuses]]
+name = "Thrash"
+icon_sprite = "~/images/statuses/thrash.webp"
+trigger = "Your Move End"
+reduce_trigger = "Your Turn End"
+  [[statuses.powers_on_trigger]]
+	name = "Status Damage Self"
+	value_x = 5
+  value_y = 0
+
+[[statuses]]
+name = "Burn"
+icon_sprite = "~/images/statuses/burn.webp"
+trigger = "Your Move End"
+reduce_trigger = "Your Turn End"
+  [[statuses.powers_on_trigger]]
+	name = "Status Damage Self"
+	value_x = 5
+  value_y = 0
+
+[[statuses]]
+name = "Sacrifice Ritual"
+icon_sprite = "~/images/statuses/sacrificial_ritual.webp"
+powers_on_trigger = ["None"]
+trigger = "None"
+reduce_trigger = "None"
+
+[[stages]]
+name = "Stadium"
+thumbnail = "match3battle/stages/stadium/stadium_thumbnail.webp"
+title_sprite1 = "match3battle/stages/stadium/stadium_title.webp"
+background = "match3battle/stages/stadium/stadium_background.webp"
+hexagon = "match3battle/stages/stadium/stadium_hexagon.webp"
+music = "match3battle/stages/stadium/stadium_music__.m4a"
+include_in_random = false
+trigger = "None"
+long_intl_key = "Default Stage"
+powers = []
+weight = 1
+
+[[stages]]
+name = "Forest Valley"
+thumbnail = "match3battle/stages/forest_valley/forest_valley_thumbnail.webp"
+title_sprite1 = "match3battle/stages/forest_valley/forest_valley_title_1.webp"
+title_sprite2 = "match3battle/stages/forest_valley/forest_valley_title_2.webp"
+background = "match3battle/stages/forest_valley/forest_valley_background.webp"
+hexagon = "match3battle/stages/forest_valley/forest_valley_hexagon.webp"
+music = "match3battle/stages/forest_valley/forest_valley_music.mp4"
+include_in_random = true
+trigger = "Game Start"
+long_intl_key = "Max Berry Reduce"
+short_intl_key = "Max Berry Reduce Short"
+powers = ["Max Berries Reduce"]
+weight = 1
+
+[[stages]]
+name = "Abandoned Town"
+thumbnail = "match3battle/stages/abandoned_town/abandoned_town_thumnail.webp"
+title_sprite1 = "match3battle/stages/abandoned_town/abandoned_town_title_1.webp"
+title_sprite2 = "match3battle/stages/abandoned_town/abandoned_town_title_2.webp"
+background = "match3battle/stages/abandoned_town/abandoned_town_background.webp"
+hexagon = "match3battle/stages/abandoned_town/abandoned_town_hexagon.webp"
+music = "match3battle/stages/abandoned_town/abandoned_town_music.mp4"
+include_in_random = true
+trigger = "Your Monster Evolve"
+long_intl_key = "Evolve Restore Life"
+short_intl_key = "Evolve Restore Life"
+effect_type = "Player Life Restore"
+weight = 1
+  [[stages.powers]]
+  name = "Heal"
+  action_type = "None"
+  effect_type = "Player Life Restore"
+  value_x = 10
+
+[[stages]]
+name = "Tranquil Falls"
+thumbnail = "match3battle/stages/tranquil_falls/tranquil_falls_thumbnail.webp"
+title_sprite1 = "match3battle/stages/tranquil_falls/tranquil_falls_title_1.webp"
+title_sprite2 = "match3battle/stages/tranquil_falls/tranquil_falls_title_2.webp"
+background = "match3battle/stages/tranquil_falls/tranquil_falls_background.webp"
+hexagon = "match3battle/stages/tranquil_falls/tranquil_falls_hexagon.webp"
+music = "match3battle/stages/tranquil_falls/tranquil_falls_music.mp4"
+include_in_random = true
+trigger = "Turn Begin"
+tile_type = "Blue Tile"
+long_intl_key = "Shuffle Tile Type"
+short_intl_key = "Shuffle Tile Type Short"
+powers = ["Shuffle Tile Type"]
+weight = 1
+
+[[stages]]
+name = "Lava Caverns"
+thumbnail = "match3battle/stages/lava_caverns/lava_caverns_thumbnail.webp"
+title_sprite1 = "match3battle/stages/lava_caverns/lava_caverns_title_1.webp"
+title_sprite2 = "match3battle/stages/lava_caverns/lava_caverns_title_2.webp"
+background = "match3battle/stages/lava_caverns/lava_caverns_background.webp"
+hexagon = "match3battle/stages/lava_caverns/lava_caverns_hexagon.webp"
+music = "match3battle/stages/lava_caverns/lava_caverns_music.m4a"
+include_in_random = true
+trigger = "Match Tiles"
+tile_type = "Red Tile"
+long_intl_key = "Match Damage"
+short_intl_key = "Match Damage Short"
+powers = ["Tile Attack"]
+weight = 1
+
+[[stages]]
+name = "Forvir Swamp"
+thumbnail = "match3battle/stages/forvir_swamp/forvir_swamp_thumbnail.webp"
+title_sprite1 = "match3battle/stages/forvir_swamp/forvir_swamp_title_1.webp"
+title_sprite2 = "match3battle/stages/forvir_swamp/forvir_swamp_title_2.webp"
+background = "match3battle/stages/forvir_swamp/forvir_swamp_background.webp"
+hexagon = "match3battle/stages/forvir_swamp/forvir_swamp_hexagon.webp"
+music = "match3battle/stages/forvir_swamp/forvir_swamp_music.mp4"
+include_in_random = true
+trigger = "Turn Begin"
+long_intl_key = "Mask Random Tiles"
+short_intl_key = "Mask Random Tiles Short"
+weight = 1
+  [[stages.powers]]
+  name = "Get Random Tiles"
+  custom_data = { amount = 1, excludeEffects = ["Confuse"] }
+  output = "tiles"
+  [[stages.powers]]
+  name = "Add Tile Effect"
+  custom_data = { effect = "Confuse", tiles = "$tiles", max = 7 }
+
+[[stages]]
+name = "Frosset Lake"
+thumbnail = "match3battle/stages/frosset_lake/frosset_lake_thumbnail.webp"
+title_sprite1 = "match3battle/stages/frosset_lake/frosset_lake_title_1.webp"
+title_sprite2 = "match3battle/stages/frosset_lake/frosset_lake_title_2.webp"
+background = "match3battle/stages/frosset_lake/frosset_lake_background.webp"
+hexagon = "match3battle/stages/frosset_lake/frosset_lake_hexagon.webp"
+music = "match3battle/stages/frosset_lake/frosset_lake_music.mp4"
+include_in_random = true
+trigger = "Match Tiles Post"
+long_intl_key = "Freeze Matched Tile Type"
+short_intl_key = "Freeze Matched Tile Type Short"
+weight = 1
+  [[stages.powers]]
+  name = "Get Tiles By Effect Types"
+  custom_data = { types = ["Frozen"] }
+  output = "unfreeze_tiles"
+  [[stages.powers]]
+  name = "Remove Tile Effect"
+  custom_data = { effect = "Frozen", tiles = "$unfreeze_tiles" }
+  [[stages.powers]]
+  name = "Get Tiles By Tile Types"
+  custom_data = { types = "^tileTypes", max = 2 }
+  output = "freeze_tiles"
+  [[stages.powers]]
+  name = "Add Tile Effect"
+  custom_data = { effect = "Frozen", tiles = "$freeze_tiles" }
+
+[[stages]]
+name = "Tallon Labs"
+thumbnail = "match3battle/stages/tallon_labs/tallon_labs_thumbnail.webp"
+title_sprite1 = "match3battle/stages/tallon_labs/tallon_labs_title_1.webp"
+title_sprite2 = "match3battle/stages/tallon_labs/tallon_labs_title_2.webp"
+background = "match3battle/stages/tallon_labs/tallon_labs_background.webp"
+hexagon = "match3battle/stages/tallon_labs/tallon_labs_hexagon.webp"
+music = "match3battle/stages/tallon_labs/tallon_labs_music.mp4"
+include_in_random = true
+trigger = "Turn Begin"
+long_intl_key = "Electrify Random Tiles"
+short_intl_key = "Electrify Random Tiles Short"
+weight = 1
+  [[stages.powers]]
+  name = "Get Random Tiles"
+  custom_data = { amount = 2, excludeEffects = ["Elecrified"] }
+  output = "tiles"
+  [[stages.powers]]
+  name = "Add Tile Effect"
+  custom_data = { effect = "Elecrified", tiles = "$tiles", max = 10 }
+
+[[stages]]
+name = "Virulent Gardens"
+background = "match3battle/stages/virulent_gardens/virulent_gardens_background.jpg"
+hexagon = "match3battle/stages/virulent_gardens/virulent_gardens_hexagon.webp"
+thumbnail = "match3battle/stages/virulent_gardens/virulent_gardens_thumbnail.png"
+title_sprite1 = "match3battle/stages/virulent_gardens/virulent_gardens_title_1.webp"
+title_sprite2 = "match3battle/stages/virulent_gardens/virulent_gardens_title_2.webp"
+music = "match3battle/stages/virulent_gardens/virulent_gardens_music.m4a"
+include_in_random = true
+trigger = "Game Start"
+long_intl_key = "Poison Berries"
+short_intl_key = "Poison Berries Short"
+powers = ["Poison Berries"]
+weight = 1
+
+[[stages]]
+name = "Reactor"
+background = "match3battle/stages/reactor/reactor_background.webp"
+hexagon = "match3battle/stages/reactor/reactor_hexagon.webp"
+thumbnail = "match3battle/stages/reactor/reactor_thumbnail.webp"
+title_sprite1 = "match3battle/stages/reactor/reactor_title.webp"
+music = "match3battle/stages/reactor/reactor_music.m4a"
+include_in_random = true
+long_intl_key = "Bomb Tiles"
+short_intl_key = "Bomb Tiles Short"
+weight = 4
+max_bombs = 2
+  [[stages.effects]]
+    trigger = "Game Start"
+    powers = ["Spawn Bombs"]
+  [[stages.effects]]
+    trigger = "Match Made"
+    [[stages.effects.powers]]
+    name = "Trigger Countdown"
+    custom_data = {}
+    [[stages.effects.powers]]
+    name = "Refill Bombs"
+    custom_data = {}
+
+[[stages]]
+name = "Wild Stage"
+background = "match3battle/stages/wild_stage/wild_stage_background.webp"
+hexagon = "match3battle/stages/wild_stage/wild_stage_hexagon.webp"
+thumbnail = "match3battle/stages/wild_stage/wild_stage_thumbnail.webp"
+title_sprite1 = "match3battle/stages/wild_stage/wild_stage_title_1.webp"
+title_sprite2 = "match3battle/stages/wild_stage/wild_stage_title_2.webp"
+music = "match3battle/stages/wild_stage/wild_stage_music.m4a"
+include_in_random = false
+long_intl_key = "Wild Tiles"
+short_intl_key = "Wild Tiles Short"
+weight = 1
+wild_per_turn = 1
+max_wild = 8
+# Played at random per spawned wild; leave empty for no sound
+wild_spawn_sounds = ["~/sounds/wild_tile_spawn1.m4a", "~/sounds/wild_tile_spawn2.m4a"]
+  [[stages.effects]]
+    trigger = "Turn Begin"
+    powers = ["Spawn Wild Tiles"]

@@ -1,0 +1,50 @@
+{
+    "max_free_moves": 99,
+    "powers": [
+        {
+            "event": "Match 4",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                }
+            ]
+        },
+        {
+            "event": "Match 5",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                },
+                {
+					"name": "Tile Heal",
+					"seat": "Self",
+					"health": 5
+				}
+            ]
+        },
+        {
+            "event": "Match Max",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Extra Move",
+                    "seat": "Self"
+                },
+                {
+					"name": "Tile Heal",
+					"seat": "Self",
+					"health": 5
+				},
+                {
+                    "name": "Tile Attack",
+                    "seat": "Opponent",
+                    "damage": 5
+                }
+            ]
+        }
+    ]
+}
