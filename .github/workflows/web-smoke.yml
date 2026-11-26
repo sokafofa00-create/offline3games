@@ -1,0 +1,32 @@
+name: Web Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "web/**"
+      - "tests/**"
+      - ".github/workflows/web-smoke.yml"
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1.49.1 >/dev/null
+          npx playwright install --with-deps chromium
+          ln -s /tmp/pw/node_modules node_modules
+      - name: Run smoke test (load, start, input, menu, rematch)
+        run: node tests/smoke.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-screenshots
+          path: shots/*.png
+          retention-days: 14
