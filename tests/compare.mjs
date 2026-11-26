@@ -18,6 +18,7 @@ for (const [game, name] of scen) {
   page.on("pageerror", (e) => errs.push("pageerror: " + e.message.slice(0, 120)));
   page.on("console", (m) => { if (m.type() === "error") errs.push("console: " + m.text().slice(0, 120)); });
   try {
+    await page.addInitScript(() => { window.__DEBUG_HOTSEAT__ = true; });
     await page.goto(`http://localhost:${PORT}/`);
     await page.click(`.game-tab[data-game="${game}"]`);
     await page.click("#start-btn");
@@ -26,6 +27,8 @@ for (const [game, name] of scen) {
     const cover = await page.locator("#pass-cover").isVisible().catch(() => false);
     if (cover) { await page.screenshot({ path: `${OUT}/${name}-cover.png` }); await page.click("#pass-cover-btn"); await page.waitForTimeout(3000); }
     await page.screenshot({ path: `${OUT}/${name}.png` });
+    const texfmt = await page.evaluate(() => window.__TEXFMT || null);
+    console.log("TEXFMT " + ROOT + " " + name + " " + JSON.stringify(texfmt));
     summary.push({ name, ok: true, cover, errCount: errs.length, errs: errs.slice(0, 6) });
   } catch (e) { summary.push({ name, ok: false, err: String(e.message).slice(0, 160), errs: errs.slice(0, 6) }); }
   await ctx.close();
