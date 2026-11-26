@@ -66,13 +66,68 @@ const lobbyDefaults = (game) => {
   if (game === "brawlbots") st.players = Number(bbPlayersEl.options[0].value);
   selectedGameKey = saved; return st;
 };
+let lanChan = null;
+let pendingHost = null;
+let pendingJoin = null;
+function leaveLan() {
+  lanChan = null; pendingHost = null; pendingJoin = null;
+  if (window.__LOBBY__ && window.__LOBBY__.lan) { window.__LOBBY__.lan.fast(false); window.__LOBBY__.setState("available"); }
+}
+// Reliable ordered channel to one peer: chunks big frames, queues frames that arrive before the game session is ready.
+function makeChannel(lan, peer, matchId) {
+  const q = []; let handler = null; let chain = Promise.resolve(); const chunks = new Map();
+  return {
+    send(msg) {
+      const str = JSON.stringify(msg); const id = Math.random().toString(36).slice(2); const N = 30000; const n = Math.max(1, Math.ceil(str.length / N));
+      for (let i = 0; i < n; i++) { const frame = { t: "lan", m: matchId, c: id, i, n, d: str.slice(i * N, (i + 1) * N) }; chain = chain.then(() => lan.sendTo(peer, frame)).catch(() => {}); }
+    },
+    onRecv(cb) { handler = cb; q.splice(0).forEach(cb); },
+    feed(m) {
+      if (m.m !== matchId || m.c === undefined) return;
+      let e = chunks.get(m.c); if (!e) { e = { n: m.n, parts: [], got: 0 }; chunks.set(m.c, e); }
+      if (e.parts[m.i] === undefined) { e.parts[m.i] = m.d; e.got++; }
+      if (e.got === e.n) { chunks.delete(m.c); const obj = JSON.parse(e.parts.join("")); if (handler) handler(obj); else q.push(obj); }
+    },
+  };
+}
+function startLanMatch(role, card, names, peer, lan) {
+  const ch = makeChannel(lan, peer, card.matchId); lanChan = ch;
+  const params = {
+    gameId: GAMES[card.game].id, settings: card.settings, playerNames: names, language: "ar", mode: "lan", botSeats: [], difficulty: "medium", gameKey: card.game,
+    lan: { role, seat: role === "host" ? 0 : 1, guestSeat: 1, send: ch.send, onRecv: ch.onRecv },
+  };
+  lastLaunchParams = params;
+  lan.fast(true); window.__LOBBY__.setState("playing");
+  window.__LAN_PARAMS__ = { role, game: card.game, names };
+  startMatch(params);
+}
 const lobby = initLobby({
   getName: () => document.getElementById("p1-name").value.trim() || "اللاعب 1",
   buildMatch: lobbyDefaults,
-  onMatchCreated: (card, lan) => { window.__LAN_CARD__ = card; },
-  onJoinCard: (card, lan, peers) => { window.__LAN_JOIN__ = card; },
+  onMatchCreated: (card) => { pendingHost = { card, taken: false }; },
+  onJoinCard: (card, lan, peers) => {
+    const peer = peers.find((p) => p.id === card.hostId) || { id: card.hostId, ip: card.hostIp };
+    pendingJoin = { card, peer };
+    lan.sendTo(peer, { t: "join", matchId: card.matchId });
+  },
 });
 window.__LOBBY__ = lobby;
+lobby.onNet = (m) => {
+  const lan = lobby.lan; if (!lan) return;
+  if (m.t === "join") {
+    if (!pendingHost || pendingHost.taken || m.matchId !== pendingHost.card.matchId) return;
+    pendingHost.taken = true;
+    const peer = lobby.peers.find((p) => p.id === m.from) || { id: m.from, ip: "" };
+    const hostName = document.getElementById("p1-name").value.trim() || "اللاعب 1";
+    const names = [hostName, m.name || "اللاعب 2"];
+    startLanMatch("host", pendingHost.card, names, peer, lan);
+    lan.sendTo(peer, { t: "lan", k: "go", matchId: pendingHost.card.matchId, names });
+  } else if (m.t === "lan") {
+    if (m.k === "go") {
+      if (pendingJoin && m.matchId === pendingJoin.card.matchId) { const pj = pendingJoin; pendingJoin = null; startLanMatch("guest", pj.card, m.names, pj.peer, lan); }
+    } else if (lanChan) lanChan.feed(m);
+  }
+};
 function setPlayMode(mode) {
   playModeEl.value = mode;
   modeTabs.forEach((t) => t.classList.toggle("selected", t.dataset.mode === mode));
@@ -231,7 +286,7 @@ async function startMatch(params) {
     let currentHudInfo = { seat: 0, turns: [0], simultaneous: false };
     // Pass-the-phone cover: only for games with hidden information (not Pool).
     const humanCount = params.playerNames.length - (params.botSeats ? params.botSeats.length : 0);
-    const coverEnabled = params.gameId !== GAMES.pool.id && humanCount > 1;
+    const coverEnabled = params.gameId !== GAMES.pool.id && humanCount > 1 && !params.lan;
     let coveredSeat = -1;
     let coverTimer = null;
     const hideCover = () => passCover.classList.add("hidden");
@@ -261,6 +316,7 @@ async function startMatch(params) {
       playerNames: params.playerNames,
       language: params.language,
       topSafeInsetCssPx: 46,
+      lan: params.lan || null,
       onMenuUpdated: renderDynamicMenu,
       onTurnHudUpdate(info) {
         currentHudInfo = info;
@@ -277,6 +333,7 @@ async function startMatch(params) {
       },
       onGameOverHud() {
         gameOverBar.classList.remove("hidden");
+        if (params.lan) rematchBtn.classList.add("hidden"); else rematchBtn.classList.remove("hidden");
       },
     });
 
@@ -341,6 +398,7 @@ startBtn.addEventListener("click", () => {
 });
 
 function exitToSetup() {
+  leaveLan();
   if (activeBots) { activeBots.stop(); activeBots = null; }
   setHostOrientation("portrait");
   if (activeSession) {
