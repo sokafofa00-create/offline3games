@@ -332,10 +332,20 @@ self.onmessage = (ev) => {
     }
 
     wireServerCallbacks(serverLogic);
-    // The game's logic.animateWorld() calls this.executeAnimation(); the client class defines it (-> animator) but the
-    // server class here does not, so a shot completed by resign/disconnect threw "executeAnimation is not a function".
-    if (typeof serverLogic.executeAnimation !== "function" && serverLogic.animator && typeof serverLogic.animator.executeAnimation === "function") {
-      serverLogic.executeAnimation = () => serverLogic.animator.executeAnimation();
+    // The game's logic.animateWorld() calls this.executeAnimation(). The client class defines it (-> its animator) but the
+    // server logic here has no animator, so a shot completed by resign/disconnect threw "executeAnimation is not a function".
+    // Mirror the game's own WorldAnimatorServer.executeAnimation (fixed-step loop, then the animation-finished signals).
+    if (typeof serverLogic.executeAnimation !== "function") {
+      serverLogic.executeAnimation = function () {
+        const l = serverLogic; const MAX = 200000;
+        if (typeof l.getNOAnimations !== "function" || !l.world) return;
+        l.world.resetAnimationTime(); l.world.resetBodiesTimes(); l.world.resetAnimationStepsCount();
+        do { l.onBeforeStep.emit(); l.world.step(l.getFixedTimeStep()); l.onAfterStep.emit(); }
+        while (!l.isAnimationFinished() && l.world.getAnimationStepsCount() <= MAX);
+        if (l.world.getAnimationStepsCount() > MAX) l.cancelAnimation(true);
+        else { l.onPreAnimationFinished.emit(); l.onAnimationFinished.emit(); }
+        l.world.resetAnimationStepsCount();
+      };
     }
     serverLogic.seed = msg.seed || Math.floor(Math.random() * 0x7fffffff);
 
