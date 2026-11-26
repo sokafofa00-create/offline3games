@@ -1,0 +1,51 @@
+name: Baseline Render Compare
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/compare.yml"
+      - "tests/compare.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: cur
+      - uses: actions/checkout@v4
+        with:
+          ref: ccd175ff8fbb097b7cf359c2c8f89fcf1246dc5e
+          path: base
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        working-directory: cur
+        run: |
+          npm i --no-save --no-package-lock playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Render baseline and current (same SwiftShader renderer, same viewport)
+        working-directory: cur
+        run: |
+          echo "baseline $(git -C ../base rev-parse HEAD) current $(git rev-parse HEAD)" | tee -a "$GITHUB_STEP_SUMMARY"
+          ls ../base | head -20 | tee -a "$GITHUB_STEP_SUMMARY"
+          node tests/compare.mjs ../base ../out-base 2>&1 | grep -E "COMPARE|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          node tests/compare.mjs . ../out-cur 2>&1 | grep -E "COMPARE|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
+      - name: Publish to ci-compare branch
+        if: always()
+        run: |
+          set -e
+          cd cur
+          git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
+          mkdir -p /tmp/o/base /tmp/o/cur; cp ../out-base/*.png /tmp/o/base/ 2>/dev/null || true; cp ../out-cur/*.png /tmp/o/cur/ 2>/dev/null || true
+          git checkout --orphan ci-compare
+          git rm -rf . >/dev/null 2>&1 || true
+          mkdir -p base cur; cp /tmp/o/base/*.png base/ 2>/dev/null || true; cp /tmp/o/cur/*.png cur/ 2>/dev/null || true
+          git add base cur
+          git commit -m "baseline vs current render, run ${GITHUB_RUN_NUMBER}"
+          git push -f origin ci-compare
