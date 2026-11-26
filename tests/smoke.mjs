@@ -202,6 +202,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         res.draft.realTouch.variants = [];
         const h0 = await region();
         const variants = [
+          ...(process.env.TAPSCAN ? [380,420,460,500,540,580,620,660,690,710,722,735,750,770,800,830].map((yy) => ["scan-y" + yy, async () => { await page.touchscreen.tap(206, yy); }]) : []),
           ["cdp-touch-100ms", async () => { await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: 206, y: 722 }] }); await page.waitForTimeout(100); await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] }); }],
           ["mouse-100ms-move", async () => { await page.mouse.move(206, 722); await page.mouse.down(); await page.waitForTimeout(50); await page.mouse.move(207, 722); await page.waitForTimeout(50); await page.mouse.up(); }],
           ["tap-y700", async () => { await page.touchscreen.tap(206, 700); }],
