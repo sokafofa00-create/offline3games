@@ -47,6 +47,37 @@ jobs:
           done
           echo "Verified: APK is 100% offline with zero network permissions and zero pairip."
 
+      - name: Verify packaged APKs (permissions, forbidden libraries, signature)
+        run: |
+          BT=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -1)
+          FAIL=0
+          {
+            echo "## Packaged APK verification"
+          } >> "$GITHUB_STEP_SUMMARY"
+          for apk in android/app/build/outputs/apk/debug/*.apk android/app/build/outputs/apk/release/*.apk; do
+            echo "=== $apk"
+            echo "### $apk" >> "$GITHUB_STEP_SUMMARY"
+            echo "size: $(stat -c %s "$apk") bytes" | tee -a "$GITHUB_STEP_SUMMARY"
+            PERMS=$($BT/aapt2 dump permissions "$apk")
+            echo "$PERMS"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"; echo "$PERMS" >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
+            for p in android.permission.INTERNET android.permission.ACCESS_NETWORK_STATE android.permission.ACCESS_WIFI_STATE; do
+              if echo "$PERMS" | grep -q "$p"; then echo "FORBIDDEN permission $p in $apk"; FAIL=1; fi
+            done
+            rm -rf /tmp/apkx && mkdir /tmp/apkx && unzip -q "$apk" -d /tmp/apkx
+            if grep -r -a -l -i -E "pairip|firebase|crashlytics|com/google/android/gms|play-core|licensecheck" /tmp/apkx --include="*.dex" --include="AndroidManifest.xml" --include="*.json" -s | head -3 | grep .; then
+              echo "FORBIDDEN library marker found in $apk"; FAIL=1
+            else
+              echo "no pairip/firebase/crashlytics/gms markers in dex/manifest/json"
+            fi
+            SIG=$($BT/apksigner verify --verbose --print-certs "$apk" 2>&1 | grep -E "Verifies|Verified using|certificate DN|Number of signers" | sed 's/SHA-256 digest.*//')
+            echo "$SIG"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"; echo "$SIG" >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
+            echo "$SIG" | grep -q "Verifies" || { echo "APK signature did not verify: $apk"; FAIL=1; }
+          done
+          echo "overall_fail=$FAIL" | tee -a "$GITHUB_STEP_SUMMARY"
+          exit $FAIL
+
       - name: Upload Ready-to-Install APKs
         uses: actions/upload-artifact@v4
         with:
