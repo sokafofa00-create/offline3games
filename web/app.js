@@ -62,6 +62,10 @@ const turnDot = document.getElementById("turn-dot");
 const turnText = document.getElementById("turn-text");
 const gameOverBar = document.getElementById("gameover-bar");
 const rematchBtn = document.getElementById("rematch-btn");
+const passCover = document.getElementById("pass-cover");
+const passCoverTitle = document.getElementById("pass-cover-title");
+const passCoverDot = document.getElementById("pass-cover-dot");
+const passCoverBtn = document.getElementById("pass-cover-btn");
 const backSetupBtn = document.getElementById("back-setup-btn");
 
 const menuBackdrop = document.getElementById("menu-backdrop");
@@ -176,6 +180,28 @@ async function startMatch(params) {
     gameScreen.classList.add("active");
 
     let currentHudInfo = { seat: 0, turns: [0], simultaneous: false };
+    // Pass-the-phone cover: only for games with hidden information (not Pool).
+    const coverEnabled = params.gameId !== GAMES.pool.id && params.playerNames.length > 1;
+    let coveredSeat = -1;
+    let coverTimer = null;
+    const hideCover = () => passCover.classList.add("hidden");
+    const maybeShowCover = (info) => {
+      if (!coverEnabled || info.gameOver || info.seat === coveredSeat) return;
+      clearTimeout(coverTimer);
+      const tryShow = () => {
+        const lg = activeSession?.getClientLogic?.();
+        if (!lg || lg.gameOver) return;
+        if (lg.paused) { coverTimer = setTimeout(tryShow, 250); return; }
+        if (currentHudInfo.seat === coveredSeat) return;
+        coveredSeat = currentHudInfo.seat;
+        passCoverDot.style.background = SEAT_COLORS[coveredSeat % SEAT_COLORS.length];
+        passCoverTitle.textContent = `الدور على ${currentHudInfo.playerName}`;
+        passCover.classList.remove("hidden");
+      };
+      tryShow();
+    };
+    passCoverBtn.onclick = hideCover;
+    hideCover();
 
     activeSession = await launchPlatoOfflineSession({
       canvas: freshCanvas,
@@ -187,6 +213,7 @@ async function startMatch(params) {
       onMenuUpdated: renderDynamicMenu,
       onTurnHudUpdate(info) {
         currentHudInfo = info;
+        if (info.gameOver) { clearTimeout(coverTimer); hideCover(); } else maybeShowCover(info);
         turnDot.style.background = SEAT_COLORS[info.seat % SEAT_COLORS.length];
         if (info.gameOver) {
           turnText.textContent = params.language === "ar" ? "انتهت المباراة" : "Game Over";
