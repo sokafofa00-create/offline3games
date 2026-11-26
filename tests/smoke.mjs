@@ -34,7 +34,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
   const page = await ctx.newPage();
   const errors = [];
   const requests = [];
-  page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+  page.on("pageerror", (e) => { errors.push("pageerror: " + e.message); console.log("PAGEERROR_STACK " + String(e.stack || "").split("\n").slice(0, 6).join(" | ").slice(0, 700)); });
   const warnLines = [];
   page.on("console", (m) => { if (m.type() === "warning" && /Missing preloaded|\[GL\]|WebGL/i.test(m.text())) warnLines.push(m.text().slice(0, 160)); });
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
