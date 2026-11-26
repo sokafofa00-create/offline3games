@@ -360,30 +360,6 @@ export async function launchPlatoOfflineSession({
 
   // --- Hotseat Pass-and-Play Controller (Same Device Player 1 vs Player 2 / 3 / 4) ---
   function installHotseatHooks(logic) {
-    // Single-device ready checks (Match Monsters / Brawlbots only, never Pool): the real client acks the active seat once
-    // its own animations finish (localReady). All local seats share this client, so right after that real ack, also ack the
-    // other seats still awaited. No timer, nothing sent before the game's own ready event.
-    if (/^(5470e3f4|ae765a3b)/.test(String(bundle.gameId)) && typeof logic.isSeatAwaitingReady === "function" && typeof logic.localReady === "function") {
-      const origReady = logic.localReady.bind(logic);
-      let inExtra = false;
-      logic.localReady = function (...args) {
-        if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "localReady", seat: logic._localSeat, type: "localReady", aw: [0, 1].map((s) => { try { return logic.isSeatAwaitingReady(s); } catch (e) { return null; } }) });
-        const res = origReady(...args);
-        if (inExtra) return res;
-        const cur = logic._localSeat;
-        inExtra = true;
-        try {
-          for (let s = 0; s < numSeats; s++) {
-            if (s === cur || !logic.isSeatAwaitingReady(s)) continue;
-            logic._localSeat = s;
-            try { origReady(...args); } finally { logic._localSeat = cur; }
-            if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "ready-extra", seat: s, type: "extraReady", cur });
-          }
-        } catch (_) {} finally { inExtra = false; logic._localSeat = cur; }
-        return res;
-      };
-    }
-
     // 1. Keep displaySeat pinned to 0 in Pool so avatars & pocketed ball racks NEVER flip left/right between turns!
     if ("displaySeat" in logic) {
       Object.defineProperty(logic, "displaySeat", {
