@@ -3,6 +3,7 @@
 export function createLan({ id, name, onPeers, onMessage }) {
   const host = window.AndroidHost && typeof window.AndroidHost.lanStart === "function" ? window.AndroidHost : null;
   let timer = null;
+  let interval = 600;
   let me = { id, name, ip: "" };
   const j = async (path, body) => (await fetch("/__lan/" + path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body) })).json();
   const api = {
@@ -20,10 +21,11 @@ export function createLan({ id, name, onPeers, onMessage }) {
           onPeers(st.peers || [], me);
           for (const e of evs || []) onMessage(e);
         } catch (_e) {}
-        timer = setTimeout(tick, 600);
+        timer = setTimeout(tick, interval);
       };
       tick();
     },
+    fast(on) { interval = on ? 60 : 600; },
     stop() { clearTimeout(timer); timer = null; if (host) host.lanStop(); else j("bye", { id }).catch(() => {}); },
     setState(state) { if (host) host.lanSetState(state); else j("hello", { id, name, state }).catch(() => {}); },
     // Sends to every online peer. Returns the number reached.
