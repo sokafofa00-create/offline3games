@@ -18,9 +18,8 @@ jobs:
           node-version: "22"
       - name: Install Playwright
         run: |
-          mkdir -p /tmp/pw && cd /tmp/pw && npm init -y >/dev/null && npm i playwright@1.49.1 >/dev/null
+          npm i --no-save --no-package-lock playwright@1.49.1
           npx playwright install --with-deps chromium
-          ln -s /tmp/pw/node_modules node_modules
       - name: Run smoke test (load, start, input, menu, rematch)
         run: node tests/smoke.mjs
       - name: Upload screenshots
