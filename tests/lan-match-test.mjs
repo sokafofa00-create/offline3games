@@ -76,7 +76,9 @@ for (const game of GAMES) {
         const hb0 = await hash(B.page); await B.page.waitForTimeout(800); const hb1 = await hash(B.page);
         o.idleStable = ha0 === ha1 && hb0 === hb1;
         await drag(A.page); o.hostStickMoved = (await hash(A.page)) !== ha1;
-        await drag(B.page); o.guestStickMoved = (await hash(B.page)) !== hb1;
+        await A.page.waitForTimeout(1500);
+        const hb2 = await hash(B.page); await B.page.waitForTimeout(800); const hb3 = await hash(B.page); o.guestStableBeforeDrag = hb2 === hb3;
+        await drag(B.page); o.guestStickMoved = (await hash(B.page)) !== hb3;
         return o;
       };
       res.poolTurns = [];
