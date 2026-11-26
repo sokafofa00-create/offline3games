@@ -34,3 +34,4 @@ jobs:
         if: always()
         run: mkdir -p shots && node --import ./tests/chrome-shim.mjs tests/lan-match-test.mjs
 # rerun on gl premultiply fix
+# rerun with displaySeat fix
