@@ -153,6 +153,7 @@ export async function launchPlatoOfflineSession({
   let activeLocalSeat = 0;
   // Track which seats have already acted in simultaneous-turn games (Brawlbots / Match Monsters draft)
   const actedInSimultaneousRound = new Set();
+  let manualSeatOverride = null; // seat chosen with the on-screen switch button for the current simultaneous round
 
   const prefStorageKey = `offline_plato_prefs_${bundle.gameId}`;
   let savedPrefs = {};
@@ -395,6 +396,7 @@ export async function launchPlatoOfflineSession({
     if (logic.onTurnChange?.receive) {
       logic.onTurnChange.receive(() => {
         actedInSimultaneousRound.clear();
+        manualSeatOverride = null;
         scheduleHotseatSeatSync();
       });
     }
@@ -445,6 +447,7 @@ export async function launchPlatoOfflineSession({
     if (turns.length > 1) {
       const pending = turns.find((s) => !actedInSimultaneousRound.has(s));
       targetSeat = pending !== undefined ? pending : turns[0];
+      if (manualSeatOverride !== null && turns.includes(manualSeatOverride) && !actedInSimultaneousRound.has(manualSeatOverride)) targetSeat = manualSeatOverride;
     }
 
     if (clientLogic._localSeat !== targetSeat) {
@@ -782,6 +785,7 @@ export async function launchPlatoOfflineSession({
     },
     manualSwitchSeat(seat) {
       if (seat >= 0 && seat < numSeats) {
+        manualSeatOverride = seat;
         switchActiveSeat(seat, true);
         updateTopHud();
       }
