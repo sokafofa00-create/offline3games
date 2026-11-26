@@ -106,28 +106,27 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         return out;
       });
       await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__mv = []; const om = l.move.bind(l); l.move = (seat, packet, reveal) => { try { window.__mv.push({ t: Math.round(performance.now()), kind: "move", seat, a: packet && packet.m && packet.m.a, hasI: !!(packet && packet.i) }); } catch (e) {} return om(seat, packet, reveal); }; });
-      const cands = [];
-      for (const pw of [3, 6, 10, 15, 22, 32, 45, 60, 80, 100]) for (const ang of [0.6, 2.4, 4.0, 5.5]) cands.push([+(pw * Math.cos(ang)).toFixed(3), +(pw * Math.sin(ang)).toFixed(3)]);
+      // One legal shot per seat (impulse length 3 is below the validator limit; seats follow the automatic handoff).
+      res.lockin.shotLog = [];
       for (let k = 0; k < nSeats; k++) {
-        const before = await st();
-        const seatNow = await page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._localSeat);
-        let accepted = null; let tried = 0;
-        for (const c of cands) {
-          tried++;
-          const r = await page.evaluate((imp) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const w = l.canSelectWeapon(seat, 0) ? 0 : -1; if (w < 0) return { seat, w, ok: false }; const ok = l.localMove({ a: 5, i: imp, p: w, f: 0, u: false }, true); return { seat, w, ok }; }, c);
-          await page.waitForTimeout(450);
-          const chk = await page.evaluate((seat) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { seatNow: l._localSeat, ready: l.isShotReady(seat), paused: l.paused }; }, r.seat);
-          chk.log = await page.evaluate(() => { const o = window.__mv.slice(-6); return o; });
-          if (r.ok && (chk.ready || chk.seatNow !== r.seat || chk.paused)) { accepted = { imp: c, ...r, ...chk }; break; }
-        }
+        const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const allowed = l.canSelectWeapon(seat, 0); const ok = allowed ? l.localMove({ a: 5, i: [2.476, 1.694], p: 0, f: 0, u: false }, true) : false; return { seat, allowed, ok, readyLocal: l.isShotReady(seat) }; });
         await page.waitForTimeout(2500);
         const after = await st();
-        res.lockin.shots.push({ seatBefore: seatNow, tried, accepted, after });
+        res.lockin.shotLog.push({ k, ...r, after, moves: await page.evaluate(() => window.__mv.slice(-4)) });
         if (after.cover) await page.click("#pass-cover-btn");
       }
-      await page.waitForTimeout(9000);
+      // Wait for the round to resolve: shots animate (paused true) then the next round starts (paused false).
+      let sawPaused = false; res.lockin.roundStates = [];
+      for (let w = 0; w < 24; w++) {
+        await page.waitForTimeout(1500);
+        const sn = await st(); if (sn.paused) sawPaused = true;
+        res.lockin.roundStates.push(sn);
+        if (sawPaused && !sn.paused) break;
+      }
+      res.lockin.sawPaused = sawPaused;
       res.lockin.afterRound = await st();
-      res.lockin.afterRound.areShotsReady = await page.evaluate(() => { try { return window.__ACTIVE_SESSION__.getClientLogic().areShotsReady(); } catch (e) { return String(e); } });
+      res.lockin.afterRound.areShotsReady = await page.evaluate(() => { try { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { all: l.areShotsReady(), seat0Ready: l.isShotReady(0) }; } catch (e) { return String(e); } });
+      await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1f-next-round.png` });
       res.lockin.deserializeBoundary = await page.evaluate(() => window.__deser);
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1c-after-picks.png` });
     }
@@ -183,6 +182,8 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       await page.waitForTimeout(4000);
       res.draft.final = await st2();
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1d-after-draft.png` });
+      for (let w = 0; w < 14 && res.draft.final.phase !== 3; w++) { if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn"); await page.waitForTimeout(1500); res.draft.final = await st2(); }
+      res.draft.reachedCombat = res.draft.final.phase === 3;
       if (res.draft.final.phase === 3) {
         const mv = await page.evaluate(() => {
           const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const seat = l._localSeat; const out = { seat };
