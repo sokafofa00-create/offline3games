@@ -65,6 +65,30 @@ for (const game of GAMES) {
     await A.page.screenshot({ path: `shots/lan-${game}-host.png` });
     await B.page.screenshot({ path: `shots/lan-${game}-guest.png` });
     if (game === "pool") {
+      // Turn ownership per seat (user report: on the other player's turn this phone could still move the cue).
+      const crypto = await import("node:crypto");
+      const caps = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused }; for (const s of [0, 1]) { try { o["canShoot" + s] = !!l.canShoot(s); } catch (e) { o["canShoot" + s] = "err"; } } return o; });
+      const hash = async (page) => crypto.createHash("md5").update(await page.screenshot({ clip: { x: 20, y: 260, width: 372, height: 480 } })).digest("hex");
+      const drag = async (page) => { await page.mouse.move(206, 640); await page.mouse.down(); await page.mouse.move(300, 600, { steps: 8 }); await page.mouse.move(120, 560, { steps: 8 }); await page.mouse.up(); await page.waitForTimeout(1200); };
+      const probe = async (label) => {
+        const o = { label, A: await caps(A.page), B: await caps(B.page) };
+        const ha0 = await hash(A.page); await A.page.waitForTimeout(800); const ha1 = await hash(A.page);
+        const hb0 = await hash(B.page); await B.page.waitForTimeout(800); const hb1 = await hash(B.page);
+        o.idleStable = ha0 === ha1 && hb0 === hb1;
+        await drag(A.page); o.hostStickMoved = (await hash(A.page)) !== ha1;
+        await drag(B.page); o.guestStickMoved = (await hash(B.page)) !== hb1;
+        return o;
+      };
+      res.poolTurns = [];
+      res.poolTurns.push(await probe("start"));
+      res.poolTurns[0].shot = await B.page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { if (!l.canShoot(1)) return { skip: true }; if (l.canMoveCueBall && l.canMoveCueBall(1)) l.requestCueBallMove([l.table.cueBall.position[0], l.table.cueBall.position[1]]); l.requestShot(0.9, -1.5, [0, 0]); return { shot: true }; } catch (e) { return { err: String(e && e.message).slice(0, 100) }; } });
+      for (let k = 0; k < 40; k++) { await A.page.waitForTimeout(1000); const c = await caps(A.page); if (c.turn !== res.poolTurns[0].A.turn && !c.paused) break; }
+      await A.page.waitForTimeout(2500);
+      res.poolTurns.push(await probe("after-guest-shot"));
+      const t = res.poolTurns;
+      res.steps.poolOwnership = t.every((x) => x.idleStable) && t[0].hostStickMoved === false && t[0].guestStickMoved === true && t[1].turn !== t[0].turn ? (t[1].hostStickMoved === true && t[1].guestStickMoved === false) : false;
+    }
+    if (game === "pool") {
       // Connection loss: the guest phone vanishes (context closed). The host must notice, tell the player and return to the menu.
       await B.ctx.close();
       try { await A.page.waitForSelector("#setup-screen.active", { timeout: 40000 }); res.steps.disconnect = dialogs.some((d) => d.startsWith("Host:") && d.includes("انقطع")); } catch (e) { res.steps.disconnect = false; }
@@ -77,5 +101,5 @@ await browser.close(); server.kill();
 const txt = JSON.stringify(out, null, 1);
 console.log("LAN_MATCH_RESULTS " + txt);
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## LAN match test (relay stand-in, two contexts, internal-API actions)\n```json\n" + txt + "\n```\n");
-const bad = out.filter((r) => r.steps.exception || !r.steps.seats || !r.steps.sameState || r.steps.movesAdvanced === false || r.steps.disconnect === false);
+const bad = out.filter((r) => r.steps.exception || !r.steps.seats || !r.steps.sameState || r.steps.movesAdvanced === false || r.steps.disconnect === false || r.steps.poolOwnership === false);
 if (bad.length) { console.log("FAILED LAN match for: " + bad.map((r) => r.game).join(",")); process.exit(1); }
