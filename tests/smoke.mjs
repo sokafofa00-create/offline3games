@@ -33,6 +33,8 @@ for (const sc of scenarios) {
   page.on("worker", (w) => w.on("console", (m) => { if (m.type() === "error") errors.push("worker-console: " + m.text()); }));
   page.on("request", (r) => { if (!r.url().startsWith(`http://localhost:${PORT}/`) && !r.url().startsWith("data:") && !r.url().startsWith("blob:")) requests.push(r.url()); });
   page.on("dialog", async (d) => { errors.push("dialog: " + d.message()); await d.dismiss(); });
+  const failedUrls = [];
+  page.on("response", (r) => { if (r.status() >= 400) failedUrls.push(r.status() + " " + r.url().replace(`http://localhost:${PORT}`, "")); });
   const res = { name: sc.name, steps: {} };
   try {
     await page.goto(`http://localhost:${PORT}/`);
@@ -68,6 +70,7 @@ for (const sc of scenarios) {
   }
   res.errors = errors.slice(0, 15);
   res.externalRequests = requests;
+  res.failedUrls = [...new Set(failedUrls)].slice(0, 20);
   results.push(res);
   await ctx.close();
 }
