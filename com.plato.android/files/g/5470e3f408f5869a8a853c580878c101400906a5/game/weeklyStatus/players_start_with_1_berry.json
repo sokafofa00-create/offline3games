@@ -1,0 +1,45 @@
+{
+	"name": "Players Start with 1 Berry",
+	"descriptions": "PlayersStartWith1Berry",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Get Player Node",
+					"seat": "Self",
+					"output": "player_node"
+				},
+				{
+					"name": "Spawn Rocket",
+					"start": "$weekly_node",
+					"end": "$player_node",
+					"seconds": 0.4,
+					"insideColor": "Purple",
+					"outsideColor": "Purple",
+					"scale": 1
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Spawn Puff",
+					"node": "$player_node",
+					"color": "Purple",
+					"size": 0.01
+				},
+				{
+					"name": "Update Player Berries",
+					"seat": "Self",
+					"change": 1
+				}
+			]
+		}
+	]
+}

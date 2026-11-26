@@ -1,0 +1,214 @@
+{
+	"name": "Aquatic Week",
+	"descriptions": "AquaticWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+			    {
+					"name": "Count Monsters By Tag",
+					"seat": "Self",
+					"tag": "aquatic",
+					"output": "aquatic_count"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$aquatic_count",
+					"b": 1,
+					"output": "has_one_aquatic_monster"
+				},
+                {
+					"name": "Is Greater Than",
+					"a": "$aquatic_count",
+					"b": 1,
+					"output": "has_two_aquatic_monster"
+				},
+				{
+					"name": "If",
+					"case": "$has_one_aquatic_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "aquatic",
+							"output": "aquatic_monsters"
+						},
+						{
+							"name": "Get Monsters Except Tag",
+							"seat": "Self",
+							"tag": "aquatic",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$aquatic_monster",
+									"buffType": "BUFF_ATK",
+									"value": 1
+								}
+							]
+						},
+						{
+							"name": "Set Permanent Buff",
+							"seat": "Self",
+							"buffType": "BUFF_BERRY",
+							"value": 1
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Gray",
+							"outsideColor": "Red",
+							"scale": 1
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$aquatic_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$aquatic_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$aquatic_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						},
+                        {
+							"name": "Show Berry Buff",
+							"seat": "Self"
+						}
+					]
+				},
+                {
+					"name": "If",
+					"case": "$has_two_aquatic_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "aquatic",
+							"output": "aquatic_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$aquatic_monster",
+									"buffType": "BUFF_ATK",
+									"value": 1
+								}
+							]
+						},
+                        {
+							"name": "Set Permanent Buff",
+							"seat": "Self",
+							"buffType": "BUFF_BERRY",
+							"value": 2
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Gray",
+							"outsideColor": "Purple",
+							"scale": 1
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$aquatic_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$aquatic_monsters",
+							"iterator": "aquatic_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$aquatic_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$aquatic_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						},
+                        {
+							"name": "Show Berry Buff",
+							"seat": "Self"
+						}
+					]
+				}
+			]
+		}
+	]
+}

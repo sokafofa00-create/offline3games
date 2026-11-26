@@ -1,0 +1,50 @@
+{
+	"name": "Shuffle",
+	"icon_sprite": "~/images/statuses/shuffle.webp",
+	"powers": [
+        {
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Shuffle Board"
+				}, 
+                {
+					"name": "Get Player Status Charges",
+					"seat": "Self",
+					"status": "Shuffle",
+					"output": "charges"
+				},
+				{
+					"name": "Subtract",
+					"a": "$charges",
+					"b": 1,
+					"output": "final_charges"
+				},
+				{
+					"name": "Update Player Status",
+					"seat": "Self",
+					"status": "Shuffle",
+					"charges": "$final_charges"
+				},
+                {
+					"name": "Is Equal To",
+					"a": "$final_charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+                {
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Player Status",
+							"seat": "Self",
+							"status": "Shuffle"
+						}
+                    ]
+                }
+			]
+		}
+	]
+}

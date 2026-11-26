@@ -1,0 +1,76 @@
+{
+	"name": "Blackhole",
+	"icon_sprite": "~/images/statuses/blackhole.webp",
+	"powers": [
+		{
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 5,
+					"excludeEffects": true,
+					"output": "tiles"
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Blackhole",
+					"spine_bundle": [
+						"~/spine/blackhole_tiles/fx_blackhole.webp",
+						"~/spine/blackhole_tiles/fx_blackhole.json",
+						"~/spine/blackhole_tiles/fx_blackhole.atlas"
+					]
+				}
+			]
+		},
+        {
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Remove Tile Effect",
+					"effect": "Blackhole"
+				},
+				{
+					"name": "Get Player Status Charges",
+					"seat": "Self",
+					"status": "Blackhole",
+					"output": "charges"
+				},
+				{
+					"name": "Subtract",
+					"a": "$charges",
+					"b": 1,
+					"output": "final_charges"
+				},
+				{
+					"name": "Update Player Status",
+					"seat": "Self",
+					"status": "Blackhole",
+					"charges": "$final_charges"
+				},
+                {
+					"name": "Is Equal To",
+					"a": "$final_charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+                {
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Player Status",
+							"seat": "Self",
+							"status": "Blackhole"
+						}
+                    ]
+                }
+
+			]
+		}
+    ]
+}

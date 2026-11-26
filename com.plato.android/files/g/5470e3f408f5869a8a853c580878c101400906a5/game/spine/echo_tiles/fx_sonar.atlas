@@ -1,0 +1,15 @@
+fx_sonar.png
+size:381,94
+filter:Linear,Linear
+sonar_circle
+bounds:341,54,38,38
+sonar_circle_back
+bounds:249,2,90,90
+offsets:1,1,92,92
+sonar_line
+bounds:2,2,17,197
+rotate:90
+sonar_line_back
+bounds:2,21,71,245
+offsets:1,3,73,251
+rotate:90

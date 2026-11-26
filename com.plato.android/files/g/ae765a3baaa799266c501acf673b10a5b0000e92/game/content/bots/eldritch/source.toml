@@ -1,0 +1,33 @@
+[stats]
+health = 10
+accuracy = 5
+weight = 5
+
+[selection]
+scale = 0.85
+x = 0.6
+y = 0.56
+
+[physics]
+height = 190
+offset = [-0, -215]
+display_offset = [-100, -50]
+display_scale = 0.48
+
+[[spine]]
+uri = "~/content/bots/eldritch/cthulhu.json"
+[[spine]]
+uri = "~/_revamp/content/bots/eldritch/cthulhu.atlas"
+[[spine]]
+uri = "~/_revamp/content/bots/eldritch/cthulhu.webp"
+
+[[abilities]]
+id = "509"
+cooldown = 2
+audio = "~/_revamp/content/bots/eldritch/into_the_void.m4a"
+
+[[abilities]]
+id = "510"
+cooldown = 3
+audio = "~/_revamp/content/bots/eldritch/existential_dread.m4a"
+

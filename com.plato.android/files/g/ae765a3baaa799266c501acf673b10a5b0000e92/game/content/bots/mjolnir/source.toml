@@ -1,0 +1,47 @@
+[stats]
+health = 5
+accuracy = 8
+weight = 4
+
+[physics]
+height = 172
+size = [354, 379]
+shape = [[188, 96], [187, 129], [167, 153], [142, 174], [117, 187], [-111, 190], [-150, 172],[-181, 146], [-191, 107], [-186, 82], [-159, 52], [-130, 37], [-129, 1], [-120, -8],[-133, -29], [-129, -76], [-150, -85], [-155, -103], [-129, -123], [-118, -155],[-98, -165], [-87, -197], [-66, -181], [-49, -200], [-24, -172], [35, -181],[31, -176], [78, -177], [118, -165], [122, -160], [113, -161], [148, -123],[146, -99], [144, 3], [131, 16], [132, 33], [175, 73]]
+
+[cannon]
+uri = "~/imported/blq27l94q4yy7.webp"
+size = 128
+position = [-17, -23]
+displacement = [0.56, 0.46]
+
+[[parts]]
+uri = "~/imported/mjolnir_z0.webp"
+animation = "Cockpit"
+position = [0.5254, 0.4366]
+[parts.cockpit]
+uri = "~/imported/mjolnir_bg.webp"
+position = [127, 89]
+avatar_size = 66
+
+[[parts]]
+uri = "~/imported/8mb9sm61144b4.webp"
+animation = "Platform"
+position = [0.5, 0.8126]
+
+[[parts]]
+uri = "~/imported/nuzqluov83bs3.webp"
+animation = "Cockpit"
+position = [0.4901, 0.1728]
+
+[[parts]]
+uri = "~/imported/blq27l9j2q6i7.webp"
+animation = "Platform"
+position = [0.2316, 0.4274]
+
+[[abilities]]
+cooldown = 3
+id = "3010"
+
+[[abilities]]
+cooldown = 3
+id = "501"

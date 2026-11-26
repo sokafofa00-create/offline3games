@@ -1,0 +1,104 @@
+{
+	"name": "Evasion",
+	"icon_sprite": "~/images/statuses/evasion.webp",
+	"powers": [
+		{
+			"event": ["Monster Attack Final Modifier", "Bullet Attack Final Modifier", "Final Attack Final Modifier"],
+			"seat": "Opponent",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Get Event Source Type",
+					"output": "event_source"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$event_source",
+					"b": "Monster",
+					"output": "is_monster_attack"
+				},
+				{
+					"name": "If",
+					"case": "$is_monster_attack",
+					"effects": [
+						{
+							"name": "Is Greater Than",
+							"a": "^damage",
+							"b": 10,
+							"output": "greater_than_10"
+						},
+						{
+							"name": "If",
+							"case": "$greater_than_10",
+							"effects": [
+								{
+									"name": "Subtract",
+									"a": "^damage",
+									"b": 10,
+									"output": "total_damage"
+								},
+								{
+									"name": "Update Event Data",
+									"data_key": "damage",
+									"value": "$total_damage"
+								}
+							]
+						},
+						{
+							"name": "Else",
+							"case": "$greater_than_10",
+							"effects": [
+								{
+									"name": "Update Event Data",
+									"data_key": "damage",
+									"value": 0
+								}
+							]
+						},
+						{
+							"name": "Get Player Status Charges",
+							"seat": "Self",
+							"status": "Evasion",
+							"output": "charges"
+						},
+						{
+							"name": "Subtract",
+							"a": "$charges",
+							"b": 1,
+							"output": "final_charges"
+						},
+						{
+							"name": "Update Player Status",
+							"seat": "Self",
+							"status": "Evasion",
+							"charges": "$final_charges"
+						},
+						{
+							"name": "Is Equal To",
+							"a": "$final_charges",
+							"b": 0,
+							"output": "is_zero"
+						},
+						{
+							"name": "If",
+							"case": "$is_zero",
+							"effects": [
+								{
+									"name": "Remove Player Status",
+									"seat": "Self",
+									"status": "Evasion"
+								},
+								{
+									"name": "Add Player Status",
+									"seat": "Self",
+									"status": "Increase Max Moves",
+									"charges": 1
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

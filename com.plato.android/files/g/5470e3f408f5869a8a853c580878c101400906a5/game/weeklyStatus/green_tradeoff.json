@@ -1,0 +1,144 @@
+{
+	"name": "Green TradeOff",
+	"descriptions": "GreenTradeOff",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Count Monsters By Tag",
+					"seat": "Self",
+					"tag": "healer",
+					"output": "healer_count"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$healer_count",
+					"b": 0,
+					"output": "has_healer"
+				},
+				{
+					"name": "If",
+					"case": "$has_healer",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "healer",
+							"output": "green_healers"
+						},
+						{
+							"name": "Get Monsters Except Tile Type",
+							"seat": "Self",
+							"tileType": "Green",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$green_healers",
+							"iterator": "green_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$green_monster",
+									"buffType": "BUFF_HEAL",
+									"value": 5
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK",
+									"value": -2
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$green_healers",
+							"iterator": "green_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$green_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Green",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$other_monster",
+									"seconds": 0.4,
+									"insideColor": "Gray",
+									"outsideColor": "Green",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$green_healers",
+							"iterator": "green_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$green_monster",
+									"color": "Green",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$green_monster",
+									"buffType": "BUFF_HEAL"
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$other_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

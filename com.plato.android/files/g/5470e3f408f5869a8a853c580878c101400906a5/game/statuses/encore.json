@@ -1,0 +1,62 @@
+{
+	"name": "Encore",
+	"icon_sprite": "~/images/statuses/encore/encore.webp",
+	"details": {
+		"wheel": "~/images/statuses/encore/wheel.webp",
+		"spinner": "~/images/statuses/encore/spinner.webp",
+		"success": "~/images/statuses/encore/success.webp",
+		"failure": "~/images/statuses/encore/failure.webp"
+	},
+	"powers": [
+		{
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Player Health",
+					"seat": "Self",
+					"output": "health"
+				},
+				{
+					"name": "Is Less Than",
+					"a": "$health",
+					"b": 35,
+					"output": "low_health"
+				},
+				{
+					"name": "Branch",
+					"case": "$low_health",
+					"true": 1,
+					"false": 0.5,
+					"output": "chance"
+				},
+				{
+					"name": "Chance",
+					"chance": "$chance",
+					"output": "to_attack"
+				},
+				{
+					"name": "Play Spinner",
+					"result": "$to_attack"
+				},
+				{
+					"name": "If",
+					"case": "$to_attack",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 15
+						}
+                    ]
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Encore"
+				}
+			]
+		}
+	]
+}

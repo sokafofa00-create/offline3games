@@ -1,0 +1,131 @@
+{
+	"name": "Lunar Drain",
+	"icon_sprite": "~/images/statuses/lunar_drain.webp",
+	"powers": [
+				{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Node",
+					"seat": "Self",
+					"monster": "Self",
+					"output": "monster_node"
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Lunardust",
+					"output": "lunardust_tiles"
+				},
+				{
+					"name": "For",
+					"list": "$lunardust_tiles",
+					"iterator": "lunardust_tile",
+					"effects": [
+						{
+							"name": "Get Tile Color",
+							"tile": "$lunardust_tile",
+							"output": "lunardust_color"
+						},
+						{
+							"name": "Get Tile Node",
+							"tile": "$lunardust_tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$monster_node",
+							"seconds": 0.4,
+							"insideColor": "$lunardust_color",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+                    "name": "Remove Tile Effect",
+                    "effect": "Lunardust"
+                },
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Get List Length",
+					"list": "$lunardust_tiles",
+					"output": "tile_amount"
+				},
+				{
+					"name": "Multiply",
+					"a": "$tile_amount",
+					"b": -1,
+					"output": "neg_tile_amount"
+				},
+				{
+					"name": "Update Mana",
+					"seat": "Opponent",
+					"monster": "Random",
+					"change": "$neg_tile_amount"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Count Tiles By Effect",
+					"effect": "Lunardust",
+					"output": "lunardust_tiles"
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Lunar Drain",
+					"output": "charges"
+				},				
+				{
+					"name": "Clamp Addition",
+					"base": "$lunardust_tiles",
+					"add": "$charges",
+					"max": "%max_lunardust",
+					"output": "spawnCount"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$spawnCount",
+					"b": 0,
+					"output": "should_spawn"
+				},
+				{
+					"name": "If",
+					"case": "$should_spawn",
+					"effects": [
+						{
+							"name": "Get Random Tiles",
+							"w": 1,
+							"h": 1,
+							"amount": "$spawnCount",
+							"excludeEffects": true, 
+							"exclude": ["Bomb"],
+							"output": "tiles"
+						},
+						{
+							"name": "Add Tile Effect",
+							"tiles": "$tiles",
+							"effect": "Lunardust"
+						}
+					]
+				}
+			]
+		}
+	]
+}

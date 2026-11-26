@@ -1,0 +1,224 @@
+{
+	"name": "Nature Week",
+	"descriptions": "NatureWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+			    {
+					"name": "Count Monsters By Tag",
+					"seat": "Self",
+					"tag": "nature",
+					"output": "nature_count"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$nature_count",
+					"b": 1,
+					"output": "has_one_nature_monster"
+				},
+                {
+					"name": "Is Greater Than",
+					"a": "$nature_count",
+					"b": 1,
+					"output": "has_two_nature_monster"
+				},
+				{
+					"name": "If",
+					"case": "$has_one_nature_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "nature",
+							"output": "nature_monsters"
+						},
+						{
+							"name": "Get Monsters Except Tag",
+							"seat": "Self",
+							"tag": "nature",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+					        	{
+									"name": "Set Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK",
+									"value": -1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$other_monster",
+									"seconds": 0.4,
+									"insideColor": "Gray",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$other_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+				                {
+									"name": "Show Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						},
+						{
+                            "name": "Get Player Node",
+                            "seat": "Self",
+                            "output": "player_node"
+                        },
+                        {
+                            "name": "Spawn Rocket",
+                            "start": "$weekly_node",
+                            "end": "$player_node",
+                            "seconds": 0.4,
+                            "insideColor": "Purple",
+                            "outsideColor": "Red",
+                            "scale": 1
+                        },
+                        {
+                            "name": "Wait",
+                            "seconds": 0.4
+                        },
+                        {
+                            "name": "Spawn Puff",
+                            "node": "$player_node",
+                            "color": "Red",
+                            "size": 0.01
+                        },
+                        {
+                            "name": "Increase Player Max Life",
+                            "seat": "Self",
+                            "value": 5
+                        }
+					]
+				},
+                {
+					"name": "If",
+					"case": "$has_two_nature_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "nature",
+							"output": "nature_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$nature_monsters",
+							"iterator": "nature_monster",
+							"effects": [
+					        	{
+									"name": "Set Permanent Buff",
+									"entity": "$nature_monster",
+									"buffType": "BUFF_ATK",
+									"value": -1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$nature_monsters",
+							"iterator": "nature_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$nature_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$nature_monsters",
+							"iterator": "nature_monster",
+							"effects": [
+                                {
+									"name": "Spawn Puff",
+									"node": "$nature_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$nature_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						},
+						{
+                            "name": "Get Player Node",
+                            "seat": "Self",
+                            "output": "player_node"
+                        },
+                        {
+                            "name": "Spawn Rocket",
+                            "start": "$weekly_node",
+                            "end": "$player_node",
+                            "seconds": 0.4,
+                            "insideColor": "Purple",
+                            "outsideColor": "Red",
+                            "scale": 1
+                        },
+                        {
+                            "name": "Wait",
+                            "seconds": 0.4
+                        },
+                        {
+                            "name": "Spawn Puff",
+                            "node": "$player_node",
+                            "color": "Red",
+                            "size": 0.01
+                        },
+                        {
+                            "name": "Increase Player Max Life",
+                            "seat": "Self",
+                            "value": 5
+                        }
+					]
+				}
+			]
+		}
+	]
+}

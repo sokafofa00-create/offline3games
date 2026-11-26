@@ -1,0 +1,48 @@
+{
+	"name": "Return To Sender",
+	"icon_sprite": "~/images/statuses/return_to_sender.webp",
+	"max_charges": 3,
+	"powers": [
+		{
+			"event": "Monster Attack",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Return To Sender",
+					"output": "rts_charges"
+				},
+				{
+					"name": "Multiply",
+					"a": "$rts_charges",
+					"b": 5, 
+					"output": "rts_bonus"
+				},
+				{
+					"name": "Add",
+					"a": "^damage",
+					"b": "$rts_bonus",
+					"output": "rts_total_damage"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "damage",
+					"value": "$rts_total_damage"
+				},
+                {
+					"name": "Wait",
+					"seconds": 0.25
+				},
+                {
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Return To Sender"
+				}
+			]
+		}
+	]
+}

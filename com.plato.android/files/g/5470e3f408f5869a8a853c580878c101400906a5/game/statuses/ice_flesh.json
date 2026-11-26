@@ -1,0 +1,24 @@
+{
+	"name": "Ice Flesh",
+	"icon_sprite": "~/images/statuses/ice_to_flesh_status.webp",
+	"powers": [
+		{
+			"event": "Mana Add",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Multiply",
+					"a": "^mana",
+					"b": 2,
+					"output": "total_mana"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "mana",
+					"value": "$total_mana"
+				}
+			]
+		}
+	]
+}

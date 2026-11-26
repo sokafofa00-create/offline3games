@@ -1,0 +1,84 @@
+{
+	"name": "Red Week",
+	"descriptions": "RedWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Get Monsters By Tile Type",
+					"seat": "Self",
+					"tileType": "Red",
+					"output": "red_monsters"
+				},
+				{
+					"name": "For",
+					"list": "$red_monsters",
+					"iterator": "red_monster",
+					"effects": [
+						{
+							"name": "Set Permanent Buff",
+							"entity": "$red_monster",
+							"buffType": "BUFF_MANA",
+							"value": 1
+						},
+						{
+							"name": "Set Permanent Buff",
+							"entity": "$red_monster",
+							"buffType": "BUFF_ATK",
+							"value": 5
+						}
+					]
+				},
+				{
+					"name": "For",
+					"list": "$red_monsters",
+					"iterator": "red_monster",
+					"effects": [
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$red_monster",
+							"seconds": 0.4,
+							"insideColor": "Purple",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "For",
+					"list": "$red_monsters",
+					"iterator": "red_monster",
+					"effects": [
+						{
+							"name": "Spawn Puff",
+							"node": "$red_monster",
+							"color": "Red",
+							"size": 0.01
+						},
+						{
+							"name": "Show Mana Buff",
+							"entity": "$red_monster",
+							"value": true
+						},
+						{
+							"name": "Show Permanent Buff",
+							"entity": "$red_monster",
+							"buffType": "BUFF_ATK"
+						}
+					]
+				}
+			]
+		}
+	]
+}

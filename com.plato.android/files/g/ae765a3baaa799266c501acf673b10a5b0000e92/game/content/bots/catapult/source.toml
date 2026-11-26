@@ -1,0 +1,73 @@
+[stats]
+health = 8
+accuracy = 7
+weight = 3
+
+# Selection-screen placement. Selection uses display_offset[0] for X (now ~-worldX, so x places the bbox
+# center directly, like the other bots at ~0.6) but a FIXED -64 for Y, so y is tuned separately.
+[selection]
+scale = 0.9
+x = 0.6
+y = 0.58
+
+# Real Cat-apult skeleton (bbox ~440x340). Alignment convention derived from the shipped spine bots:
+#  - hull `offset = [0, -h/2]`  centers the collision hull on the bbox center (h≈341 -> -170).
+#  - `display_offset = [-Wx, Wy]` where (Wx,Wy) is the bbox center in skeleton WORLD space (bone
+#    transforms composed — NOT the raw local center; every bot's bbox hangs off a translated/flipped
+#    `master` bone). Catapult world center = (153.3, -44.1) -> [-153, -44].
+#    Cross-check: Eldritch world center (96,-50) -> its shipped display_offset [-100,-50].
+#  - `height` scales the hull to sit just inside the art; `display_scale` sizes the art.
+[physics]
+height = 127
+offset = [0, -210]
+display_offset = [-121, -35]
+display_scale = 0.4
+
+# Cannon pivot + length — set to MATCH THE RIG so the math aimer and the visual (IK) barrel stay synced at EVERY aim
+# angle. The rig's aim-IK rotates the `cannon` bone around ITS origin, so the aimer must orbit that same point with the
+# same length. Both are STATIC rig constants (data model: definitions.ts `Cannon` -> tank.cannon_x/y + cannon_size),
+# read by BOTH the client reticle and the deterministic server spawn — no spine needed on the server.
+#   position = the `cannon` bone's offset from tank center = the rotation center (the YELLOW debug marker)
+#   size     = barrel length, cannon bone -> muzzle (the `shoot` marker), so the tip lands on the barrel end
+# MEASURED FROM THE RIG (catapult.json): the `cannon` bone sits at world (160.07, 3.50) (root + master + cannon),
+# and the `shoot` point attachment hangs off it at (-388.05, -2.71), so the raw barrel length is 388.06 skeleton
+# units. In game units that is 388.06 * display_scale: 155 at scale 0.4, 194 at scale 0.5. The stale numbers that
+# used to sit in this comment (~[1,-32] and ~194) were measured at display_scale 0.5; the scale was later dropped
+# to 0.4 without updating them, which is why they disagreed with the shipped values.
+# Sync-by-eye with the debug overlay: nudge `position` until MAGENTA sits on YELLOW (pivot synced), then `size` until
+# CYAN sits on the barrel tip (length synced). Once they overlap, aimer + barrel track together through the whole sweep.
+# Only affects THIS tank. `displacement` is unused for aim (selection-screen sprite only) — omitted.
+[cannon]
+# size = aim-pivot.length * display_scale = 500 * 0.4 = 200. A Spine bone's `length` is its modelled length, and
+# `aim-pivot` is the bone the aim IK rotates, so the rig states the barrel length directly. All six spine rigs use
+# 500. NOTE the other five bots have no [cannon] block and fall back to the default 200, which does NOT equal
+# 500 * their scale (baishe 0.6 -> 300, jolly_rudders/lionheart 0.5 -> 250, eldritch 0.48 -> 240, bloodwing
+# 0.45 -> 225) - they may all be short.
+#
+# position is NOT derivable from the rig: the barrel's visual rotation centre sits ~25 units above tank centre
+# while every bone origin sits 1-14 above, so the gap is in the art placement, not the skeleton. Solving for the
+# bone that would produce [-3, -25] lands 28 units from the nearest one. It was measured by hand instead.
+# The old value of -42 is what made the aim read as elliptical: the aimer orbited a point well away from the one
+# the barrel rotates about, so the reticle-to-barrel-tip gap grew and shrank as the aim swept.
+#
+# WARNING: both values scale with display_scale - re-derive/re-measure if it changes.
+position = [-3, -25]
+size = 200
+
+[[spine]]
+uri = "~/content/bots/catapult/catapult.json"
+[[spine]]
+uri = "~/_revamp/content/bots/catapult/catapult.atlas"
+[[spine]]
+uri = "~/_revamp/content/bots/catapult/catapult.webp"
+
+# Both abilities are currently EXACT clones of Lion's Pride (3019) — same cooldown (3) too. Custom behaviour
+# (Purr-fect Snare = root; Flurry of Paws = AoE DoT) will be layered back on step by step from this baseline.
+[[abilities]]
+id = "3022"
+cooldown = 3
+
+[[abilities]]
+id = "3023"
+cooldown = 3
+

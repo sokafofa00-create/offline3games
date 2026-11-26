@@ -1,0 +1,50 @@
+{
+	"name": "Prosper",
+	"icon_sprite": "~/images/statuses/prosper.webp",
+	"powers": [
+        {
+            "event": "Turn Start",
+            "seat": "Self",
+            "effects": [
+                {
+                    "name": "Update Mana",
+                    "seat": "Self",
+                    "monster": "Self",
+                    "change": 1
+                },
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Prosper",
+					"change": -1
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Prosper",
+					"output": "charges"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+				{
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Prosper"
+						}
+					]
+				}
+			]
+		}
+	]
+}

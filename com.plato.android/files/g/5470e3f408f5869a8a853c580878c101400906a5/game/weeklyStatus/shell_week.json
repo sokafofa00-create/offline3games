@@ -1,0 +1,237 @@
+{
+	"name": "Shell Week",
+	"descriptions": "ShellWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+			    {
+					"name": "Count Monsters By Tag",
+					"seat": "Self",
+					"tag": "shell",
+					"output": "shell_count"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$shell_count",
+					"b": 1,
+					"output": "has_one_shell_monster"
+				},
+                {
+					"name": "Is Greater Than",
+					"a": "$shell_count",
+					"b": 1,
+					"output": "has_two_shell_monster"
+				},
+				{
+					"name": "If",
+					"case": "$has_one_shell_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "shell",
+							"output": "shell_monsters"
+						},
+						{
+							"name": "Get Monsters Except Tag",
+							"seat": "Self",
+							"tag": "shell",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+			                    {
+									"name": "Set Initial Mana",
+									"entity": "$shell_monster",
+									"value": 2
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+					        	{
+									"name": "Set Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK",
+									"value": -1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$shell_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$other_monster",
+									"seconds": 0.4,
+									"insideColor": "Gray",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$shell_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Mana Buff",
+									"entity": "$shell_monster",
+									"value": true
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$other_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+				                {
+									"name": "Show Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						}
+					]
+				},
+                {
+					"name": "If",
+					"case": "$has_two_shell_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "shell",
+							"output": "shell_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+			                    {
+									"name": "Set Initial Mana",
+									"entity": "$shell_monster",
+									"value": 2
+								},
+					        	{
+									"name": "Set Permanent Buff",
+									"entity": "$shell_monster",
+									"buffType": "BUFF_ATK",
+									"value": -1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$shell_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								},
+                                {
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$shell_monster",
+									"seconds": 0.4,
+									"insideColor": "Gray",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$shell_monsters",
+							"iterator": "shell_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$shell_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Mana Buff",
+									"entity": "$shell_monster",
+									"value": true
+								},
+                                {
+									"name": "Spawn Puff",
+									"node": "$shell_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$shell_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

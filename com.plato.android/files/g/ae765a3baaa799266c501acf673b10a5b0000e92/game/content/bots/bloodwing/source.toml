@@ -1,0 +1,33 @@
+[stats]
+health = 4
+accuracy = 10
+weight = 9
+
+[selection]
+scale = 0.77
+x = 0.55
+y = 0.6
+
+[physics]
+height = 160
+offset = [-8, -210]
+display_offset = [-128, -20]
+display_scale = 0.45
+
+[[spine]]
+uri = "~/content/bots/bloodwing/vampire_tank.json"
+[[spine]]
+uri = "~/_revamp/content/bots/bloodwing/vampire_tank.atlas"
+[[spine]]
+uri = "~/_revamp/content/bots/bloodwing/vampire_tank.webp"
+
+[[abilities]]
+id = "202"
+cooldown = 2
+animation = "skill_1"
+audio = "~/_revamp/content/bots/bloodwing/skill_1.m4a"
+
+[[abilities]]
+id = "506"
+cooldown = 3
+audio = "~/_revamp/content/bots/bloodwing/bat_beam.m4a"

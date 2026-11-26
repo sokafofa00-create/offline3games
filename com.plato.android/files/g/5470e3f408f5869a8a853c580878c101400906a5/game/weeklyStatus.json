@@ -1,0 +1,18 @@
+{
+	"weekly_statuses": [
+		{ "id":1, "name":"Wings Week" },
+		{ "id":2, "name":"Shell Week" },
+		{ "id":3, "name":"Chillax Week" },
+		{ "id":4, "name":"Nature Week" },
+		{ "id":5, "name":"Aquatic Week" },
+		{ "id":6, "name":"Heavyweight Week" },
+		{ "id":7, "name":"Bushytail Week" },
+		{ "id":8, "name":"Undead Week" },
+		{ "id":9, "name":"Monsters Cost 1 Mana Less" },
+		{ "id":10, "name":"Monsters Cost 1 Mana More" },
+		{ "id":11, "name":"Players Start with Minus Five Health" },
+		{ "id":12, "name":"Players Start with Plus Five Health" },
+		{ "id":13, "name":"Players Start with Minus Ten Health" },
+		{ "id":14, "name":"Players Start with Plus Ten Health" }
+	]
+}

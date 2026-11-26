@@ -1,0 +1,26 @@
+{
+	"name": "Flash",
+	"icon_sprite": "~/images/statuses/speed_flash.webp",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Flash",
+					"output": "charges"
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Increase Max Moves",
+					"charges": "$charges"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,144 @@
+{
+	"name": "Yellow TradeOff",
+	"descriptions": "YellowTradeOff",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Count Monsters By Tile Type",
+					"seat": "Self",
+					"tileType": "Yellow",
+					"output": "yellow_count"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$yellow_count",
+					"b": 0,
+					"output": "has_yellow"
+				},
+				{
+					"name": "If",
+					"case": "$has_yellow",
+					"effects": [
+						{
+							"name": "Get Monsters By Tile Type",
+							"seat": "Self",
+							"tileType": "Yellow",
+							"output": "yellow_monsters"
+						},
+						{
+							"name": "Get Monsters Except Tile Type",
+							"seat": "Self",
+							"tileType": "Yellow",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$yellow_monsters",
+							"iterator": "yellow_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$yellow_monster",
+									"buffType": "BUFF_MANA",
+									"value": -1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK",
+									"value": -5
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$yellow_monsters",
+							"iterator": "yellow_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$yellow_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Yellow",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$other_monster",
+									"seconds": 0.4,
+									"insideColor": "Gray",
+									"outsideColor": "Yellow",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$yellow_monsters",
+							"iterator": "yellow_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$yellow_monster",
+									"color": "Yellow",
+									"size": 0.01
+								},
+								{
+									"name": "Show Mana Buff",
+									"entity": "$yellow_monster",
+									"value": true
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$other_monsters",
+							"iterator": "other_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$other_monster",
+									"color": "Gray",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$other_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

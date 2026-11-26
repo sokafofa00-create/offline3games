@@ -1,0 +1,31 @@
+{
+	"name": "Charge",
+	"icon_sprite": "~/images/statuses/charge.webp",
+	"powers": [
+		{
+			"event": "Monster Attack",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Charge",
+					"output": "charges"
+				},
+				{
+					"name": "Multiply",
+					"a": "^damage",
+					"b": "$charges",
+					"output": "total_damage"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "damage",
+					"value": "$total_damage"
+				}
+			]
+		}
+	]
+}

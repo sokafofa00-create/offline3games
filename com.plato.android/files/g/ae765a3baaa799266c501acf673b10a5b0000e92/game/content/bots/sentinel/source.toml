@@ -1,0 +1,45 @@
+[stats]
+health = 9
+accuracy = 6
+weight = 9
+
+[physics]
+height = 175
+uri = "~/content/bots/sentinel/shape.txt"
+
+[cannon]
+uri = "~/imported/sentinel_cannon.webp"
+size = 135
+position = [0, 1]
+displacement = [0.63, -17.0]
+
+[[parts]]
+uri = "~/imported/sentinel_z0_backleg.webp"
+animation = "Platform"
+position = [0.89, 0.87]
+
+[[parts]]
+uri = "~/imported/sentinel_z1_bodyblade.webp"
+animation = "Cockpit"
+position = [0.44, 0.42]
+[parts.cockpit]
+uri = "~/imported/sentinel_backing.webp"
+position = [244, 167]
+
+[[parts]]
+uri = "~/imported/sentinel_z2_bodyshell.webp"
+animation = "Cockpit"
+position = [0.58, 0.41]
+
+[[parts]]
+uri = "~/imported/sentinel_z3_frontleg.webp"
+animation = "Platform"
+position = [0.5, 0.83]
+
+[[abilities]]
+cooldown = 2
+id = "6"
+
+[[abilities]]
+cooldown = 2
+id = "504"

@@ -1,0 +1,34 @@
+{
+	"name": "Glitch Goo",
+	"icon_sprite": "~/images/statuses/glitchgoo.webp",
+	"powers": [
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Glitch Goo",
+					"output": "glitch_charges"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": "$glitch_charges",
+					"excludeEffects": true,
+					"exclude": ["Bomb"],
+					"output": "tiles"
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "GlitchGoo",
+					"max": "%max_glitch_goo"
+				}			
+			]
+		}
+    ]
+}

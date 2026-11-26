@@ -1,0 +1,222 @@
+{
+	"name": "Heavyweight Week",
+	"descriptions": "HeavyweightWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+			    {
+					"name": "Count Monsters By Tag",
+					"seat": "Self",
+					"tag": "heavyweight",
+					"output": "heavyweight_count"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$heavyweight_count",
+					"b": 1,
+					"output": "has_one_heavyweight_monster"
+				},
+                {
+					"name": "Is Greater Than",
+					"a": "$heavyweight_count",
+					"b": 1,
+					"output": "has_two_heavyweight_monster"
+				},
+				{
+					"name": "If",
+					"case": "$has_one_heavyweight_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "heavyweight",
+							"output": "heavyweight_monsters"
+						},
+						{
+							"name": "Get Monsters Except Tag",
+							"seat": "Self",
+							"tag": "heavyweight",
+							"output": "other_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+			                    {
+									"name": "Set Initial Mana",
+									"entity": "$heavyweight_monster",
+									"value": 3
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$heavyweight_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$heavyweight_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Mana Buff",
+									"entity": "$heavyweight_monster",
+									"value": true
+								}
+							]
+						},
+                    	{
+                            "name": "Get Player Node",
+                            "seat": "Self",
+                            "output": "player_node"
+                        },
+                        {
+                            "name": "Spawn Rocket",
+                            "start": "$weekly_node",
+                            "end": "$player_node",
+                            "seconds": 0.4,
+                            "insideColor": "Purple",
+                            "outsideColor": "Red",
+                            "scale": 1
+                        },
+                        {
+                            "name": "Wait",
+                            "seconds": 0.4
+                        },
+                        {
+                            "name": "Spawn Puff",
+                            "node": "$player_node",
+                            "color": "Red",
+                            "size": 0.01
+                        },
+                        {
+                            "name": "Increase Player Max Life",
+                            "seat": "Self",
+                            "value": -5
+                        }
+					]
+				},
+                {
+					"name": "If",
+					"case": "$has_two_heavyweight_monster",
+					"effects": [
+						{
+							"name": "Get Monsters By Tag",
+							"seat": "Self",
+							"tag": "heavyweight",
+							"output": "heavyweight_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+			                    {
+									"name": "Set Initial Mana",
+									"entity": "$heavyweight_monster",
+									"value": 3
+								}
+							]
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$heavyweight_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Red",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$heavyweight_monsters",
+							"iterator": "heavyweight_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$heavyweight_monster",
+									"color": "Red",
+									"size": 0.01
+								},
+								{
+									"name": "Show Mana Buff",
+									"entity": "$heavyweight_monster",
+									"value": true
+								}
+							]
+						},
+						{
+                            "name": "Get Player Node",
+                            "seat": "Self",
+                            "output": "player_node"
+                        },
+                        {
+                            "name": "Spawn Rocket",
+                            "start": "$weekly_node",
+                            "end": "$player_node",
+                            "seconds": 0.4,
+                            "insideColor": "Purple",
+                            "outsideColor": "Red",
+                            "scale": 1
+                        },
+                        {
+                            "name": "Wait",
+                            "seconds": 0.4
+                        },
+                        {
+                            "name": "Spawn Puff",
+                            "node": "$player_node",
+                            "color": "Red",
+                            "size": 0.01
+                        },
+                        {
+                            "name": "Increase Player Max Life",
+                            "seat": "Self",
+                            "value": -10
+                        }
+					]
+				}
+			]
+		}
+	]
+}

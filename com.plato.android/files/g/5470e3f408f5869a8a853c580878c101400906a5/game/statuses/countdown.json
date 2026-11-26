@@ -1,0 +1,65 @@
+{
+	"name": "Countdown",
+	"icon_sprite": "~/images/statuses/fullmoon.webp",
+	"idle_anim": "idle",
+	"attack_anim": "attack",
+	"powers": [
+		{
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Countdown",
+					"change": -1
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Countdown",
+					"output": "charges"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+				{
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Countdown"
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.25
+						},
+						{
+							"name": "Add Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Blood Moon"
+						},
+						{
+							"name": "Set Monster Animation Keys",
+							"seat": "Self",
+							"monster": "Self",
+							"keys": {
+								"idle": "SP_idle",
+								"attack": "SP_attack"
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

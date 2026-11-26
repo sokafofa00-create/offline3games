@@ -1,0 +1,86 @@
+{
+	"name": "Tea",
+	"icon_sprite": "~/images/statuses/tea.webp",
+	"powers": [
+		{
+			"event": "Tile Match",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Monster Status Node",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "status_node"
+				},
+				{
+					"name": "For",
+					"list": "^tiles",
+					"iterator": "tile",
+					"effects": [
+						{
+							"name": "Get Tile Node",
+							"tile": "$tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$status_node",
+							"seconds": 0.2,
+							"insideColor": "gray",
+							"outsideColor": "purple",
+							"scale": 0.5
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": 1,
+					"waitTime": 0
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 10,
+					"output": "spill"
+				},
+				{
+					"name": "If",
+					"case": "$spill",
+					"effects": [
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Self",
+							"amount": 0
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Ally",
+							"amount": 0
+						},
+						{
+							"name": "Update Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Tea",
+							"amount": 0
+						}
+					]
+				}
+			]
+		}
+	]
+}

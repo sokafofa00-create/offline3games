@@ -1,0 +1,44 @@
+{
+	"name": "Berserk",
+	"icon_sprite": "~/images/statuses/berserk.webp",
+	"idle_anim": "idle_low_HP",
+	"powers": [
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects":  [
+				{
+					"name": "Get Player Health",
+					"seat": "Self",
+					"output": "health"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$health",
+					"b": 30,
+					"output": "not_low_hp"
+				},
+				{
+					"name": "If",
+					"case": "$not_low_hp",
+					"effects": [
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Berserk"
+						},
+						{
+							"name": "Set Monster Animation Keys",
+							"seat": "Self",
+							"monster": "Self",
+							"keys": {
+								"idle": "idle"					
+							}
+						}
+                    ]					
+                }
+			]
+		}
+	]
+}

@@ -1,0 +1,2466 @@
+[[maps]]
+name = "1"
+map_weight = 1
+
+[[maps]]
+name = "2"
+map_weight = 1
+
+[[maps]]
+name = "3"
+map_weight = 1
+
+[[maps]]
+name = "4"
+map_weight = 1
+
+[[maps]]
+name = "5"
+map_weight = 1
+
+[[maps]]
+name = "6"
+map_weight = 1
+
+[[maps]]
+name = "7"
+map_weight = 1
+
+[[maps]]
+name = "8"
+map_weight = 1
+
+[[maps]]
+name = "9"
+map_weight = 1
+
+[[maps]]
+name = "10"
+map_weight = 1
+
+[[maps]]
+name = "11"
+map_weight = 1
+
+[[maps]]
+name = "12"
+map_weight = 1
+
+[[maps]]
+name = "13"
+map_weight = 1
+
+[[maps]]
+name = "14"
+map_weight = 1
+
+[[maps]]
+name = "15"
+map_weight = 1
+
+[[maps]]
+name = "16"
+map_weight = 1
+
+[[maps]]
+name = "17"
+map_weight = 1
+
+[[maps]]
+name = "18"
+map_weight = 1
+
+[[maps]]
+name = "19"
+map_weight = 1
+
+[[maps]]
+name = "20"
+map_weight = 1
+
+[[maps]]
+name = "21"
+map_weight = 1
+
+[[maps]]
+name = "22"
+map_weight = 1
+
+[[maps]]
+name = "23"
+map_weight = 1
+
+[[maps]]
+name = "24"
+map_weight = 1
+
+[[maps]]
+name = "25"
+map_weight = 1
+
+[[maps]]
+name = "26"
+map_weight = 1
+
+[[maps]]
+name = "27"
+map_weight = 1
+
+[[maps]]
+name = "28"
+map_weight = 1
+
+[[maps]]
+name = "29"
+map_weight = 1
+
+[[maps]]
+name = "30"
+map_weight = 1
+
+[[maps]]
+name = "31"
+map_weight = 1
+
+[[pointer_icons]]
+name = "bullet-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/8mb55nnq39fm1.webp"
+
+[[pointer_icons]]
+name = "whip-pointer-icon"
+split_mode = "No"
+image = "~/imported/m6z7711n99i4q.webp"
+
+[[pointer_icons]]
+name = "tanks-lightning-beam-icon"
+split_mode = "No"
+image = "~/imported/8mb55nnq7is25.webp"
+
+[[pointer_icons]]
+name = "tanks-rune-icon"
+split_mode = "No"
+image = "~/imported/rz3ttbb6lbzp9.webp"
+
+[[pointer_icons]]
+name = "shield-deflector-pointer-icon"
+split_mode = "No"
+image = "~/imported/6obyy88847nlz.webp"
+
+[[pointer_icons]]
+name = "rocket-x3-small-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/tmb77222mbv6q.webp"
+
+[[pointer_icons]]
+name = "shark_icon_torpedo"
+split_mode = "No"
+image = "~/imported/shark_icon_torpedo.webp"
+
+[[pointer_icons]]
+name = "lionheart_pridebreaker"
+split_mode = "No"
+image = "~/imported/lionheart_pridebreaker_pointer.webp"
+
+[[pointer_icons]]
+name = "baishe_firework"
+split_mode = "No"
+image = "~/imported/baishe_firework_icon.webp"
+
+[[pointer_icons]]
+name = "tank-pointer-icon"
+split_mode = "No"
+image = "~/imported/nuz77nnmtrn2p.webp"
+
+[[pointer_icons]]
+name = "sentinel_impact_pointer"
+split_mode = "No"
+image = "~/imported/sentinel_impact_pointer.webp"
+
+[[pointer_icons]]
+name = "sentinel_beam_pointer"
+split_mode = "No"
+image = "~/imported/sentinel_beam_pointer.webp"
+
+[[pointer_icons]]
+name = "life_drain"
+split_mode = "No"
+image = "~/imported/bloodwing_drain_icon.webp"
+
+[[pointer_icons]]
+name = "wind_blow"
+split_mode = "No"
+image = "~/imported/baishe_windblow_icon.webp"
+
+[[pointer_icons]]
+name = "shark_icon_tail_whip"
+split_mode = "No"
+image = "~/imported/shark_icon_tail_whip.webp"
+
+[[pointer_icons]]
+name = "jolly_rudders_cola_blast"
+split_mode = "No"
+image = "~/imported/jolly_rudders_cola_blast_trail.webp"
+
+[[pointer_icons]]
+name = "collision-pointer-icon"
+split_mode = "No"
+image = "~/imported/4tzyy55lffzlu.webp"
+
+[[pointer_icons]]
+name = "ghost-pointer-icon"
+split_mode = "No"
+image = "~/imported/tmb7722pynb7l.webp"
+
+[[pointer_icons]]
+name = "bouncy-ball-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/6obyy88mb37ft.webp"
+
+[[pointer_icons]]
+name = "grenade-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/rz3ttbbl8q2b3.webp"
+
+[[pointer_icons]]
+name = "marker-grenade-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/ymyuulltyy9j6.webp"
+
+[[pointer_icons]]
+name = "rocket-x3-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/ymyuull6ins1b.webp"
+
+[[pointer_icons]]
+name = "rocket-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/blqssoo4z83bq.webp"
+
+[[pointer_icons]]
+name = "rocket-x5-air-pointer-icon"
+split_mode = "Vertical"
+image = "~/imported/vzy44nn195fym.webp"
+
+[[pointer_icons]]
+name = "stomp-pointer-icon"
+split_mode = "No"
+image = "~/imported/6obyy88m4tbnb.webp"
+
+[[pointer_icons]]
+name = "tail-pointer-icon"
+split_mode = "No"
+image = "~/imported/nuz77nnf896t4.webp"
+
+[[pointer_icons]]
+name = "jolly_rudders_cannonball_punch"
+split_mode = "No"
+image = "~/imported/jolly_rudders_cannonball_punch_trail.webp"
+
+[[pointer_icons]]
+name = "lionheart-kingscall-icon"
+split_mode = "No"
+image = "~/imported/lionheart_kingscall_pointer.webp"
+
+[[pointer_icons]]
+name = "into-the-void"
+split_mode = "No"
+image = "~/imported/eldritch_into_the_void_aim_icon.webp"
+
+[[pointer_icons]]
+name = "existential-dread"
+split_mode = "No"
+image = "~/imported/eldritch_existential_dread_aim_icon.webp"
+
+[[pointer_icons]]
+name = "teleport-pointer-icon"
+split_mode = "No"
+image = "~/imported/teleport-pointer-icon.webp"
+
+[[pointer_icons]]
+name = "vanish-icon"
+split_mode = "No"
+image = "~/imported/bloodwing_vanish_icon.webp"
+
+[[pointer_icons]]
+name = "shuriken-pointer-icon"
+split_mode = "No"
+image = "~/imported/shuriken-pointer-icon.webp"
+
+[[pointer_icons]]
+name = "poison-grenade-pointer-icon"
+split_mode = "Horizontal"
+image = "~/imported/poison-grenade-pointer-icon.webp"
+
+[[pointer_icons]]
+name = "catapult_snare"
+split_mode = "No"
+image = "~/imported/catapult_snare_pointer.webp"
+
+[[pointer_icons]]
+name = "catapult_flurry"
+split_mode = "No"
+image = "~/imported/catapult_flurry_pointer.webp"
+
+[[weapon_bases]]
+name = "jump-default"
+weapon_uid = 0
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/nuzpom5qpo3tj.webp"
+control_panel_glow_icon = "~/imported/nuzpom54v73p8.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.38
+pointer_icons = [ "jump-default-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "jump-time-bomb"
+weapon_uid = 1
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/2snf2mipt84mm.webp"
+control_panel_glow_icon = "~/imported/nuzpom5onrznp.webp"
+flavour = true
+flavor_min = 1
+flavor_max = 5
+flavor_def = 2
+pointer_icon_animated = true
+pointer_icon_scale = 1
+pointer_icons = [ ]
+projectile_pool = [ "jump-time-bomb-1" ]
+
+[[weapon_bases]]
+name = "jump-bomb-x3"
+weapon_uid = 2
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/rz3j26ou3n597.webp"
+control_panel_glow_icon = "~/imported/8mbj6q16o2ypb.webp"
+flavour = true
+flavor_min = 0
+flavor_max = 2
+flavor_def = 1
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [
+  "jump-bomb-x3-1",
+  "jump-bomb-x3-2",
+  "jump-bomb-x3-3",
+  "jump-bomb-x3-4"
+]
+projectile_pool = [ "jump-bomb-x3-1" ]
+
+[[weapon_bases]]
+name = "jump-bouncy"
+weapon_uid = 3
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/tmb6n4juz6p1z.webp"
+control_panel_glow_icon = "~/imported/ymyo8z6puiyl6.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [
+  "jump-bouncy-1",
+  "jump-bouncy-2",
+  "jump-bouncy-3",
+  "jump-bouncy-4",
+  "jump-bouncy-5"
+]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "jump-bouncy2"
+weapon_uid = 6
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/sentinel_impact.webp"
+control_panel_glow_icon = "~/imported/sentinel_impact_glow.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [ "sentinel_impact_pointer" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "jump-stomp"
+weapon_uid = 4
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/4tzib9l35lqv1.webp"
+control_panel_glow_icon = "~/imported/8mbj6q188ninl.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.45
+pointer_icons = [ "jump-stomp-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "jump-dino-claw"
+weapon_uid = -1
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/m6z4rn9lpu8ru.webp"
+control_panel_glow_icon = "~/imported/95sr73mi76l5u.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [
+  "jump-dino-claw-1",
+  "jump-dino-claw-2",
+  "jump-dino-claw-3",
+  "jump-dino-claw-4",
+  "jump-dino-claw-5"
+]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "jump-tail-whip"
+weapon_uid = 5
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/shark_tail_whip.webp"
+control_panel_glow_icon = "~/imported/shark_tail_whip_glow.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "shark_icon_tail_whip" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "cola-blast"
+weapon_uid = 7
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/jolly_rudders_cola_blast_deselected.webp"
+control_panel_glow_icon = "~/imported/jolly_rudders_cola_blast_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.5
+pointer_icons = [ "jolly_rudders_cola_blast" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "teleport-default"
+weapon_uid = 200
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/icon_teleport.webp"
+control_panel_glow_icon = "~/imported/glow_icon_teleport.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1
+pointer_icons = [ "teleport-default-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "teleport-shuriken"
+weapon_uid = 201
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/icon_teleport.webp"
+control_panel_glow_icon = "~/imported/glow_icon_teleport.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1
+pointer_icon_margin = [ 72, 116 ]
+pointer_icons = [ "teleport-default-1" ]
+projectile_pool = [ ]
+control_panel_icon_size = 1.15
+weapon_box = { scale = 1.3, anchor = [0.5, 0.45] }
+
+[[weapon_bases]]
+name = "vanish-default"
+weapon_uid = 202
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/bloodwing_vanish_deselected.webp"
+control_panel_glow_icon = "~/imported/bloodwing_vanish_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 0.6
+pointer_icons = [ "vanish-icon" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "explosion-tail-whip"
+weapon_uid = 500
+gravity_scale = 0
+fixed_impulse = 0.055
+control_panel_icon = "~/imported/ymyo8z6p5vo9i.webp"
+control_panel_glow_icon = "~/imported/rz3j26o4o24p8.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.7
+pointer_icons = [ "explosion-tail-whip-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "shark-explosion-tail-whip"
+weapon_uid = 503
+gravity_scale = 0
+fixed_impulse = 0.055
+control_panel_icon = "~/imported/ymyo8z6p5vo9i.webp"
+control_panel_glow_icon = "~/imported/rz3j26o4o24p8.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.7
+pointer_icons = [ "explosion-tail-whip-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "explosion-laser-bolt"
+weapon_uid = 501
+gravity_scale = 0
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/tmb6n4jy9tj44.webp"
+control_panel_glow_icon = "~/imported/vzy37tb21zo6j.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 0.5
+pointer_icons = [ "explosion-laser-bolt-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "explosion-whip"
+weapon_uid = 502
+gravity_scale = 0
+fixed_impulse = 0.055
+control_panel_icon = "~/imported/blq695b24f596.webp"
+control_panel_glow_icon = "~/imported/ymyo8zrnvu47o.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.6
+pointer_icons = [ "explosion-whip-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "explosion-laser-bolt2"
+weapon_uid = 504
+gravity_scale = 0
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/sentinel_beam.webp"
+control_panel_glow_icon = "~/imported/sentinel_beam_glow.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 0.5
+pointer_icons = [ "sentinel_beam_pointer" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "lionheart-roar"
+weapon_uid = 505
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/lionheart_kingscall_off.webp"
+control_panel_glow_icon = "~/imported/lionheart_kingscall_on.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1.1
+pointer_icons = [ "lionheart-kingscall" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "life-drain"
+weapon_uid = 506
+gravity_scale = 0
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/bloodwing_drain_deselected.webp"
+control_panel_glow_icon = "~/imported/bloodwing_drain_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 0.5
+pointer_icons = [ "life_drain" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "wind-blow"
+weapon_uid = 507
+gravity_scale = 0
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/baishe_windblow_deselected.webp"
+control_panel_glow_icon = "~/imported/baishe_windblow_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 0.5
+pointer_icons = [ "wind_blow" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "cannonball-punch"
+weapon_uid = 508
+gravity_scale = 0
+fixed_impulse = 0.055
+control_panel_icon = "~/imported/jolly_rudders_cannonball_punch_deselected.webp"
+control_panel_glow_icon = "~/imported/jolly_rudders_cannonball_punch_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.25
+pointer_icons = [ "jolly_rudders_cannonball_punch" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "into-the-void"
+weapon_uid = 509
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/eldritch_into_the_void_deselected.webp"
+control_panel_glow_icon = "~/imported/eldritch_into_the_void_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1.1
+pointer_icons = [ "into-the-void" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "existential-dread"
+weapon_uid = 510
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/eldritch_existential_dread_deselected.webp"
+control_panel_glow_icon = "~/imported/eldritch_existential_dread_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1.1
+pointer_icons = [ "existential-dread" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "explosion-lightning-strike"
+weapon_uid = -1
+gravity_scale = 0
+fixed_impulse = 0.055
+control_panel_icon = "~/imported/vzy37tb6p9p69.webp"
+control_panel_glow_icon = "~/imported/qyzjo2v882ry3.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.7
+pointer_icons = [ "explosion-lightning-strike-1" ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "shield-deflector"
+weapon_uid = 1_000
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/ymyo8zrjs1uu4.webp"
+control_panel_glow_icon = "~/imported/qyzjo2v8vus1u.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = false
+pointer_icon_scale = 1
+pointer_icons = [ "shield-deflector-1" ]
+projectile_pool = [ ]
+control_panel_icon_size = 0.81
+tank_selection_icon_size = 0.63
+
+[[weapon_bases]]
+name = "expl-mine"
+weapon_uid = 2_000
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = ""
+control_panel_glow_icon = ""
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 1
+pointer_icons = [ ]
+projectile_pool = [ ]
+
+[[weapon_bases]]
+name = "proj-time-bomb"
+weapon_uid = 3_000
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = ""
+control_panel_glow_icon = ""
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 1
+pointer_icons = [ ]
+projectile_pool = [ "proj-time-bomb-1" ]
+projectile_extra_scale = 0.839
+
+[[weapon_bases]]
+name = "proj-rocket"
+weapon_uid = 3_001
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/tmb6n4i8yq6yr.webp"
+control_panel_glow_icon = "~/imported/8mbj6qi3bm771.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-rocket-1" ]
+projectile_pool = [ "proj-rocket-1" ]
+projectile_trail_animation = "rocket_trail"
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-mini-rocket"
+weapon_uid = 3020
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/tmb6n4i8yq6yr.webp"
+control_panel_glow_icon = "~/imported/8mbj6qi3bm771.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-rocket-1" ]
+projectile_pool = [ "proj-rocket-1" ]
+projectile_trail_animation = "rocket_trail"
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-rocket-bouncy"
+weapon_uid = 3_002
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/4tzib92j2u81y.webp"
+control_panel_glow_icon = "~/imported/ymyo8zr59924u.webp"
+flavour = true
+flavor_min = 3
+flavor_max = 8
+flavor_def = 3
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-rocket-bouncy-1" ]
+projectile_pool = [ "proj-rocket-bouncy-1" ]
+
+[[weapon_bases]]
+name = "proj-rocket-x3"
+weapon_uid = 3_003
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/shark_wpn_torpedo.webp"
+control_panel_glow_icon = "~/imported/shark_wpn_torpedo_glow.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+projectile_trail_animation = "rocket_trail"
+pointer_icons = [ "shark_icon_torpedo" ]
+projectile_pool = [ "proj-rocket-x3-1" ]
+
+[[weapon_bases]]
+name = "proj-sharkpedo"
+weapon_uid = 3_018
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/shark_wpn_torpedo.webp"
+control_panel_glow_icon = "~/imported/shark_wpn_torpedo_glow.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "shark_icon_torpedo" ]
+projectile_pool = [ "proj-sharkpedo" ]
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-lion-rocket"
+weapon_uid = 3019
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/lionheart_pridebreaker_off.webp"
+control_panel_glow_icon = "~/imported/lionheart_pridebreaker_on.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "lionheart_pridebreaker" ]
+projectile_pool = []
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-snake-rocket"
+weapon_uid = 3021
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/baishe_firework_deselected.webp"
+control_panel_glow_icon = "~/imported/baishe_firework_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "baishe_firework" ]
+projectile_pool = []
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-rocket-x5-air"
+weapon_uid = 3_004
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/blq695b3u8nsf.webp"
+control_panel_glow_icon = "~/imported/qyzjo2py7ibu2.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [ "proj-rocket-x5-air-1" ]
+projectile_pool = [ "proj-rocket-x5-air-1", "proj-rocket-x5-air-2" ]
+projectile_trail_animation = "rocket_trail"
+projectile_extra_scale = 0.821
+projectle_anchor = [0.55, 0.5]
+
+[[weapon_bases]]
+name = "proj-grenade"
+weapon_uid = 3_005
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/95sr7315y54vn.webp"
+control_panel_glow_icon = "~/imported/m6z4rnp739ysz.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.42
+pointer_icons = [ "proj-grenade-1" ]
+projectile_pool = [ "proj-grenade-1" ]
+tank_selection_icon_size = 0.58
+projectile_extra_scale = 0.839
+
+[[weapon_bases]]
+name = "proj-mini-grenade"
+weapon_uid = 3_006
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = ""
+control_panel_glow_icon = ""
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.38
+pointer_icons = [ "proj-mini-grenade-1" ]
+projectile_pool = [ "proj-mini-grenade-1" ]
+projectile_extra_scale = 0.839
+
+[[weapon_bases]]
+name = "proj-marker-grenade"
+weapon_uid = 3_007
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/8mbj6qr5y2o85.webp"
+control_panel_glow_icon = "~/imported/95sr731tssj8i.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-marker-grenade-1" ]
+projectile_pool = [ "proj-marker-grenade-1", "proj-marker-grenade-2" ]
+projectile_extra_scale = 0.871
+
+[[weapon_bases]]
+name = "proj-ghost-rocket"
+weapon_uid = 3_008
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/vzy37t948vmsb.webp"
+control_panel_glow_icon = "~/imported/6obl269i5ol8v.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.38
+pointer_icons = [ "proj-ghost-rocket-1" ]
+projectile_pool = [ "proj-ghost-rocket-1" ]
+control_panel_icon_size = 0.80
+projectile_trail_animation = "ghost_trail"
+projectile_extra_scale = 0.7
+projectle_anchor = [0.7, 0.5]
+
+[[weapon_bases]]
+name = "proj-egg-rocket"
+weapon_uid = 3_009
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = ""
+control_panel_glow_icon = ""
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-egg-rocket-1" ]
+projectile_pool = [ "proj-egg-rocket-1" ]
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "proj-lightning-strike-marker"
+weapon_uid = 3_010
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/8mbj6qiojr1z2.webp"
+control_panel_glow_icon = "~/imported/8mbj6qi7q5192.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-lightning-strike-marker-1" ]
+projectile_pool = [
+  "proj-lightning-strike-marker-1",
+  "proj-lightning-strike-marker-2"
+]
+
+[[weapon_bases]]
+name = "proj-lightning-laser"
+weapon_uid = 3_011
+gravity_scale = 0.06
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/8mbj6qi758z6b.webp"
+control_panel_glow_icon = "~/imported/tmb6n4i368u43.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-lightning-laser-1" ]
+projectile_pool = [ "proj-lightning-laser-1" ]
+
+[[weapon_bases]]
+name = "proj-bullet"
+weapon_uid = 3_012
+gravity_scale = 0.06
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/rzqmmt1f758y3.webp"
+control_panel_glow_icon = "~/imported/958bbt37u6ipr.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-bullet-1" ]
+projectile_pool = [ "proj-bullet-1" ]
+
+[[weapon_bases]]
+name = "proj-revolver"
+weapon_uid = 3_013
+gravity_scale = 0.06
+fixed_impulse = 1.15
+control_panel_icon = "~/imported/2s6uuq55y23qr.webp"
+control_panel_glow_icon = "~/imported/m6mll56bmsi9n.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.4
+pointer_icons = [ "proj-revolver-1" ]
+projectile_pool = [ "proj-revolver-1" ]
+
+[[weapon_bases]]
+name = "proj-poison"
+weapon_uid = 3_014
+gravity_scale = 0.001
+fixed_impulse = 0.3
+control_panel_icon = "~/imported/2s6uuq55y23qr.webp"
+control_panel_glow_icon = "~/imported/m6mll56bmsi9n.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.5
+pointer_icons = [ "proj-revolver-1" ]
+projectile_pool = [ "proj-poison-1" ]
+
+[[weapon_bases]]
+name = "proj-poison-grenade"
+weapon_uid = 3_015
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/icon_poison_grenade.webp"
+control_panel_glow_icon = "~/imported/glow_icon_poison_grenade.webp"
+flavour = true
+flavor_min = 0
+flavor_max = 2
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.35
+pointer_icons = [ "poison-grenade-pointer-icon" ]
+projectile_pool = [ "proj-poison-grenade-1", "proj-poison-grenade-2" ]
+projectile_extra_scale = 0.85
+
+[[weapon_bases]]
+name = "proj-poison-cloud"
+weapon_uid = 3_016
+gravity_scale = 0.001
+fixed_impulse = 0.3
+control_panel_icon = "~/imported/2s6uuq55y23qr.webp"
+control_panel_glow_icon = "~/imported/m6mll56bmsi9n.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.5
+pointer_icons = [ "proj-revolver-1" ]
+projectile_pool = [ "proj-poison-cloud-1" ]
+projectile_anchor = [0.5, 0.63]
+
+[[weapon_bases]]
+name = "proj-shuriken"
+weapon_uid = 3_017
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/icon_shuriken.webp"
+control_panel_glow_icon = "~/imported/glow_icon_shuriken.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 1
+pointer_icons = [ "proj-shuriken-1" ]
+projectile_pool = [ "proj-shuriken-1" ]
+
+# Purr-fect Snare (WPYarnBall): a lobbed yarn ball that explodes on impact and roots enemies in range.
+[[weapon_bases]]
+name = "perr-fect-snare"
+weapon_uid = 3022
+gravity_scale = 0
+fixed_impulse = 0
+control_panel_icon = "~/imported/catapult_snare_deselected.webp"
+control_panel_glow_icon = "~/imported/catapult_snare_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "catapult_snare" ]
+projectile_pool = []
+projectle_anchor = [0.75, 0.5]
+
+# Flurry of Paws (WPFlurryPaws): one puff that arcs to the ground, phases through tanks, and DoTs an area as it
+# travels for ~4s. gravity_scale = 1 so it falls to the terrain and travels along it.
+[[weapon_bases]]
+name = "flurry-of-paws"
+weapon_uid = 3023
+# Normal projectile: arcs under gravity, power-based aiming. The "special stuff" (a large-area damage-over-time
+# zone) lives in its EXPLOSION, not here — on impact WPFlurryPaws.explode drops paw-cloud(s) (ProjPawCloud/3024).
+gravity_scale = 1
+fixed_impulse = 0
+control_panel_icon = "~/imported/catapult_flurry_deselected.webp"
+control_panel_glow_icon = "~/imported/catapult_flurry_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.3
+pointer_icons = [ "catapult_flurry" ]
+projectile_pool = []
+projectle_anchor = [0.75, 0.5]
+
+[[weapon_bases]]
+name = "flurry-of-paws-cloud"
+weapon_uid = 3024
+gravity_scale = 0.001
+fixed_impulse = 0.3
+control_panel_icon = "~/imported/catapult_flurry_deselected.webp"
+control_panel_glow_icon = "~/imported/catapult_flurry_selected.webp"
+flavour = false
+flavor_min = 0
+flavor_max = 0
+flavor_def = 0
+pointer_icon_animated = true
+pointer_icon_scale = 0.5
+pointer_icons = [ ]
+projectile_pool = [ ]
+projectile_anchor = [0.5, 0.63]
+
+[[weapon_jumps]]
+name = "jump-default"
+scale = 13
+damage = 0
+vfx_mode = "Simple"
+basis = "jump-default"
+jwuid = 0
+vfx_sprites = [ ]
+
+[[weapon_jumps]]
+name = "jump-time-bomb"
+scale = 12
+damage = 0
+vfx_mode = "Simple"
+basis = "jump-time-bomb"
+jwuid = 1
+vfx_sprites = [ ]
+
+[[weapon_jumps]]
+name = "jump-bomb-x3"
+scale = 12
+damage = 0
+vfx_mode = "Simple"
+basis = "jump-bomb-x3"
+jwuid = 2
+vfx_sprites = [ ]
+
+[[weapon_jumps]]
+name = "jump-bouncy"
+scale = 15
+damage = 20
+damageOnCollision = true
+vfx_mode = "Simple"
+basis = "jump-bouncy"
+jwuid = 3
+vfx_sprites = [ "jump-bouncy-1" ]
+
+[[weapon_jumps]]
+name = "jump-bouncy2"
+scale = 15
+damage = 30
+damageOnCollision = true
+vfx_mode = "Simple"
+basis = "jump-bouncy"
+jwuid = 6
+vfx_sprites = [ "jump-bouncy-2" ]
+
+[[weapon_jumps]]
+name = "jump-stomp"
+scale = 14
+damage = 60
+vfx_mode = "Stomp"
+basis = "jump-stomp"
+jwuid = 4
+vfx_sprites = [ "jump-stomp-1", "jump-stomp-2" ]
+
+[[weapon_jumps]]
+name = "jump-dino-claw"
+scale = 13
+damage = 30
+vfx_mode = "Simple"
+basis = "jump-dino-claw"
+jwuid = -1
+vfx_sprites = [ ]
+
+[[weapon_jumps]]
+name = "jump-tail-whip"
+scale = 13
+damage = 0
+vfx_mode = "Simple"
+basis = "jump-tail-whip"
+jwuid = 5
+vfx_sprites = [ ]
+
+[[weapon_jumps]]
+name = "cola-blast"
+scale = 15
+damage = 30
+damageOnCollision = true
+vfx_mode = "Simple"
+basis = "cola-blast"
+jwuid = 7
+vfx_sprites = [ ]
+
+[[weapon_teleports]]
+name = "teleport-default"
+damage = 0
+time = 1
+proj = [ ]
+basis = "teleport-default"
+tpuid = 200
+
+[[weapon_teleports]]
+name = "teleport-shuriken"
+damage = 0
+time = 1
+proj = [3017, -1500, 100, -1200, -400, 1200, -400, 1500, 100]
+basis = "teleport-shuriken"
+tpuid = 201
+
+[[weapon_teleports]]
+name = "vanish-default"
+damage = 0
+time = 4
+proj = [ ]
+basis = "vanish-default"
+tpuid = 202
+
+[[weapon_shields]]
+name = "shield-deflector"
+sprite = "~/imported/4tzibmfos22lp.webp"
+shape = "dome"
+width = 280
+height = 1
+material = "shield_solid"
+basis = "shield-deflector"
+shuid = 1_000
+
+[[weapon_explosions]]
+name = "explosion-tail-whip"
+sprite = "~/imported/6oblb755t8111.webp"
+damage = 30
+range = 350
+dig = 0.2
+blast = 50
+recoil = 0
+basis = "explosion-tail-whip"
+expluid = 500
+
+[[weapon_explosions]]
+name = "explosion-laser-bolt"
+sprite = "~/imported/nuzpzj55fiozm.webp"
+damage = 25
+range = -60
+duration = 20
+segments = 1
+dig = 0
+blast = 35
+recoil = 2
+basis = "explosion-laser-bolt"
+expluid = 501
+
+[[weapon_explosions]]
+name = "explosion-whip"
+sprite = "~/imported/rz3j37oon1886.webp"
+damage = 15
+range = 100
+dig = 0
+blast = 50
+recoil = 0
+basis = "explosion-whip"
+expluid = 502
+
+[[weapon_explosions]]
+name = "shark-explosion-tail-whip"
+sprite = "~/imported/6oblb755t8111.webp"
+damage = 30
+range = 300
+dig = 0.2
+blast = 50
+recoil = 0
+basis = "shark-explosion-tail-whip"
+expluid = 503
+
+[[weapon_explosions]]
+name = "explosion-laser-bolt2"
+sprite = "~/imported/nuzpzj55fiozm.webp"
+damage = 40
+range = -60
+length = 400
+duration = 20
+segments = 1
+dig = 0
+blast = 50
+recoil = 0
+basis = "explosion-laser-bolt2"
+expluid = 504
+
+[[weapon_explosions]]
+name = "lionheart-roar"
+sprite = "~/imported/6oblb755t8111.webp"
+damage = 60
+range = 420
+dig = 0
+blast = 70
+recoil = 0
+basis = "lionheart-roar"
+expluid = 505
+
+[[weapon_explosions]]
+name = "life-drain"
+sprite = "~/imported/nuzpzj55fiozm.webp"
+damage = 8
+range = -80
+length = 1025
+duration = 300
+segments = 100
+dig = 0
+blast = 50
+recoil = 0
+basis = "life-drain"
+expluid = 506
+
+[[weapon_explosions]]
+name = "wind-blow"
+sprite = "~/imported/nuzpzj55fiozm.webp"
+damage = 0
+range = 285
+length = 1000
+duration = 60
+segments = 50
+dig = 0
+blast = 0
+recoil = 0
+basis = "wind-blow"
+expluid = 507
+
+[[weapon_explosions]]
+name = "cannonball-punch"
+sprite = "~/imported/8mbjb8mm31zu2.webp"
+damage = 0
+range = 285
+length = 1000
+duration = 60
+segments = 50
+dig = 0
+blast = 0
+recoil = 0
+basis = "cannonball-punch"
+expluid = 508
+
+[[weapon_explosions]]
+name = "into-the-void"
+sprite = "~/imported/6oblb755t8111.webp"
+duration = 450
+damage = 0
+range = 2048
+dig = 0
+blast = 70
+recoil = 0
+basis = "into-the-void"
+expluid = 509
+
+[[weapon_explosions]]
+name = "existential-dread"
+sprite = "~/imported/6oblb755t8111.webp"
+duration = 450
+damage = 6
+range = 800
+dig = 0
+blast = 0
+recoil = 0
+basis = "existential-dread"
+expluid = 510
+
+[[weapon_explosives]]
+name = "expl-mine"
+sprite = "~/imported/8mbjb8mm31zu2.webp"
+projectile = false
+mass = 5
+material = "proj_grenade"
+radius = 32
+damping = 0.5
+angular_damping = 0.4
+damage = 40
+range = 300
+dig = 0.3
+blast = 65
+recoil = 0
+rotation_based_on_velocity = false
+starting_rotation = 0
+basis = "expl-mine"
+puid = 2_000
+
+[[weapon_explosives]]
+name = "proj-time-bomb"
+sprite = "~/imported/ymyoyfmm86ti4.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 27
+damping = 0.32
+angular_damping = 0.3
+damage = 40
+range = 240
+dig = 0.3
+blast = 50
+recoil = 0
+rotation_based_on_velocity = false
+starting_rotation = 0
+basis = "proj-time-bomb"
+puid = 3_000
+
+[[weapon_explosives]]
+name = "proj-rocket"
+sprite = "~/imported/tmb6bymmf8j74.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 13
+damping = 0.05
+angular_damping = 0.1
+damage = 25
+range = 150
+dig = 0.45
+blast = 35
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-rocket"
+puid = 3_001
+
+[[weapon_explosives]]
+name = "proj-mini-rocket"
+sprite = "~/imported/tmb6bymmf8j74.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 13
+damping = 0.05
+angular_damping = 0.1
+damage = 15
+range = 150
+dig = 0.45
+blast = 35
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-mini-rocket"
+puid = 3020
+
+[[weapon_explosives]]
+name = "proj-rocket-bouncy"
+sprite = "~/imported/ymyoyfmmqt7r6.webp"
+projectile = true
+mass = 2
+material = "proj_bouncy"
+radius = 43
+damping = 0.05
+angular_damping = 0.1
+damage = 30
+range = 300
+dig = 0.3
+blast = 40
+recoil = 4.5
+rotation_based_on_velocity = false
+starting_rotation = 0.0015
+basis = "proj-rocket-bouncy"
+puid = 3_002
+
+[[weapon_explosives]]
+name = "proj-rocket-x3"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 1.5
+material = "proj_explosive"
+radius = 14
+damping = 0.05
+angular_damping = 0.1
+damage = 20
+range = 120
+dig = 0.45
+blast = 25
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+projectile_trail_animation = "rocket_trail"
+basis = "proj-rocket-x3"
+puid = 3_003
+
+[[weapon_explosives]]
+name = "proj-sharkpedo"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 1.5
+material = "proj_explosive"
+radius = 14
+damping = 0.05
+angular_damping = 0.1
+damage = 20
+range = 120
+dig = 0.45
+blast = 25
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-sharkpedo"
+puid = 3_018
+
+[[weapon_explosives]]
+name = "proj-lion-rocket"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 14
+damping = 0.05
+angular_damping = 0.1
+damage = 60
+range = 200
+dig = 0.75
+blast = 60
+recoil = 10
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-lion-rocket"
+puid = 3019
+
+[[weapon_explosives]]
+name = "proj-snake-rocket"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 14
+damping = 0.05
+angular_damping = 0.1
+damage = 25
+range = 300
+dig = 0.1
+blast = 90
+recoil = 0
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-snake-rocket"
+puid = 3021
+
+[[weapon_explosives]]
+name = "proj-rocket-x5-air"
+sprite = "~/imported/2snfnyss4s8bm.webp"
+projectile = true
+mass = 2.5
+material = "proj_bouncy_sm"
+radius = 31
+damping = 0.05
+angular_damping = 0.1
+damage = 0
+range = 80
+dig = 0
+blast = 5
+recoil = 5
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-rocket-x5-air"
+puid = 3_004
+
+[[weapon_explosives]]
+name = "proj-grenade"
+sprite = "~/imported/2snfnysitib3y.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 30
+damping = 0.2
+angular_damping = 0.3
+damage = 45
+range = 320
+dig = 0.3
+blast = 40
+recoil = 2.5
+rotation_based_on_velocity = false
+starting_rotation = 0.005
+basis = "proj-grenade"
+puid = 3_005
+
+[[weapon_explosives]]
+name = "proj-mini-grenade"
+sprite = "~/imported/m6z4zo693nvnf.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 25
+damping = 0.2
+angular_damping = 0.3
+damage = 25
+range = 200
+dig = 0.2
+blast = 35
+recoil = 2
+rotation_based_on_velocity = false
+starting_rotation = 0.005
+basis = "proj-mini-grenade"
+puid = 3_006
+
+[[weapon_explosives]]
+name = "proj-marker-grenade"
+sprite = "~/imported/95srsi5m15lzo.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 26
+damping = 0.2
+angular_damping = 0.3
+damage = 0
+range = -120
+dig = 0
+blast = 3
+recoil = 1.5
+rotation_based_on_velocity = false
+starting_rotation = 0.005
+basis = "proj-marker-grenade"
+puid = 3_007
+
+[[weapon_explosives]]
+name = "proj-ghost-rocket"
+sprite = "~/imported/4tziz6tl2t3vy.webp"
+projectile = true
+mass = 1.7
+material = "proj_explosive"
+radius = 23
+damping = 0.05
+angular_damping = 0.1
+damage = 35
+range = -100
+dig = 0
+blast = 0
+recoil = 2
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-ghost-rocket"
+puid = 3_008
+
+[[weapon_explosives]]
+name = "proj-egg-rocket"
+sprite = "~/imported/4tziz6t25trfv.webp"
+projectile = true
+mass = 1.5
+material = "proj_explosive"
+radius = 23
+damping = 0.05
+angular_damping = 0.1
+damage = 25
+range = 150
+dig = 0.47
+blast = 27
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-egg-rocket"
+puid = 3_009
+
+[[weapon_explosives]]
+name = "proj-lightning-strike-marker"
+sprite = "~/imported/blq6qvl1n9yi7.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 26
+damping = 0.2
+angular_damping = 0.3
+damage = 0
+range = 120
+dig = 0.35
+blast = 3
+recoil = 2
+rotation_based_on_velocity = false
+starting_rotation = 0.005
+basis = "proj-lightning-strike-marker"
+puid = 3_010
+
+[[weapon_explosives]]
+name = "proj-lightning-laser"
+sprite = "~/imported/blq6qvlbs1or3.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 24
+damping = 0.01
+angular_damping = 0.1
+damage = 25
+range = 100
+dig = 0.5
+blast = 35
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-lightning-laser"
+puid = 3_011
+
+[[weapon_explosives]]
+name = "proj-bullet"
+sprite = "~/imported/m6mll5bqtq42q.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 13
+damping = 0.01
+angular_damping = 0.1
+damage = 10
+range = -50
+dig = 0.25
+blast = 4
+recoil = 3
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-bullet"
+puid = 3_012
+
+[[weapon_explosives]]
+name = "proj-revolver"
+sprite = "~/imported/958bbt6u6v3v3.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 6
+damping = 0.01
+angular_damping = 0.1
+damage = 10
+range = 50
+dig = 0.25
+blast = 4
+recoil = 2
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-revolver"
+puid = 3_013
+
+[[weapon_explosives]]
+name = "proj-poison"
+sprite = "~/imported/shinobi_poison.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 5
+damping = 0.01
+angular_damping = 0.1
+damage = 5
+range = -50
+dig = 0
+blast = 0
+recoil = 1
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-poison"
+puid = 3_014
+
+[[weapon_explosives]]
+name = "proj-poison-grenade"
+sprite = "~/imported/poison-grenade-projectile.webp"
+projectile = true
+mass = 1
+material = "proj_grenade"
+radius = 42
+damping = 0.2
+angular_damping = 0.3
+damage = 0
+range = -120
+dig = 0
+blast = 3
+recoil = 1.5
+rotation_based_on_velocity = false
+starting_rotation = 0.005
+basis = "proj-poison-grenade"
+puid = 3_015
+
+[[weapon_explosives]]
+name = "proj-poison-cloud"
+sprite = "~/imported/shinobi_poison.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 5
+damping = 0.01
+angular_damping = 0.1
+damage = 5
+range = -50
+dig = 0
+blast = 0
+recoil = 1
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "proj-poison-cloud"
+puid = 3_016
+
+[[weapon_explosives]]
+name = "proj-shuriken"
+sprite = "~/imported/shuriken.webp"
+projectile = true
+mass = 2
+material = "proj_semibouncy"
+radius = 30
+damping = 0.35
+angular_damping = 0.5
+damage = 5
+range = -50
+dig = 0
+blast = 0
+recoil = 0
+rotation_based_on_velocity = false
+starting_rotation = 0.01
+basis = "proj-shuriken"
+puid = 3_017
+
+[[weapon_explosives]]
+# Purr-fect Snare: explodes on impact -> damage + ROOT (CharmUID.Snared) to every enemy tank within `range`,
+# applied by applyDamageAndBlast (see WPYarnBall.charm). Values are a first pass; retune freely.
+name = "perr-fect-snare"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 25
+damping = 0.05
+angular_damping = 0.1
+damage = 45
+range = 150
+dig = 0.5
+blast = 25
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "perr-fect-snare"
+puid = 3022
+
+[[weapon_explosives]]
+# Flurry of Paws: DoT cloud. `damage`/`range` are the PER-TICK AoE (WPFlurryPaws re-ticks every RETICK_STEPS for
+# ~4s); blast 0 (no repeated knockback), dig 0 (a cloud, not a crater). Values are a first pass; retune freely.
+name = "flurry-of-paws"
+sprite = "~/imported/2snfnyss4m16i.webp"
+projectile = true
+mass = 2
+material = "proj_explosive"
+radius = 14
+damping = 0.05
+angular_damping = 0.1
+# Impact does NO direct damage (0). A range-based blast falls off toward the edges (stronger at the centre); all
+# damage instead comes from the paw-cloud DoT (flat per tick), so it's uniform across the whole cloud area.
+damage = 0
+range = 110
+dig = 0
+blast = 0
+recoil = 4
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "flurry-of-paws"
+puid = 3023
+
+[[weapon_explosives]]
+name = "flurry-of-paws-cloud"
+sprite = "~/imported/catapult_paw_cloud.webp"
+projectile = true
+mass = 0.1
+material = "proj_explosive"
+radius = 5
+damping = 0.01
+angular_damping = 0.1
+damage = 5
+range = -50
+dig = 0
+blast = 0
+recoil = 1
+rotation_based_on_velocity = true
+starting_rotation = 0
+basis = "flurry-of-paws-cloud"
+puid = 3024
+
+[[RI_WJ_vfx_sprites]]
+name = "jump-bouncy-1"
+sprite = "~/imported/qyz8yo18uu79z.webp"
+width = 190
+height = 193
+
+[[RI_WJ_vfx_sprites]]
+name = "jump-bouncy-2"
+sprite = "~/imported/sentinel_shield.webp"
+width = 200
+height = 192
+
+[[RI_WJ_vfx_sprites]]
+name = "jump-stomp-1"
+sprite = "~/imported/8mbombfsoqinb.webp"
+width = 300
+height = 237
+
+[[RI_WJ_vfx_sprites]]
+name = "jump-stomp-2"
+sprite = "~/imported/4tz1tzqyzzbv3.webp"
+width = 274
+height = 212
+
+[[RI_WB_pointer_icons]]
+name = "proj-rocket-bouncy-1"
+x = 0
+y = 0
+rotation = 0
+icon = "bouncy-ball-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-default-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tank-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "sentinel_beam_pointer"
+x = -200
+y = 0
+rotation = 0
+icon = "sentinel_beam_pointer"
+
+[[RI_WB_pointer_icons]]
+name = "life_drain"
+x = -200
+y = 0
+rotation = 0
+icon = "life_drain"
+
+[[RI_WB_pointer_icons]]
+name = "wind_blow"
+x = -200
+y = 0
+rotation = 0
+icon = "wind_blow"
+
+[[RI_WB_pointer_icons]]
+name = "sentinel_impact_pointer"
+x = 0
+y = 0
+rotation = 0
+icon = "sentinel_impact_pointer"
+
+[[RI_WB_pointer_icons]]
+name = "shark_icon_tail_whip"
+x = 0
+y = 0
+rotation = 0
+icon = "shark_icon_tail_whip"
+
+[[RI_WB_pointer_icons]]
+name = "jolly_rudders_cola_blast"
+x = 0
+y = 0
+rotation = 0
+icon = "jolly_rudders_cola_blast"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bomb-x3-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tank-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bomb-x3-2"
+x = -35
+y = 200
+rotation = 1.57
+icon = "rocket-x3-small-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bomb-x3-3"
+x = 35
+y = 200
+rotation = 1.27
+icon = "rocket-x3-small-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bomb-x3-4"
+x = -105
+y = 200
+rotation = 1.87
+icon = "rocket-x3-small-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bouncy-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tank-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bouncy-2"
+x = 72
+y = -121
+rotation = -0.1
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bouncy-3"
+x = -132
+y = -121
+rotation = -1.55
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bouncy-4"
+x = -172
+y = 136
+rotation = -3.2
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-bouncy-5"
+x = 102
+y = 133
+rotation = 1.4
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-dino-claw-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tank-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-dino-claw-2"
+x = 72
+y = -121
+rotation = -0.1
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-dino-claw-3"
+x = -132
+y = -127
+rotation = -1.55
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-dino-claw-4"
+x = -172
+y = 136
+rotation = -3.2
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-dino-claw-5"
+x = 102
+y = 133
+rotation = 1.4
+icon = "collision-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jump-stomp-1"
+x = 0
+y = 0
+rotation = 0
+icon = "stomp-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "explosion-tail-whip-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tail-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "jolly_rudders_cannonball_punch"
+x = 0
+y = 0
+rotation = 0
+icon = "jolly_rudders_cannonball_punch"
+
+[[RI_WB_pointer_icons]]
+name = "lionheart-kingscall"
+x = 0
+y = 0
+rotation = 0
+icon = "lionheart-kingscall-icon"
+
+[[RI_WB_pointer_icons]]
+name = "into-the-void"
+x = 0
+y = 0
+rotation = 0
+icon = "into-the-void"
+
+[[RI_WB_pointer_icons]]
+name = "existential-dread"
+x = 0
+y = 0
+rotation = 0
+icon = "existential-dread"
+
+[[RI_WB_pointer_icons]]
+name = "explosion-laser-bolt-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tanks-lightning-beam-icon"
+
+[[RI_WB_pointer_icons]]
+name = "explosion-lightning-strike-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tail-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "explosion-whip-1"
+x = 0
+y = 0
+rotation = 0
+icon = "whip-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "shield-deflector-1"
+x = 0
+y = 0
+rotation = 0
+icon = "shield-deflector-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-lightning-strike-marker-1"
+x = 0
+y = 0
+rotation = 0
+icon = "tanks-rune-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-lightning-laser-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-rocket-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-rocket-x5-air-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-x5-air-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-grenade-1"
+x = 0
+y = 0
+rotation = 0
+icon = "grenade-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-mini-grenade-1"
+x = 0
+y = 0
+rotation = 0
+icon = "grenade-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-marker-grenade-1"
+x = 0
+y = 0
+rotation = 0
+icon = "marker-grenade-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-ghost-rocket-1"
+x = 0
+y = 0
+rotation = 0
+icon = "ghost-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-egg-rocket-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-x3-small-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "shark_icon_torpedo"
+x = 0
+y = 0
+rotation = 0
+icon = "shark_icon_torpedo"
+
+[[RI_WB_pointer_icons]]
+name = "lionheart_pridebreaker"
+x = 0
+y = 0
+rotation = 0
+icon = "lionheart_pridebreaker"
+
+[[RI_WB_pointer_icons]]
+name = "baishe_firework"
+x = 0
+y = 0
+rotation = 0
+icon = "baishe_firework"
+
+[[RI_WB_pointer_icons]]
+name = "proj-bullet-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-revolver-1"
+x = 0
+y = 0
+rotation = 0
+icon = "bullet-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-rope-1"
+x = 0
+y = 0
+rotation = 0
+icon = "rocket-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "teleport-default-1"
+x = 0
+y = 0
+rotation = 0
+icon = "teleport-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "vanish-icon"
+x = 0
+y = 0
+rotation = 0
+icon = "vanish-icon"
+
+[[RI_WB_pointer_icons]]
+name = "proj-shuriken-1"
+x = 0
+y = 0
+rotation = 0
+icon = "shuriken-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "poison-grenade-pointer-icon"
+x = 0
+y = -30
+rotation = 0
+icon = "poison-grenade-pointer-icon"
+
+[[RI_WB_pointer_icons]]
+name = "catapult_snare"
+x = 0
+y = 0
+rotation = 0
+icon = "catapult_snare"
+
+[[RI_WB_pointer_icons]]
+name = "catapult_flurry"
+x = 0
+y = -30
+rotation = 0
+icon = "catapult_flurry"
+
+[[RI_WB_projectile_pool]]
+name = "proj-egg-rocket-1"
+amount = 1
+projectile = "proj-egg-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-revolver-1"
+amount = 5
+projectile = "proj-bullet"
+
+[[RI_WB_projectile_pool]]
+name = "proj-poison-1"
+amount = 5
+projectile = "proj-poison"
+
+[[RI_WB_projectile_pool]]
+name = "proj-poison-grenade-1"
+amount = 1
+projectile = "proj-poison-grenade"
+
+[[RI_WB_projectile_pool]]
+name = "proj-poison-grenade-2"
+amount = 3
+projectile = "proj-poison"
+
+[[RI_WB_projectile_pool]]
+name = "proj-poison-cloud-1"
+amount = 122
+projectile = "proj-poison-cloud"
+
+[[RI_WB_projectile_pool]]
+name = "proj-bullet-1"
+amount = 5
+projectile = "proj-bullet"
+
+[[RI_WB_projectile_pool]]
+name = "proj-ghost-rocket-1"
+amount = 1
+projectile = "proj-ghost-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-marker-grenade-1"
+amount = 1
+projectile = "proj-marker-grenade"
+
+[[RI_WB_projectile_pool]]
+name = "proj-marker-grenade-2"
+amount = 3
+projectile = "proj-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-mini-grenade-1"
+amount = 1
+projectile = "proj-mini-grenade"
+
+[[RI_WB_projectile_pool]]
+name = "proj-grenade-1"
+amount = 1
+projectile = "proj-grenade"
+
+[[RI_WB_projectile_pool]]
+name = "proj-rocket-x5-air-1"
+amount = 1
+projectile = "proj-rocket-x5-air"
+
+[[RI_WB_projectile_pool]]
+name = "proj-rocket-x5-air-2"
+amount = 5
+projectile = "proj-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-rocket-x3-1"
+amount = 3
+projectile = "proj-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-sharkpedo"
+amount = 3
+projectile = "proj-sharkpedo"
+
+[[RI_WB_projectile_pool]]
+name = "proj-rocket-bouncy-1"
+amount = 1
+projectile = "proj-rocket-bouncy"
+
+[[RI_WB_projectile_pool]]
+name = "proj-rocket-1"
+amount = 1
+projectile = "proj-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-lightning-laser-1"
+amount = 1
+projectile = "proj-lightning-laser"
+
+[[RI_WB_projectile_pool]]
+name = "proj-lightning-strike-marker-1"
+amount = 1
+projectile = "proj-marker-grenade"
+
+[[RI_WB_projectile_pool]]
+name = "proj-lightning-strike-marker-2"
+amount = 1
+projectile = "proj-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "proj-time-bomb-1"
+amount = 1
+projectile = "proj-time-bomb"
+
+[[RI_WB_projectile_pool]]
+name = "jump-bomb-x3-1"
+amount = 3
+projectile = "proj-egg-rocket"
+
+[[RI_WB_projectile_pool]]
+name = "jump-time-bomb-1"
+amount = 1
+projectile = "proj-time-bomb"
+
+[[RI_WB_projectile_pool]]
+name = "proj-shuriken-1"
+amount = 1
+projectile = "proj-shuriken"
+
+[[RI_WB_projectile_pool]]
+name = "catapult-yarnball-pool"
+amount = 1
+projectile = "perr-fect-snare"
+
+[[RI_WB_projectile_pool]]
+name = "catapult-flurry-pool"
+amount = 1
+projectile = "flurry-of-paws"
+
+[[RI_WB_projectile_pool]]
+name = "catapult-pawcloud-pool"
+amount = 6
+projectile = "flurry-of-paws-cloud"

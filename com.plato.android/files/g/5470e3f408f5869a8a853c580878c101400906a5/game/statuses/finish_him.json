@@ -1,0 +1,85 @@
+{
+	"name": "Finish Him",
+	"icon_sprite": "~/images/statuses/finish_him.webp",
+    "powers": [
+        {
+			"event": ["Monster Attack Final Modifier", "Final Attack Final Modifier"],
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Event Source Type",
+					"output": "event_source"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$event_source",
+					"b": "Monster",
+					"output": "is_monster_attack"
+				},
+				{
+					"name": "If",
+					"case": "$is_monster_attack",
+					"effects": [
+						{
+							"name": "Add",
+							"a": "^damage",
+							"b": 5,
+							"output": "total_damage"
+						},
+						{
+							"name": "Update Event Data",
+							"data_key": "damage",
+							"value": "$total_damage"
+						},
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Finish Him"
+						}
+					]
+				}
+			]
+		},
+        {
+			"event": "Turn Start",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Finish Him",
+					"change": -1
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Finish Him",
+					"output": "charges"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+				{
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Finish Him"
+						}
+					]
+				}
+			]
+		}
+    ]
+}

@@ -1,0 +1,82 @@
+{
+	"name": "Monsters Cost 1 Mana More",
+	"descriptions": "MonstersCost1ManaMore",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Get Monsters By Seat",
+					"seat": "Self",
+					"output": "monsters"
+				},
+				{
+					"name": "For",
+					"list": "$monsters",
+					"iterator": "m",
+					"effects": [
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$m",
+							"seconds": 0.4,
+							"insideColor": "Purple",
+							"outsideColor": "White",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "For",
+					"list": "$monsters",
+					"iterator": "m",
+					"effects": [
+						{
+							"name": "Spawn Puff",
+							"node": "$m",
+							"color": "White",
+							"size": 0.01
+						},
+                        {
+                            "name": "Set Permanent Buff",
+                            "entity": "$m",
+                            "buffType": "BUFF_MANA",
+                            "value": 1
+                        }
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "For",
+					"list": "$monsters",
+					"iterator": "m",
+					"effects": [
+						{
+							"name": "Spawn Puff",
+							"node": "$m",
+							"color": "Gray",
+							"size": 0.01
+						},
+						{
+							"name": "Show Mana Buff",
+							"entity": "$m",
+							"value": true
+						}
+					]
+				}
+			]
+		}
+	]
+}

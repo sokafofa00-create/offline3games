@@ -1,0 +1,81 @@
+{
+	"name": "Death Mark",
+	"icon_sprite": "~/images/statuses/deathsmark.webp",
+	"powers": [
+        {
+			"event": "Turn Start",
+			"seat": "Opponent",
+			"effects": [
+                {
+					"name": "Get Player Status Charges",
+					"seat": "Self",
+					"status": "Death Mark",
+					"output": "charges"
+				},
+				{
+					"name": "Subtract",
+					"a": "$charges",
+					"b": 1,
+					"output": "final_charges"
+				},
+				{
+					"name": "Update Player Status",
+					"seat": "Self",
+					"status": "Death Mark",
+					"charges": "$final_charges"
+				},
+                {
+					"name": "Is Equal To",
+					"a": "$final_charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+                {
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Player Status",
+							"seat": "Self",
+							"status": "Death Mark"
+						}
+                    ]
+                }
+			]
+		},
+        {
+			"event": ["Monster Attack Final Modifier", "Final Attack Final Modifier"],
+			"seat": "Opponent",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Get Event Source Type",
+					"output": "event_source"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$event_source",
+					"b": "Monster",
+					"output": "is_monster_attack"
+				},
+				{
+					"name": "If",
+					"case": "$is_monster_attack",
+					"effects": [
+						{
+							"name": "Add",
+							"a": "^damage",
+							"b": 5,
+							"output": "total_damage"
+						},
+						{
+							"name": "Update Event Data",
+							"data_key": "damage",
+							"value": "$total_damage"
+						}
+					]
+				}
+			]
+		}
+	]
+}

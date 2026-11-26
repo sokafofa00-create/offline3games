@@ -1,0 +1,47 @@
+[stats]
+health = 8
+accuracy = 4
+weight = 4
+
+[physics]
+height = 156
+size = [ 367, 342 ]
+shape = [[ -35.5, 129.5 ],[ -71.5, 161.5 ],[ -96.5, 170.5 ],[ -118.5, 170.5 ],[ -151.5, 143.5 ],[ -160.5, 97.5 ],[ -183.5, 97.5 ],[ -183.5, 83.5 ],[ -150.5, 41.5 ],[ -154.5, -13.5 ],[ -114.5, -14.5 ],[ -114.5, -82.5 ],[ -64.5, -133.5 ],[ -42.5, -133.5 ],[ -42.5, -147.5 ],[ -20.5, -170.5 ],[ 18.5, -170.5 ],[ 40.5, -146.5 ],[ 40.5, -133.5 ],[ 72.5, -132.5 ],[ 113.5, -91.5 ],[ 113.5, -73.5 ],[ 128.5, -70.5 ],[ 128.5, -11.5 ],[ 113.5, -9.5 ],[ 127.5, 28.5 ],[ 141.5, 29.5 ],[ 183.5, 83.5 ],[ 183.5, 97.5 ],[ 161.5, 98.5 ],[ 157.5, 133.5 ],[ 112.5, 170.5 ],[ 83.5, 170.5 ],[ 33.5, 129.5 ]]
+
+[cannon]
+uri = "~/imported/4tz83t1j7o2nm.webp"
+size = 146
+position = [ 0, -24 ]
+displacement = [ 0.42, 0.65 ]
+
+[[parts]]
+uri = "~/imported/8mb9smoroijml.webp"
+animation = "No"
+position = [ 0.5, 0.8128 ]
+
+[[parts]]
+uri = "~/imported/raptor_z1.webp"
+animation = "Cockpit"
+position = [ 0.4645, 0.3245 ]
+[parts.cockpit]
+uri = "~/imported/raptor_bg.webp"
+position = [154, 122]
+avatar_size = 70
+
+[[parts]]
+uri = "~/imported/vzyujz5qfizl6.webp"
+animation = "Platform"
+position = [ 0.5, 0.6783 ]
+
+[[parts]]
+uri = "~/imported/8mb9smoiivnm8.webp"
+animation = "Platform"
+position = [ 0.47, 0.6242 ]
+
+[[abilities]]
+cooldown = 2
+id = "1000"
+
+[[abilities]]
+cooldown = 3
+id = "3005"

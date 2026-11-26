@@ -1,0 +1,52 @@
+{
+	"name": "Eruption",
+	"icon_sprite": "~/images/statuses/eruption.webp",
+    "max_charges": 2,
+    "powers": [
+        {
+			"event": "Monster Attack",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+                {
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Eruption",
+					"output": "charges"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$charges",
+					"b": 2,
+					"output": "is_two"
+				},
+                {
+					"name": "If",
+					"case": "$is_two",
+					"effects": [
+                        {
+                            "name": "Add",
+                            "a": "^damage",
+                            "b": 10,
+                            "output": "total_damage"
+                        },
+                        {
+                            "name": "Update Event Data",
+                            "data_key": "damage",
+                            "value": "$total_damage",
+                            "waitTime": 250
+
+                        },
+                        {
+                            "name": "Remove Monster Status",
+                            "seat": "Self",
+                            "monster": "Self",
+                            "status": "Eruption"
+                        }
+                    ]
+                }
+			]
+		}
+    ]
+}

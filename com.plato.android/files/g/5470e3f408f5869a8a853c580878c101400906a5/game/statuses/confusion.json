@@ -1,0 +1,131 @@
+{
+	"name": "Confusion",
+	"icon_sprite": "~/images/statuses/confused.webp",
+	"powers": [
+		{
+			"event": "Tile Match",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Chance",
+					"chance": 0.5,
+					"output": "to_attack"
+				},
+				{
+					"name": "Get Player Status Node",
+					"seat": "Self",
+					"status": "Confusion",
+					"output": "status_node"
+				},
+				{
+					"name": "Highlight Tiles",
+					"tiles": "^tiles",
+					"seconds": 0.75,
+					"wait": true
+				},
+				{
+					"name": "For",
+					"list": "^tiles",
+					"iterator": "tile",
+					"effects": [
+						{
+							"name": "Get Tile Node",
+							"tile": "$tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$status_node",
+							"seconds": 0.2,
+							"insideColor": "gray",
+							"outsideColor": "purple",
+							"scale": 0.5
+						}
+					]
+				},
+				{
+					"name": "Scale Node",
+					"node": "$status_node",
+					"scale": 3,
+					"seconds": 0.15,
+					"wait": true
+				},
+				{
+					"name": "Spin Node",
+					"node": "$status_node",
+					"rotations": 5,
+					"seconds": 0.5,
+					"wait": true
+				},
+				{
+					"name": "Scale Node",
+					"node": "$status_node",
+					"scale": 1,
+					"seconds": 0.15
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.3
+				},
+				{
+					"name": "If",
+					"case": "$to_attack",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Self",
+							"damage": 5
+						}
+					]
+				},
+				{
+					"name": "Else",
+					"case": "$to_attack",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Opponent",
+							"health": 5
+						}
+					]
+				},
+				{
+					"name": "Get Player Status Charges",
+					"seat": "Self",
+					"status": "Confusion",
+					"output": "charges"
+				},
+				{
+					"name": "Subtract",
+					"a": "$charges",
+					"b": 1,
+					"output": "final_charges"
+				},
+				{
+					"name": "Update Player Status",
+					"seat": "Self",
+					"status": "Confusion",
+					"charges": "$final_charges"
+				},
+                {
+					"name": "Is Equal To",
+					"a": "$final_charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+                {
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Player Status",
+							"seat": "Self",
+							"status": "Confusion"
+						}
+                    ]
+                }
+			]
+		}
+	]
+}

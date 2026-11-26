@@ -1,0 +1,24 @@
+{
+	"name": "High Voltage",
+	"icon_sprite": "~/images/statuses/high_voltage.webp",
+	"powers": [
+		{
+			"event": "Monster Attack",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Multiply",
+					"a": "^damage",
+					"b": 2,
+					"output": "total_damage"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "damage",
+					"value": "$total_damage"
+				}
+			]
+		}
+	]
+}

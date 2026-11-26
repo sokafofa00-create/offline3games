@@ -1,0 +1,84 @@
+{
+	"name": "Yellow Week",
+	"descriptions": "YellowWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Get Monsters By Tile Type",
+					"seat": "Self",
+					"tileType": "Yellow",
+					"output": "yellow_monsters"
+				},
+				{
+					"name": "For",
+					"list": "$yellow_monsters",
+					"iterator": "yellow_monster",
+					"effects": [
+						{
+							"name": "Set Permanent Buff",
+							"entity": "$yellow_monster",
+							"buffType": "BUFF_MANA",
+							"value": -1
+						},
+						{
+							"name": "Set Permanent Buff",
+							"entity": "$yellow_monster",
+							"buffType": "BUFF_ATK",
+							"value": -5
+						}
+					]
+				},
+				{
+					"name": "For",
+					"list": "$yellow_monsters",
+					"iterator": "yellow_monster",
+					"effects": [
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$yellow_monster",
+							"seconds": 0.4,
+							"insideColor": "Purple",
+							"outsideColor": "Yellow",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "For",
+					"list": "$yellow_monsters",
+					"iterator": "yellow_monster",
+					"effects": [
+						{
+							"name": "Spawn Puff",
+							"node": "$yellow_monster",
+							"color": "Yellow",
+							"size": 0.01
+						},
+						{
+							"name": "Show Mana Buff",
+							"entity": "$yellow_monster",
+							"value": true
+						},
+						{
+							"name": "Show Permanent Buff",
+							"entity": "$yellow_monster",
+							"buffType": "BUFF_ATK"
+						}
+					]
+				}
+			]
+		}
+	]
+}

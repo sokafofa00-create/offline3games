@@ -1,0 +1,99 @@
+{
+	"name": "Dry Well",
+	"icon_sprite": "~/images/statuses/dry_well.webp",
+	"powers": [
+		{
+			"event": "Status Update",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+                {
+					"name": "Is Equal To",
+					"a": "^status_key",
+                    "b": "Dry Well",
+					"output": "is_dry_well"
+				},
+				{
+					"name": "And",
+					"a": "^added",
+                    "b": "$is_dry_well",
+					"output": "to_disable"
+				},
+				{
+					"name": "If",
+					"case": "$to_disable",
+					"effects": [
+						{
+							"name": "Enable Mana",
+							"seat": "Self",
+                            "monster": "Self",
+							"enabled": false
+						}
+					]
+				}
+			]
+		},
+        {
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+                {
+					"name": "Update Mana",
+					"seat": "Self",
+                    "monster": "Self",
+					"change": -3
+				}
+			]
+		},
+        {
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+                {
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+                    "monster": "Self",
+					"status": "Dry Well",
+					"output": "charges"
+				},
+				{
+					"name": "Subtract",
+					"a": "$charges",
+					"b": 1,
+					"output": "final_charges"
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+                    "monster": "Self",
+					"status": "Dry Well",
+					"amount": "$final_charges"
+				},
+                {
+					"name": "Is Equal To",
+					"a": "$final_charges",
+					"b": 0,
+					"output": "is_zero"
+				},
+                {
+					"name": "If",
+					"case": "$is_zero",
+					"effects": [
+						{
+							"name": "Remove Monster Status",
+							"seat": "Self",
+                            "monster": "Self",
+							"status": "Dry Well"
+						},
+						{
+							"name": "Enable Mana",
+							"seat": "Self",
+                            "monster": "Self",
+							"enabled": true
+						}
+                    ]
+                }
+			]
+		}
+	]
+}

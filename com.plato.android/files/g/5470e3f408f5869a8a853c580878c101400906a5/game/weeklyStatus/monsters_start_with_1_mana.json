@@ -1,0 +1,59 @@
+{
+	"name": "Monsters Start with 1 Mana",
+	"descriptions": "MonstersStartWith1Mana",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Get Monsters By Seat",
+					"seat": "Self",
+					"output": "monsters"
+				},
+				{
+					"name": "For",
+					"list": "$monsters",
+					"iterator": "m",
+					"effects": [
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$m",
+							"seconds": 0.4,
+							"insideColor": "Purple",
+							"outsideColor": "White",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "For",
+					"list": "$monsters",
+					"iterator": "m",
+					"effects": [
+						{
+							"name": "Spawn Puff",
+							"node": "$m",
+							"color": "White",
+							"size": 0.01
+						},
+						{
+							"name": "Set Initial Mana",
+							"entity": "$m",
+							"value": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

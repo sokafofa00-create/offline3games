@@ -1,0 +1,32 @@
+[stats]
+health = 6
+accuracy = 8
+weight = 3
+
+[selection]
+scale = 1
+x = 0.6
+y = 0.65
+
+[physics]
+height = 160
+offset = [-0, -160]
+display_offset = [-160, -45]
+display_scale = 0.6
+
+[[spine]]
+uri = "~/content/bots/baishe/snake_tank.json"
+[[spine]]
+uri = "~/_revamp/content/bots/baishe/snake_tank.atlas"
+[[spine]]
+uri = "~/_revamp/content/bots/baishe/snake_tank.webp"
+
+[[abilities]]
+id = "507"
+cooldown = 2
+audio = "~/_revamp/content/bots/baishe/windblow.m4a"
+
+[[abilities]]
+id = "3021"
+cooldown = 3
+audio = "~/_revamp/content/bots/baishe/shoot.m4a"

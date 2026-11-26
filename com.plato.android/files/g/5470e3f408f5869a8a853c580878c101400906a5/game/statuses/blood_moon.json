@@ -1,0 +1,76 @@
+{
+	"name": "Blood Moon",
+	"icon_sprite": "~/images/statuses/bloodmoon.webp",
+	"idle_anim": "SP_idle",
+	"attack_anim": "SP_attack",
+	"powers": [
+		{
+			"event": "Monster Attack",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Add",
+					"a": "^damage",
+					"b": 10,
+					"output": "total_damage"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "damage",
+					"value": "$total_damage"
+				}
+			]
+		},
+		{
+			"event": "Monster Heal",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Multiply",
+					"a": "^health",
+					"b": 2,
+					"output": "total_health"
+				},
+				{
+					"name": "Update Event Data",
+					"data_key": "health",
+					"value": "$total_health"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Blood Moon"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Countdown",
+					"charges": 3
+				},
+				{
+					"name": "Set Monster Animation Keys",
+					"seat": "Self",
+					"monster": "Self",
+					"keys": {
+						"idle": "idle",
+						"attack": "attack"
+					}
+				}
+			]
+		}
+	]
+}

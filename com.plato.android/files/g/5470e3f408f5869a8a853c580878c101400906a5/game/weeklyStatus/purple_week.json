@@ -1,0 +1,115 @@
+{
+	"name": "Purple Week",
+	"descriptions": "PurpleWeek",
+	"powers": [
+		{
+			"event": "Game Start",
+			"seat": "All",
+			"effects": [
+				{
+					"name": "Get Weekly Status Node",
+					"output": "weekly_node"
+				},
+				{
+					"name": "Count Monsters By Tile Type",
+					"seat": "Self",
+					"tileType": "Purple",
+					"output": "purple_count"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$purple_count",
+					"b": 0,
+					"output": "has_purple"
+				},
+				{
+					"name": "If",
+					"case": "$has_purple",
+					"effects": [
+						{
+							"name": "Get Monsters By Tile Type",
+							"seat": "Self",
+							"tileType": "Purple",
+							"output": "purple_monsters"
+						},
+						{
+							"name": "For",
+							"list": "$purple_monsters",
+							"iterator": "purple_monster",
+							"effects": [
+								{
+									"name": "Set Permanent Buff",
+									"entity": "$purple_monster",
+									"buffType": "BUFF_ATK",
+									"value": 1
+								}
+							]
+						},
+						{
+							"name": "Set Permanent Buff",
+							"seat": "Self",
+							"buffType": "BUFF_BERRY",
+							"value": 1
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$weekly_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Gray",
+							"outsideColor": "Purple",
+							"scale": 1
+						},
+						{
+							"name": "For",
+							"list": "$purple_monsters",
+							"iterator": "purple_monster",
+							"effects": [
+								{
+									"name": "Spawn Rocket",
+									"start": "$weekly_node",
+									"end": "$purple_monster",
+									"seconds": 0.4,
+									"insideColor": "Purple",
+									"outsideColor": "Purple",
+									"scale": 1
+								}
+							]
+						},
+						{
+							"name": "Wait",
+							"seconds": 0.4
+						},
+						{
+							"name": "For",
+							"list": "$purple_monsters",
+							"iterator": "purple_monster",
+							"effects": [
+								{
+									"name": "Spawn Puff",
+									"node": "$purple_monster",
+									"color": "Purple",
+									"size": 0.01
+								},
+								{
+									"name": "Show Permanent Buff",
+									"entity": "$purple_monster",
+									"buffType": "BUFF_ATK"
+								}
+							]
+						},
+						{
+							"name": "Show Berry Buff",
+							"seat": "Self"
+						}
+					]
+				}
+			]
+		}
+	]
+}
