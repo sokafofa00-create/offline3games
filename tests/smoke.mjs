@@ -206,9 +206,17 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         });
         res.draft.swap = mv;
         res.draft.swapStates = [];
+        await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__LM = []; window.__WARN = []; if (!l.__lmWrapped) { l.__lmWrapped = true; const o = l.localMove.bind(l); l.localMove = (m, e) => { const r = o(m, e); window.__LM.push({ m: JSON.stringify(m).slice(0, 60), e, seat: l._localSeat, paused: l._paused, r }); return r; }; const w = console.warn.bind(console); console.warn = (...a) => { window.__WARN.push(a.map(String).join(" ").slice(0, 160)); w(...a); }; } });
+        res.draft.diagReady = { note: "DIAGNOSTIC ONLY, one call after 6s of an unacked ready check, not a fix" };
         const seatStart = res.draft.final.seat; res.draft.swaps = [mv];
         for (let w = 0; w < 75; w++) {
           await page.waitForTimeout(1500); const sn = await st2(); sn.aw = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return { a: [0, 1].map((x) => l.isSeatAwaitingReady(x)), rs: Array.from(l._readySeats || []), alarm: l._alarmState, paused: l._paused }; } catch (e) { return String(e).slice(0, 80); } }); res.draft.swapStates.push(sn);
+          if (w === 4) {
+            res.draft.diagReady.before = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, rs: Array.from(l._readySeats || []), seat: l._localSeat, paused: l._paused, active: l.isGameActive(), lm: window.__LM.slice(-10), warn: window.__WARN.slice(-5) }; });
+            res.draft.diagReady.call = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const r = l.localReady(); return { r }; });
+            await page.waitForTimeout(1500);
+            res.draft.diagReady.after = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, rs: Array.from(l._readySeats || []), seat: l._localSeat, lm: window.__LM.slice(-4), warn: window.__WARN.slice(-5) }; });
+          }
           if (sn.cover) { res.draft.seatChangedWithCover = { from: seatStart, to: sn.seat, phase: sn.phase, paused: sn.paused }; break; }
           if (!sn.paused && sn.phase === 3 && sn.seat === seatStart && res.draft.swaps.length < 6) {
             const mv2 = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const out = { seat: l._localSeat }; try { let found = null; for (let y = 0; y < b.height && !found; y++) for (let x = 0; x < b.width && !found; x++) for (const [dx, dy] of [[1, 0], [0, 1]]) { const x2 = x + dx, y2 = y + dy; if (x2 >= b.width || y2 >= b.height || !b.areTilesAdjacent(x, y, x2, y2)) continue; b.swapTiles(x, y, x2, y2); const t = b.tiles[y2][x2]; const ms = b.getMatches(t); b.swapTiles(x2, y2, x, y); if (ms && ms.length) { found = { x1: x, y1: y, x2, y2 }; break; } } out.found = found; if (found) out.ok = l.localMove({ t: 6, ...found }, true); } catch (e) { out.err = String(e && e.message).slice(0, 160); } return out; });
