@@ -9,7 +9,7 @@
 <body>
   <!-- شاشة إعدادات اللعبة واللاعبين (Launcher / Setup) -->
   <div id="setup-screen" class="screen active">
-    <div class="setup-card">
+    <div class="setup-card mode-hotseat" id="setup-card">
       <header class="brand-header">
         <div class="brand-badge">OFFLINE PASS &amp; PLAY</div>
         <h1>صالة الألعاب المحلية</h1>
@@ -117,15 +117,13 @@
         </div>
       </div>
 
-      <!-- وضع اللعب -->
-      <div class="field-group" id="mode-box">
-        <label for="play-mode">وضع اللعب</label>
-        <select id="play-mode">
-          <option value="hotseat" selected>لاعبان أو أكثر على نفس الجهاز</option>
-          <option value="bot">ضد الكمبيوتر</option>
-          <option value="lan" disabled>عبر الشبكة المحلية (قريبًا)</option>
-        </select>
+      <!-- أوضاع اللعب الثلاثة -->
+      <div class="mode-tabs" id="mode-tabs">
+        <button type="button" class="mode-tab selected" data-mode="hotseat">نفس الجهاز</button>
+        <button type="button" class="mode-tab" data-mode="lan">الشبكة المحلية</button>
+        <button type="button" class="mode-tab" data-mode="bot">ضد الكمبيوتر</button>
       </div>
+      <input type="hidden" id="play-mode" value="hotseat" />
       <div class="field-group hidden" id="difficulty-box">
         <label for="bot-difficulty">مستوى صعوبة الكمبيوتر</label>
         <select id="bot-difficulty">
@@ -133,6 +131,23 @@
           <option value="medium" selected>متوسط</option>
           <option value="hard">صعب</option>
         </select>
+      </div>
+
+      <!-- لوبي الشبكة المحلية -->
+      <div id="lobby-panel" class="lobby-panel">
+        <div class="lobby-head"><span class="lobby-dot"></span><span id="lobby-me">...</span><span id="lobby-count" class="lobby-count"></span></div>
+        <div id="lobby-players" class="lobby-players"></div>
+        <div id="lobby-chat" class="lobby-chat"></div>
+        <div id="lobby-games-menu" class="lobby-games-menu hidden">
+          <button type="button" data-lobby-game="pool">🎱 البلياردو</button>
+          <button type="button" data-lobby-game="monsters">👾 Match Monsters</button>
+          <button type="button" data-lobby-game="brawlbots">🤖 Brawlbots</button>
+        </div>
+        <div class="lobby-bar">
+          <button type="button" id="lobby-games-btn" class="lobby-plus" aria-label="إنشاء مباراة">＋</button>
+          <input type="text" id="lobby-input" maxlength="200" placeholder="اكتب رسالة…" autocomplete="off" />
+          <button type="button" id="lobby-send" class="lobby-sendbtn">إرسال</button>
+        </div>
       </div>
 
       <!-- أسماء اللاعبين على نفس الهاتف -->
