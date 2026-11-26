@@ -25,23 +25,30 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run smoke test (load, start, input, menu, rematch)
         run: node tests/smoke.mjs
+      - name: Renderer comparison (Mesa GL via Xvfb, same scenarios)
+        if: always()
+        run: |
+          sudo apt-get install -y xvfb libgl1-mesa-dri >/dev/null
+          BACKEND=gl SHOT_DIR=shots-gl SCEN=pool-8ball,brawlbots-2p,monsters-normal xvfb-run -a node tests/smoke.mjs || true
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: smoke-screenshots
-          path: shots/*.png
+          path: |
+            shots/*.png
+            shots-gl/*.png
           retention-days: 14
       - name: Publish screenshots to ci-shots branch (for viewing)
         if: always()
         run: |
           set -e
           git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
-          cp -r shots /tmp/shots-out
+          cp -r shots /tmp/shots-out; mkdir -p /tmp/shots-gl-out; cp shots-gl/*.png /tmp/shots-gl-out/ 2>/dev/null || true
           git checkout --orphan ci-shots
           git rm -rf . >/dev/null 2>&1 || true
-          mkdir -p shots && cp /tmp/shots-out/*.png shots/
+          mkdir -p shots shots-gl && cp /tmp/shots-out/*.png shots/ && (cp /tmp/shots-gl-out/*.png shots-gl/ 2>/dev/null || true)
           { echo "# Smoke screenshots"; echo; for f in shots/*.png; do echo "- $f"; done; } > README.md
-          git add shots README.md
+          git add shots shots-gl README.md
           git commit -m "smoke screenshots for run ${GITHUB_RUN_NUMBER}"
           git push -f origin ci-shots
