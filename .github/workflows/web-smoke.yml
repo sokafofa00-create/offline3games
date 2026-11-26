@@ -8,6 +8,9 @@ on:
       - "tests/**"
       - ".github/workflows/web-smoke.yml"
 
+permissions:
+  contents: write
+
 jobs:
   smoke:
     runs-on: ubuntu-latest
@@ -29,3 +32,16 @@ jobs:
           name: smoke-screenshots
           path: shots/*.png
           retention-days: 14
+      - name: Publish screenshots to ci-shots branch (for viewing)
+        if: always()
+        run: |
+          set -e
+          git config user.name "ci"; git config user.email "ci@users.noreply.github.com"
+          cp -r shots /tmp/shots-out
+          git checkout --orphan ci-shots
+          git rm -rf . >/dev/null 2>&1 || true
+          mkdir -p shots && cp /tmp/shots-out/*.png shots/
+          { echo "# Smoke screenshots"; echo; for f in shots/*.png; do echo "- $f"; done; } > README.md
+          git add shots README.md
+          git commit -m "smoke screenshots for run ${GITHUB_RUN_NUMBER}"
+          git push -f origin ci-shots
