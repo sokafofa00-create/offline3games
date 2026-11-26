@@ -62,7 +62,8 @@ for (const game of GAMES) {
     res.end = { A: await snap(A.page), B: await snap(B.page) };
     res.steps.sameState = !!res.end.A && !!res.end.B && res.end.A.turn === res.end.B.turn && res.end.A.phase === res.end.B.phase && res.end.A.sel === res.end.B.sel;
     const chg = (x, y) => x.turn !== y.turn || x.sel !== y.sel || x.phase !== y.phase;
-    res.steps.movesAdvanced = game === "pool" ? null : (chg(res.end.A, res.start.A) && chg(res.end.B, res.start.B));
+    const adv = (side) => chg(res.end[side], res.start[side]) || (res.mid && chg(res.mid[side], res.start[side]) && chg(res.end[side], res.mid[side]));
+    res.steps.movesAdvanced = game === "pool" ? null : (adv("A") && adv("B"));
     await A.page.screenshot({ path: `shots/lan-${game}-host.png` });
     await B.page.screenshot({ path: `shots/lan-${game}-guest.png` });
     if (game === "pool") {
