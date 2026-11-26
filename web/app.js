@@ -190,7 +190,8 @@ async function startMatch(params) {
       clearTimeout(coverTimer);
       const tryShow = () => {
         const lg = activeSession?.getClientLogic?.();
-        if (!lg || lg.gameOver) return;
+        if (!lg) { coverTimer = setTimeout(tryShow, 250); return; }
+        if (lg.gameOver) return;
         if (lg.paused) { coverTimer = setTimeout(tryShow, 250); return; }
         if (currentHudInfo.seat === coveredSeat) return;
         coveredSeat = currentHudInfo.seat;
