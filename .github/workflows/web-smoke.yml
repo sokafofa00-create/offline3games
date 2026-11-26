@@ -34,6 +34,9 @@ jobs:
       - name: Computer-player test (bot seat acts by itself; internal-API human seat)
         if: always()
         run: node tests/bots-test.mjs
+      - name: Audio decode diagnosis (music-stream errors)
+        if: always()
+        run: node tests/audio-diag.mjs
       - name: Pool bot test (vs computer)
         if: always()
         run: mkdir -p shots && node tests/pool-bot-test.mjs
