@@ -1,0 +1,47 @@
+[stats]
+health = 6
+accuracy = 9
+weight = 1
+
+[physics]
+height = 175
+size = [434, 359]
+shape = [[-116.5, 144.5], [-96.5, 179.5], [-127.5, 150.5], [-184.5, 122.5], [-154.5, 179.5], [-202.5, 138.5],[-215.5, 82.5], [-197.5, 45.5], [-120.5, 35.5], [-163.5, -5.5], [-133.5, -22.5], [-130.5, -55.5],[-154.5, -81.5], [-120.5, -82.5], [-99.5, -109.5], [-106.5, -149.5], [-71.5, -130.5], [-34.5, -143.5],[-21.5, -178.5], [-4.5, -147.5], [39.5, -143.5], [67.5, -169.5], [69.5, -132.5], [102.5, -108.5],[135.5, -118.5], [122.5, -83.5], [132.5, -54.5], [161.5, -46.5], [135.5, -29.5], [133.5, 0.5], [154.5, 13.5],[123.5, 34.5], [197.5, 45.5], [216.5, 81.5], [201.5, 138.5], [154.5, 179.5], [184.5, 125.5], [125.5, 152.5],[95.5, 179.5], [113.5, 147.5], [3.5, 128.5]]
+
+[cannon]
+uri = "~/imported/ymyj4m8lmir4q.webp"
+size = 150
+position = [0, -29]
+displacement = [0.44, 0.6]
+
+[[parts]]
+uri = "~/imported/m6ziq62b2ltpq.webp"
+animation = "No"
+position = [0.5, 0.8036]
+
+[[parts]]
+uri = "~/imported/8mb9sm6nz719b.webp"
+animation = "Platform"
+position = [0.5, 0.7339]
+
+[[parts]]
+uri = "~/imported/m6ziq6ru89suq.webp"
+animation = "No"
+position = [0.5, 0.8036]
+
+[[parts]]
+uri = "~/imported/xebes_z3.webp"
+animation = "Cockpit"
+position = [0.5, 0.369]
+[parts.cockpit]
+uri = "~/imported/xebes_bg.webp"
+position = [168, 144]
+avatar_size = 81
+
+[[abilities]]
+cooldown = 2
+id = "2"
+
+[[abilities]]
+cooldown = 3
+id = "3008"
