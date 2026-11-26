@@ -1,0 +1,27 @@
+name: Pool Bot Test
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tests/pool-bot-test.mjs"
+      - "web/bots.js"
+      - ".github/workflows/pool-bot.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  pool-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright
+        run: |
+          npm i --no-save --no-package-lock playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Pool bot test (vs computer)
+        run: mkdir -p shots && node tests/pool-bot-test.mjs
