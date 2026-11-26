@@ -1,0 +1,128 @@
+lulabaa_oracle.webp
+size:837,837
+filter:Linear,Linear
+Card01
+bounds:634,496,64,102
+offsets:1,1,66,104
+rotate:90
+Card02
+bounds:692,289,63,102
+offsets:2,1,66,104
+rotate:90
+Card03
+bounds:692,354,64,102
+offsets:1,1,66,104
+Card04
+bounds:758,354,64,102
+offsets:1,1,66,104
+Card_back
+bounds:594,9,87,125
+offsets:2,7,90,143
+Card_dark
+bounds:750,186,62,101
+offsets:2,2,66,105
+Decoration 2
+bounds:807,78,28,41
+L_arm
+bounds:673,156,119,75
+rotate:90
+L_ear
+bounds:491,2,101,86
+L_earing
+bounds:759,52,46,67
+L_leg
+bounds:683,36,74,118
+L_rope
+bounds:2,158,203,328
+L_rope 1
+bounds:2,19,35,124
+rotate:90
+L_rope 2
+bounds:795,2,27,48
+R_arm
+bounds:759,603,76,67
+R_ear
+bounds:366,2,63,84
+R_earing
+bounds:431,29,57,57
+R_hand
+bounds:738,458,94,92
+R_leg
+bounds:592,136,79,139
+R_rope
+bounds:2,488,260,347
+R_rope 1
+bounds:431,2,25,55
+rotate:90
+R_rope 2
+bounds:624,465,29,94
+rotate:90
+R_rope 3
+bounds:759,2,34,48
+Upper robe
+bounds:635,562,108,111
+rotate:90
+back rope
+bounds:264,612,186,223
+body
+bounds:264,448,162,176
+rotate:90
+decoration 1
+bounds:128,19,40,35
+decoration 3
+bounds:796,310,33,42
+decoration 4
+bounds:207,448,39,38
+decoration 5
+bounds:712,3,34,31
+eye
+bounds:683,2,32,27
+rotate:90
+fx_fire_00
+bounds:389,88,176,100
+offsets:0,0,180,100
+rotate:90
+fx_fire_01
+bounds:488,272,179,100
+offsets:0,0,180,100
+rotate:90
+fx_fire_02
+bounds:2,56,180,100
+fx_fire_03
+bounds:452,555,180,100
+fx_fire_04
+bounds:207,143,180,99
+offsets:0,1,180,100
+fx_fire_05
+bounds:184,45,180,96
+offsets:0,4,180,100
+fx_fire_06
+bounds:389,266,180,97
+offsets:0,3,180,100
+rotate:90
+fx_fire_07
+bounds:491,90,180,99
+offsets:0,1,180,100
+rotate:90
+fx_fire_08
+bounds:442,453,180,100
+fx_fire_09
+bounds:207,346,180,100
+fx_fire_10
+bounds:207,244,180,100
+fx_fire_11
+bounds:590,277,174,100
+offsets:0,0,180,100
+rotate:90
+fx_star
+bounds:759,121,63,63
+offsets:7,8,78,78
+hat
+bounds:452,657,181,178
+head
+bounds:635,672,163,189
+rotate:90
+mouth
+bounds:366,110,17,31
+neckleck
+bounds:750,552,85,49

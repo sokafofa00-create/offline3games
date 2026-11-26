@@ -1,0 +1,46 @@
+{
+	"name": "root",
+	"columns": 3,
+	"columnsTemplate": ["30%", "40%", "30%"],
+	"elements": [
+		{
+			"name": "monsters-left",
+			"rows": 2,
+			"rowsTemplate": ["50%", "50%"],
+			"elements": [
+				{
+					"name": "monster-left-top"
+				},
+				{
+					"name": "monster-left-bottom"
+				}
+			]
+		},
+		{
+			"name": "center-column",
+			"rows": 2,
+			"rowsTemplate": ["25%", "75%"],
+			"elements": [
+				{
+					"name": "player-nodes"
+				},
+				{
+					"name": "board"
+				}
+			]
+		},
+		{
+			"name": "monsters-right",
+			"rows": 2,
+			"rowsTemplate": ["50%", "50%"],
+			"elements": [
+				{
+					"name": "monster-right-top"
+				},
+				{
+					"name": "monster-right-bottom"
+				}
+			]
+		}
+	]
+}

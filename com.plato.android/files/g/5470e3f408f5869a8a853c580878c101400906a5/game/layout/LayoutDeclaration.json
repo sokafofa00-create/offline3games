@@ -1,0 +1,53 @@
+{
+	"name": "root",
+	"rows": 2,
+	"rowsTemplate": ["65%", "35%"],
+	"mediaQueries": [
+		{
+			"minWidth": 800,
+			"rowsTemplate": ["60%", "40%"]
+		},
+		{
+			"minWidth": 950,
+			"rowsTemplate": ["50%", "50%"]
+		}
+	],
+	"elements": [
+		{
+			"name": "play-area",
+			"columns": 2,
+			"columnsTemplate": ["50%", "50%"],
+			"elements": [
+				{
+					"name": "monsters-left",
+					"rows": 2,
+					"rowsTemplate": ["50%", "50%"],
+					"elements": [
+						{
+							"name": "monster-left-top"
+						},
+						{
+							"name": "monster-left-bottom"
+						}
+					]
+				},
+				{
+					"name": "monsters-right",
+					"rows": 2,
+					"rowsTemplate": ["50%", "50%"],
+					"elements": [
+						{
+							"name": "monster-right-top"
+						},
+						{
+							"name": "monster-right-bottom"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "board"
+		}
+	]
+}

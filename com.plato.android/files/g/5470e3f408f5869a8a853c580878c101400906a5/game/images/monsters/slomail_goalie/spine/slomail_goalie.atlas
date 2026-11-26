@@ -1,0 +1,174 @@
+
+slomail_goalie.webp
+size: 656, 656
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Arm_L
+  rotate: false
+  xy: 446, 493
+  size: 149, 161
+  orig: 149, 161
+  offset: 0, 0
+  index: -1
+Arm_R
+  rotate: false
+  xy: 290, 446
+  size: 154, 208
+  orig: 154, 208
+  offset: 0, 0
+  index: -1
+Ball
+  rotate: false
+  xy: 2, 242
+  size: 199, 198
+  orig: 199, 198
+  offset: 0, 0
+  index: -1
+Body
+  rotate: false
+  xy: 2, 98
+  size: 172, 142
+  orig: 172, 142
+  offset: 0, 0
+  index: -1
+Hat
+  rotate: true
+  xy: 176, 110
+  size: 130, 106
+  orig: 130, 106
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 2, 442
+  size: 286, 212
+  orig: 286, 212
+  offset: 0, 0
+  index: -1
+bubble
+  rotate: false
+  xy: 447, 216
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+bubble_pop
+  rotate: false
+  xy: 446, 449
+  size: 36, 42
+  orig: 36, 42
+  offset: 0, 0
+  index: -1
+fx_fireball_00
+  rotate: false
+  xy: 392, 293
+  size: 95, 151
+  orig: 110, 164
+  offset: 6, 2
+  index: -1
+fx_fireball_01
+  rotate: false
+  xy: 294, 293
+  size: 96, 151
+  orig: 110, 164
+  offset: 4, 2
+  index: -1
+fx_fireball_02
+  rotate: true
+  xy: 166, 2
+  size: 94, 156
+  orig: 110, 164
+  offset: 2, 2
+  index: -1
+fx_fireball_03
+  rotate: true
+  xy: 2, 2
+  size: 94, 162
+  orig: 110, 164
+  offset: 5, 2
+  index: -1
+fx_fireball_04
+  rotate: false
+  xy: 203, 278
+  size: 89, 162
+  orig: 110, 164
+  offset: 11, 2
+  index: -1
+fx_fireball_05
+  rotate: false
+  xy: 489, 333
+  size: 87, 158
+  orig: 110, 164
+  offset: 12, 2
+  index: -1
+fx_fireball_06
+  rotate: true
+  xy: 294, 200
+  size: 91, 151
+  orig: 110, 164
+  offset: 8, 2
+  index: -1
+fx_fireball_07
+  rotate: true
+  xy: 284, 105
+  size: 93, 150
+  orig: 110, 164
+  offset: 6, 3
+  index: -1
+fx_fireball_08
+  rotate: true
+  xy: 324, 9
+  size: 94, 150
+  orig: 110, 164
+  offset: 7, 2
+  index: -1
+leg_L
+  rotate: false
+  xy: 578, 348
+  size: 75, 143
+  orig: 76, 144
+  offset: 1, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 447, 155
+  size: 59, 66
+  orig: 59, 66
+  offset: 0, 0
+  index: -1
+spark_00
+  rotate: true
+  xy: 489, 294
+  size: 37, 53
+  orig: 80, 80
+  offset: 0, 16
+  index: -1
+spark_01
+  rotate: false
+  xy: 584, 281
+  size: 61, 65
+  orig: 80, 80
+  offset: 4, 9
+  index: -1
+spark_02
+  rotate: false
+  xy: 524, 220
+  size: 58, 72
+  orig: 80, 80
+  offset: 16, 8
+  index: -1
+spark_03
+  rotate: false
+  xy: 597, 581
+  size: 56, 73
+  orig: 80, 80
+  offset: 22, 7
+  index: -1
+spark_04
+  rotate: false
+  xy: 597, 512
+  size: 53, 67
+  orig: 80, 80
+  offset: 27, 9
+  index: -1

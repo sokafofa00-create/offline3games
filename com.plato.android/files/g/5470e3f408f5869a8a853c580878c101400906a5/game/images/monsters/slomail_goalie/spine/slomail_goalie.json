@@ -1,0 +1,1540 @@
+{
+    "skeleton": {
+        "hash": "aykGBFessVU",
+        "spine": "4.1.24",
+        "x": -206.58,
+        "y": -9.41,
+        "width": 422.93,
+        "height": 326.06
+    },
+    "bones": [
+        {
+            "name": "root"
+        },
+        {
+            "name": "slomail_ctrl",
+            "parent": "root"
+        },
+        {
+            "name": "ball",
+            "parent": "slomail_ctrl",
+            "length": 219.75,
+            "rotation": 78.74,
+            "x": 0.7,
+            "y": 5.38
+        },
+        {
+            "name": "body",
+            "parent": "ball",
+            "length": 117.7,
+            "rotation": 130.28,
+            "x": 187.58,
+            "y": -14.44,
+            "transform": "onlyTranslation"
+        },
+        {
+            "name": "leg_R",
+            "parent": "body",
+            "length": 52.61,
+            "rotation": 171.86,
+            "x": -15.34,
+            "y": -12.91
+        },
+        {
+            "name": "leg_L",
+            "parent": "body",
+            "length": 76.36,
+            "rotation": 161.68,
+            "x": -7.59,
+            "y": -47.93
+        },
+        {
+            "name": "head",
+            "parent": "body",
+            "length": 165.73,
+            "rotation": 66.6,
+            "x": 39.04,
+            "y": 24.86
+        },
+        {
+            "name": "ball6",
+            "parent": "head",
+            "length": 77.96,
+            "rotation": -100.92,
+            "x": 51.23,
+            "y": -75.24
+        },
+        {
+            "name": "arm_R",
+            "parent": "body",
+            "length": 181.47,
+            "rotation": 162.48,
+            "x": -1.95,
+            "y": -12.58
+        },
+        {
+            "name": "arm_L",
+            "parent": "body",
+            "length": 156.41,
+            "rotation": 113.98,
+            "x": 65.49,
+            "y": 92.76
+        },
+        {
+            "name": "IK_arm_R",
+            "parent": "slomail_ctrl",
+            "x": 149.35,
+            "y": 22.31
+        },
+        {
+            "name": "IK_arm_L",
+            "parent": "slomail_ctrl",
+            "x": -139.61,
+            "y": 27.82
+        },
+        {
+            "name": "bubble",
+            "parent": "head",
+            "x": 50.15,
+            "y": 65.86
+        },
+        {
+            "name": "attack_ball",
+            "parent": "root",
+            "rotation": -81.77,
+            "x": -404.25,
+            "y": 354.97,
+            "scaleX": 1.0189,
+            "scaleY": 1.0189
+        },
+        {
+            "name": "attack_ball1",
+            "parent": "attack_ball",
+            "x": 4.95,
+            "y": 97.35
+        },
+        {
+            "name": "flame",
+            "parent": "attack_ball",
+            "x": 13.33,
+            "y": -21.97,
+            "scaleX": 2.661,
+            "scaleY": 2.661
+        },
+        {
+            "name": "spark",
+            "parent": "root",
+            "x": -224.15,
+            "y": 342.86,
+            "scaleX": 4.6071,
+            "scaleY": 4.6071
+        },
+        {
+            "name": "spark2",
+            "parent": "root",
+            "x": -224.15,
+            "y": 342.86,
+            "scaleX": 4.6071,
+            "scaleY": 4.6071
+        }
+    ],
+    "slots": [
+        {
+            "name": "leg_R",
+            "bone": "leg_R",
+            "attachment": "leg_R"
+        },
+        {
+            "name": "leg_L",
+            "bone": "leg_L",
+            "attachment": "leg_L"
+        },
+        {
+            "name": "Body",
+            "bone": "body",
+            "attachment": "Body"
+        },
+        {
+            "name": "Ball",
+            "bone": "ball",
+            "attachment": "Ball"
+        },
+        {
+            "name": "Arm_L",
+            "bone": "arm_L",
+            "attachment": "Arm_L"
+        },
+        {
+            "name": "Arm_R",
+            "bone": "arm_R",
+            "attachment": "Arm_R"
+        },
+        {
+            "name": "Head",
+            "bone": "head",
+            "attachment": "Head"
+        },
+        {
+            "name": "Hat",
+            "bone": "ball6",
+            "attachment": "Hat"
+        },
+        {
+            "name": "bubble",
+            "bone": "bubble",
+            "attachment": "bubble"
+        },
+        {
+            "name": "bubble_pop",
+            "bone": "bubble"
+        },
+        {
+            "name": "Ball2",
+            "bone": "attack_ball1"
+        },
+        {
+            "name": "fx_fireball_00",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_01",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_02",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_03",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_04",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_05",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_06",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_07",
+            "bone": "flame"
+        },
+        {
+            "name": "fx_fireball_08",
+            "bone": "flame"
+        },
+        {
+            "name": "spark_00",
+            "bone": "spark"
+        },
+        {
+            "name": "spark_05",
+            "bone": "spark2"
+        },
+        {
+            "name": "spark_01",
+            "bone": "spark"
+        },
+        {
+            "name": "spark_06",
+            "bone": "spark2"
+        },
+        {
+            "name": "spark_02",
+            "bone": "spark"
+        },
+        {
+            "name": "spark_07",
+            "bone": "spark2"
+        },
+        {
+            "name": "spark_03",
+            "bone": "spark"
+        },
+        {
+            "name": "spark_08",
+            "bone": "spark2"
+        },
+        {
+            "name": "spark_04",
+            "bone": "spark"
+        },
+        {
+            "name": "spark_09",
+            "bone": "spark2"
+        }
+    ],
+    "ik": [
+        {
+            "name": "IK_arm_L",
+            "order": 1,
+            "bones": [
+                "arm_L"
+            ],
+            "target": "IK_arm_L",
+            "stretch": true
+        },
+        {
+            "name": "IK_arm_R",
+            "bones": [
+                "arm_R"
+            ],
+            "target": "IK_arm_R",
+            "stretch": true
+        }
+    ],
+    "skins": [
+        {
+            "name": "default",
+            "attachments": {
+                "Arm_L": {
+                    "Arm_L": {
+                        "x": 92.28,
+                        "y": -20.54,
+                        "rotation": 115.74,
+                        "width": 149,
+                        "height": 161
+                    }
+                },
+                "Arm_R": {
+                    "Arm_R": {
+                        "x": 104.29,
+                        "y": 18.33,
+                        "rotation": 67.24,
+                        "width": 154,
+                        "height": 208
+                    }
+                },
+                "Ball": {
+                    "Ball": {
+                        "x": 93.41,
+                        "y": 3.91,
+                        "rotation": -78.74,
+                        "width": 199,
+                        "height": 198
+                    }
+                },
+                "Ball2": {
+                    "Ball": {
+                        "width": 199,
+                        "height": 198
+                    }
+                },
+                "Body": {
+                    "Body": {
+                        "x": 50.81,
+                        "y": 3.7,
+                        "rotation": -130.28,
+                        "width": 172,
+                        "height": 142
+                    }
+                },
+                "bubble": {
+                    "bubble": {
+                        "x": -14.46,
+                        "y": 4.07,
+                        "scaleX": 0.5025,
+                        "scaleY": 0.5025,
+                        "rotation": 163.12,
+                        "width": 75,
+                        "height": 75
+                    }
+                },
+                "bubble_pop": {
+                    "bubble_pop": {
+                        "x": -14.09,
+                        "y": 2.14,
+                        "scaleX": 1.428,
+                        "scaleY": 1.428,
+                        "width": 36,
+                        "height": 42
+                    }
+                },
+                "fx_fireball_00": {
+                    "fx_fireball_00": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_01": {
+                    "fx_fireball_01": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_02": {
+                    "fx_fireball_02": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_03": {
+                    "fx_fireball_03": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_04": {
+                    "fx_fireball_04": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_05": {
+                    "fx_fireball_05": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_06": {
+                    "fx_fireball_06": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_07": {
+                    "fx_fireball_07": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "fx_fireball_08": {
+                    "fx_fireball_08": {
+                        "x": -1.55,
+                        "y": 76.76,
+                        "width": 110,
+                        "height": 164
+                    }
+                },
+                "Hat": {
+                    "Hat": {
+                        "x": 5.91,
+                        "y": -3.97,
+                        "rotation": -95.96,
+                        "width": 130,
+                        "height": 106
+                    }
+                },
+                "Head": {
+                    "Head": {
+                        "x": 51.18,
+                        "y": -20.99,
+                        "rotation": 163.12,
+                        "width": 286,
+                        "height": 212
+                    }
+                },
+                "leg_L": {
+                    "leg_L": {
+                        "x": 13.56,
+                        "y": -5.15,
+                        "rotation": 68.04,
+                        "width": 76,
+                        "height": 144
+                    }
+                },
+                "leg_R": {
+                    "leg_R": {
+                        "x": 23.05,
+                        "y": 2.13,
+                        "rotation": 57.86,
+                        "width": 59,
+                        "height": 66
+                    }
+                },
+                "spark_00": {
+                    "spark_00": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_01": {
+                    "spark_01": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_02": {
+                    "spark_02": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_03": {
+                    "spark_03": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_04": {
+                    "spark_04": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_05": {
+                    "spark_00": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_06": {
+                    "spark_01": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_07": {
+                    "spark_02": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_08": {
+                    "spark_03": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                },
+                "spark_09": {
+                    "spark_04": {
+                        "x": 34.62,
+                        "y": -2.45,
+                        "width": 80,
+                        "height": 80
+                    }
+                }
+            }
+        }
+    ],
+    "animations": {
+        "attack": {
+            "slots": {
+                "Ball": {
+                    "attachment": [
+                        {
+                            "time": 0.7667
+                        },
+                        {
+                            "time": 1.2,
+                            "name": "Ball"
+                        }
+                    ]
+                },
+                "Ball2": {
+                    "attachment": [
+                        {
+                            "time": 0.7667,
+                            "name": "Ball"
+                        },
+                        {
+                            "time": 1.3333
+                        }
+                    ]
+                },
+                "fx_fireball_00": {
+                    "attachment": [
+                        {
+                            "time": 0.9333,
+                            "name": "fx_fireball_00"
+                        },
+                        {
+                            "time": 0.9667,
+                            "name": "fx_fireball_00"
+                        },
+                        {
+                            "time": 1.0333
+                        }
+                    ]
+                },
+                "fx_fireball_01": {
+                    "attachment": [
+                        {
+                            "time": 1.0333,
+                            "name": "fx_fireball_01"
+                        },
+                        {
+                            "time": 1.0667
+                        }
+                    ]
+                },
+                "fx_fireball_02": {
+                    "attachment": [
+                        {
+                            "time": 1.0667,
+                            "name": "fx_fireball_02"
+                        },
+                        {
+                            "time": 1.1333
+                        }
+                    ]
+                },
+                "fx_fireball_03": {
+                    "attachment": [
+                        {
+                            "time": 1.1333,
+                            "name": "fx_fireball_03"
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ]
+                },
+                "fx_fireball_04": {
+                    "attachment": [
+                        {
+                            "time": 0.7667
+                        },
+                        {
+                            "time": 1.1667,
+                            "name": "fx_fireball_04"
+                        },
+                        {
+                            "time": 1.2333
+                        }
+                    ]
+                },
+                "fx_fireball_05": {
+                    "attachment": [
+                        {
+                            "time": 0.7667,
+                            "name": "fx_fireball_05"
+                        },
+                        {
+                            "time": 0.8
+                        },
+                        {
+                            "time": 1.2333,
+                            "name": "fx_fireball_05"
+                        },
+                        {
+                            "time": 1.3
+                        }
+                    ]
+                },
+                "fx_fireball_06": {
+                    "attachment": [
+                        {
+                            "time": 0.8,
+                            "name": "fx_fireball_06"
+                        },
+                        {
+                            "time": 0.8333
+                        },
+                        {
+                            "time": 1.3,
+                            "name": "fx_fireball_06"
+                        },
+                        {
+                            "time": 1.3333
+                        }
+                    ]
+                },
+                "fx_fireball_07": {
+                    "attachment": [
+                        {
+                            "time": 0.8333,
+                            "name": "fx_fireball_07"
+                        },
+                        {
+                            "time": 0.8667
+                        },
+                        {
+                            "time": 1.3333
+                        }
+                    ]
+                },
+                "fx_fireball_08": {
+                    "attachment": [
+                        {
+                            "time": 0.8667,
+                            "name": "fx_fireball_08"
+                        },
+                        {
+                            "time": 0.9333
+                        }
+                    ]
+                },
+                "spark_00": {
+                    "attachment": [
+                        {
+                            "time": 0.8,
+                            "name": "spark_00"
+                        },
+                        {
+                            "time": 0.8667
+                        }
+                    ]
+                },
+                "spark_01": {
+                    "attachment": [
+                        {
+                            "time": 0.8667,
+                            "name": "spark_01"
+                        },
+                        {
+                            "time": 0.9667
+                        }
+                    ]
+                },
+                "spark_02": {
+                    "attachment": [
+                        {
+                            "time": 0.9667,
+                            "name": "spark_02"
+                        },
+                        {
+                            "time": 1.0333
+                        }
+                    ]
+                },
+                "spark_03": {
+                    "attachment": [
+                        {
+                            "time": 1.0333,
+                            "name": "spark_03"
+                        },
+                        {
+                            "time": 1.0667
+                        }
+                    ]
+                },
+                "spark_04": {
+                    "attachment": [
+                        {
+                            "time": 1.0667,
+                            "name": "spark_04"
+                        },
+                        {
+                            "time": 1.1,
+                            "name": "spark_04"
+                        },
+                        {
+                            "time": 1.1333
+                        }
+                    ]
+                },
+                "spark_05": {
+                    "attachment": [
+                        {
+                            "time": 0.8,
+                            "name": "spark_00"
+                        },
+                        {
+                            "time": 0.8667
+                        }
+                    ]
+                },
+                "spark_06": {
+                    "attachment": [
+                        {
+                            "time": 0.8667,
+                            "name": "spark_01"
+                        },
+                        {
+                            "time": 0.9667
+                        }
+                    ]
+                },
+                "spark_07": {
+                    "attachment": [
+                        {
+                            "time": 0.9667,
+                            "name": "spark_02"
+                        },
+                        {
+                            "time": 1.0333
+                        }
+                    ]
+                },
+                "spark_08": {
+                    "attachment": [
+                        {
+                            "time": 1.0333,
+                            "name": "spark_03"
+                        },
+                        {
+                            "time": 1.0667
+                        }
+                    ]
+                },
+                "spark_09": {
+                    "attachment": [
+                        {
+                            "time": 1.0667,
+                            "name": "spark_04"
+                        },
+                        {
+                            "time": 1.1,
+                            "name": "spark_04"
+                        },
+                        {
+                            "time": 1.1333
+                        }
+                    ]
+                }
+            },
+            "bones": {
+                "ball": {
+                    "rotate": [
+                        {}
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.6667
+                        },
+                        {
+                            "time": 0.7333,
+                            "x": -3.75,
+                            "y": -30.73
+                        }
+                    ]
+                },
+                "slomail_ctrl": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.1,
+                            "value": 26.69
+                        },
+                        {
+                            "time": 0.4,
+                            "value": 3.37,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.5,
+                            "value": 3.37,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.5667,
+                            "value": 3.37
+                        },
+                        {
+                            "time": 0.7
+                        },
+                        {
+                            "time": 0.8,
+                            "value": -83.04
+                        },
+                        {
+                            "time": 1.1,
+                            "value": -96.61
+                        },
+                        {
+                            "time": 1.2,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.3333,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.6667
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.1
+                        },
+                        {
+                            "time": 0.4,
+                            "y": 11.44
+                        },
+                        {
+                            "time": 0.5,
+                            "y": 22.88
+                        },
+                        {
+                            "time": 0.5667,
+                            "y": 135.7
+                        },
+                        {
+                            "time": 0.7,
+                            "y": 170.42
+                        },
+                        {
+                            "time": 0.8,
+                            "x": -78.9,
+                            "y": 312.44,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1,
+                            "x": -78.9,
+                            "y": 312.44
+                        },
+                        {
+                            "time": 1.2,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.3333,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.6667
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.1
+                        },
+                        {
+                            "time": 0.4,
+                            "x": 1.284,
+                            "y": 0.654
+                        },
+                        {
+                            "time": 0.5,
+                            "x": 0.931,
+                            "y": 1.168
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": 0.872,
+                            "y": 1.252
+                        },
+                        {
+                            "time": 0.7,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.8,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1
+                        },
+                        {
+                            "time": 1.2,
+                            "x": 1.505,
+                            "y": 0.574
+                        },
+                        {
+                            "time": 1.3333
+                        },
+                        {
+                            "time": 1.4667,
+                            "x": 1.15,
+                            "y": 0.763
+                        },
+                        {
+                            "time": 1.6667
+                        }
+                    ]
+                },
+                "body": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.1333,
+                            "value": 12.1
+                        },
+                        {
+                            "time": 0.3333,
+                            "value": -0.52,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.7,
+                            "value": -0.52
+                        },
+                        {
+                            "time": 0.8,
+                            "value": -98.5,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1333,
+                            "value": -98.5
+                        },
+                        {
+                            "time": 1.2
+                        }
+                    ],
+                    "translate": [
+                        {}
+                    ]
+                },
+                "leg_R": {
+                    "rotate": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "value": -30.73
+                        },
+                        {
+                            "time": 1.1,
+                            "value": -51.07
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "x": -3.27,
+                            "y": 94.86,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1,
+                            "x": -3.27,
+                            "y": 94.86
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "x": 1.543,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1,
+                            "x": 1.543
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ]
+                },
+                "leg_L": {
+                    "rotate": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "value": -30.73
+                        },
+                        {
+                            "time": 1.1,
+                            "value": -38.47
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "x": -54.17,
+                            "y": 105.57,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1,
+                            "x": -54.17,
+                            "y": 105.57
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "time": 0.5667
+                        },
+                        {
+                            "time": 0.8333,
+                            "x": 1.543,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.1,
+                            "x": 1.543
+                        },
+                        {
+                            "time": 1.1667
+                        }
+                    ]
+                },
+                "IK_arm_L": {
+                    "translate": [
+                        {
+                            "time": 0.6667
+                        },
+                        {
+                            "time": 0.8,
+                            "x": -105.11,
+                            "y": 230.56,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.0667,
+                            "x": -105.11,
+                            "y": 230.56
+                        },
+                        {
+                            "time": 1.3333
+                        }
+                    ]
+                },
+                "IK_arm_R": {
+                    "translate": [
+                        {
+                            "time": 0.6667
+                        },
+                        {
+                            "time": 0.8,
+                            "x": -19.23,
+                            "y": 207.19
+                        },
+                        {
+                            "time": 1.0667,
+                            "x": 22.96,
+                            "y": 354.84
+                        },
+                        {
+                            "time": 1.2
+                        }
+                    ]
+                },
+                "bubble": {
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.1333,
+                            "x": 2.442,
+                            "y": 2.442
+                        },
+                        {
+                            "time": 0.4667,
+                            "x": 0.163,
+                            "y": 0.163
+                        }
+                    ]
+                },
+                "head": {
+                    "rotate": [
+                        {}
+                    ],
+                    "translate": [
+                        {}
+                    ]
+                },
+                "ball6": {
+                    "rotate": [
+                        {
+                            "time": 0.4,
+                            "curve": [
+                                0.456,
+                                -15.94,
+                                0.511,
+                                -47.82
+                            ]
+                        },
+                        {
+                            "time": 0.5667,
+                            "value": -47.82,
+                            "curve": [
+                                0.622,
+                                -47.82,
+                                0.678,
+                                -15.94
+                            ]
+                        },
+                        {
+                            "time": 0.7333
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.4,
+                            "curve": [
+                                0.456,
+                                -7.4,
+                                0.511,
+                                -22.19,
+                                0.456,
+                                -30.82,
+                                0.511,
+                                -92.46
+                            ]
+                        },
+                        {
+                            "time": 0.5667,
+                            "x": -22.19,
+                            "y": -92.46,
+                            "curve": [
+                                0.622,
+                                -22.19,
+                                0.678,
+                                -7.4,
+                                0.622,
+                                -92.46,
+                                0.678,
+                                -30.82
+                            ]
+                        },
+                        {
+                            "time": 0.7333
+                        }
+                    ]
+                },
+                "attack_ball": {
+                    "translate": [
+                        {
+                            "time": 0.6333
+                        },
+                        {
+                            "time": 0.6667,
+                            "x": 4.06,
+                            "y": 14.87
+                        },
+                        {
+                            "time": 0.7,
+                            "x": 10.24,
+                            "y": 4.64
+                        },
+                        {
+                            "time": 0.7333,
+                            "x": 15.29,
+                            "y": 14.68
+                        },
+                        {
+                            "time": 0.7667,
+                            "x": 21.7,
+                            "y": -0.42
+                        },
+                        {
+                            "time": 0.8,
+                            "x": 18.98,
+                            "y": 15.91
+                        },
+                        {
+                            "time": 0.8333,
+                            "x": 31.58,
+                            "y": -21.84
+                        },
+                        {
+                            "time": 0.8667,
+                            "x": 17.14,
+                            "y": 12.06
+                        },
+                        {
+                            "time": 0.9333,
+                            "x": 35.15,
+                            "y": 1.35
+                        },
+                        {
+                            "time": 1.3,
+                            "x": -1333.83,
+                            "y": -196.55
+                        }
+                    ]
+                },
+                "attack_ball1": {
+                    "rotate": [
+                        {
+                            "time": 0.6
+                        },
+                        {
+                            "time": 0.8,
+                            "value": -360,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 0.8333
+                        },
+                        {
+                            "time": 1,
+                            "value": -360,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.0333
+                        },
+                        {
+                            "time": 1.2333,
+                            "value": -360,
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1.2667
+                        },
+                        {
+                            "time": 1.4333,
+                            "value": -360
+                        }
+                    ]
+                },
+                "flame": {
+                    "translate": [
+                        {
+                            "time": 0.8667
+                        },
+                        {
+                            "time": 1.0333,
+                            "y": -46.72
+                        },
+                        {
+                            "time": 1.3333,
+                            "y": -16.67
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "time": 0.6333,
+                            "y": 0.535
+                        },
+                        {
+                            "time": 0.8667,
+                            "y": 0.969
+                        },
+                        {
+                            "time": 1.0333,
+                            "y": 1.726
+                        },
+                        {
+                            "time": 1.3,
+                            "y": 2.022
+                        },
+                        {
+                            "time": 1.3333,
+                            "y": 1.214
+                        }
+                    ]
+                },
+                "spark": {
+                    "rotate": [
+                        {
+                            "time": 0.8,
+                            "value": -29.81
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.8,
+                            "x": -95.88,
+                            "y": -13.96
+                        },
+                        {
+                            "time": 0.9333,
+                            "x": -36.52,
+                            "y": -22.75
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "time": 0.8,
+                            "x": 2.785,
+                            "y": 2.921
+                        },
+                        {
+                            "time": 0.9667,
+                            "x": 2.785,
+                            "y": 1.07
+                        }
+                    ]
+                },
+                "spark2": {
+                    "rotate": [
+                        {
+                            "time": 0.8,
+                            "value": 37.49
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "time": 0.8,
+                            "x": -95.88,
+                            "y": -13.96
+                        },
+                        {
+                            "time": 0.9333,
+                            "x": -56.31,
+                            "y": 25.62
+                        }
+                    ],
+                    "scale": [
+                        {
+                            "time": 0.8,
+                            "x": 2.785,
+                            "y": 2.921
+                        },
+                        {
+                            "time": 1.0333,
+                            "x": 3.182,
+                            "y": 0.426
+                        }
+                    ]
+                }
+            }
+        },
+        "idle": {
+            "bones": {
+                "ball": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.5,
+                            "value": 3.97
+                        },
+                        {
+                            "time": 1
+                        }
+                    ]
+                },
+                "body": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.5,
+                            "value": 3.97
+                        },
+                        {
+                            "time": 1
+                        }
+                    ],
+                    "translate": [
+                        {
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1
+                        }
+                    ]
+                },
+                "ball6": {
+                    "rotate": [
+                        {},
+                        {
+                            "time": 0.5,
+                            "value": 8.65
+                        },
+                        {
+                            "time": 1
+                        }
+                    ],
+                    "translate": [
+                        {},
+                        {
+                            "time": 0.5,
+                            "x": 1.94,
+                            "y": 3.88
+                        },
+                        {
+                            "time": 1
+                        }
+                    ]
+                },
+                "bubble": {
+                    "rotate": [
+                        {
+                            "curve": "stepped"
+                        },
+                        {
+                            "time": 1
+                        }
+                    ],
+                    "scale": [
+                        {},
+                        {
+                            "time": 0.3333,
+                            "x": 2.202,
+                            "y": 2.202
+                        },
+                        {
+                            "time": 1
+                        }
+                    ]
+                },
+                "spark": {
+                    "translate": [
+                        {
+                            "x": 214.7,
+                            "y": -5.86
+                        }
+                    ]
+                },
+                "spark2": {
+                    "translate": [
+                        {
+                            "x": 214.7,
+                            "y": -5.86
+                        }
+                    ]
+                },
+                "attack_ball": {
+                    "translate": [
+                        {
+                            "x": 368.89,
+                            "y": 5.86
+                        }
+                    ]
+                },
+                "IK_arm_L": {
+                    "translate": [
+                        {
+                            "x": -0.72,
+                            "y": -14.47
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
