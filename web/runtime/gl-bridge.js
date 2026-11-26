@@ -118,7 +118,9 @@ export function createGLBridge(canvas, assetStore) {
 
   function uploadBitmapToTarget(target, level, bitmap) {
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+    // ImageBitmaps are decoded premultiplied (createImageBitmap premultiplyAlpha:"premultiply"). The WebGL spec says
+    // UNPACK_PREMULTIPLY_ALPHA is ignored for ImageBitmap sources, so never rely on it: data is premultiplied either way.
+    gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
     gl.texImage2D(target, level, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bitmap);
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
   }
