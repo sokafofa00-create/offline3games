@@ -500,3 +500,38 @@ select:focus, input[type="text"]:focus {
 .pass-cover-dot { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px; }
 .pass-cover-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
 .pass-cover-sub { font-size: 14px; color: #b8b2c4; margin-bottom: 20px; }
+
+
+
+/* --- Play modes and LAN lobby --- */
+.mode-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 14px; }
+.mode-tab { padding: 10px 6px; border-radius: 12px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.04); color: var(--text-muted); font: inherit; font-weight: 700; font-size: 13px; }
+.mode-tab.selected { background: var(--accent); color: #04130d; border-color: transparent; }
+.lobby-panel { display: none; flex-direction: column; gap: 8px; margin-bottom: 8px; }
+.mode-lan .lobby-panel { display: flex; }
+.mode-lan #game-selector, .mode-lan .options-panel, .mode-lan .players-box, .mode-lan #start-btn { display: none !important; }
+.mode-bot .players-box .player-input-wrap:not(.seat-0) { display: none; }
+.lobby-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
+.lobby-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.lobby-count { margin-inline-start: auto; color: var(--text-main); font-weight: 700; }
+.lobby-players { display: flex; flex-wrap: wrap; gap: 6px; min-height: 34px; }
+.peer-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(16,185,129,0.14); border: 1px solid rgba(16,185,129,0.4); font-size: 13px; }
+.peer-chip i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.peer-chip.busy { background: rgba(245,158,11,0.14); border-color: rgba(245,158,11,0.4); }
+.peer-chip.busy i { background: var(--seat-3); }
+.peer-chip small { color: var(--text-muted); font-size: 11px; }
+.lobby-empty { color: var(--text-muted); font-size: 12px; }
+.lobby-chat { height: 220px; overflow-y: auto; touch-action: pan-y; background: rgba(0,0,0,0.25); border: 1px solid var(--card-border); border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 6px; }
+.lobby-msg { font-size: 14px; line-height: 1.5; user-select: text; -webkit-user-select: text; }
+.lobby-msg .who { color: var(--seat-0); font-weight: 700; margin-inline-end: 4px; }
+.lobby-msg .who.me { color: var(--accent); }
+.match-card { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 14px; background: rgba(14,165,233,0.14); border: 1px solid rgba(14,165,233,0.45); }
+.match-card b { font-size: 14px; } .match-card span { color: var(--text-muted); font-size: 12px; } .match-card em { margin-inline-start: auto; color: var(--seat-3); font-size: 12px; font-style: normal; }
+.join-btn { margin-inline-start: auto; padding: 8px 16px; border: 0; border-radius: 10px; background: var(--accent); color: #04130d; font: inherit; font-weight: 800; }
+.join-btn:disabled { opacity: 0.6; }
+.lobby-games-menu { display: flex; flex-direction: column; gap: 6px; padding: 8px; border-radius: 14px; background: #0b1220; border: 1px solid var(--card-border); }
+.lobby-games-menu button { padding: 12px; border-radius: 10px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.05); color: var(--text-main); font: inherit; font-weight: 700; text-align: start; }
+.lobby-bar { display: flex; gap: 6px; align-items: center; }
+.lobby-bar input { flex: 1; min-width: 0; padding: 12px; border-radius: 12px; border: 1px solid var(--card-border); background: rgba(255,255,255,0.06); color: var(--text-main); font: inherit; user-select: text; -webkit-user-select: text; }
+.lobby-plus { width: 44px; height: 44px; border-radius: 12px; border: 0; background: var(--seat-0); color: #fff; font-size: 24px; font-weight: 800; line-height: 1; }
+.lobby-sendbtn { height: 44px; padding: 0 16px; border-radius: 12px; border: 0; background: var(--accent); color: #04130d; font: inherit; font-weight: 800; }
