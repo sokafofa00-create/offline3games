@@ -88,6 +88,29 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       res.switch = { before, after: await seatOf(), coverShown: await coverVisible(), hud: (await page.textContent("#turn-text"))?.trim() };
       if (res.switch.coverShown) await page.click("#pass-cover-btn");
     }
+    if (sc.game === "brawlbots") {
+      // INTERNAL API (labelled): select each seat's tank through localMove and record the automatic handoff.
+      const st = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused, cover: !document.getElementById("pass-cover").classList.contains("hidden"), hud: document.getElementById("turn-text").textContent.trim() }; });
+      const pick = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const own = []; for (let i = 0; i < 16; i++) { try { if (l.isTankOwned(seat, i)) own.push(i); } catch (e) {} } let ok = null; if (own.length) ok = l.localMove({ a: 1, t: own[0] }); return { seat, own, ok }; });
+      res.lockin = { start: await st() };
+      res.lockin.pick0 = await pick();
+      await page.waitForTimeout(3500);
+      res.lockin.afterPick0 = await st();
+      if (res.lockin.afterPick0.cover) await page.click("#pass-cover-btn");
+      res.lockin.pick1 = await pick();
+      await page.waitForTimeout(3500);
+      res.lockin.afterPick1 = await st();
+      await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1c-after-picks.png` });
+    }
+    if (sc.game !== "pool") {
+      // REAL control: while the cover is up, a tap on the canvas must not reach the game.
+      await page.evaluate(() => { window.__tapCount = 0; document.getElementById("game-canvas").addEventListener("pointerdown", () => window.__tapCount++); });
+      if (!(await coverVisible())) { await page.evaluate(() => { const b = document.getElementById("pass-cover"); b.classList.remove("hidden"); }); }
+      const bx = await page.locator("#game-canvas").boundingBox();
+      await page.mouse.click(bx.x + bx.width / 2, bx.y + bx.height / 2);
+      res.coverBlocksInput = { canvasPointerDowns: await page.evaluate(() => window.__tapCount) };
+      await page.click("#pass-cover-btn");
+    }
     if (sc.game === "monsters") {
       const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
       res.monstersBefore = await snap();
