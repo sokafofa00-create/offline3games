@@ -42,3 +42,11 @@ jobs:
 # rerun scope
 # rerun after assets merge 1795725887
 # rerun manifest fix 1795727223
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-chrome-screenshots
+          path: |
+            shots/*.png
+            shots-gl/*.png
