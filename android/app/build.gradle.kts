@@ -7,6 +7,8 @@ val generatedAssetsDir = layout.buildDirectory.dir("generated/offlineAssets")
 
 val syncOfflineAssets by tasks.registering(Sync::class) {
     into(generatedAssetsDir)
+    // Games share some hashed assets across folders; the same hash is the same file, keep the first.
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     from("../../web") {
         into("")
