@@ -29,6 +29,8 @@ for (const sc of scenarios) {
   const errors = [];
   const requests = [];
   page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+  const warnLines = [];
+  page.on("console", (m) => { if (m.type() === "warning" && /Missing preloaded|\[GL\]|WebGL/i.test(m.text())) warnLines.push(m.text().slice(0, 160)); });
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
   page.on("worker", (w) => w.on("console", (m) => { if (m.type() === "error") errors.push("worker-console: " + m.text()); }));
   page.on("request", (r) => { if (!r.url().startsWith(`http://localhost:${PORT}/`) && !r.url().startsWith("data:") && !r.url().startsWith("blob:")) requests.push(r.url()); });
@@ -70,6 +72,7 @@ for (const sc of scenarios) {
   }
   res.errors = errors.slice(0, 15);
   res.externalRequests = requests;
+  res.glWarnings = [...new Set(warnLines)].slice(0, 25);
   res.failedUrls = [...new Set(failedUrls)].slice(0, 20);
   results.push(res);
   await ctx.close();
