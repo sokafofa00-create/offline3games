@@ -411,6 +411,29 @@ export async function launchPlatoOfflineSession({
         scheduleHotseatSeatSync();
       });
     }
+
+    // Match Monsters ready check: the game acks its awaited seat from its onSync handler, which the real platform
+    // triggers after state changes. This offline runtime never raises that sync after an incremental move, so the
+    // ready check waited for the 25s alarm. Raise the same sync event (no ack of our own, no timer) once the
+    // local seat is awaited and the logic is not paused (animations finished). Games without a ready check are untouched.
+    if (typeof logic.startReadyCheck === "function" && typeof logic.isSeatAwaitingReady === "function" && logic.onSynchronize?.emit) {
+      let readySyncQueued = false;
+      const raiseReadySync = () => {
+        if (readySyncQueued) return;
+        readySyncQueued = true;
+        setTimeout(() => {
+          readySyncQueued = false;
+          try {
+            const s = logic._localSeat;
+            if (!destroyed && !logic.gameOver && !logic._paused && s !== undefined && logic.isSeatAwaitingReady(s)) {
+              if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG = window.__SRV_LOG || []).push({ dir: "bridge", type: "readySync", seat: s });
+              logic.onSynchronize.emit();
+            }
+          } catch (_e) { /* ignore */ }
+        }, 0);
+      };
+      for (const sig of ["onMove", "onAction", "onTurnChange", "onResumed"]) logic[sig]?.receive?.(raiseReadySync);
+    }
   }
 
   let syncPending = false;
