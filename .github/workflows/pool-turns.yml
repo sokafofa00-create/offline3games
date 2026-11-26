@@ -28,3 +28,4 @@ jobs:
         if: always()
         run: mkdir -p shots && LAN_GAMES=pool node --import ./tests/chrome-shim.mjs tests/lan-match-test.mjs
 # rev2
+# rerun after ownership probe fix
