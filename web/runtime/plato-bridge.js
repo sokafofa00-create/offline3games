@@ -585,8 +585,8 @@ export async function launchPlatoOfflineSession({
   // Resize canvas to exact device pixels
   function resizeSurface() {
     const rect = canvas.parentElement.getBoundingClientRect();
-    const w = Math.max(320, Math.round(rect.width * dpr));
-    const h = Math.max(480, Math.round(rect.height * dpr));
+    const w = Math.max(64, Math.round(rect.width * dpr));
+    const h = Math.max(64, Math.round(rect.height * dpr));
     if (canvas.width !== w || canvas.height !== h) {
       canvas.width = w;
       canvas.height = h;
