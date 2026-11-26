@@ -62,8 +62,9 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       const val = (k) => { try { const v = lg[k]; return typeof v === "function" ? "fn" : JSON.stringify(v)?.slice(0, 80); } catch (e) { return "err"; } };
       return {
         state: Object.fromEntries(["turn", "gamePhase", "_localSeat", "localSeat", "paused", "started", "gameOver", "vMode", "numSeats", "displaySeat"].map((k) => [k, val(k)])),
+        board: (() => { try { const b = lg.board; if (!b) return null; return { w: b.width, h: b.height, row0: JSON.stringify(b.tiles?.[0])?.slice(0, 200), nTiles: b.tiles?.length, ps: JSON.stringify(lg.playerStates)?.slice(0, 600), settings: JSON.stringify(lg.settings || lg._settings)?.slice(0, 300) }; } catch (e) { return String(e); } })(),
         props: Object.fromEntries(all.filter((n) => { try { return typeof lg[n] !== "function"; } catch (e) { return false; } }).slice(0, 90).map((n) => [n, val(n)])),
-        src: Object.fromEntries(["moveSelectTile", "moveSwapTiles", "_ready", "readyCheck", "isSeatAwaitingReady", "haveAllMovesBeenMade", "fire", "sendReady", "isShotReady", "areShotsReady", "canShoot", "canSelectTank", "shoot", "canMoveCueBall"].filter((n) => typeof lg[n] === "function").map((n) => [n, String(lg[n]).replace(/\s+/g, " ").slice(0, 700)])),
+        src: Object.fromEntries(["localMove", "localReady", "_move", "move", "moveSwapTiles", "moveDeselectTile", "isTurn", "isResigned", "readyCheck", "isSeatAwaitingReady", "haveAllMovesBeenMade", "fire", "sendReady", "isShotReady", "areShotsReady", "canShoot", "canSelectTank", "shoot", "canMoveCueBall"].filter((n) => typeof lg[n] === "function").map((n) => [n, String(lg[n]).replace(/\s+/g, " ").slice(0, 1800)])),
         methods: pick(/ready|confirm|select|pick|lock|shoot|shots|fire|submit|choose|draft|forfeit|move|simult|reveal|hidden|visible/i),
       };
     });
