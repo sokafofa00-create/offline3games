@@ -35,7 +35,7 @@ for (const diff of ["easy", "hard"]) {
       const s = await snap();
       if (s.over) break;
       if (s.seat === 0 && s.turn === "[0]" && !s.paused) {
-        const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); if (!l.canShoot(0)) return { skip: true }; if (l.canMoveCueBall && l.canMoveCueBall(0)) { l.requestCueBallMove([l.table.cueBall.position[0], l.table.cueBall.position[1]]); return { placed: true }; } const nb = l.table.balls.filter((b) => !b.isPocketed())[0]; const c = l.table.cueBall.position; l.requestShot(0.9, Math.atan2(nb.position[1] - c[1], nb.position[0] - c[0]), [0, 0]); return { shot: true }; });
+        const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); if (!l.canShoot(0)) return { skip: true }; if (l.canMoveCueBall && l.canMoveCueBall(0) && !window.__placedOnce) { window.__placedOnce = true; l.requestCueBallMove([l.table.cueBall.position[0], l.table.cueBall.position[1]]); return { placed: true }; } const nb = l.table.balls.filter((b) => !b.isPocketed())[0]; const c = l.table.cueBall.position; window.__placedOnce = false; l.requestShot(0.9, Math.atan2(nb.position[1] - c[1], nb.position[0] - c[0]), [0, 0]); return { shot: true }; });
         if (r.shot) humanShots++;
         res.timeline.push({ k, who: "human", r });
       }
