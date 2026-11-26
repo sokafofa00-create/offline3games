@@ -1,0 +1,184 @@
+{
+"skeleton": {
+	"hash": "2w0O6y12duM",
+	"spine": "4.1-from-4.2.24",
+	"x": -570.14,
+	"y": -103.56,
+	"width": 573.94,
+	"height": 223.83,
+	"images": "./images/",
+	"audio": "./audio"
+},
+"bones": [
+	{ "name": "root" },
+	{ "name": "projectile", "parent": "root", "x": -117.98, "y": 9.17, "scaleX": 1.073, "scaleY": 1.1395 },
+	{ "name": "jaw", "parent": "projectile", "length": 46.14, "rotation": -19.77, "x": -2.06, "y": -21.46 },
+	{ "name": "fx_burst", "parent": "projectile", "x": -80.84, "y": -0.71, "scaleX": 2.806, "scaleY": 2.806 }
+],
+"slots": [
+	{ "name": "fx_burst_00", "bone": "fx_burst", "attachment": "fx_burst_00" },
+	{ "name": "fx_burst_01", "bone": "fx_burst" },
+	{ "name": "fx_burst_02", "bone": "fx_burst" },
+	{ "name": "fx_burst_03", "bone": "fx_burst" },
+	{ "name": "fx_burst_04", "bone": "fx_burst" },
+	{ "name": "fx_burst_05", "bone": "fx_burst" },
+	{ "name": "fx_burst_06", "bone": "fx_burst" },
+	{ "name": "fx_burst_07", "bone": "fx_burst" },
+	{ "name": "fx_burst_08", "bone": "fx_burst" },
+	{ "name": "fx_burst_09", "bone": "fx_burst" },
+	{ "name": "jaw", "bone": "jaw", "attachment": "jaw" },
+	{ "name": "projectile", "bone": "projectile", "attachment": "projectile" },
+	{ "name": "eye", "bone": "projectile", "color": "ffffff00", "attachment": "eye" },
+	{ "name": "fx_highlights", "bone": "projectile", "color": "ffffff00", "attachment": "fx_highlights" }
+],
+"skins": [
+	{
+		"name": "default",
+		"attachments": {
+			"eye": {
+				"eye": { "x": 41.47, "y": -3.67, "scaleX": 1.1768, "scaleY": 1.1768, "width": 40, "height": 30 }
+			},
+			"fx_burst_00": {
+				"fx_burst_00": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_01": {
+				"fx_burst_01": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_02": {
+				"fx_burst_02": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_03": {
+				"fx_burst_03": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_04": {
+				"fx_burst_04": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_05": {
+				"fx_burst_05": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_06": {
+				"fx_burst_06": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_07": {
+				"fx_burst_07": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_08": {
+				"fx_burst_08": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_burst_09": {
+				"fx_burst_09": { "x": -57.37, "width": 128, "height": 70 }
+			},
+			"fx_highlights": {
+				"fx_highlights": { "x": -73.56, "width": 79, "height": 132 }
+			},
+			"jaw": {
+				"jaw": { "x": 39.16, "y": -4.01, "rotation": 19.77, "width": 87, "height": 53 }
+			},
+			"projectile": {
+				"projectile": { "width": 227, "height": 132 }
+			}
+		}
+	}
+],
+"animations": {
+	"shark_projectile": {
+		"slots": {
+			"eye": {
+				"rgba": [
+					{ "color": "ffffff00" },
+					{ "time": 0.1667, "color": "ffffffff" },
+					{ "time": 0.3333, "color": "ffffff00" }
+				]
+			},
+			"fx_burst_00": {
+				"attachment": [
+					{ "time": 0.0333 },
+					{ "time": 0.3333, "name": "fx_burst_00" }
+				]
+			},
+			"fx_burst_01": {
+				"attachment": [
+					{ "time": 0.0333, "name": "fx_burst_01" },
+					{ "time": 0.0667 }
+				]
+			},
+			"fx_burst_02": {
+				"attachment": [
+					{ "time": 0.0667, "name": "fx_burst_02" },
+					{ "time": 0.1 }
+				]
+			},
+			"fx_burst_03": {
+				"attachment": [
+					{ "time": 0.1, "name": "fx_burst_03" },
+					{ "time": 0.1333 }
+				]
+			},
+			"fx_burst_04": {
+				"attachment": [
+					{ "time": 0.1333, "name": "fx_burst_04" },
+					{ "time": 0.1667 }
+				]
+			},
+			"fx_burst_05": {
+				"attachment": [
+					{ "time": 0.1667, "name": "fx_burst_05" },
+					{ "time": 0.2 }
+				]
+			},
+			"fx_burst_06": {
+				"attachment": [
+					{ "time": 0.2, "name": "fx_burst_06" },
+					{ "time": 0.2333 }
+				]
+			},
+			"fx_burst_07": {
+				"attachment": [
+					{ "time": 0.2333, "name": "fx_burst_07" },
+					{ "time": 0.2667 }
+				]
+			},
+			"fx_burst_08": {
+				"attachment": [
+					{ "time": 0.2667, "name": "fx_burst_08" },
+					{ "time": 0.3 }
+				]
+			},
+			"fx_burst_09": {
+				"attachment": [
+					{ "time": 0.3, "name": "fx_burst_09" },
+					{ "time": 0.3333 }
+				]
+			},
+			"fx_highlights": {
+				"rgba": [
+					{ "color": "ffffff65" },
+					{ "time": 0.1667, "color": "ffffffc9" },
+					{ "time": 0.3333, "color": "ffffff65" }
+				]
+			}
+		},
+		"bones": {
+			"jaw": {
+				"rotate": [
+					{},
+					{ "time": 0.1667, "value": -23.98 },
+					{ "time": 0.3333 }
+				],
+				"translate": [
+					{},
+					{ "time": 0.1667, "x": -0.98, "y": 0.65 },
+					{ "time": 0.3333 }
+				]
+			},
+			"fx_burst": {
+				"scale": [
+					{},
+					{ "time": 0.1667, "x": 1.376 },
+					{ "time": 0.3333 }
+				]
+			}
+		}
+	}
+}
+}
