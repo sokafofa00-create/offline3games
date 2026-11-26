@@ -34,7 +34,7 @@ jobs:
         if: always()
         run: |
           mkdir -p shots-end
-          node tests/endgame.mjs 2>&1 | grep -E "ENDGAME|Error" | cut -c1-12000 | tee -a "$GITHUB_STEP_SUMMARY" || true
+          node tests/endgame.mjs 2>&1 | grep -E "ENDGAME|Error" | cut -c1-60000 | tee -a "$GITHUB_STEP_SUMMARY" || true
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
