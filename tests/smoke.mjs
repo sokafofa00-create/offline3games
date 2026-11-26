@@ -190,6 +190,16 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       for (let w = 0; w < 14 && res.draft.final.phase !== 3; w++) { if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn"); await page.waitForTimeout(1500); res.draft.final = await st2(); }
       res.draft.reachedCombat = res.draft.final.phase === 3;
       if (res.draft.final.phase === 3) {
+        res.draft.geo = await page.evaluate(() => {
+          const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { canvas: null };
+          const c = document.getElementById("game-canvas"); const r = c.getBoundingClientRect(); o.canvas = { x: r.x, y: r.y, w: r.width, h: r.height, cw: c.width, ch: c.height, dpr: window.devicePixelRatio };
+          const seen = new Set(); const hits = [];
+          const walk = (v, path, depth) => { if (!v || typeof v !== "object" || seen.has(v) || depth > 4 || hits.length > 12) return; seen.add(v); let keys = []; try { keys = Object.keys(v); } catch (e) { return; } if (keys.includes("boardNode") || (typeof v.getTilePos === "function")) hits.push({ path, keys: keys.slice(0, 25) }); for (const k of keys.slice(0, 60)) { let x; try { x = v[k]; } catch (e) { continue; } if (x && typeof x === "object") walk(x, path + "." + k, depth + 1); } };
+          walk(l, "logic", 0); try { walk(l.sceneMgr, "sceneMgr", 0); } catch (e) {} try { walk(window.__ACTIVE_SESSION__, "session", 0); } catch (e) {}
+          o.hits = hits; o.sceneKeys = (() => { try { return Object.keys(l.sceneMgr || {}).slice(0, 40); } catch (e) { return null; } })();
+          o.globals = Object.keys(window).filter((k) => /^__|scene|game|stage|node|pixi/i.test(k)).slice(0, 40);
+          return o;
+        });
         const mv = await page.evaluate(() => {
           const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const seat = l._localSeat; const out = { seat };
           try {
