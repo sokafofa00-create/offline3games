@@ -9,6 +9,17 @@ const WEB_DIR = path.join(__dirname, "web");
 const PLATO_FILES_DIR = path.join(__dirname, "com.plato.android", "files");
 const PORT = Number(process.env.PORT || 8090);
 
+// Resource folders uploaded by file name (not by hash). Each one has a __assets.json manifest (name -> SHA-1);
+// /assets/<hash> is answered from the named file. Same mapping the Android build uses. No network involved.
+const NAMED_ASSET_DIRS = ["match_monsters_assets"];
+const hashToFile = new Map();
+for (const dir of NAMED_ASSET_DIRS) {
+  const manifest = path.join(__dirname, dir, "__assets.json");
+  if (!fs.existsSync(manifest)) continue;
+  const map = JSON.parse(fs.readFileSync(manifest, "utf8"));
+  for (const [name, hash] of Object.entries(map)) hashToFile.set(hash, path.join(__dirname, dir, name));
+}
+
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -41,6 +52,10 @@ const server = http.createServer((req, res) => {
   let filePath = null;
   if (cleanPath.startsWith("/g/") || cleanPath.startsWith("/assets/")) {
     filePath = safeJoin(PLATO_FILES_DIR, cleanPath);
+    if (cleanPath.startsWith("/assets/") && (!filePath || !fs.existsSync(filePath))) {
+      const named = hashToFile.get(cleanPath.slice("/assets/".length));
+      if (named) filePath = named;
+    }
   } else {
     filePath = safeJoin(WEB_DIR, cleanPath);
   }
