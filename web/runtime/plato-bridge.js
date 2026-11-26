@@ -360,6 +360,26 @@ export async function launchPlatoOfflineSession({
 
   // --- Hotseat Pass-and-Play Controller (Same Device Player 1 vs Player 2 / 3 / 4) ---
   function installHotseatHooks(logic) {
+    // Single-device ready checks (Match Monsters / Brawlbots only, never Pool): every local seat shares this client,
+    // so acknowledge the ready check for seats that are not the active one, otherwise each phase waits for the full timer.
+    if (/^(5470e3f4|ae765a3b)/.test(String(bundle.gameId)) && typeof logic.isSeatAwaitingReady === "function" && typeof logic.localReady === "function") {
+      const lastReady = {};
+      setInterval(() => {
+        try {
+          if (clientLogic !== logic) return;
+          const cur = logic._localSeat;
+          for (let s = 0; s < numSeats; s++) {
+            if (s === cur || !logic.isSeatAwaitingReady(s)) continue;
+            const now = performance.now();
+            if (lastReady[s] && now - lastReady[s] < 2500) continue;
+            lastReady[s] = now;
+            logic._localSeat = s;
+            try { logic.localReady(); } finally { logic._localSeat = cur; }
+            if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "ready-extra", seat: s, type: "extraReady" });
+          }
+        } catch (_) {}
+      }, 300);
+    }
     // 1. Keep displaySeat pinned to 0 in Pool so avatars & pocketed ball racks NEVER flip left/right between turns!
     if ("displaySeat" in logic) {
       Object.defineProperty(logic, "displaySeat", {
