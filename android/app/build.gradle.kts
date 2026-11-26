@@ -17,6 +17,27 @@ val syncOfflineAssets by tasks.registering(Sync::class) {
     from("../../com.plato.android/files/assets") {
         into("assets")
     }
+
+    // Resource folders uploaded by file name. Each manifest (__assets.json: name -> SHA-1) maps a file to the
+    // /assets/<hash> path the games request; files not listed in a manifest are not packaged. Fully offline.
+    listOf("match_monsters_assets").forEach { dirName ->
+        val manifestFile = file("../../$dirName/__assets.json")
+        if (manifestFile.exists()) {
+            @Suppress("UNCHECKED_CAST")
+            val hashByName = groovy.json.JsonSlurper().parseText(manifestFile.readText()) as Map<String, String>
+            from("../../$dirName") {
+                eachFile {
+                    val hash = hashByName[this.path]
+                    if (hash == null) {
+                        this.exclude()
+                    } else {
+                        this.relativePath = RelativePath(true, "assets", hash)
+                    }
+                }
+                includeEmptyDirs = false
+            }
+        }
+    }
 }
 
 android {
