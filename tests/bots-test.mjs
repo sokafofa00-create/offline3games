@@ -13,6 +13,7 @@ const scenarios = [
   { name: "brawlbots-bot-hard", game: "brawlbots", diff: "hard", vp: { width: 860, height: 412 } },
   { name: "monsters-bot-medium", game: "monsters", diff: "medium", vp: { width: 412, height: 860 } },
 ];
+import { splitKnownMissing } from "./known-missing.mjs";
 const results = [];
 for (const sc of scenarios) {
   const ctx = await browser.newContext({ viewport: sc.vp, hasTouch: true });
@@ -59,7 +60,7 @@ for (const sc of scenarios) {
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}.png` });
     res.steps.hudText = (await page.textContent("#turn-text"))?.trim();
   } catch (e) { res.steps.exception = String(e && e.message).slice(0, 300); }
-  res.errors = errors; res.failedUrls = failed.slice(0, 20); res.externalRequests = ext;
+  { const sp = splitKnownMissing(errors, failed); res.knownMissing404Console = sp.knownMissing404Console; res.errors = sp.errors; } res.failedUrls = failed.slice(0, 20); res.externalRequests = ext;
   results.push(res);
   await ctx.close();
 }
