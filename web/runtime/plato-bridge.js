@@ -424,10 +424,16 @@ export async function launchPlatoOfflineSession({
         setTimeout(() => {
           readySyncQueued = false;
           try {
-            const s = logic._localSeat;
-            if (!destroyed && !logic.gameOver && !logic._paused && s !== undefined && logic.isSeatAwaitingReady(s)) {
-              if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG = window.__SRV_LOG || []).push({ dir: "bridge", type: "readySync", seat: s });
-              logic.onSynchronize.emit();
+            if (destroyed || logic.gameOver || logic._paused) return;
+            // One phone stands in for every device: each awaited seat acks through the game's own onSync handler,
+            // with the local seat set to that seat for the duration of the handler.
+            const awaited = Array.from(logic._readySeats || []);
+            for (const s of awaited) {
+              if (!logic.isSeatAwaitingReady(s)) continue;
+              const prev = logic._localSeat;
+              if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG = window.__SRV_LOG || []).push({ dir: "bridge", type: "readySync", seat: s, prev });
+              logic._localSeat = s;
+              try { logic.onSynchronize.emit(); } finally { logic._localSeat = prev; }
             }
           } catch (_e) { /* ignore */ }
         }, 0);
