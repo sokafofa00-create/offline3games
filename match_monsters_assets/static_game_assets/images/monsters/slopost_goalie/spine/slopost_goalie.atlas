@@ -1,0 +1,153 @@
+
+slopost_goalie.webp
+size: 884, 884
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+Arm_L
+  rotate: false
+  xy: 683, 31
+  size: 104, 128
+  orig: 104, 128
+  offset: 0, 0
+  index: -1
+Arm_R
+  rotate: false
+  xy: 711, 241
+  size: 166, 129
+  orig: 166, 129
+  offset: 0, 0
+  index: -1
+Bubble
+  rotate: true
+  xy: 356, 453
+  size: 33, 27
+  orig: 33, 27
+  offset: 0, 0
+  index: -1
+Foot_L
+  rotate: true
+  xy: 238, 243
+  size: 208, 99
+  orig: 208, 99
+  offset: 0, 0
+  index: -1
+Foot_R
+  rotate: true
+  xy: 239, 453
+  size: 211, 115
+  orig: 211, 115
+  offset: 0, 0
+  index: -1
+Hand_L
+  rotate: false
+  xy: 213, 9
+  size: 202, 229
+  orig: 202, 229
+  offset: 0, 0
+  index: -1
+Hand_R
+  rotate: false
+  xy: 2, 4
+  size: 209, 234
+  orig: 209, 234
+  offset: 0, 0
+  index: -1
+Hat
+  rotate: false
+  xy: 711, 372
+  size: 171, 167
+  orig: 171, 167
+  offset: 0, 0
+  index: -1
+Head
+  rotate: false
+  xy: 566, 161
+  size: 138, 127
+  orig: 138, 127
+  offset: 0, 0
+  index: -1
+Leg_L
+  rotate: false
+  xy: 417, 488
+  size: 198, 167
+  orig: 198, 167
+  offset: 0, 0
+  index: -1
+Leg_R
+  rotate: true
+  xy: 548, 290
+  size: 196, 161
+  orig: 196, 161
+  offset: 0, 0
+  index: -1
+Pelvis
+  rotate: false
+  xy: 2, 666
+  size: 354, 216
+  orig: 355, 216
+  offset: 0, 0
+  index: -1
+Scarf
+  rotate: false
+  xy: 358, 657
+  size: 260, 225
+  orig: 260, 225
+  offset: 0, 0
+  index: -1
+Shoulder_L
+  rotate: true
+  xy: 566, 9
+  size: 150, 115
+  orig: 150, 115
+  offset: 0, 0
+  index: -1
+Shoulder_R
+  rotate: true
+  xy: 417, 15
+  size: 227, 147
+  orig: 227, 147
+  offset: 0, 0
+  index: -1
+attack_palm
+  rotate: true
+  xy: 2, 240
+  size: 214, 234
+  orig: 214, 234
+  offset: 0, 0
+  index: -1
+attack_palm_R
+  rotate: true
+  xy: 2, 456
+  size: 208, 235
+  orig: 210, 237
+  offset: 1, 1
+  index: -1
+body1
+  rotate: false
+  xy: 620, 692
+  size: 260, 190
+  orig: 264, 190
+  offset: 0, 0
+  index: -1
+body2
+  rotate: false
+  xy: 620, 541
+  size: 255, 149
+  orig: 255, 149
+  offset: 0, 0
+  index: -1
+bubble2
+  rotate: false
+  xy: 706, 164
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+fx_ring
+  rotate: false
+  xy: 339, 244
+  size: 207, 207
+  orig: 207, 207
+  offset: 0, 0
+  index: -1
