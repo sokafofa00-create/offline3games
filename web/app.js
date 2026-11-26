@@ -1,5 +1,6 @@
 import { preloadGameBundle, launchPlatoOfflineSession } from "./runtime/plato-bridge.js";
 import { startBots } from "./bots.js";
+import { initLobby } from "./lobby.js";
 
 const GAMES = {
   pool: {
@@ -56,7 +57,31 @@ const playModeEl = document.getElementById("play-mode");
 const difficultyBox = document.getElementById("difficulty-box");
 const botDifficultyEl = document.getElementById("bot-difficulty");
 const modeBox = document.getElementById("mode-box");
-playModeEl.addEventListener("change", () => { difficultyBox.classList.toggle("hidden", playModeEl.value !== "bot"); });
+const setupCard = document.getElementById("setup-card");
+const modeTabs = document.querySelectorAll(".mode-tab");
+const lobbyDefaults = (game) => {
+  const saved = selectedGameKey; selectedGameKey = game;
+  // LAN matches are one player per device: use the first (two-player) option of each game.
+  const st = game === "pool" ? { gameType: Number(poolGameTypeEl.options[0].value), live: Number(poolLiveEl.value), trickShots: Number(poolScoringEl.value), break: Number(poolBreakEl.value) } : buildGameSettings();
+  if (game === "brawlbots") st.players = Number(bbPlayersEl.options[0].value);
+  selectedGameKey = saved; return st;
+};
+const lobby = initLobby({
+  getName: () => document.getElementById("p1-name").value.trim() || "اللاعب 1",
+  buildMatch: lobbyDefaults,
+  onMatchCreated: (card, lan) => { window.__LAN_CARD__ = card; },
+  onJoinCard: (card, lan, peers) => { window.__LAN_JOIN__ = card; },
+});
+window.__LOBBY__ = lobby;
+function setPlayMode(mode) {
+  playModeEl.value = mode;
+  modeTabs.forEach((t) => t.classList.toggle("selected", t.dataset.mode === mode));
+  setupCard.classList.remove("mode-hotseat", "mode-bot", "mode-lan");
+  setupCard.classList.add("mode-" + mode);
+  difficultyBox.classList.toggle("hidden", mode !== "bot");
+  if (mode === "lan") lobby.open(); else lobby.close();
+}
+modeTabs.forEach((t) => t.addEventListener("click", () => setPlayMode(t.dataset.mode)));
 let activeBots = null;
 const loadingBox = document.getElementById("loading-box");
 const progressFill = document.getElementById("progress-fill");
