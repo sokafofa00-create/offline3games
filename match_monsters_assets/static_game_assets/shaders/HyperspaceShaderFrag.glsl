@@ -1,0 +1,159 @@
+precision mediump float;
+
+// Plato setup
+varying vec4 vAttrColor;
+uniform vec4 uGlobalTint;
+uniform vec2 uDevice;
+uniform vec4 uColor;
+uniform float uTime;
+uniform float uReverse;
+// uniform float uScale;
+
+// https://www.shadertoy.com/view/WdyXDm
+/*
+ * Based on https://www.shadertoy.com/view/Wl2GRz
+ * Created by Louis Sugy, 2019
+ * You can use it under the terms of the MIT license
+ * (free to use even in commercial projects, attribution required)
+ */
+
+#define PI 3.14159265
+#define ATAN5 1.37340076695
+
+vec3 blue_col = vec3(0.5, 0.7, 1);
+
+const float t2 = 2.0;
+
+vec2 cart2polar (vec2 cart) {
+	return vec2(atan(cart.y, cart.x), length(cart));
+}
+
+// From https://www.shadertoy.com/view/4sc3z2
+// and https://www.shadertoy.com/view/XsX3zB
+#define MOD3 vec3(.1031, .11369, .13787)
+vec3 hash33(vec3 p3) {
+	p3 = fract(p3 * MOD3);
+	p3 += dot(p3, p3.yxz+19.19);
+	return -1.0 + 2.0 * fract(vec3((p3.x + p3.y)*p3.z, (p3.x+p3.z)*p3.y, (p3.y+p3.z)*p3.x));
+}
+
+float simplexNoise(vec3 p) {
+	const float k1 = 0.333333333;
+	const float k2 = 0.166666667;
+
+	vec3 i = floor(p + (p.x + p.y + p.z) * k1);
+	vec3 d0 = p - (i - (i.x + i.y + i.z) * k2);
+
+	vec3 e = step(vec3(0.0), d0 - d0.yzx);
+	vec3 i1 = e * (1.0 - e.zxy);
+	vec3 i2 = 1.0 - e.zxy * (1.0 - e);
+
+	vec3 d1 = d0 - (i1 - 1.0 * k2);
+	vec3 d2 = d0 - (i2 - 2.0 * k2);
+	vec3 d3 = d0 - (1.0 - 3.0 * k2);
+
+	vec4 h = max(0.6 - vec4(dot(d0, d0), dot(d1, d1), dot(d2, d2), dot(d3, d3)), 0.0);
+	vec4 n = h * h * h * h * vec4(dot(d0, hash33(i)), dot(d1, hash33(i + i1)), dot(d2, hash33(i + i2)), dot(d3, hash33(i + 1.0)));
+
+	return dot(vec4(31.316), n);
+}
+
+float jumpstep(float low, float high, float val) {
+	// This part of the curve looks like a smoothstep going from 0
+	// to halfway up the curve
+	float f1 = clamp(
+		atan(8.0 * (val-low) / (high-low) - 5.0) / (2.0 * ATAN5) + 0.5,
+		0.0, 1.0
+	);
+	// This is a linear curve
+	float f2 = (8.0 * (val-low) / (high-low) - 5.0) / (2.0 * ATAN5) + 0.5;
+	return max(f1, f2);
+}
+
+vec3 pixelVal (vec2 coord) {
+	// Pixel to point (the center of the screen is 0,0)
+	//float t1 = 2.8, t2 = 4.5;
+	// vec2 resolution = (uDevice.xy * uScale * 4.0);
+	vec2 resolution = (uDevice.xy * 4.0);
+
+	vec2 uv = (2.0 * coord.xy - resolution.xy) / resolution.x;
+	vec2 ad = cart2polar(uv);
+	// ad: polar coords
+	// ad.x = angle
+	// ad.y = radius
+
+	// The time var determines whether the effect loops or not
+	float time = 0.0;
+	// time = mod(uTime, t2); // Loop forever
+	time = uTime; // Loop once
+
+	// Uncomment this line to reverse the effect
+	if (uReverse > 0.0) {
+		time = (t2 - time);
+	}
+
+	float t = (time / t2); // normalized [0..1] time
+
+	vec3 bg = vec3(0.0);
+	vec3 fg = (0.75 * uColor.rgb);
+	vec3 col = mix(bg, fg, t);
+	// whiteout:
+	col = mix(col, vec3(1.0), smoothstep(0.5, 0.9, t));
+
+	float intensity = 1.0;
+	// Smaller r's produce longer streaks
+	float r = ad.y;
+	r = r * 40.0 / (5.0 + 60.0 * jumpstep(0.0, t2, 0.5 * pow(time, 3.5)));
+
+	// Lower values in the multiplier for ad.x yield thicker streaks
+	float noiseVal = simplexNoise(vec3(60.0 * ad.x, r, 0.0));
+	float noiseGain = 1.0 + 2.0 * smoothstep(0.5, 0.9, t);
+	noiseVal *= noiseGain;
+
+	// Let's remove a few streaks:
+	float lo_t = clamp(mix(0.25, 0.0, t), 0.0, 1.0);
+	noiseVal = smoothstep(lo_t, 1.0, noiseVal);
+
+	// Overall intensity of the streaks
+	intensity = mix(0.0, 10.0, t * 1.5);
+	// Multiplying by ad.y darkens the center streaks a little bit
+	noiseVal *= ad.y * intensity * noiseVal;
+	float white_level = smoothstep(0.0, 1.0, noiseVal);
+	white_level *= white_level;
+
+	col += intensity * blue_col * vec3(noiseVal) + vec3(white_level);
+
+	///////////////////////////////////////
+	// Add the white disk in the center
+	///////////////////////////////////////
+	float disk_size = 0.025, falloff, disk_col;
+	float disk_intensity;
+	disk_intensity = smoothstep(0.25, 0.65, t);
+	//disk_size = jumpstep(0.0, t2 - 0.3, 0.5*pow(time, 3.5));
+
+	falloff = 3.0; // 100 = short fallof, 3.0 = bigger, nicer falloff
+	// Negative fallofs will make a black disk surrounded by a halo
+	disk_col = exp(-(ad.y - disk_size) * falloff);
+	col += disk_intensity * disk_col * vec3(0.913, 0.964, 0.980);
+
+	return col;
+}
+
+void main (void) {
+	vec4 fragColor = (vAttrColor * uGlobalTint);
+	vec4 fragCoord = gl_FragCoord;
+
+	vec3 avgcol = vec3(0.0);
+	for (float i = -1.0; i <= 1.0; i += 1.0) {
+		for (float j = -1.0; j <= 1.0; j += 1.0) {
+			avgcol += pixelVal(4.0 * fragCoord.xy + vec2(i, j));
+		}
+	}
+	avgcol /= 9.0;
+
+	vec4 shaderColor = vec4(avgcol, 0.0);
+	fragColor.r = shaderColor.r;
+	fragColor.g = shaderColor.g;
+	fragColor.b = shaderColor.b;
+	gl_FragColor = fragColor;
+}
