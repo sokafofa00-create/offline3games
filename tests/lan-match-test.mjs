@@ -84,7 +84,8 @@ for (const game of GAMES) {
       };
       res.poolTurns = [];
       res.poolTurns.push(await probe("start"));
-      res.poolTurns[0].shot = await B.page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { if (!l.canShoot(1)) return { skip: true }; if (l.canMoveCueBall && l.canMoveCueBall(1)) l.requestCueBallMove([l.table.cueBall.position[0], l.table.cueBall.position[1]]); l.requestShot(0.9, -1.5, [0, 0]); return { shot: true }; } catch (e) { return { err: String(e && e.message).slice(0, 100) }; } });
+      { const ownerIsHost = res.poolTurns[0].A.canShoot0 === true; const shooter = ownerIsHost ? A : B; const sseat = ownerIsHost ? 0 : 1;
+      res.poolTurns[0].shot = await shooter.page.evaluate((sseat) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { if (!l.canShoot(sseat)) return { skip: true }; if (l.canMoveCueBall && l.canMoveCueBall(sseat)) l.requestCueBallMove([l.table.cueBall.position[0], l.table.cueBall.position[1]]); l.requestShot(0.9, -1.5, [0, 0]); return { shot: true, sseat }; } catch (e) { return { err: String(e && e.message).slice(0, 100) }; } }, sseat); }
       for (let k = 0; k < 40; k++) { await A.page.waitForTimeout(1000); const c = await caps(A.page); if (c.turn !== res.poolTurns[0].A.turn && !c.paused) break; }
       await A.page.waitForTimeout(2500);
       res.poolTurns.push(await probe("after-guest-shot"));
