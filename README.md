@@ -8,6 +8,8 @@
 
 ## هيكلة المشروع
 - `OFFLINE_APP_SPECIFICATIONS.md`: التوثيق الهندسي الكامل للبيئة والجسور الأربعة (`plato`, `GL`, `audio`, `pmath`) وآلية اللعب المتعاقب.
+- `match_monsters_assets/`: موارد وأصول لعبة Match Monsters الكاملة المستخرجة وفقاً لسيرفر الموارد.
+- `brawlbots_assets/`: موارد وأصول لعبة Brawlbots (الدبابات) الكاملة المستخرجة وفقاً لسيرفر الموارد (صور، أصوات، أشكال، شيدرات).
 - `web/`: واجهة التطبيق ومحرك التشغيل (`WebGL2` + `WebAudio` + `Local Server Worker` + `Hotseat Controller`).
 - `android/`: مشروع Android Kotlin نظيف (`WebViewAssetLoader` بدون إذن `INTERNET` وبدون `pairip` أو أي مكتبات تتبع).
 - `ci/build-apk.yml`: ملف بناء الـ APK الجاهز لـ GitHub Actions (انسخه إلى `.github/workflows/build-apk.yml` لتفعيل البناء التلقائي).
