@@ -36,6 +36,7 @@ export function initLobby({ getName, buildMatch, onMatchCreated, onJoinCard }) {
   const api = {
     onNet: null,
     get lan() { return lan; },
+    get peers() { return peers; },
     async open() {
       if (lan) return;
       me = { id: myId, name: getName() };
