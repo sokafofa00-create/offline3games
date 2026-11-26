@@ -1,0 +1,13 @@
+rocket_projectile.webp
+size:514,84
+filter:Linear,Linear
+Firework_rocket
+bounds:2,2,309,80
+offsets:10,22,328,124
+projectile_blast
+bounds:390,45,37,122
+rotate:90
+projectile_glow
+bounds:313,6,76,75
+offsets:6,7,89,89
+rotate:90
