@@ -95,32 +95,29 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         res.lockin.picks.push({ seat: p.seat, ok: p.ok, after });
         if (after.cover) await page.click("#pass-cover-btn");
       }
+      // Shot lock-in: for each seat, try aimed impulses through localMove until the server accepts one
+      // (accepted = the seat stays ready after a short wait; a rejected shot is reset by the server resync).
+      const cands = [];
+      for (const pw of [3, 6, 10, 15, 22, 32, 45, 60, 80, 100]) for (const ang of [0.6, 2.4, 4.0, 5.5]) cands.push([+(pw * Math.cos(ang)).toFixed(3), +(pw * Math.sin(ang)).toFixed(3)]);
       for (let k = 0; k < nSeats; k++) {
-        const r = await page.evaluate(() => {
-          const l = window.__ACTIVE_SESSION__.getClientLogic();
-          const seat = l._localSeat;
-          const out = { seat, canShoot: null, tankKeys: null, wp: null, err: null, ready: null };
-          try {
-            out.canShoot = l.canShoot(seat, true);
-            const names = new Set();
-            for (let o = l; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) Object.getOwnPropertyNames(o).forEach((x) => names.add(x));
-            out.wpNames = [...names].filter((x) => /weap|wpn|wp[A-Z_]|ammo/i.test(x)).slice(0, 40);
-            out.valid = [];
-            for (let p = 0; p < 40; p++) { try { if (l.canSelectWeapon(seat, p)) out.valid.push(p); } catch (e) {} }
-            out.src = String(l.canSelectWeapon).replace(/\s+/g, " ").slice(0, 400);
-            out.wmKeys = Object.keys(l.worldMap).filter((x) => /weap|tank|shot|sel/i.test(x)).slice(0, 30);
-            if (out.valid.length) {
-              out.ok = l.localMove({ a: 5, i: [20, 6], p: out.valid[0], f: 0, u: false }, true);
-            }
-            out.ready = l.isShotReady(seat);
-          } catch (e) { out.err = String(e && e.message).slice(0, 160); }
-          return out;
-        });
-        await page.waitForTimeout(3500);
+        const before = await st();
+        const seatNow = await page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._localSeat);
+        let accepted = null; let tried = 0;
+        for (const c of cands) {
+          tried++;
+          const r = await page.evaluate((imp) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const w = l.canSelectWeapon(seat, 0) ? 0 : -1; if (w < 0) return { seat, w, ok: false }; const ok = l.localMove({ a: 5, i: imp, p: w, f: 0, u: false }, true); return { seat, w, ok }; }, c);
+          await page.waitForTimeout(450);
+          const chk = await page.evaluate((seat) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { seatNow: l._localSeat, ready: l.isShotReady(seat), paused: l.paused }; }, r.seat);
+          if (r.ok && (chk.ready || chk.seatNow !== r.seat || chk.paused)) { accepted = { imp: c, ...r, ...chk }; break; }
+        }
+        await page.waitForTimeout(2500);
         const after = await st();
-        res.lockin.shots.push({ ...r, after });
+        res.lockin.shots.push({ seatBefore: seatNow, tried, accepted, after });
         if (after.cover) await page.click("#pass-cover-btn");
       }
+      await page.waitForTimeout(9000);
+      res.lockin.afterRound = await st();
+      res.lockin.afterRound.areShotsReady = await page.evaluate(() => { try { return window.__ACTIVE_SESSION__.getClientLogic().areShotsReady(); } catch (e) { return String(e); } });
       res.lockin.deserializeBoundary = await page.evaluate(() => window.__deser);
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1c-after-picks.png` });
     }
@@ -148,6 +145,54 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       await page.mouse.up();
     }
     await page.waitForTimeout(3000);
+    if (sc.game === "monsters") {
+      // INTERNAL API (labelled): drive the draft through the plugin's own move methods, then one legal board swap.
+      const st2 = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const p = l.plugins()[0]; return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused, cover: !document.getElementById("pass-cover").classList.contains("hidden"), moveCount: l.moveCount, selecting: JSON.stringify(p && p.selecting), confirmed: JSON.stringify(p && p.confirmed), hud: document.getElementById("turn-text").textContent.trim() }; });
+      res.draft = { steps: [] };
+      for (let round = 0; round < 4; round++) {
+        const before = await st2();
+        if (before.phase !== 0) break;
+        const r = await page.evaluate(() => {
+          const l = window.__ACTIVE_SESSION__.getClientLogic(); const p = l.plugins()[0]; const seat = l._localSeat; const out = { seat, picks: [], err: null };
+          try {
+            for (let n = 0; n < 8 && !p.canConfirm(seat); n++) {
+              const idx = p.selectable.findIndex((m, ix) => m.sku !== 0 && p.canSelect(seat, m.key) && !p.selecting[seat].some((x) => x && x.key === m.key) && !p.confirmed[seat].some((x) => x && x.key === m.key));
+              if (idx < 0) break;
+              out.picks.push([p.selectable[idx].key, p.moveSelect(p.selectable[idx], p.selecting[seat].length + p.confirmed[seat].length)]);
+            }
+            out.canConfirm = p.canConfirm(seat);
+            if (out.canConfirm) out.confirmOk = p.moveConfirm();
+          } catch (e) { out.err = String(e && e.message).slice(0, 200); }
+          return out;
+        });
+        await page.waitForTimeout(3500);
+        const after = await st2();
+        res.draft.steps.push({ before, r, after });
+        if (after.cover) await page.click("#pass-cover-btn");
+      }
+      await page.waitForTimeout(4000);
+      res.draft.final = await st2();
+      await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1d-after-draft.png` });
+      if (res.draft.final.phase === 3) {
+        const mv = await page.evaluate(() => {
+          const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const seat = l._localSeat; const out = { seat };
+          try {
+            let found = null;
+            for (let y = 0; y < b.height && !found; y++) for (let x = 0; x < b.width && !found; x++) for (const [dx, dy] of [[1, 0], [0, 1]]) {
+              const x2 = x + dx, y2 = y + dy; if (x2 >= b.width || y2 >= b.height || !b.areTilesAdjacent(x, y, x2, y2)) continue;
+              b.swapTiles(x, y, x2, y2); const t = b.tiles[y2][x2]; const ms = b.getMatches(t); b.swapTiles(x2, y2, x, y);
+              if (ms && ms.length) { found = { x1: x, y1: y, x2, y2 }; break; }
+            }
+            out.found = found;
+            if (found) out.ok = l.localMove({ t: 6, ...found }, true);
+          } catch (e) { out.err = String(e && e.message).slice(0, 200); }
+          return out;
+        });
+        res.draft.swap = mv;
+        for (let w = 0; w < 8; w++) { await page.waitForTimeout(1500); const sn = await st2(); res.draft.swapStates = (res.draft.swapStates || []); res.draft.swapStates.push(sn); if (!sn.paused && sn.moveCount > 0) break; }
+        await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1e-after-swap.png` });
+      }
+    }
     if (sc.game === "monsters") res.monstersAfter = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
     res.steps.hud2 = (await page.textContent("#turn-text"))?.trim();
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-2-after-input.png` });
