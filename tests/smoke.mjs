@@ -102,12 +102,16 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
           const out = { seat, canShoot: null, tankKeys: null, wp: null, err: null, ready: null };
           try {
             out.canShoot = l.canShoot(seat, true);
-            const tank = l.worldMap.tanks[seat];
-            out.tankKeys = Object.keys(tank).slice(0, 40);
-            const wl = tank.weapons || tank.weaponList || (tank.getWeapons && tank.getWeapons()) || [];
-            const w = Array.isArray(wl) ? wl[0] : Object.values(wl)[0];
-            out.wp = w ? Object.keys(w).slice(0, 25) : null;
-            if (w) { l.fire(false, w, [20, 6], 0); }
+            const names = new Set();
+            for (let o = l; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) Object.getOwnPropertyNames(o).forEach((x) => names.add(x));
+            out.wpNames = [...names].filter((x) => /weap|wpn|wp[A-Z_]|ammo/i.test(x)).slice(0, 40);
+            out.valid = [];
+            for (let p = 0; p < 40; p++) { try { if (l.canSelectWeapon(seat, p)) out.valid.push(p); } catch (e) {} }
+            out.src = String(l.canSelectWeapon).replace(/\s+/g, " ").slice(0, 400);
+            out.wmKeys = Object.keys(l.worldMap).filter((x) => /weap|tank|shot|sel/i.test(x)).slice(0, 30);
+            if (out.valid.length) {
+              out.ok = l.localMove({ a: 5, i: [20, 6], p: out.valid[0], f: 0, u: false }, true);
+            }
             out.ready = l.isShotReady(seat);
           } catch (e) { out.err = String(e && e.message).slice(0, 160); }
           return out;
@@ -132,6 +136,8 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     if (sc.game === "monsters") {
       const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
       res.monstersBefore = await snap();
+      res.monstersPlugins = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return l.plugins().map((p) => ({ name: p.constructor && p.constructor.name, keys: Object.keys(p).slice(0, 25), moveVal: p.onMoveValidation ? String(p.onMoveValidation).replace(/\s+/g, " ").slice(0, 900) : null, proto: Object.getOwnPropertyNames(Object.getPrototypeOf(p)).slice(0, 30) })); } catch (e) { return String(e); } });
+      res.monstersPhaseSrc = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = {}; for (const n of ["onMove", "startReadyCheck", "turnExpireWaitingForBattleReady", "_ready", "turnExpireBattlePrep"]) if (typeof l[n] === "function") o[n] = String(l[n]).replace(/\s+/g, " ").slice(0, 700); return o; });
     }
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1-start.png` });
     const box = await page.locator("#game-canvas").boundingBox();
