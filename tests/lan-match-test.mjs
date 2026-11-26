@@ -40,6 +40,7 @@ for (const game of GAMES) {
     for (const P of [A, B]) await P.page.waitForFunction(() => !!window.__ACTIVE_SESSION__?.getClientLogic?.(), null, { timeout: 120000 });
     await A.page.waitForTimeout(10000);
     res.start = { A: await snap(A.page), B: await snap(B.page) };
+    res.inventoryCount = await A.page.evaluate(() => { try { return plato.getInventory().length; } catch (e) { return "err " + e.message; } });
     res.steps.seats = res.start.A?.seat === 0 && res.start.B?.seat === 1;
     res.steps.noCover = !(await A.page.locator("#pass-cover").isVisible()) && !(await B.page.locator("#pass-cover").isVisible());
     // one internal-API action per seat
