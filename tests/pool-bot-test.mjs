@@ -27,10 +27,11 @@ for (const diff of ["easy", "hard"]) {
     await page.waitForSelector("#game-screen.active", { timeout: 60000 });
     await page.waitForFunction(() => !!window.__ACTIVE_SESSION__?.getClientLogic?.()?.table, null, { timeout: 90000 });
     await page.waitForTimeout(6000);
-    const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = window.__BOTS__; const bs = l.table.balls.map((x) => (x.isPocketed() ? "P" : x.position.map((v) => Math.round(v * 100) / 100).join(","))); return { seat: l._localSeat, turn: JSON.stringify(l.turn), paused: l.paused, over: !!l.gameOver, cue: l.table.cueBall.position.map((v) => Math.round(v * 100) / 100), balls: bs.join("|"), pocketed: bs.filter((x) => x === "P").length, botActs: b ? b.log.filter((x) => x.acted).length : -1, botErrs: b ? b.log.filter((x) => x.err).map((x) => x.err).slice(0, 3) : [] }; });
+    const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = window.__BOTS__; const bs = l.table.balls.map((x) => (x.isPocketed() ? "P" : x.position.map((v) => Math.round(v * 100) / 100).join(","))); return { seat: l._localSeat, turn: JSON.stringify(l.turn), paused: l.paused, over: !!l.gameOver, cue: l.table.cueBall.position.map((v) => Math.round(v * 100) / 100), balls: bs.join("|"), cueVel: l.table.cueBall.velocity ? [l.table.cueBall.velocity[0], l.table.cueBall.velocity[1]] : null, lastShot: b && b.log.filter((x) => x.shot).slice(-1)[0]?.shot, pocketed: bs.filter((x) => x === "P").length, botActs: b ? b.log.filter((x) => x.acted).length : -1, botErrs: b ? b.log.filter((x) => x.err).map((x) => x.err).slice(0, 3) : [] }; });
     res.start = await snap();
     let humanShots = 0;
-    for (let k = 0; k < 40; k++) {
+    let lastActs = 0;
+    for (let k = 0; k < 90; k++) {
       const s = await snap();
       if (s.over) break;
       if (s.seat === 0 && s.turn === "[0]" && !s.paused) {
@@ -38,8 +39,9 @@ for (const diff of ["easy", "hard"]) {
         if (r.shot) humanShots++;
         res.timeline.push({ k, who: "human", r });
       }
-      if (s.botActs >= 3 && humanShots >= 2) break;
-      await page.waitForTimeout(3000);
+      if (s.botActs !== lastActs) { lastActs = s.botActs; const v = s.cueVel; await page.waitForTimeout(120); const s2 = await snap(); const vv = s2.cueVel; res.timeline.push({ k, who: "bot", acts: s.botActs, pocketed: s2.pocketed, shot: s2.lastShot, cueVelAng: vv && Math.hypot(vv[0], vv[1]) > 1e-3 ? Math.round(Math.atan2(vv[1], vv[0]) * 1000) / 1000 : null }); }
+      if (k % 10 === 0) res.timeline.push({ k, pocketed: s.pocketed, turn: s.turn, acts: s.botActs });
+      await page.waitForTimeout(1000);
     }
     res.final = await snap();
     res.humanShots = humanShots;
