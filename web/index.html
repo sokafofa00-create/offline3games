@@ -117,6 +117,24 @@
         </div>
       </div>
 
+      <!-- وضع اللعب -->
+      <div class="field-group" id="mode-box">
+        <label for="play-mode">وضع اللعب</label>
+        <select id="play-mode">
+          <option value="hotseat" selected>لاعبان أو أكثر على نفس الجهاز</option>
+          <option value="bot">ضد الكمبيوتر</option>
+          <option value="lan" disabled>عبر الشبكة المحلية (قريبًا)</option>
+        </select>
+      </div>
+      <div class="field-group hidden" id="difficulty-box">
+        <label for="bot-difficulty">مستوى صعوبة الكمبيوتر</label>
+        <select id="bot-difficulty">
+          <option value="easy">سهل</option>
+          <option value="medium" selected>متوسط</option>
+          <option value="hard">صعب</option>
+        </select>
+      </div>
+
       <!-- أسماء اللاعبين على نفس الهاتف -->
       <div class="players-box">
         <div class="players-label">أسماء اللاعبين على نفس الجهاز</div>
