@@ -209,6 +209,16 @@ function setupHeadlessGlobals() {
         Object.getPrototypeOf(ParentClass.prototype) &&
         typeof Object.getPrototypeOf(ParentClass.prototype).initialize === "function"
       ) {
+        // Some bundles (Match Monsters) call this.setCustomPlugins() inside the shared base-class
+        // constructor but define it on the derived (client-registered) class only. The pure server
+        // class would then throw "this.setCustomPlugins is not a function", so borrow the method
+        // from the registered class when the base class lacks it. Pool already has it: no change.
+        if (
+          typeof ParentClass.prototype.setCustomPlugins !== "function" &&
+          typeof registeredLogic.constructor.prototype.setCustomPlugins === "function"
+        ) {
+          ParentClass.prototype.setCustomPlugins = registeredLogic.constructor.prototype.setCustomPlugins;
+        }
         serverLogic = new ParentClass();
         if (
           Array.isArray(registeredLogic.customPlugins) &&
