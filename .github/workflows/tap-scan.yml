@@ -1,0 +1,31 @@
+name: Tap Scan (Monsters)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/tap-scan.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  tap-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright and Chrome
+        run: |
+          npm i --no-save --no-package-lock playwright@1.49.1
+          npx playwright install --with-deps chrome
+      - name: Tap scan, Monsters combat popup
+        run: mkdir -p shots && SCEN=monsters-normal TAPSCAN=1 node --import ./tests/chrome-shim.mjs tests/smoke.mjs | grep -A60 '"realTouch"' | head -90
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tap-scan-shots
+          path: shots/*.png
