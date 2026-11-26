@@ -29,7 +29,7 @@ for (const sc of scenarios) {
     await page.addInitScript(() => { window.__DEBUG_HOTSEAT__ = true; window.AndroidHost = { vibrate() {}, setOrientation(m) { (window.__ORI_HOST__ = window.__ORI_HOST__ || []).push(m); } }; });
     await page.goto(`http://localhost:${PORT}/`);
     await page.click(`.game-tab[data-game="${sc.game}"]`);
-    await page.selectOption("#play-mode", "bot");
+    await page.click('.mode-tab[data-mode="bot"]');
     await page.selectOption("#bot-difficulty", sc.diff);
     res.steps.difficultyVisible = await page.locator("#difficulty-box").isVisible();
     await page.click("#start-btn");
