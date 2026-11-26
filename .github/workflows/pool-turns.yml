@@ -1,0 +1,29 @@
+name: Pool Turns (hotseat and LAN)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "tests/pool-hotseat-test.mjs"
+      - ".github/workflows/pool-turns.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  pool-turns:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright and Chrome
+        run: |
+          npm i --no-save --no-package-lock playwright@1.49.1
+          npx playwright install --with-deps chrome
+      - name: Pool hotseat turns (system Chrome)
+        run: mkdir -p shots && node --import ./tests/chrome-shim.mjs tests/pool-hotseat-test.mjs
+      - name: Pool LAN turn ownership (system Chrome)
+        if: always()
+        run: mkdir -p shots && LAN_GAMES=pool node --import ./tests/chrome-shim.mjs tests/lan-match-test.mjs
