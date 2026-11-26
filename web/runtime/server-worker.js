@@ -332,6 +332,11 @@ self.onmessage = (ev) => {
     }
 
     wireServerCallbacks(serverLogic);
+    // The game's logic.animateWorld() calls this.executeAnimation(); the client class defines it (-> animator) but the
+    // server class here does not, so a shot completed by resign/disconnect threw "executeAnimation is not a function".
+    if (typeof serverLogic.executeAnimation !== "function" && serverLogic.animator && typeof serverLogic.animator.executeAnimation === "function") {
+      serverLogic.executeAnimation = () => serverLogic.animator.executeAnimation();
+    }
     serverLogic.seed = msg.seed || Math.floor(Math.random() * 0x7fffffff);
 
     // Initialize authoritative server (localSeat = undefined -> server === true)
