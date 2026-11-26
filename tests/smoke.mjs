@@ -86,7 +86,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       const pick = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const own = []; for (let i = 0; i < 16; i++) { try { if (l.isTankOwned(seat, i)) own.push(i); } catch (e) {} } let ok = null; if (own.length) ok = l.localMove({ a: 1, t: own[0] }); return { seat, own, ok }; });
       const nSeats = await page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._seats);
       // Boundary check: record whether the cover is already visible whenever the next seat's state is loaded.
-      await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__deser = []; const o = l.deserialize.bind(l); l.deserialize = (...a) => { window.__deser.push({ seatArg: a[1], coverVisible: !document.getElementById("pass-cover").classList.contains("hidden"), prevSeat: l._localSeat }); return o(...a); }; });
+      await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__deser = []; const o = l.deserialize.bind(l); l.deserialize = (...a) => { window.__deser.push({ t: Math.round(performance.now()), seatArg: a[1], coverVisible: !document.getElementById("pass-cover").classList.contains("hidden"), prevSeat: l._localSeat }); return o(...a); }; });
       res.lockin = { nSeats, start: await st(), picks: [], shots: [] };
       for (let k = 0; k < nSeats; k++) {
         const p = await pick();
@@ -97,6 +97,15 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       }
       // Shot lock-in: for each seat, try aimed impulses through localMove until the server accepts one
       // (accepted = the seat stays ready after a short wait; a rejected shot is reset by the server resync).
+      res.lockin.validators = await page.evaluate(() => {
+        const l = window.__ACTIVE_SESSION__.getClientLogic(); const out = { statics: {}, fns: {}, settings: {} };
+        for (let c = l.constructor; c && c !== Function.prototype; c = Object.getPrototypeOf(c)) for (const n of Object.getOwnPropertyNames(c)) if (/Wp|Weapon|Impulse|Flavour/i.test(n) && typeof c[n] === "function") out.statics[n] = String(c[n]).replace(/\s+/g, " ").slice(0, 900);
+        for (const n of ["getShotWeapon", "canSelectWeapon", "getShotOrder", "isTankOwned"]) if (typeof l[n] === "function") out.fns[n] = String(l[n]).replace(/\s+/g, " ").slice(0, 600);
+        for (const n of ["settings", "_settings", "matchConfig", "rules", "gsMgr"]) { try { if (l[n] !== undefined) out.settings[n] = JSON.stringify(l[n])?.slice(0, 400); } catch (e) { out.settings[n] = "err"; } }
+        try { const w = l.worldMap.tanks[l._localSeat]; out.tank = { pos: JSON.stringify(w.position), angle: w.angle }; } catch (e) {}
+        return out;
+      });
+      await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__mv = []; const om = l.move.bind(l); l.move = (seat, packet, reveal) => { try { window.__mv.push({ t: Math.round(performance.now()), kind: "move", seat, a: packet && packet.m && packet.m.a, hasI: !!(packet && packet.i) }); } catch (e) {} return om(seat, packet, reveal); }; });
       const cands = [];
       for (const pw of [3, 6, 10, 15, 22, 32, 45, 60, 80, 100]) for (const ang of [0.6, 2.4, 4.0, 5.5]) cands.push([+(pw * Math.cos(ang)).toFixed(3), +(pw * Math.sin(ang)).toFixed(3)]);
       for (let k = 0; k < nSeats; k++) {
@@ -108,6 +117,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
           const r = await page.evaluate((imp) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const w = l.canSelectWeapon(seat, 0) ? 0 : -1; if (w < 0) return { seat, w, ok: false }; const ok = l.localMove({ a: 5, i: imp, p: w, f: 0, u: false }, true); return { seat, w, ok }; }, c);
           await page.waitForTimeout(450);
           const chk = await page.evaluate((seat) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { seatNow: l._localSeat, ready: l.isShotReady(seat), paused: l.paused }; }, r.seat);
+          chk.log = await page.evaluate(() => { const o = window.__mv.slice(-6); return o; });
           if (r.ok && (chk.ready || chk.seatNow !== r.seat || chk.paused)) { accepted = { imp: c, ...r, ...chk }; break; }
         }
         await page.waitForTimeout(2500);
@@ -148,7 +158,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     if (sc.game === "monsters") {
       // INTERNAL API (labelled): drive the draft through the plugin's own move methods, then one legal board swap.
       const st2 = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const p = l.plugins()[0]; return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused, cover: !document.getElementById("pass-cover").classList.contains("hidden"), moveCount: l.moveCount, selecting: JSON.stringify(p && p.selecting), confirmed: JSON.stringify(p && p.confirmed), hud: document.getElementById("turn-text").textContent.trim() }; });
-      res.draft = { steps: [] };
+      res.draft = { steps: [], settings: await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = {}; for (const n of ["settings", "_settings", "matchRules", "gameMode", "firstSeat", "chosenStage", "liveMode", "weeklyStatus", "maxTurnMoves", "moveCountMax", "maxFreeMoves"]) { try { if (l[n] !== undefined) o[n] = JSON.stringify(l[n])?.slice(0, 200); } catch (e) {} } return o; }) };
       for (let round = 0; round < 4; round++) {
         const before = await st2();
         if (before.phase !== 0) break;
