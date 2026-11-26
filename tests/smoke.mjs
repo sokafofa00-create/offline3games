@@ -44,6 +44,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
   page.on("response", (r) => { if (r.status() >= 400) failedUrls.push(r.status() + " " + r.url().replace(`http://localhost:${PORT}`, "")); });
   const res = { name: sc.name, backend: BACKEND, steps: {} };
   try {
+    await page.addInitScript(() => { window.__DEBUG_HOTSEAT__ = true; });
     await page.goto(`http://localhost:${PORT}/`);
     await page.click(`.game-tab[data-game="${sc.game}"]`);
     for (const [sel, val] of Object.entries(sc.set || {})) await page.selectOption(sel, val);
@@ -109,7 +110,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       // One legal shot per seat (impulse length 3 is below the validator limit; seats follow the automatic handoff).
       res.lockin.shotLog = [];
       for (let k = 0; k < nSeats; k++) {
-        const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const allowed = l.canSelectWeapon(seat, 0); const ok = allowed ? l.localMove({ a: 5, i: [2.476, 1.694], p: 0, f: 0, u: false }, true) : false; return { seat, allowed, ok, readyLocal: l.isShotReady(seat) }; });
+        const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const allowed = l.canSelectWeapon(seat, 0); const ok = allowed ? l.localMove({ a: 5, i: [2.476, 1.694], p: 0, f: 0, u: false }, false) : false; return { seat, allowed, ok, readyLocal: l.isShotReady(seat) }; });
         await page.waitForTimeout(2500);
         const after = await st();
         res.lockin.shotLog.push({ k, ...r, after, moves: await page.evaluate(() => window.__mv.slice(-4)) });
@@ -127,6 +128,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       res.lockin.afterRound = await st();
       res.lockin.afterRound.areShotsReady = await page.evaluate(() => { try { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { all: l.areShotsReady(), seat0Ready: l.isShotReady(0) }; } catch (e) { return String(e); } });
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1f-next-round.png` });
+      res.lockin.srvLog = await page.evaluate(() => (window.__SRV_LOG || []).filter((e) => e.type !== "turnChanged").slice(-60));
       res.lockin.deserializeBoundary = await page.evaluate(() => window.__deser);
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1c-after-picks.png` });
     }
@@ -200,7 +202,16 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
           return out;
         });
         res.draft.swap = mv;
-        for (let w = 0; w < 8; w++) { await page.waitForTimeout(1500); const sn = await st2(); res.draft.swapStates = (res.draft.swapStates || []); res.draft.swapStates.push(sn); if (!sn.paused && sn.moveCount > 0) break; }
+        res.draft.swapStates = [];
+        const seatStart = res.draft.final.seat; res.draft.swaps = [mv];
+        for (let w = 0; w < 30; w++) {
+          await page.waitForTimeout(1200); const sn = await st2(); res.draft.swapStates.push(sn);
+          if (sn.cover) { res.draft.seatChangedWithCover = { from: seatStart, to: sn.seat, phase: sn.phase, paused: sn.paused }; break; }
+          if (!sn.paused && sn.phase === 3 && sn.seat === seatStart && res.draft.swaps.length < 6) {
+            const mv2 = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const out = { seat: l._localSeat }; try { let found = null; for (let y = 0; y < b.height && !found; y++) for (let x = 0; x < b.width && !found; x++) for (const [dx, dy] of [[1, 0], [0, 1]]) { const x2 = x + dx, y2 = y + dy; if (x2 >= b.width || y2 >= b.height || !b.areTilesAdjacent(x, y, x2, y2)) continue; b.swapTiles(x, y, x2, y2); const t = b.tiles[y2][x2]; const ms = b.getMatches(t); b.swapTiles(x2, y2, x, y); if (ms && ms.length) { found = { x1: x, y1: y, x2, y2 }; break; } } out.found = found; if (found) out.ok = l.localMove({ t: 6, ...found }, true); } catch (e) { out.err = String(e && e.message).slice(0, 160); } return out; });
+            res.draft.swaps.push(mv2);
+          }
+        }
         await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1e-after-swap.png` });
       }
     }
