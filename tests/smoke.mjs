@@ -52,6 +52,19 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     await page.waitForFunction(() => !!window.__ACTIVE_SESSION__, null, { timeout: 90000 });
     await page.waitForTimeout(6000);
     res.steps.started = true;
+    res.logic = await page.evaluate(() => {
+      const lg = window.__ACTIVE_SESSION__?.getClientLogic?.();
+      if (!lg) return { error: "no client logic" };
+      const names = new Set();
+      for (let o = lg; o && o !== Object.prototype; o = Object.getPrototypeOf(o)) Object.getOwnPropertyNames(o).forEach((n) => names.add(n));
+      const all = [...names];
+      const pick = (re) => all.filter((n) => re.test(n)).slice(0, 60);
+      const val = (k) => { try { const v = lg[k]; return typeof v === "function" ? "fn" : JSON.stringify(v)?.slice(0, 80); } catch (e) { return "err"; } };
+      return {
+        state: Object.fromEntries(["turn", "gamePhase", "_localSeat", "localSeat", "paused", "started", "gameOver", "vMode", "numSeats", "displaySeat"].map((k) => [k, val(k)])),
+        methods: pick(/ready|confirm|select|pick|lock|shoot|shots|fire|submit|choose|draft|forfeit|move|simult|reveal|hidden|visible/i),
+      };
+    });
     res.steps.hud1 = (await page.textContent("#turn-text"))?.trim();
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1-start.png` });
     const box = await page.locator("#game-canvas").boundingBox();
