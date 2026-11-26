@@ -69,7 +69,7 @@ for (const game of GAMES) {
       // Turn ownership per seat (user report: on the other player's turn this phone could still move the cue).
       const crypto = await import("node:crypto");
       const caps = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused }; for (const s of [0, 1]) { try { o["canShoot" + s] = !!l.canShoot(s); } catch (e) { o["canShoot" + s] = "err"; } } return o; });
-      const rot = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const c = l.sceneMgr && l.sceneMgr.cueStick; return c ? { r: c.rotation, en: !!(l.sceneMgr.powerMeter && l.sceneMgr.powerMeter.enabled !== undefined ? l.sceneMgr.powerMeter.enabled : null), loc: !!l.isLocalPlayerTurn(), ls: l.localSeat, t: JSON.stringify(l.turn), it0: !!l.isTurn(0), it1: !!l.isTurn(1), itl: !!l.isTurn(l.localSeat), lt: !!l.localTurn, cls: l.constructor && l.constructor.name } : null; });
+      const rot = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const c = l.sceneMgr && l.sceneMgr.cueStick; return c ? { r: c.rotation, en: !!(l.sceneMgr.powerMeter && l.sceneMgr.powerMeter.enabled !== undefined ? l.sceneMgr.powerMeter.enabled : null), loc: !!l.isLocalPlayerTurn(), ls: l.localSeat, t: JSON.stringify(l.turn), it0: !!l.isTurn(0), it1: !!l.isTurn(1), itl: !!l.isTurn(l.localSeat), lt: !!l.localTurn, rem: l.alarmRemaining } : null; });
       const hash = async (page) => crypto.createHash("md5").update(await page.screenshot({ clip: { x: 20, y: 260, width: 372, height: 480 } })).digest("hex");
       const drag = async (page) => { await page.mouse.move(206, 640); await page.mouse.down(); await page.mouse.move(300, 600, { steps: 8 }); await page.mouse.move(120, 560, { steps: 8 }); await page.mouse.up(); await page.waitForTimeout(1200); };
       const probe = async (label) => {
@@ -92,7 +92,14 @@ for (const game of GAMES) {
       res.poolTurns.push(await probe("after-guest-shot"));
       const t = res.poolTurns;
       res.poolOwnerSeats = t.map((x) => { try { return JSON.parse(x.A.turn)[0]; } catch (e) { return null; } });
-      res.steps.poolOwnership = t.every((x, k) => x.idleStable && (res.poolOwnerSeats[k] === 0 ? (x.hostStickMoved === true && x.guestStickMoved === false) : res.poolOwnerSeats[k] === 1 ? (x.hostStickMoved === false && x.guestStickMoved === true) : false));
+      // A drag only counts as a violation when the dragging seat was NOT the turn owner at drag time (the shot clock can hand the turn over mid-probe).
+      const owns = (r, seat) => { try { return JSON.parse(r.t).includes(seat); } catch (e) { return false; } };
+      res.poolViolations = [];
+      t.forEach((x, k) => {
+        if (x.hostStickMoved && !(owns(x.hostRot0, 0) && owns(x.hostRot1, 0))) res.poolViolations.push({ probe: k, who: "host" });
+        if (x.guestStickMoved && !(owns(x.guestRot0, 1) && owns(x.guestRot1, 1))) res.poolViolations.push({ probe: k, who: "guest" });
+      });
+      res.steps.poolOwnership = t.every((x) => x.idleStable) && res.poolViolations.length === 0 && t.some((x) => x.hostStickMoved) && t.some((x) => x.guestStickMoved);
     }
     if (game === "pool") {
       // Connection loss: the guest phone vanishes (context closed). The host must notice, tell the player and return to the menu.
