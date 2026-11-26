@@ -44,10 +44,26 @@ for (const sc of scenarios) {
     res.steps.resignItem = clicked;
     await page.waitForTimeout(2500);
     res.afterResignClick = await snap(page);
-    res.popupButtons = await page.$$eval("button", (bs) => bs.filter((b) => b.offsetParent !== null).map((b) => (b.textContent || "").trim().slice(0, 40)).filter(Boolean).slice(0, 14));
-    await page.screenshot({ path: `shots-end/${sc.name}-a-after-resign-click.png` });
+        await page.screenshot({ path: `shots-end/${sc.name}-a-after-resign-click.png` });
+    // Confirm the in-canvas popup with a REAL touch tap (coordinates read from the popup screenshots; viewport 412x860).
+    const TAP = { pool: [283, 599], monsters: [103, 460], brawlbots: [309, 823] }[sc.game];
+    await page.touchscreen.tap(TAP[0], TAP[1]);
+    res.tap = TAP;
+    let over = null;
+    for (let w = 0; w < 12; w++) { await page.waitForTimeout(1000); over = await snap(page); if (over.gameOver || over.barVisible) break; }
+    res.afterConfirm = over;
+    await page.screenshot({ path: `shots-end/${sc.name}-b-after-confirm.png` });
+    if (over.barVisible) {
+      await page.click("#rematch-btn");
+      let fresh = null;
+      for (let w = 0; w < 20; w++) { await page.waitForTimeout(1000); fresh = await snap(page); if (!fresh.gameOver && !fresh.barVisible) break; }
+      res.afterRematch = fresh;
+      await page.waitForTimeout(4000);
+      res.afterRematch2 = await snap(page);
+      await page.screenshot({ path: `shots-end/${sc.name}-c-after-rematch.png` });
+    }
   } catch (e) { res.steps.error = String(e.message).slice(0, 200); }
-  res.errors = errors; res.dialogs = dialogs;
+  res.errCount = errors.length; res.nonBenign = errors.filter((e) => !/Failed to load|music/.test(e)).slice(0, 4); res.dialogs = dialogs;
   out.push(res);
   await ctx.close();
 }
