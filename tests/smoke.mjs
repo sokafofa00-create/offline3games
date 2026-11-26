@@ -193,8 +193,25 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         // REAL TOUCH: dismiss the in-canvas tutorial popup ("OK" button, found from the after-draft screenshot) before touching the board.
         res.draft.realTouch = { okTap: [206, 722] };
         res.draft.realTouch.beforeOk = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, seat: l._localSeat, moves: l.moveCount, board: l.board ? [l.board.width, l.board.height] : null }; });
-        await page.touchscreen.tap(206, 722);
-        await page.waitForTimeout(2000);
+        const crypto = await import("node:crypto");
+        const region = async () => crypto.createHash("md5").update(await page.screenshot({ clip: { x: 60, y: 230, width: 290, height: 50 } })).digest("hex");
+        const cdp = await ctx.newCDPSession(page);
+        res.draft.realTouch.variants = [];
+        const h0 = await region();
+        const variants = [
+          ["cdp-touch-100ms", async () => { await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: 206, y: 722 }] }); await page.waitForTimeout(100); await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] }); }],
+          ["mouse-100ms-move", async () => { await page.mouse.move(206, 722); await page.mouse.down(); await page.waitForTimeout(50); await page.mouse.move(207, 722); await page.waitForTimeout(50); await page.mouse.up(); }],
+          ["tap-y700", async () => { await page.touchscreen.tap(206, 700); }],
+          ["tap-y740", async () => { await page.touchscreen.tap(206, 740); }],
+          ["tap-x120", async () => { await page.touchscreen.tap(120, 722); }],
+        ];
+        for (const [name, fn] of variants) {
+          await fn(); await page.waitForTimeout(1500);
+          const h = await region(); const changed = h !== h0;
+          res.draft.realTouch.variants.push({ name, changed });
+          await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1d2-${name}.png` });
+          if (changed) break;
+        }
         await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1d2-after-ok-tap.png` });
         res.draft.geo = await page.evaluate(() => {
           const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { canvas: null };
