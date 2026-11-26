@@ -29,7 +29,7 @@ const browser = await chromium.launch(
 );
 const results = [];
 for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name))) {
-  const ctx = await browser.newContext({ viewport: { width: 412, height: 860 }, hasTouch: true });
+  const ctx = await browser.newContext({ viewport: sc.game === "brawlbots" ? { width: 860, height: 412 } : { width: 412, height: 860 }, hasTouch: true });
   const page = await ctx.newPage();
   const errors = [];
   const requests = [];
@@ -45,6 +45,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
   const res = { name: sc.name, backend: BACKEND, steps: {} };
   try {
     await page.addInitScript(() => { window.__DEBUG_HOTSEAT__ = true; });
+    await page.addInitScript(() => { window.AndroidHost = { vibrate() {}, setOrientation(m) { (window.__ORI_HOST__ = window.__ORI_HOST__ || []).push(m); } }; });
     await page.goto(`http://localhost:${PORT}/`);
     await page.click(`.game-tab[data-game="${sc.game}"]`);
     for (const [sel, val] of Object.entries(sc.set || {})) await page.selectOption(sel, val);
@@ -70,6 +71,8 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       };
     });
     res.steps.hud1 = (await page.textContent("#turn-text"))?.trim();
+    res.orientation = await page.evaluate(() => ({ viewport: innerWidth + "x" + innerHeight, canvas: (() => { const c = document.getElementById("game-canvas"); return c ? c.width + "x" + c.height : null; })(), hostCalls: window.__ORI_HOST__ || null }));
+    res.orientation.ok = sc.game === "brawlbots" ? (res.orientation.hostCalls || []).slice(-1)[0] === "landscape" : (res.orientation.hostCalls || []).slice(-1)[0] === "portrait";
     // Pass-the-phone cover (REAL controls): visible at start for hidden-info games, never for Pool.
     const coverVisible = async () => (await page.locator("#pass-cover").isVisible());
     res.cover = { expected: sc.game !== "pool", atStart: await coverVisible() };
@@ -286,5 +289,5 @@ await browser.close();
 server.kill();
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Smoke results\n```json\n" + JSON.stringify(results, (k, v) => (k === "props" || k === "methods" || k === "src" || k === "tankKeys") ? undefined : v, 1).slice(0, 200000) + "\n```\n");
 console.log("SMOKE_RESULTS " + JSON.stringify(results, null, 1));
-const bad = results.filter((r) => r.errors.length || r.cover?.ok === false || r.externalRequests.length || !r.steps.rematchClicked);
+const bad = results.filter((r) => r.errors.length || r.cover?.ok === false || r.orientation?.ok === false || r.externalRequests.length || !r.steps.rematchClicked);
 if (bad.length) { console.log("FAILED: " + bad.map((b) => b.name).join(", ")); process.exit(1); }
