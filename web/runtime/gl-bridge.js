@@ -586,6 +586,7 @@ export function createGLBridge(canvas, assetStore) {
       gl.generateMipmap(target);
     },
     texImage2D(target, level, internalformat, width, height, border, format, type, pixels) {
+      if (window.__DEBUG_HOTSEAT__) { const k = `if${internalformat}/f${format}/t${type}/${pixels ? pixels.constructor.name : "null"}`; const m = (window.__TEXFMT ||= {}); m[k] = (m[k] || 0) + 1; }
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
       gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
       gl.texImage2D(target, level, internalformat, width, height, border, format, type, pixels ?? null);
