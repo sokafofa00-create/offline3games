@@ -1,0 +1,7 @@
+{
+ "match_monsters_assets": [
+  "match3battle/monsters/glowzard_darkops/glowzard_darkops_static.webp",
+  "match3battle/monsters/radiaze_darkops/radiaze_darkops_static.webp",
+  "match3battle/stages/abandoned_town/stage_town.png"
+ ]
+}
