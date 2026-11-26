@@ -1,0 +1,57 @@
+{
+	"index": 33,
+	"name": "Grumchum",
+	"collector_tag": "069",
+	"skins": [
+		{
+			"name": "Grumchum",
+			"sku": 12128,
+			"sprite": "match3battle/monsters/grumchum/grumchum_static.webp",
+			"popup_sprite": "match3battle/monsters/grumchum/grumchum_popup.webp",
+			"hex_sprite": "match3battle/monsters/grumchum/grumchum_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Grumchum",
+			"sku": 12190,
+			"sprite": "match3battle/monsters/grumchum_shadow/grumchum_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/grumchum_shadow/grumchum_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/grumchum_shadow/grumchum_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "New",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 8,
+	"evolutions": [
+		"Garbaric"
+	],
+	"tile_type": "Blue",
+	"tags": ["aquatic"],
+	"skill_name": "Drown",
+	"skill_note": "Drown",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Thrash",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

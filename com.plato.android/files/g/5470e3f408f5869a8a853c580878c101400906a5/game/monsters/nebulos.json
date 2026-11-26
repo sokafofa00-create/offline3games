@@ -1,0 +1,40 @@
+{
+	"name": "Nebulos",
+	"collector_tag": "092",
+	"skins": [
+		{
+			"name": "Nebulos",
+			"sku": 12140,
+			"sprite": "match3battle/monsters/nebulos/nebulos_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/nebulos/spine/nebulos.webp",
+				"~/images/monsters/nebulos/spine/nebulos.json",
+				"~/images/monsters/nebulos/spine/nebulos.atlas"
+			]
+		}
+	],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"skill_name": "Singularity+",
+	"skill_note": "Singularity+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Blackhole",
+					"charges": 3
+				}
+			]
+		}			
+	]
+}

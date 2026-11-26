@@ -1,0 +1,80 @@
+{
+	"index": 34,
+	"name": "Gr1ff-E",
+	"collector_tag": "071",
+	"skins": [
+		{
+			"name": "Gr1ff-E",
+			"sku": 12129,
+			"sprite": "match3battle/monsters/gr1ff-e/gr1ff-e_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/gr1ff-e/spine/gr1ff-e.webp",
+				"~/images/monsters/gr1ff-e/spine/gr1ff-e.json",
+				"~/images/monsters/gr1ff-e/spine/gr1ff-e.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/gr1ff-e/gr1ff-e_popup.webp",
+			"hex_sprite": "match3battle/monsters/gr1ff-e/gr1ff-e_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Cobalt Gr1ff-E",
+			"sku": 12163,
+			"sprite": "match3battle/monsters/gr1ff-e_cobalt/gr1ff-e_cobalt_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/gr1ff-e_cobalt/spine/gr1ff-e_cobalt.webp",
+				"~/images/monsters/gr1ff-e_cobalt/spine/gr1ff-e_cobalt.json",
+				"~/images/monsters/gr1ff-e_cobalt/spine/gr1ff-e_cobalt.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/gr1ff-e_cobalt/gr1ff-e_cobalt_popup.webp",
+			"hex_sprite": "match3battle/monsters/gr1ff-e_cobalt/gr1ff-e_cobalt_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 5,
+	"evolutions": [
+		"Gr1ff-0n"
+	],
+	"tile_type": "Blue",
+	"tags": ["wings"],
+	"skill_name": "Scalar Beam",
+	"skill_note": "Scalar Beam",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Charge",
+					"charges": 2
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Charge",
+					"change": 1
+				}
+			]
+		}
+	]
+}

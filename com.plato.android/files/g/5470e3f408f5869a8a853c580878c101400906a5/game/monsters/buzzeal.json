@@ -1,0 +1,129 @@
+{
+	"name": "Buzzeal",
+	"collector_tag": "080",
+	"skins": [{
+		"name": "Buzzeal",
+		"sku": 12133,
+		"sprite": "match3battle/monsters/buzzeal/buzzeal_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/buzzeal/spine/buzzeal.webp",
+			"~/images/monsters/buzzeal/spine/buzzeal.json",
+			"~/images/monsters/buzzeal/spine/buzzeal.atlas"
+		]
+	}],
+	"mana": 6,
+	"tile_type": "Yellow",
+	"skill_name": "Electroshift+",
+	"skill_note": "Buzzeal",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 3,
+					"h": 2,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": ["High Voltage", "Flash"],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "High Voltage",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Flash",
+									"charges": 2
+								}
+							]
+						},
+						{
+							"case": "Flash",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "High Voltage"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"event": "Evolution",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": ["Flash"],
+					"output": "status"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$status",
+					"b": "Flash",
+					"output": "has_flash"
+				},
+				{
+					"name": "If",
+					"case": "$has_flash",
+					"effects": [
+						{
+							"name": "Update Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Flash",
+							"amount": 2
+						}
+					]
+				}
+			]
+		}
+	]
+}

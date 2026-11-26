@@ -1,0 +1,1401 @@
+{
+	"monsters": [
+		"Abyssoul",
+		"Alpalaine",
+		"Armathorn",
+		"Aromaphant",
+		"Axelraze",
+		"Axoodle",
+		"Bandicrook",
+		"Barbenin",
+		"Birchard",
+		"Birchee",
+		"Bombit",
+		"Bonzire",
+		"Bonzumi",
+		"Bubball",
+		"Buzzapt",
+		"Buzzeal",
+		"Bytepole",
+		"Cactkid",
+		"Caplett",
+		"Captrio",
+		"Coink",
+		"Crescemoth",
+		"Criminook",
+		"DJ Puff",
+		"Doomzy",
+		"Dreadhoof",
+		"Echomento",
+		"Echomori",
+		"Eidelf",
+		"Elescent",
+		"Elfini",
+		"Ferobite",
+		"Flambagant",
+		"Frostoyle",
+		"Fursway",
+		"Garbaric",
+		"Gargice",
+		"Gleamur",
+		"Glowzard",
+		"Gr1ff-0n",
+		"Gr1ff-E",
+		"Gravetiery",
+		"Grumchum",
+		"Habibun",
+		"Harebomb",
+		"Hellkid",
+		"Hogsworth",
+		"Hothoof",
+		"Inknight",
+		"Karaggon",
+		"Kittea",
+		"Kyuubi",
+		"Lavasteed",
+		"Lilabaa",
+		"Lulabaa",
+		"Lunarva",
+		"Lynix",
+		"Maboobun",
+		"Madambrella",
+		"Magnooki",
+		"MC Jiggle",
+		"Mirrage",
+		"Mirrip",
+		"Missbrella",
+		"Moodenga",
+		"Mootabak",
+		"Mouskrow",
+		"Mousummit",
+		"Myubi",
+		"Neblin",
+		"Nebulos",
+		"Necrogeist",
+		"Nerverack",
+		"Noctynx",
+		"Nosferax",
+		"Nosfyretu",
+		"Ozzy",
+		"Pelijet",
+		"Petirex",
+		"Phirapt",
+		"Pinathotlada",
+		"Purrtea",
+		"Pyrokun",
+		"Radiaze",
+		"Ranzap",
+		"Rexsaur",
+		"Riffoon",
+		"Rituki",
+		"Ritukong",
+		"Rockoon",
+		"Sahibun",
+		"Scoprikon",
+		"Sephanix",
+		"Serphina",
+		"Shardivore",
+		"Shinopi",
+		"Sipzap",
+		"Slickitty",
+		"Slomail",
+		"Slopost",
+		"Slumbie",
+		"Slumbro",
+		"Slythia",
+		"Snaxolotl",
+		"Sniblet",
+		"Tadapt",
+		"Thornapt",
+		"Timingo",
+		"Toadware",
+		"Trashark",
+		"Tropina",
+		"Turtlelisk",
+		"Voidevour",
+		"Voltarmour",
+		"Voltshard",
+		"Vortapt",
+		"Winklit",
+		"Woolam",
+		"Wreckore",
+		"Zapion"
+	],
+	"roster": [
+		{
+			"index": 1,
+			"team": "Bonzumi + Bonzire",
+			"monster": "Bonzumi",
+			"skins": [
+				{
+					"sku": 101,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/bonzumi/bonzumi_popup.webp",
+					"hex_sprite": "match3battle/monsters/bonzumi/bonzumi_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": false
+				},
+				{
+					"sku": 12137,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/bonzumi_wukong/bonzumi_wukong_popup.webp",
+					"hex_sprite": "match3battle/monsters/bonzumi_wukong/bonzumi_wukong_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12187,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/bonzumi_clown/bonzumi_clown_popup.webp",
+					"hex_sprite": "match3battle/monsters/bonzumi_clown/bonzumi_clown_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 2,
+			"team": "Pelijet + Sephanix",
+			"monster": "Pelijet",
+			"skins": [
+				{
+					"sku": 201,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/pelijet/pelijet_popup.webp",
+					"hex_sprite": "match3battle/monsters/pelijet/pelijet_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": false
+				},
+				{
+					"sku": 12152,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/pelijet_garuda/pelijet_garuda_popup.webp",
+					"hex_sprite": "match3battle/monsters/pelijet_garuda/pelijet_garuda_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12188,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/pelijet_witch/pelijet_witch_popup.webp",
+					"hex_sprite": "match3battle/monsters/pelijet_witch/pelijet_witch_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 3,
+			"team": "Turtlelisk + Karaggon",
+			"monster": "Turtlelisk",
+			"skins": [
+				{
+					"sku": 301,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/turtlelisk/turtlelisk_popup.webp",
+					"hex_sprite": "match3battle/monsters/turtlelisk/turtlelisk_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": false
+				},
+				{
+					"sku": 12151,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/turtlelisk_waverider/turtlelisk_waverider_popup.webp",
+					"hex_sprite": "match3battle/monsters/turtlelisk_waverider/turtlelisk_waverider_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12189,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/turtlelisk_hockey/turtlelisk_hockey_popup.webp",
+					"hex_sprite": "match3battle/monsters/turtlelisk_hockey/turtlelisk_hockey_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 4,
+			"team": "Slickitty + Axelraze",
+			"monster": "Slickitty",
+			"skins": [
+				{
+					"sku": 401,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/slickitty/slickitty_popup.webp",
+					"hex_sprite": "match3battle/monsters/slickitty/slickitty_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": false
+				},
+				{
+					"sku": 12166,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/slickitty_shadow/slickitty_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/slickitty_shadow/slickitty_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 5,
+			"team": "Barbenin + Scoprikon",
+			"monster": "Barbenin",
+			"skins": [
+				{
+					"sku": 501,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/barbenin/barbenin_popup.webp",
+					"hex_sprite": "match3battle/monsters/barbenin/barbenin_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": false
+				},
+				{
+					"sku": 12172,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/barbenin_shadow/barbenin_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/barbenin_shadow/barbenin_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 6,
+			"team": "Pyrokun + Magnooki",
+			"monster": "Pyrokun",
+			"skins": [
+				{
+					"sku": 601,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/pyrokun/pyrokun_popup.webp",
+					"hex_sprite": "match3battle/monsters/pyrokun/pyrokun_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12173,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/pyrokun_shadow/pyrokun_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/pyrokun_shadow/pyrokun_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 7,
+			"team": "Trashark + Shardivore",
+			"monster": "Trashark",
+			"skins": [
+				{
+					"sku": 701,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/trashark/trashark_popup.webp",
+					"hex_sprite": "match3battle/monsters/trashark/trashark_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12167,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/trashark_shadow/trashark_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/trashark_shadow/trashark_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 8,
+			"team": "Elfini + Eidelf",
+			"monster": "Elfini",
+			"skins": [
+				{
+					"sku": 801,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/elfini/elfini_popup.webp",
+					"hex_sprite": "match3battle/monsters/elfini/elfini_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 9,
+			"team": "Winklit + Gleamur",
+			"monster": "Winklit",
+			"skins": [
+				{
+					"sku": 901,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/winklit/winklit_popup.webp",
+					"hex_sprite": "match3battle/monsters/winklit/winklit_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12145,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/winklit_astro/winklit_astro_popup.webp",
+					"hex_sprite": "match3battle/monsters/winklit_astro/winklit_astro_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 10,
+			"team": "Timingo + Flambagant",
+			"monster": "Timingo",
+			"skins": [
+				{
+					"sku": 1101,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/timingo/timingo_popup.webp",
+					"hex_sprite": "match3battle/monsters/timingo/timingo_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				},
+				{
+					"sku": 12174,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/timingo_prism/timingo_prism_popup.webp",
+					"hex_sprite": "match3battle/monsters/timingo_prism/timingo_prism_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 11,
+			"team": "Criminook + Bandicrook",
+			"monster": "Criminook",
+			"skins": [
+				{
+					"sku": 12020,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/criminook/criminook_popup.webp",
+					"hex_sprite": "match3battle/monsters/criminook/criminook_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12157,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/criminook_greench/criminook_greench_popup.webp",
+					"hex_sprite": "match3battle/monsters/criminook_greench/criminook_greench_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 12,
+			"team": "Nerverack + Wreckore",
+			"monster": "Nerverack",
+			"skins": [
+				{
+					"sku": 12022,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/nerverack/nerverack_popup.webp",
+					"hex_sprite": "match3battle/monsters/nerverack/nerverack_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12146,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/nerverack_prism/nerverack_prism_popup.webp",
+					"hex_sprite": "match3battle/monsters/nerverack_prism/nerverack_prism_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 13,
+			"team": "Birchee + Birchard",
+			"monster": "Birchee",
+			"skins": [
+				{
+					"sku": 12024,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/birchee/birchee_popup.webp",
+					"hex_sprite": "match3battle/monsters/birchee/birchee_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 14,
+			"team": "Glowzard + Radiaze",
+			"monster": "Glowzard",
+			"skins": [
+				{
+					"sku": 12026,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/glowzard/glowzard_popup.webp",
+					"hex_sprite": "match3battle/monsters/glowzard/glowzard_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12182,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/glowzard_darkops/glowzard_darkops_popup.webp",
+					"hex_sprite": "match3battle/monsters/glowzard_darkops/glowzard_darkops_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 15,
+			"team": "Ferobite + Fursway",
+			"monster": "Ferobite",
+			"skins": [
+				{
+					"sku": 12028,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/ferobite/ferobite_popup.webp",
+					"hex_sprite": "match3battle/monsters/ferobite/ferobite_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 16,
+			"team": "Gravetiery + Necrogeist",
+			"monster": "Gravetiery",
+			"skins": [
+				{
+					"sku": 1001,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/gravetiery/gravetiery_popup.webp",
+					"hex_sprite": "match3battle/monsters/gravetiery/gravetiery_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 17,
+			"team": "Mouskrow + Mousummit",
+			"monster": "Mouskrow",
+			"skins": [
+				{
+					"sku": 12029,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/mouskrow/mouskrow_popup.webp",
+					"hex_sprite": "match3battle/monsters/mouskrow/mouskrow_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				},
+				{
+					"sku": 12149,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/mouskrow_coral/mouskrow_coral_popup.webp",
+					"hex_sprite": "match3battle/monsters/mouskrow_coral/mouskrow_coral_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 18,
+			"team": "Lilabaa + Lulabaa",
+			"monster": "Lilabaa",
+			"skins": [
+				{
+					"sku": 12030,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/lilabaa/lilabaa_popup.webp",
+					"hex_sprite": "match3battle/monsters/lilabaa/lilabaa_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12153,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/lilabaa_oracle/lilabaa_oracle_popup.webp",
+					"hex_sprite": "match3battle/monsters/lilabaa_oracle/lilabaa_oracle_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 19,
+			"team": "Tadapt + Phirapt + Vortapt + Thornapt + Buzzapt",
+			"monster": "Tadapt",
+			"skins": [
+				{
+					"sku": 12031,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/tadapt/tadapt_popup.webp",
+					"hex_sprite": "match3battle/monsters/tadapt/tadapt_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 20,
+			"team": "Woolam + Alpalaine",
+			"monster": "Woolam",
+			"skins": [
+				{
+					"sku": 12032,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/woolam/woolam_popup.webp",
+					"hex_sprite": "match3battle/monsters/woolam/woolam_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12179,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/woolam_rococo/woolam_rococo_popup.webp",
+					"hex_sprite": "match3battle/monsters/woolam_rococo/woolam_rococo_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 21,
+			"team": "Abyssoul + Voidevour",
+			"monster": "Abyssoul",
+			"skins": [
+				{
+					"sku": 12033,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/abyssoul/abyssoul_popup.webp",
+					"hex_sprite": "match3battle/monsters/abyssoul/abyysoul_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12175,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/abyssoul_shadow/abyssoul_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/abyssoul_shadow/abyssoul_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 22,
+			"team": "Petirex + Rexsaur",
+			"monster": "Petirex",
+			"skins": [
+				{
+					"sku": 12034,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/petirex/petirex_popup.webp",
+					"hex_sprite": "match3battle/monsters/petirex/petirex_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12164,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/petirex_bowshi/petirex_bowshi_popup.webp",
+					"hex_sprite": "match3battle/monsters/petirex_bowshi/petirex_bowshi_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 23,
+			"team": "Sipzap + Ranzap",
+			"monster": "Sipzap",
+			"skins": [
+				{
+					"sku": 12035,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/sipzap/sipzap_popup.webp",
+					"hex_sprite": "match3battle/monsters/sipzap/sipzap_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12160,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/sipzap_demiurge/sipzap_demiurge_popup.webp",
+					"hex_sprite": "match3battle/monsters/sipzap_demiurge/sipzap_demiurge_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 24,
+			"team": "Elescent + Aromaphant",
+			"monster": "Elescent",
+			"skins": [
+				{
+					"sku": 12036,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/elescent/elescent_popup.webp",
+					"hex_sprite": "match3battle/monsters/elescent/elescent_hex.webp",
+					"selection_status": "Hidden Unless Owned",
+					"label": "Rare",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 25,
+			"team": "Gargice + Frostoyle",
+			"monster": "Gargice",
+			"skins": [
+				{
+					"sku": 12037,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/gargice/gargice_popup.webp",
+					"hex_sprite": "match3battle/monsters/gargice/gargice_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 26,
+			"team": "Sahibun + Maboobun + Habibun",
+			"monster": "Sahibun",
+			"skins": [
+				{
+					"sku": 12038,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/sahibun/sahibun_popup.webp",
+					"hex_sprite": "match3battle/monsters/sahibun/sahibun_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12142,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/sahibun_wedding/sahibun_wedding_popup.webp",
+					"hex_sprite": "match3battle/monsters/sahibun_wedding/sahibun_wedding_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 27,
+			"team": "Cactkid + Armathorn",
+			"monster": "Cactkid",
+			"skins": [
+				{
+					"sku": 12122,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/cactkid/cactkid_popup.webp",
+					"hex_sprite": "match3battle/monsters/cactkid/cactkid_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 28,
+			"team": "Tropina + Pinathotlada",
+			"monster": "Tropina",
+			"skins": [
+				{
+					"sku": 12123,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/tropina/tropina_popup.webp",
+					"hex_sprite": "match3battle/monsters/tropina/tropina_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12143,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/tropina_badam/tropina_badam_popup.webp",
+					"hex_sprite": "match3battle/monsters/tropina_badam/tropina_badam_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 29,
+			"team": "Voltshard + Voltarmour",
+			"monster": "Voltshard",
+			"skins": [
+				{
+					"sku": 12124,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/voltshard/voltshard_popup.webp",
+					"hex_sprite": "match3battle/monsters/voltshard/voltshard_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12183,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/voltshard_badromance/voltshard_badromance_popup.webp",
+					"hex_sprite": "match3battle/monsters/voltshard_badromance/voltshard_badromance_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 30,
+			"team": "Echomori + Echomento",
+			"monster": "Echomori",
+			"skins": [
+				{
+					"sku": 12125,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/echomori/echomori_popup.webp",
+					"hex_sprite": "match3battle/monsters/echomori/echomori_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 31,
+			"team": "Kittea + Purrtea",
+			"monster": "Kittea",
+			"skins": [
+				{
+					"sku": 12126,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/kittea/kittea_popup.webp",
+					"hex_sprite": "match3battle/monsters/kittea/kittea_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12168,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/kittea_prism/kittea_prism_popup.webp",
+					"hex_sprite": "match3battle/monsters/kittea_prism/kittea_prism_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 32,
+			"team": "Snaxolotl + Axoodle",
+			"monster": "Snaxolotl",
+			"skins": [
+				{
+					"sku": 12127,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/snaxolotl/snaxolotl_popup.webp",
+					"hex_sprite": "match3battle/monsters/snaxolotl/snaxolotl_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 33,
+			"team": "Grumchum + Garbaric",
+			"monster": "Grumchum",
+			"skins": [
+				{
+					"sku": 12128,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/grumchum/grumchum_popup.webp",
+					"hex_sprite": "match3battle/monsters/grumchum/grumchum_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12190,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/grumchum_shadow/grumchum_shadow_popup.webp",
+					"hex_sprite": "match3battle/monsters/grumchum_shadow/grumchum_shadow_hex.webp",
+					"selection_status": "Selectable",
+					"label": "New",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 34,
+			"team": "Gr1ff-E + Gr1ff-0n",
+			"monster": "Gr1ff-E",
+			"skins": [
+				{
+					"sku": 12129,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/gr1ff-e/gr1ff-e_popup.webp",
+					"hex_sprite": "match3battle/monsters/gr1ff-e/gr1ff-e_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12163,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/gr1ff-e_cobalt/gr1ff-e_cobalt_popup.webp",
+					"hex_sprite": "match3battle/monsters/gr1ff-e_cobalt/gr1ff-e_cobalt_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 35,
+			"team": "Rituki + Ritukong",
+			"monster": "Rituki",
+			"skins": [
+				{
+					"sku": 12130,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/rituki/rituki_popup.webp",
+					"hex_sprite": "match3battle/monsters/rituki/rituki_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 36,
+			"team": "MC Jiggle + DJ Puff",
+			"monster": "MC Jiggle",
+			"skins": [
+				{
+					"sku": 12131,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/mcjiggle/mcjiggle_popup.webp",
+					"hex_sprite": "match3battle/monsters/mcjiggle/mcjiggle_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 37,
+			"team": "Missbrella + Madambrella",
+			"monster": "Missbrella",
+			"skins": [
+				{
+					"sku": 12132,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/missbrella/missbrella_popup.webp",
+					"hex_sprite": "match3battle/monsters/missbrella/missbrella_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12148,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/missbrella_seamaiden/missbrella_seamaiden_popup.webp",
+					"hex_sprite": "match3battle/monsters/missbrella_seamaiden/missbrella_seamaiden_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 38,
+			"team": "Bubball + Buzzeal",
+			"monster": "Bubball",
+			"skins": [
+				{
+					"sku": 12133,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/bubball/bubball_popup.webp",
+					"hex_sprite": "match3battle/monsters/bubball/bubball_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 39,
+			"team": "Nosferax + Nosfyretu",
+			"monster": "Nosferax",
+			"skins": [
+				{
+					"sku": 12134,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/nosferax/nosferax_popup.webp",
+					"hex_sprite": "match3battle/monsters/nosferax/nosferax_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 40,
+			"team": "Ozzy + Doomzy",
+			"monster": "Ozzy",
+			"skins": [
+				{
+					"sku": 12135,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/ozzy/ozzy_popup.webp",
+					"hex_sprite": "match3battle/monsters/ozzy/ozzy_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 41,
+			"team": "Moodenga + Mootabak",
+			"monster": "Moodenga",
+			"skins": [
+				{
+					"sku": 12136,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/moodenga/moodenga_popup.webp",
+					"hex_sprite": "match3battle/monsters/moodenga/moodenga_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12178,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/moodenga_melonpan/moodenga_melonpan_popup.webp",
+					"hex_sprite": "match3battle/monsters/moodenga_melonpan/moodenga_melonpan_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 42,
+			"team": "Slumbie + Slumbro",
+			"monster": "Slumbie",
+			"skins": [
+				{
+					"sku": 12138,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/slumbie/slumbie_popup.webp",
+					"hex_sprite": "match3battle/monsters/slumbie/slumbie_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12180,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/slumbie_forest/slumbie_forest_popup.webp",
+					"hex_sprite": "match3battle/monsters/slumbie_forest/slumbie_forest_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 43,
+			"team": "Caplett + Captrio",
+			"monster": "Caplett",
+			"skins": [
+				{
+					"sku": 12139,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/caplett/caplett_popup.webp",
+					"hex_sprite": "match3battle/monsters/caplett/caplett_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 44,
+			"team": "Neblin + Nebulos",
+			"monster": "Neblin",
+			"skins": [
+				{
+					"sku": 12140,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/neblin/neblin_popup.webp",
+					"hex_sprite": "match3battle/monsters/neblin/neblin_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 45,
+			"team": "Slythia + Serphina",
+			"monster": "Slythia",
+			"skins": [
+				{
+					"sku": 12141,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/slythia/slythia_popup.webp",
+					"hex_sprite": "match3battle/monsters/slythia/slythia_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 46,
+			"team": "Riffoon + Rockoon",
+			"monster": "Riffoon",
+			"skins": [
+				{
+					"sku": 12144,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/riffoon/riffoon_popup.webp",
+					"hex_sprite": "match3battle/monsters/riffoon/riffoon_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 47,
+			"team": "Sniblet + Inknight",
+			"monster": "Sniblet",
+			"skins": [
+				{
+					"sku": 12147,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/sniblet/sniblet_popup.webp",
+					"hex_sprite": "match3battle/monsters/sniblet/sniblet_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12169,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/sniblet_prism/sniblet_prism_popup.webp",
+					"hex_sprite": "match3battle/monsters/sniblet_prism/sniblet_prism_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 48,
+			"team": "Myubi + Kyuubi",
+			"monster": "Myubi",
+			"skins": [
+				{
+					"sku": 12150,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/myubi/myubi_popup.webp",
+					"hex_sprite": "match3battle/monsters/myubi/myubi_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12165,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/myubi_sakura/myubi_sakura_popup.webp",
+					"hex_sprite": "match3battle/monsters/myubi_sakura/myubi_sakura_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 49,
+			"team": "Slomail + Slopost",
+			"monster": "Slomail",
+			"skins": [
+				{
+					"sku": 12154,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/slomail/slomail_popup.webp",
+					"hex_sprite": "match3battle/monsters/slomail/slomail_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12177,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/slomail_goalie/slomail_goalie_popup.webp",
+					"hex_sprite": "match3battle/monsters/slomail_goalie/slomail_goalie_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 50,
+			"team": "Hellkid + Dreadhoof",
+			"monster": "Hellkid",
+			"skins": [
+				{
+					"sku": 12155,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/hellkid/hellkid_popup.webp",
+					"hex_sprite": "match3battle/monsters/hellkid/hellkid_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 51,
+			"team": "Lynix + Noctynx",
+			"monster": "Lynix",
+			"skins": [
+				{
+					"sku": 12156,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/lynix/lynix_popup.webp",
+					"hex_sprite": "match3battle/monsters/lynix/lynix_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12185,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/lynix_horangi/lynix_horangi_popup.webp",
+					"hex_sprite": "match3battle/monsters/lynix_horangi/lynix_horangi_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 52,
+			"team": "Coink + Hogsworth",
+			"monster": "Coink",
+			"skins": [
+				{
+					"sku": 12158,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/coink/coink_popup.webp",
+					"hex_sprite": "match3battle/monsters/coink/coink_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12176,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/coink_cowboy/coink_cowboy_popup.webp",
+					"hex_sprite": "match3battle/monsters/coink_cowboy/coink_cowboy_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 53,
+			"team": "Hothoof + Lavasteed",
+			"monster": "Hothoof",
+			"skins": [
+				{
+					"sku": 12159,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/hothoof/hothoof_popup.webp",
+					"hex_sprite": "match3battle/monsters/hothoof/hothoof_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 54,
+			"team": "Lunarva + Crescemoth",
+			"monster": "Lunarva",
+			"skins": [
+				{
+					"sku": 12161,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/lunarva/lunarva_popup.webp",
+					"hex_sprite": "match3battle/monsters/lunarva/lunarva_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12162,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/lunarva_rosequartz/lunarva_rosequartz_popup.webp",
+					"hex_sprite": "match3battle/monsters/lunarva_rosequartz/lunarva_rosequartz_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 54,
+			"team": "Shinopi + Zapion",
+			"monster": "Shinopi",
+			"skins": [
+				{
+					"sku": 12170,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/shinopi/shinopi_popup.webp",
+					"hex_sprite": "match3battle/monsters/shinopi/shinopi_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				},
+				{
+					"sku": 12171,
+					"type": "Skin",
+					"popup_sprite": "match3battle/monsters/shinopi_subzero/shinopi_subzero_popup.webp",
+					"hex_sprite": "match3battle/monsters/shinopi_subzero/shinopi_subzero_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 55,
+			"team": "Bombit + Harebomb",
+			"monster": "Bombit",
+			"skins": [
+				{
+					"sku": 12181,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/bombit/bombit_popup.webp",
+					"hex_sprite": "match3battle/monsters/bombit/bombit_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 56,
+			"team": "Bytepole + Toadware",
+			"monster": "Bytepole",
+			"skins": [
+				{
+					"sku": 12184,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/bytepole/bytepole_popup.webp",
+					"hex_sprite": "match3battle/monsters/bytepole/bytepole_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 57,
+			"team": "Mirrip + Mirrage",
+			"monster": "Mirrip",
+			"skins": [
+				{
+					"sku": 12186,
+					"type": "Base",
+					"popup_sprite": "match3battle/monsters/mirrip/mirrip_popup.webp",
+					"hex_sprite": "match3battle/monsters/mirrip/mirrip_hex.webp",
+					"selection_status": "Selectable",
+					"label": "None",
+					"premium": true
+				}
+			]
+		},
+		{
+			"index": 9999,
+			"team": "Next Monster",
+			"monster": "Next Monster",
+			"skins": [
+				{
+					"sku": 0,
+					"hex_sprite": "match3battle/monsters/next_monster.webp",
+					"selection_status": "Visible",
+					"label": "Coming Soon",
+					"premium": true
+				}
+			]
+		}
+	]
+}

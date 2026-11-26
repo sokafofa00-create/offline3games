@@ -1,0 +1,98 @@
+{
+	"name": "Frostoyle",
+	"collector_tag": "053",
+	"skins": [{
+		"name": "Frostoyle",
+		"sku": 12037,
+		"sprite": "match3battle/monsters/frostoyle/frostoyle_static.webp"
+	}],
+	"mana": 8,
+	"tile_type": "Blue",
+	"skill_name": "Frostbite+",
+	"skill_note": "Frostoyle",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": ["Ice Flesh", "Anger Flesh"],
+					"output": "current_status"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$current_status",
+					"b": "Anger Flesh",
+					"output": "has_anger"
+				},
+				{
+					"name": "Branch",
+					"case": "$has_anger",
+					"true": 30,
+					"false": 15,
+					"output": "attack_damage"
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": "$attack_damage"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": ["Ice Flesh", "Anger Flesh"],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "Ice Flesh",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Anger Flesh"
+								}
+							]
+						},
+						{
+							"case": "Anger Flesh",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Ice Flesh"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

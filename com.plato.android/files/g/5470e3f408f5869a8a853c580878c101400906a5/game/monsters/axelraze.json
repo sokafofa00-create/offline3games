@@ -1,0 +1,46 @@
+{	
+	"name": "Axelraze",
+	"collector_tag": "008",
+	"skins": [
+		{
+			"name": "Axelraze",
+			"sku": 401,
+			"sprite": "match3battle/monsters/axelraze/axelraze_static.webp"
+		},
+		{
+			"name": "Shadow Axelraze",
+			"sku": 12166,
+			"sprite": "match3battle/monsters/axelraze_shadow/axelraze_shadow_static.webp"
+		}
+	],
+	"mana": 4,
+	"tile_type": "Yellow",
+	"skill_name": "Electroclaw+",
+	"skill_note": "Electroclaw+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 3,
+					"h": 2,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

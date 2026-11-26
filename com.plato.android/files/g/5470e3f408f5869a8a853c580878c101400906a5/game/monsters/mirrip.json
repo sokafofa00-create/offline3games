@@ -1,0 +1,86 @@
+{
+	"index": 57,
+	"name": "Mirrip",
+	"collector_tag": "118",
+	"skins": [
+		{
+			"name": "Mirrip",
+			"sku": 12186,
+			"sprite": "match3battle/monsters/mirrip/mirrip_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/mirrip/spine/mirrip.webp",
+				"~/images/monsters/mirrip/spine/mirrip.json",
+				"~/images/monsters/mirrip/spine/mirrip.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/mirrip/mirrip_popup.webp",
+			"hex_sprite": "match3battle/monsters/mirrip/mirrip_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Mirrage"
+	],           
+	"tile_type": "Blue",
+	"tags": ["household"],
+	"skill_name": "Soul Echo",
+	"skill_note": "SoulEcho",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				}
+			]
+		},
+		{
+			"event": "Both Max Mana",
+			"seat": "Self",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Reduce Opponent Move 1"
+				}
+			]
+		},
+		{
+			"event": "Mana Add",
+			"seat": "Self",
+            "monster": "Ally ",
+			"effects":  [
+				{
+					"name": "Update Mana",
+					"seat": "Self",
+					"monster": "Self",
+                    "change": 1
+				}
+			]
+		},
+        {
+            "event": "After Monster Attack",
+            "seat": "Self",
+            "monster": "Ally",
+            "effects": [
+				{
+ 					"name": "Wait",
+  					"seconds": 0.5
+				},
+                {
+                    "name": "Attack",
+                    "seat": "Opponent",
+                    "damage": 5
+                }
+            ]
+        }
+	]
+}

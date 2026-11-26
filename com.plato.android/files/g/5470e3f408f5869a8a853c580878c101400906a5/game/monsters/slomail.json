@@ -1,0 +1,132 @@
+{
+	"index": 49,
+	"name": "Slomail",
+	"collector_tag": "099",
+	"skins": [
+		{
+			"name": "Slomail",
+			"sku": 12154,
+			"sprite": "match3battle/monsters/slomail/slomail_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slomail/spine/slomail.webp",
+				"~/images/monsters/slomail/spine/slomail.json",
+				"~/images/monsters/slomail/spine/slomail.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/slomail/slomail_popup.webp",
+			"hex_sprite": "match3battle/monsters/slomail/slomail_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Goalie Slomail",
+			"sku": 12177,
+			"sprite": "match3battle/monsters/slomail_goalie/slomail_goalie_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slomail_goalie/spine/slomail_goalie.webp",
+				"~/images/monsters/slomail_goalie/spine/slomail_goalie.json",
+				"~/images/monsters/slomail_goalie/spine/slomail_goalie.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/slomail_goalie/slomail_goalie_popup.webp",
+			"hex_sprite": "match3battle/monsters/slomail_goalie/slomail_goalie_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Slopost"
+	],
+	"tile_type": "Green",
+	"tags": ["chillax"],
+	"skill_name": "Cash on Delivery",
+	"skill_note": "CashonDelivery",
+	"powers": [
+		{
+			"event": ["Monster Attack", "Final Attack"],
+			"seat": "Opponent",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Get Player Node",
+					"seat": "Self",
+					"output": "damaged_player"
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Return To Sender",
+					"charges": 1,
+					"start": "$damaged_player"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Opponent",
+					"output": "berries"
+				},
+				{
+					"name": "Is Greater Or Equal",
+					"a": "$berries",
+					"b": 1,
+					"output": "has_berries"
+				},
+				{
+					"name": "If",
+					"case": "$has_berries",
+					"effects": [
+						{
+							"name": "Wait",
+							"seconds": 1
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Opponent",
+							"change": -1
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Opponent",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$enemy_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Red",
+							"outsideColor": "Green",
+							"scale": 1,
+							"wait": true
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"change": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

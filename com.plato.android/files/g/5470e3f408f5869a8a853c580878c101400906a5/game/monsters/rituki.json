@@ -1,0 +1,179 @@
+{
+	"index": 35,
+	"name": "Rituki",
+	"collector_tag": "073",
+	"skins": [
+		{
+			"name": "Rituki",
+			"sku": 12130,
+			"sprite": "match3battle/monsters/rituki/rituki_static.webp",
+			"popup_sprite": "match3battle/monsters/rituki/rituki_popup.webp",
+			"hex_sprite": "match3battle/monsters/rituki/rituki_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Ritukong"
+	],
+	"tile_type": "Green",
+	"tags": ["healer", "nature"],
+	"skill_name": "Ritual Sacrifice",
+	"skill_note": "Ritual Sacrifice",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Sacrifice Ritual",
+					"charges": 0
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"monster": "Self",
+					"health": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 100,
+					"type": "Berry",
+					"output": "berries"
+				},
+				{
+					"name": "Get Monster Status Node",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Sacrifice Ritual",
+					"output": "status_node"
+				},
+				{
+					"name": "For",
+					"list": "$berries",
+					"iterator": "tile",
+					"effects": [
+						{
+							"name": "Get Tile Node",
+							"tile": "$tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$status_node",
+							"end": "$tile_node",
+							"seconds": 0.4,
+							"insideColor": "green",
+							"outsideColor": "green",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Shake Board"
+				},
+				{
+					"name": "For",
+					"list": "$berries",
+					"iterator": "tile",
+					"effects": [
+						{
+							"name": "Get Tile Node",
+							"tile": "$tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Puff",
+							"node": "$tile_node",
+							"color": "white"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$status_node",
+							"seconds": 0.4,
+							"insideColor": "green",
+							"outsideColor": "red",
+							"scale": 0.5
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Remove Tiles",
+					"tiles": "$berries"
+				},
+				{
+					"name": "Get List Length",
+					"list": "$berries",
+					"output": "berry_amount"
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Sacrifice Ritual",
+					"change": "$berry_amount"
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Sacrifice Ritual",
+					"output": "ritual_charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$ritual_charges",
+					"b": 5,
+					"output": "to_attack"
+				},
+				{
+					"name": "If",
+					"case": "$to_attack",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 15
+						},
+						{
+							"name": "Multiply",
+							"a": "$ritual_charges",
+							"b": -1,
+							"output": "ritual_neg_charges"
+						},
+						{
+							"name": "Update Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Sacrifice Ritual",
+							"change": "$ritual_neg_charges"
+						}
+					]
+				}
+			]
+		}
+	]
+}

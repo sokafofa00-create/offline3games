@@ -1,0 +1,59 @@
+{
+	"index": 20,
+	"name": "Woolam",
+	"collector_tag": "042",
+	"skins": [
+		{
+			"name": "Woolam",
+			"sku": 12032,
+			"sprite": "match3battle/monsters/woolam/woolam_static.webp",
+			"popup_sprite": "match3battle/monsters/woolam/woolam_popup.webp",
+			"hex_sprite": "match3battle/monsters/woolam/woolam_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Rococo Woolam",
+			"sku": 12179,
+			"sprite": "match3battle/monsters/woolam_rococo/woolam_rococo_static.webp",
+			"popup_sprite": "match3battle/monsters/woolam_rococo/woolam_rococo_popup.webp",
+			"hex_sprite": "match3battle/monsters/woolam_rococo/woolam_rococo_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 8,
+	"evolutions": [
+		"Alpalaine"
+	],
+	"tile_type": "Green",
+	"skill_name": "Graze",
+	"skill_note": "Graze",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Tiles By Type",
+					"type": "Berry",
+					"output": "tiles"
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

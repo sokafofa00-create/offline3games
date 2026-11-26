@@ -1,0 +1,82 @@
+{
+	"name": "Harebomb",
+	"collector_tag": "115",
+	"skins": [
+		{
+			"name": "Harebomb",
+			"sku": 12181,
+			"sprite": "match3battle/monsters/harebomb/harebomb_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/harebomb/spine/harebomb.webp",
+				"~/images/monsters/harebomb/spine/harebomb.json",
+				"~/images/monsters/harebomb/spine/harebomb.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Blue",
+	"skill_name": "Paint Bomb+",
+	"skill_note": "PaintBomb+",
+	"powers": [
+        {
+            "event": "Max Mana",
+            "seat": "Self",
+            "monster": "Self",
+            "effects": [
+                {
+                    "name": "Attack",
+                    "seat": "Opponent",
+                    "damage": 15
+                },
+                {
+                    "name": "Get Tiles By Type",
+                    "type": "Blue",
+                    "output": "blue_tiles"
+                },
+                {
+                    "name": "Get List Length",
+                    "list": "$blue_tiles",
+                    "output": "blue_tile_count"
+                },
+                {
+                    "name": "Is Greater Than",
+                    "a": "$blue_tile_count",
+                    "b": 1,
+                    "output": "harvest_blue_tiles"
+                },
+                {
+                    "name": "If",
+                    "case": "$harvest_blue_tiles",
+                    "effects": [
+                        {
+                            "name": "Harvest Tiles",
+                            "tiles": "$blue_tiles"
+                        }
+                    ]
+                },
+                {
+                    "name": "Else",
+                    "case": "$harvest_blue_tiles",
+                    "effects": [
+                        {
+                            "name": "Get Random Tiles",
+                            "w": 1,
+                            "h": 1,
+                            "amount": 3,
+                            "exclude": [
+                                "Blue",
+                                "Bomb"
+                            ],
+                            "output": "tiles_to_convert"
+                        },
+                        {
+                            "name": "Convert Tiles",
+                            "tiles": "$tiles_to_convert",
+                            "type": "Blue"
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}

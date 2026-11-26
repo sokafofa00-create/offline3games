@@ -1,0 +1,34 @@
+{	
+	"name": "Fursway",
+	"collector_tag": "030",
+	"skins": [{
+		"name": "Fursway",
+		"sku": 12028,
+		"sprite": "match3battle/monsters/fursway/fursway_static.webp"
+	}],
+	"mana": 4,
+	"tile_type": "Red",
+	"skill_name": "Maim+",
+	"skill_note": "Maim+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "Disable Monster While Active",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

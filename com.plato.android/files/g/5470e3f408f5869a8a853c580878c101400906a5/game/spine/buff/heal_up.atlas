@@ -1,0 +1,11 @@
+heal_up.webp
+size:554,554
+filter:Linear,Linear
+fx_line
+bounds:295,352,17,200
+offsets:1,14,20,231
+fx_ring
+bounds:2,261,291,291
+offsets:3,3,297,297
+heart
+bounds:2,2,274,257

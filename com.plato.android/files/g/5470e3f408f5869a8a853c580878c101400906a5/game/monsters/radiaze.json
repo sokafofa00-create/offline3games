@@ -1,0 +1,51 @@
+{	
+	"name": "Radiaze",
+	"collector_tag": "028",
+	"skins": [
+		{
+			"name": "Radiaze",
+			"sku": 12026,
+			"sprite": "match3battle/monsters/radiaze/radiaze_static.webp"
+		},
+		{
+			"name": "Dark Ops Radiaze",
+			"sku": 12182,
+			"sprite": "match3battle/monsters/radiaze_darkops/radiaze_darkops_static.webp"
+		}
+	],
+	"mana": 9,
+	"tile_type": "Yellow",
+	"skill_name": "Overload+",
+	"skill_note": "Overload+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Reduce Opponent Move 1"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 8,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

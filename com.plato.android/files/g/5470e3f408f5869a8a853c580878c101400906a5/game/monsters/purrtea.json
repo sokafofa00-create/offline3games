@@ -1,0 +1,188 @@
+{
+	"name": "Purrtea",
+	"collector_tag": "066",
+	"skins": [
+		{
+			"name": "Purrtea",
+			"sku": 12126,
+			"sprite": "match3battle/monsters/purrtea/purrtea_static.webp"
+		},
+		{
+			"name": "Prism Purrtea",
+			"sku": 12168,
+			"sprite": "match3battle/monsters/purrtea_prism/purrtea_prism_static.webp"
+		}
+	],
+	"mana": 6,
+	"tile_type": "Purple",
+	"skill_name": "Hot Tea+",
+	"skill_note": "Hot Tea+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "has_first_attack"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 6,
+					"output": "uses_bullet_first"
+				},
+				{
+					"name": "Not",
+					"input": "$uses_bullet_first",
+					"output": "is_single_attack"
+				},
+				{
+					"name": "And",
+					"a": "$has_first_attack",
+					"b": "$is_single_attack",
+					"output": "uses_attack_first"
+				},
+				{
+					"name": "If",
+					"case": "$uses_bullet_first",
+					"effects": [
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": 15
+						}
+					]
+				},
+				{
+					"name": "If",
+					"case": "$uses_attack_first",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 15
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "heal"
+				},
+				{
+					"name": "If",
+					"case": "$heal",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 15
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "attack_two"
+				},
+				{
+					"name": "If",
+					"case": "$attack_two",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 15
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "grant_mana"
+				},
+				{
+					"name": "If",
+					"case": "$grant_mana",
+					"effects": [
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Self",
+							"change": 3
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Ally",
+							"change": 3
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				}
+			]
+		}
+	]
+}

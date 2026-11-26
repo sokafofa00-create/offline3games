@@ -1,0 +1,40 @@
+{
+	"name": "Garbaric",
+	"collector_tag": "070",
+	"skins": [
+		{
+			"name": "Garbaric",
+			"sku": 12128,
+			"sprite": "match3battle/monsters/garbaric/garbaric_static.webp"
+		},
+		{
+			"name": "Shadow Garbaric",
+			"sku": 12190,
+			"sprite": "match3battle/monsters/garbaric_shadow/garbaric_shadow_static.webp"
+		}
+	],
+	"mana": 8,
+	"tile_type": "Blue",
+	"skill_name": "Drown+",
+	"skill_note": "Drown+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+                {
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Thrash",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

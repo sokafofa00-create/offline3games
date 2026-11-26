@@ -1,0 +1,57 @@
+{
+	"index": 10,
+	"name": "Timingo",
+	"collector_tag": "019",
+	"skins": [
+		{
+			"name": "Timingo",
+			"sku": 1101,
+			"sprite": "match3battle/monsters/timingo/timingo_static.webp",
+			"popup_sprite": "match3battle/monsters/timingo/timingo_popup.webp",
+			"hex_sprite": "match3battle/monsters/timingo/timingo_hex.webp",
+			"selection_status": "Hidden Unless Owned",
+			"label": "Rare",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Prism Timingo",
+			"sku": 12174,
+			"sprite": "match3battle/monsters/timingo_prism/timingo_prism_static.webp",
+			"popup_sprite": "match3battle/monsters/timingo_prism/timingo_prism_popup.webp",
+			"hex_sprite": "match3battle/monsters/timingo_prism/timingo_prism_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Flambagant"
+	],
+	"tile_type": "Red",
+	"tags": ["wings"],
+	"skill_name": "Hugs",
+	"skill_note": "Hugs",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Update Mana",
+					"seat": "Self",
+					"monster": "Ally",
+					"change": 2
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,171 @@
+{
+	"index": 11,
+	"name": "Criminook",
+	"collector_tag": "021",
+	"skins": [
+		{
+			"name": "Criminook",
+			"sku": 12020,
+			"sprite": "match3battle/monsters/criminook/criminook_static.webp",
+			"popup_sprite": "match3battle/monsters/criminook/criminook_popup.webp",
+			"hex_sprite": "match3battle/monsters/criminook/criminook_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Greench Criminook",
+			"sku": 12157,
+			"sprite": "match3battle/monsters/criminook_greench/criminook_greench_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/criminook_greench/spine/criminook_greench.webp",
+				"~/images/monsters/criminook_greench/spine/criminook_greench.json",
+				"~/images/monsters/criminook_greench/spine/criminook_greench.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/criminook_greench/criminook_greench_popup.webp",
+			"hex_sprite": "match3battle/monsters/criminook_greench/criminook_greench_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Bandicrook"
+	],
+	"tile_type": "Purple",
+	"tags": ["bushytail"],
+	"skill_name": "Pickpocket",
+	"skill_note": "Pickpocket",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Opponent",
+					"output": "berries"
+				},
+				{
+					"name": "Min",
+					"a": "$berries",
+					"b": 1,
+					"output": "stolen_berries"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$stolen_berries",
+					"b": 0,
+					"output": "successful_steal"
+				},
+				{
+					"name": "If",
+					"case": "$successful_steal",
+					"effects": [
+						{
+							"name": "Wait",
+							"seconds": 1
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Opponent",
+							"change": -1
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Opponent",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$enemy_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Red",
+							"outsideColor": "Green",
+							"scale": 1,
+							"wait": true
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"change": "$stolen_berries"
+						}
+					]
+				},
+				{
+					"name": "Get Monster Mana",
+					"seat": "Opponent",
+					"monster": "Most Mana",
+					"output": "mana"
+				},
+				{
+					"name": "Min",
+					"a": "$mana",
+					"b": 1,
+					"output": "stolen_mana"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$stolen_mana",
+					"b": 0,
+					"output": "successful_steal"
+				},
+				{
+					"name": "If",
+					"case": "$successful_steal",
+					"effects": [
+						{
+							"name": "Get Monster Node",
+							"seat": "Opponent",
+							"monster": "Most Mana",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Monster Node",
+							"seat": "Self",
+							"monster": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Opponent",
+							"monster": "Most Mana",
+							"change": -1
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$enemy_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "White",
+							"outsideColor": "Purple",
+							"scale": 1,
+							"wait": true
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Self",
+							"change": "$stolen_mana"
+						}
+					]
+				}
+			]
+		}
+	]
+}

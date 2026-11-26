@@ -1,0 +1,103 @@
+{
+	"name": "Echomento",
+	"collector_tag": "064",
+	"skins": [{
+		"name": "Echomento",
+		"sku": 12125,
+		"sprite": "match3battle/monsters/echomento/echomento_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/echomento/spine/echomento.webp",
+			"~/images/monsters/echomento/spine/echomento.json",
+			"~/images/monsters/echomento/spine/echomento.atlas"
+		  ]
+	}],
+	"mana": 6,
+	"tile_type": "Yellow",
+	"skill_name": "Screech+",
+	"skill_note": "Screech+",
+	"powers": [
+		{
+			"event": "Evolution",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+                {
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Echo",
+					"amount": 4
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Node",
+					"seat": "Self",
+					"monster": "Self",
+					"output": "monster_node"
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Echo",
+					"output": "echo_tiles"
+				},
+				{
+					"name": "For",
+					"list": "$echo_tiles",
+					"iterator": "echo_tile",
+					"effects": [
+						{
+							"name": "Get Tile Color",
+							"tile": "$echo_tile",
+							"output": "tile_color"
+						},
+						{
+							"name": "Get Tile Node",
+							"tile": "$echo_tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$monster_node",
+							"seconds": 0.4,
+							"insideColor": "$tile_color",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Get List Length",
+					"list": "$echo_tiles",
+					"output": "tile_amount"
+				},
+				{
+					"name": "Multiply",
+					"a": "$tile_amount",
+					"b": 5,
+					"output": "damage"
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": "$damage",
+					"wait": true
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$echo_tiles"
+				}
+			]
+		}
+	]
+}

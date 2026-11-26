@@ -1,0 +1,36 @@
+{
+	"name": "Voltarmour",
+	"collector_tag": "062",
+	"skins": [
+		{
+			"name": "Voltarmour",
+			"sku": 12124,
+			"sprite": "match3battle/monsters/voltarmour/voltarmour_static.webp"
+		},
+		{
+			"name": "Bad Romance Voltarmour",
+			"sku": 12183,
+			"sprite": "match3battle/monsters/voltarmour_badromance/voltarmour_badromance_static.webp"
+		}
+	],
+	"mana": 6,
+	"tile_type": "Yellow",
+	"skill_name": "Shellshock+",
+	"skill_note": "Shellshock+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Shield",
+					"charges": 5
+				}
+			]
+		}
+	]
+}

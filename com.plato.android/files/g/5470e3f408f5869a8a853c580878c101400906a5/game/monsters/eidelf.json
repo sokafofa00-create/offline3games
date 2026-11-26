@@ -1,0 +1,33 @@
+{	
+	"name": "Eidelf",
+	"collector_tag": "016",
+	"skins": [{
+		"name": "Eidelf",
+		"sku": 801,
+		"sprite": "match3battle/monsters/eidelf/eidelf_static.webp"
+	}],
+	"mana": 6,
+	"tile_type": "Green",
+	"skill_name": "Flower Dance+",
+	"skill_note": "Flower Dance+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Regen For 10",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

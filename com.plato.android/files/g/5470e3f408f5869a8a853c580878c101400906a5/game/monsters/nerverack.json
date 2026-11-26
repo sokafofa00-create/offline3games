@@ -1,0 +1,61 @@
+{
+	"index": 12,
+	"name": "Nerverack",
+	"collector_tag": "023",
+	"skins": [
+		{
+			"name": "Nerverack",
+			"sku": 12022,
+			"sprite": "match3battle/monsters/nerverack/nerverack_static.webp",
+			"popup_sprite": "match3battle/monsters/nerverack/nerverack_popup.webp",
+			"hex_sprite": "match3battle/monsters/nerverack/nerverack_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Prism Nerverack",
+			"sku": 12146,
+			"sprite": "match3battle/monsters/nerverack_prism/nerverack_prism_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/nerverack_prism/spine/nerverack_prism.webp",
+				"~/images/monsters/nerverack_prism/spine/nerverack_prism.json",
+				"~/images/monsters/nerverack_prism/spine/nerverack_prism.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/nerverack_prism/nerverack_prism_popup.webp",
+			"hex_sprite": "match3battle/monsters/nerverack_prism/nerverack_prism_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 9,
+	"evolutions": [
+		"Wreckore"
+	],
+	"tile_type": "Blue",
+	"tags": ["heavyweight"],
+	"skill_name": "Punish",
+	"skill_note": "Punish",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 30
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Reduce Move 1"
+				}
+			]
+		}
+	]
+}

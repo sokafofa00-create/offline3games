@@ -1,0 +1,78 @@
+{
+	"index": 42,
+	"name": "Slumbie",
+	"collector_tag": "087",
+	"skins": [
+		{
+			"name": "Slumbie",
+			"sku": 12138,
+			"sprite": "match3battle/monsters/slumbie/slumbie_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slumbie/spine/slumbie.webp",
+				"~/images/monsters/slumbie/spine/slumbie.json",
+				"~/images/monsters/slumbie/spine/slumbie.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/slumbie/slumbie_popup.webp",
+			"hex_sprite": "match3battle/monsters/slumbie/slumbie_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Forest Slumbie",
+			"sku": 12180,
+			"sprite": "match3battle/monsters/slumbie_forest/slumbie_forest_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slumbie_forest/spine/slumbie_forest.webp",
+				"~/images/monsters/slumbie_forest/spine/slumbie_forest.json",
+				"~/images/monsters/slumbie_forest/spine/slumbie_forest.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/slumbie_forest/slumbie_forest_popup.webp",
+			"hex_sprite": "match3battle/monsters/slumbie_forest/slumbie_forest_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+
+	],
+	"evolutions": [
+		"Slumbro"
+	],
+	"mana": 5,
+	"tile_type": "Blue",
+	"tags": ["chillax"],
+	"skill_name": "Snowball Fight",
+	"skill_note": "SnowballFight",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 2,
+					"output": "tiles",
+					"excludeEffects": ["GlitchGoo"],
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Snow"
+				}
+			]
+		}
+	]
+}

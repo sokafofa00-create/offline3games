@@ -1,0 +1,33 @@
+{	
+	"name": "Necrogeist",
+	"collector_tag": "031",
+	"skins": [{
+		"name": "Necrogeist",
+		"sku": 1001,
+		"sprite": "match3battle/monsters/necrogeist/necrogeist_static.webp"
+	}],
+	"mana": 9,
+	"tile_type": "Purple",
+	"skill_name": "Soul Curse+",
+	"skill_note": "Soul Curse+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "On Ability Damage Self For 15",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

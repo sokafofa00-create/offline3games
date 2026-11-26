@@ -1,0 +1,51 @@
+{
+	"name": "Madambrella",
+	"collector_tag": "078",
+	"skins": [
+		{
+			"name": "Madambrella",
+			"sku": 12132,
+			"sprite": "match3battle/monsters/madambrella/madambrella_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/madambrella/spine/madambrella.webp",
+				"~/images/monsters/madambrella/spine/madambrella.json",
+				"~/images/monsters/madambrella/spine/madambrella.atlas"
+			]
+		},
+		{
+			"name": "Sea-Maiden Madambrella",
+			"sku": 12148,
+			"sprite": "match3battle/monsters/madambrella_seamaiden/madambrella_seamaiden_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/madambrella_seamaiden/spine/madambrella_seamaiden.webp",
+				"~/images/monsters/madambrella_seamaiden/spine/madambrella_seamaiden.json",
+				"~/images/monsters/madambrella_seamaiden/spine/madambrella_seamaiden.atlas"
+			]
+		}
+	],
+	"mana": 7,
+	"tile_type": "Red",
+	"skill_name": "Fiery Twirl+",
+	"skill_note": "Fiery Twirl+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Burn",
+					"charges": 2
+				},
+                {
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "NoReflectShield",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

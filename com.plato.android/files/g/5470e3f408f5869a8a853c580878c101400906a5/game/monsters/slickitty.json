@@ -1,0 +1,64 @@
+{
+	"index": 4,
+	"name": "Slickitty",
+	"collector_tag": "007",
+	"skins": [
+		{
+			"name": "Slickitty",
+			"sku": 401,
+			"sprite": "match3battle/monsters/slickitty/slickitty_static.webp",
+			"popup_sprite": "match3battle/monsters/slickitty/slickitty_popup.webp",
+			"hex_sprite": "match3battle/monsters/slickitty/slickitty_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": false,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Slickitty",
+			"sku": 12166,
+			"sprite": "match3battle/monsters/slickitty_shadow/slickitty_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/slickitty_shadow/slickitty_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/slickitty_shadow/slickitty_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Axelraze"
+	],
+	"tile_type": "Yellow",
+	"skill_name": "Electroclaw",
+	"skill_note": "Electroclaw",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 2,
+					"h": 2,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

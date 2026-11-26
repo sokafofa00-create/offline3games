@@ -1,0 +1,58 @@
+{	
+	"name": "Magnooki",
+	"collector_tag": "012",
+	"skins": [
+		{
+			"name": "Magnooki",
+			"sku": 601,
+			"sprite": "match3battle/monsters/magnooki/magnooki_static.webp"
+		},
+		{
+			"name": "Shadow Magnooki",
+			"sku": 12173,
+			"sprite": "match3battle/monsters/magnooki_shadow/magnooki_shadow_static.webp"
+		}
+	],
+	"mana": 9,
+	"tile_type": "Red",
+	"skill_name": "Pyro Blitz+",
+	"skill_note": "Pyro Blitz+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 30
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 7,
+					"h": 1,
+					"amount": 1,
+					"output": "row"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 1,
+					"output": "column"
+				},
+				{
+					"name": "Combine Lists",
+					"a": "$row",
+					"b": "$column",
+					"output": "tiles"
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,88 @@
+{	
+	"name": "Alpalaine",
+	"collector_tag": "043",
+	"skins": [
+		{
+			"name": "Alpalaine",
+			"sku": 12032,
+			"sprite": "match3battle/monsters/alpalaine/alpalaine_static.webp"
+		},
+		{
+			"name": "Rococo Alpalaine",
+			"sku": 12179,
+			"sprite": "match3battle/monsters/alpalaine_rococo/alpalaine_rococo_static.webp"
+		}
+	],
+	"mana": 8,
+	"tile_type": "Green",
+	"skill_name": "Graze+",
+	"skill_note": "Graze+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Self",
+					"output": "berries"
+				},
+				{
+					"name": "Get Tiles By Type",
+					"type": "Berry",
+					"output": "tiles"
+				},
+				{
+					"name": "Get List Length",
+					"list": "$tiles",
+					"output": "to_harvest"
+				},
+				{
+					"name": "Add",
+					"a": "$berries",
+					"b": "$to_harvest",
+					"output": "total_berries"
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$total_berries",
+					"b": "%max_berries",
+					"output": "overflow"
+				},
+				{
+					"name": "If",
+					"case": "$overflow",
+					"effects": [
+						{
+							"name": "Subtract",
+							"a": "$total_berries",
+							"b": "%max_berries",
+							"output": "berries_difference"
+						},
+						{
+							"name": "Multiply",
+							"a": "$berries_difference",
+							"b": 10,
+							"output": "health"
+						},
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": "$health"
+						}
+					]
+				}
+			]
+		}
+	]
+}

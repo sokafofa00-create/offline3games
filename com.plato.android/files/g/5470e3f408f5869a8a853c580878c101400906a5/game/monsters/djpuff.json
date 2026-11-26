@@ -1,0 +1,38 @@
+{
+	"name": "DJ Puff",
+	"collector_tag": "076",
+	"skins": [{
+		"name": "DJ Puff",
+		"sku": 12131,
+		"sprite": "match3battle/monsters/djpuff/djpuff_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/djpuff/spine/djpuff.webp",
+			"~/images/monsters/djpuff/spine/djpuff.json",
+			"~/images/monsters/djpuff/spine/djpuff.atlas"
+		]
+	}],
+	"mana": 5,
+	"tile_type": "Purple",
+	"skill_name": "Distortion+",
+	"skill_note": "Distortion+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+                {
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Confusion",
+					"charges": 4
+				}
+			]
+		}
+	]
+}

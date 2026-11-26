@@ -1,0 +1,121 @@
+{
+	"name": "Crescemoth",
+	"collector_tag": "110",
+	"skins": [
+		{
+			"name": "Crescemoth",
+			"sku": 12161,
+			"sprite": "match3battle/monsters/crescemoth/crescemoth_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/crescemoth/spine/crescemoth.webp",
+				"~/images/monsters/crescemoth/spine/crescemoth.json",
+				"~/images/monsters/crescemoth/spine/crescemoth.atlas"
+			]
+		},
+		{
+			"name": "Rosequartz Crescemoth",
+			"sku": 12162,
+			"sprite": "match3battle/monsters/crescemoth_rosequartz/crescemoth_rosequartz_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/crescemoth_rosequartz/spine/crescemoth_rosequartz.webp",
+				"~/images/monsters/crescemoth_rosequartz/spine/crescemoth_rosequartz.json",
+				"~/images/monsters/crescemoth_rosequartz/spine/crescemoth_rosequartz.atlas"
+			]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Purple",
+	"skill_name": "Lunar Dust+",
+	"skill_note": "LunarDust+",
+	"powers": [
+		{
+			"event": "Evolution",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+                {
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Lunar Drain",
+					"amount": 3
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Lunar Gain",
+					"amount": 3
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Lunar Gain",
+						"Lunar Drain"
+					],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "Lunar Gain",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Lunar Drain",
+									"charges": 3
+								}
+							]
+						},
+						{
+							"case": "Lunar Drain",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Lunar Gain",
+									"charges": 3
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

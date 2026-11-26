@@ -1,0 +1,57 @@
+{
+	"name": "Zapion",
+	"collector_tag": "113",
+	"skins": [
+		{
+			"name": "Zapion",
+			"sku": 12170,
+			"sprite": "match3battle/monsters/zapion/zapion_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/zapion/spine/zapion.webp",
+				"~/images/monsters/zapion/spine/zapion.json",
+				"~/images/monsters/zapion/spine/zapion.atlas"
+			]
+		},
+		{
+			"name": "Subzero Zapion",
+			"sku": 12171,
+			"sprite": "match3battle/monsters/zapion_subzero/zapion_subzero_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/zapion_subzero/spine/zapion_subzero.webp",
+				"~/images/monsters/zapion_subzero/spine/zapion_subzero.json",
+				"~/images/monsters/zapion_subzero/spine/zapion_subzero.atlas"
+			]
+		}
+	],
+	"mana": 8,
+	"tile_type": "Yellow",
+	"skill_name": "Fatality+",
+	"skill_note": "Fatality+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+                {
+                    "name": "Add Monster Status",
+                    "seat": "Self",
+                    "monster": "Ally",
+                    "status": "Finish Him",
+					"charges": 3
+				},
+				{
+                    "name": "Update Mana",
+                    "seat": "Self",
+                    "monster": "Ally",
+                    "change": 2
+                }
+			]
+		}
+	]
+}

@@ -1,0 +1,45 @@
+{
+	"index": 40,
+	"name": "Ozzy",
+	"collector_tag": "083",
+	"skins": [
+		{
+			"name": "Ozzy",
+			"sku": 12135,
+			"sprite": "match3battle/monsters/ozzy/ozzy_static.webp",
+			"popup_sprite": "match3battle/monsters/ozzy/ozzy_popup.webp",
+			"hex_sprite": "match3battle/monsters/ozzy/ozzy_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Doomzy"
+	],
+	"mana": 7,
+	"tile_type": "Purple",
+	"skill_name": "Death Mark",
+	"skill_note": "DeathMark",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Death Mark",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

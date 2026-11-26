@@ -1,0 +1,45 @@
+{	
+	"name": "Wreckore",
+	"collector_tag": "024",
+	"skins": [
+		{
+			"name": "Wreckore",
+			"sku": 12022,
+			"sprite": "match3battle/monsters/wreckore/wreckore_static.webp"
+		},
+		{
+			"name": "Prism Wreckore",
+			"sku": 12146,
+			"sprite": "match3battle/monsters/wreckore_prism/wreckore_prism_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/wreckore_prism/spine/wreckore_prism.webp",
+				"~/images/monsters/wreckore_prism/spine/wreckore_prism.json",
+				"~/images/monsters/wreckore_prism/spine/wreckore_prism.atlas"
+			]
+		}
+	],
+	"mana": 9,
+	"tile_type": "Blue",
+	"skill_name": "Punish+",
+	"skill_note": "Punish+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 40
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Reduce Move 1",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

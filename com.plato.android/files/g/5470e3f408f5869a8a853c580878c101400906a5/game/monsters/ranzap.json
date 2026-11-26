@@ -1,0 +1,142 @@
+{
+	"name": "Ranzap",
+	"collector_tag": "049",
+	"skins": [
+		{
+			"name": "Ranzap",
+			"sku": 12035,
+			"sprite": "match3battle/monsters/ranzap/ranzap_static.webp"
+		},
+		{
+			"name": "Demiurge Ranzap",
+			"sku": 12160,
+			"sprite": "match3battle/monsters/ranzap_demiurge/ranzap_demiurge_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/ranzap_demiurge/spine/ranzap_demiurge.webp",
+				"~/images/monsters/ranzap_demiurge/spine/ranzap_demiurge.json",
+				"~/images/monsters/ranzap_demiurge/spine/ranzap_demiurge.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Yellow",
+	"skill_name": "Honey Ohm+",
+	"skill_note": "Honey Ohm+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Electric Honey",
+					"output": "charges"
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Electric Honey",
+					"amount": 0
+				},
+				{
+					"name": "Switch",
+					"input": "$charges",
+					"cases": [
+						{
+							"case": 0,
+							"effects": [
+								{
+									"name": "Attack",
+									"seat": "Opponent",
+									"damage": 5
+								},
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 2,
+									"output": "tiles",
+									"exclude": ["Bomb"]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						},
+						{
+							"case": 1,
+							"effects": [
+								{
+									"name": "Attack",
+									"seat": "Opponent",
+									"damage": 10
+								},
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 4,
+									"output": "tiles",
+									"exclude": ["Bomb"]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						},
+						{
+							"case": 2,
+							"effects": [
+								{
+									"name": "Attack",
+									"seat": "Opponent",
+									"damage": 15
+								},
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 6,
+									"output": "tiles",
+									"exclude": ["Bomb"]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						},
+						{
+							"case": 3,
+							"effects": [
+								{
+									"name": "Attack",
+									"seat": "Opponent",
+									"damage": 20
+								},
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 8,
+									"output": "tiles",
+									"exclude": ["Bomb"]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

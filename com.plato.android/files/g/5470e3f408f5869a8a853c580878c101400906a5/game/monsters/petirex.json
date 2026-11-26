@@ -1,0 +1,167 @@
+{
+	"index": 22,
+	"name": "Petirex",
+	"collector_tag": "046",
+	"skins": [
+		{
+			"name": "Petirex",
+			"sku": 12034,
+			"sprite": "match3battle/monsters/petirex/petirex_static.webp",
+			"popup_sprite": "match3battle/monsters/petirex/petirex_popup.webp",
+			"hex_sprite": "match3battle/monsters/petirex/petirex_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Bowshi Petirex",
+			"sku": 12164,
+			"sprite": "match3battle/monsters/petirex_bowshi/petirex_bowshi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/petirex_bowshi/spine/petirex_bowshi.webp",
+				"~/images/monsters/petirex_bowshi/spine/petirex_bowshi.json",
+				"~/images/monsters/petirex_bowshi/spine/petirex_bowshi.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/petirex_bowshi/petirex_bowshi_popup.webp",
+			"hex_sprite": "match3battle/monsters/petirex_bowshi/petirex_bowshi_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Rexsaur"
+	],
+	"tile_type": "Red",
+	"tags": ["heavyweight"],
+	"skill_name": "Rupture",
+	"skill_note": "Rupture",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 5,
+					"exclude": [
+						"Bomb"
+					],
+					"excludeEffects": true,
+					"output": "tiles"
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Ruptured"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Get Monster Node",
+					"seat": "Self",
+					"monster": "Self",
+					"output": "monster_node"
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Ruptured",
+					"output": "rupture_tiles"
+				},
+				{
+					"name": "For",
+					"list": "$rupture_tiles",
+					"iterator": "rupture_tile",
+					"effects": [
+						{
+							"name": "Get Tile Color",
+							"tile": "$rupture_tile",
+							"output": "tile_color"
+						},
+						{
+							"name": "Get Tile Node",
+							"tile": "$rupture_tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$monster_node",
+							"seconds": 0.4,
+							"insideColor": "$tile_color",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Get List Length",
+					"list": "$rupture_tiles",
+					"output": "tile_amount"
+				},
+				{
+					"name": "Multiply",
+					"a": "$tile_amount",
+					"b": 5,
+					"output": "damage"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$tile_amount",
+					"b": 0,
+					"output": "has_rupture"
+				},
+				{
+					"name": "If",
+					"case": "$has_rupture",
+					"effects": [
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": "$damage",
+							"wait": true
+						}
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$rupture_tiles"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 5,
+					"exclude": [
+						"Bomb"
+					],
+					"excludeEffects": true,
+					"output": "tiles"
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Ruptured"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,57 @@
+{
+	"index": 5,
+	"name": "Barbenin",
+	"collector_tag": "009",
+	"skins": [
+		{
+			"name": "Barbenin",
+			"sku": 501,
+			"sprite": "match3battle/monsters/barbenin/barbenin_static.webp",
+			"popup_sprite": "match3battle/monsters/barbenin/barbenin_popup.webp",
+			"hex_sprite": "match3battle/monsters/barbenin/barbenin_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": false,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Barbenin",
+			"sku": 12172,
+			"sprite": "match3battle/monsters/barbenin_shadow/barbenin_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/barbenin_shadow/barbenin_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/barbenin_shadow/barbenin_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Scoprikon"
+	],
+	"tile_type": "Purple",
+	"tags": ["aquatic"],
+	"skill_name": "Psycho Bite",
+	"skill_note": "Psycho Bite",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Update Mana",
+					"seat": "Opponent",
+					"monster": "All",
+					"change": -2
+				}
+			]
+		}
+	]
+}

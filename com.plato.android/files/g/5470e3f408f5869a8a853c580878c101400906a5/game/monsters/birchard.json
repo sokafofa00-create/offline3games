@@ -1,0 +1,32 @@
+{	
+	"name": "Birchard",
+	"collector_tag": "026",
+	"skins": [{
+		"name": "Birchard",
+		"sku": 12024,
+		"sprite": "match3battle/monsters/birchard/birchard_static.webp"
+	}],
+	"mana": 6,
+	"tile_type": "Green",
+	"skill_name": "Harvest+",
+	"skill_note": "Harvest+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Update Player Berries",
+					"seat": "Self",
+					"change": 3
+				}
+			]
+		}
+	]
+}

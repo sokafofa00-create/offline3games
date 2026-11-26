@@ -1,0 +1,131 @@
+{
+	"index": 50,
+	"name": "Hellkid",
+	"collector_tag": "101",
+	"skins": [
+		{
+			"name": "Hellkid",
+			"sku": 12155,
+			"sprite": "match3battle/monsters/hellkid/hellkid_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/hellkid/spine/hellkid.webp",
+				"~/images/monsters/hellkid/spine/hellkid.json",
+				"~/images/monsters/hellkid/spine/hellkid.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/hellkid/hellkid_popup.webp",
+			"hex_sprite": "match3battle/monsters/hellkid/hellkid_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Dreadhoof"
+	],
+	"tile_type": "Red",
+	"tags": ["undead"],
+	"skill_name": "Soulburn",
+	"skill_note": "Soulburn",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Count Unique Player Statuses",
+					"seat": "Opponent",
+					"output": "scount"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$scount",
+					"b": 0,
+					"output": "has_status"
+				},
+				{
+					"name": "If",
+					"case": "$has_status",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 20
+						}
+					]
+				},
+				{
+					"name": "Else",
+					"case": "$has_status",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 10
+						}
+					]
+				},
+				{
+					"name": "Get Monster Mana",
+					"seat": "Opponent",
+					"monster": "Most Mana",
+					"output": "mana"
+				},
+				{
+					"name": "Min",
+					"a": "$mana",
+					"b": 1,
+					"output": "stolen_mana"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$stolen_mana",
+					"b": 0,
+					"output": "successful_steal"
+				},
+				{
+					"name": "If",
+					"case": "$successful_steal",
+					"effects": [
+						{
+							"name": "Get Monster Node",
+							"seat": "Opponent",
+							"monster": "Most Mana",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Monster Node",
+							"seat": "Self",
+							"monster": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Opponent",
+							"monster": "Most Mana",
+							"change": -1
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$enemy_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "White",
+							"outsideColor": "Purple",
+							"scale": 1,
+							"wait": true
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Self",
+							"change": "$stolen_mana"
+						}
+					]
+				}
+			]
+		}
+	]
+}

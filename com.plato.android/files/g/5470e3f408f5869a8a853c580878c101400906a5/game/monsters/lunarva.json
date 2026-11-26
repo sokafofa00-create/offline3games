@@ -1,0 +1,129 @@
+{
+	"index": 54,
+	"name": "Lunarva",
+	"collector_tag": "109",
+	"skins": [
+		{
+			"name": "Lunarva",
+			"sku": 12161,
+			"sprite": "match3battle/monsters/lunarva/lunarva_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lunarva/spine/lunarva.webp",
+				"~/images/monsters/lunarva/spine/lunarva.json",
+				"~/images/monsters/lunarva/spine/lunarva.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/lunarva/lunarva_popup.webp",
+			"hex_sprite": "match3battle/monsters/lunarva/lunarva_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Rosequartz Lurnava",
+			"sku": 12162,
+			"sprite": "match3battle/monsters/lunarva_rosequartz/lunarva_rosequartz_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lunarva_rosequartz/spine/lunarva_rosequartz.webp",
+				"~/images/monsters/lunarva_rosequartz/spine/lunarva_rosequartz.json",
+				"~/images/monsters/lunarva_rosequartz/spine/lunarva_rosequartz.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/lunarva_rosequartz/lunarva_rosequartz_popup.webp",
+			"hex_sprite": "match3battle/monsters/lunarva_rosequartz/lunarva_rosequartz_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"evolutions": [
+		"Crescemoth"
+	],
+	"mana": 6,
+	"tile_type": "Purple",
+	"tags": ["wings", "insect"],
+	"skill_name": "Lunar Dust",
+	"skill_note": "LunarDust",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Lunar Gain",
+					"charges": 2
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Lunar Gain",
+						"Lunar Drain"
+					],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "Lunar Gain",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Lunar Drain",
+									"charges": 2
+								}
+							]
+						},
+						{
+							"case": "Lunar Drain",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Lunar Gain",
+									"charges": 2
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,40 @@
+{	
+	"name": "Scoprikon",
+	"collector_tag": "010",
+	"skins": [
+		{
+			"name": "Scoprikon",
+			"sku": 501,
+			"sprite": "match3battle/monsters/scoprikon/scoprikon_static.webp"
+		},
+				{
+			"name": "Shadow Scoprikon",
+			"sku": 12172,
+			"sprite": "match3battle/monsters/scoprikon_shadow/scoprikon_shadow_static.webp"
+		}
+	],
+	"mana": 6,
+	"tile_type": "Purple",
+	"skill_name": "Psycho Bite+",
+	"skill_note": "Psycho Bite+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Update Mana",
+					"seat": "Opponent",
+					"monster": "All",
+					"change": -3
+				}
+			]
+		}
+	]
+}

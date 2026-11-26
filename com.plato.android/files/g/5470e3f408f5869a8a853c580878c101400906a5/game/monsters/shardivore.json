@@ -1,0 +1,47 @@
+{	
+	"name": "Shardivore",
+	"collector_tag": "014",
+	"skins": [
+		{
+			"name": "Shardivore",
+			"sku": 701,
+			"sprite": "match3battle/monsters/shardivore/shardivore_static.webp"
+		},
+		{
+			"name": "Shadow Shardivore",
+			"sku": 12167,
+			"sprite": "match3battle/monsters/shardivore_shadow/shardivore_shadow_static.webp"
+		}
+	],
+	"mana": 8,
+	"tile_type": "Blue",
+	"skill_name": "Aqua Blast+",
+	"skill_note": "Aqua Blast+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 4,
+					"exclude": ["Blue"],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Blue"
+				}
+			]
+		}
+	]
+}

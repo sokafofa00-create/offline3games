@@ -1,0 +1,53 @@
+{
+	"name": "Pinathotlada",
+	"collector_tag": "060",
+	"skins": [
+		{
+			"name": "Pinathotlada",
+			"sku": 12123,
+			"sprite": "match3battle/monsters/pinathotlada/pinathotlada_static.webp"
+		},
+		{
+			"name": "Badam Pinathotlada",
+			"sku": 12143,
+			"sprite": "match3battle/monsters/pinathotlada_badam/pinathotlada_badam_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/pinathotlada_badam/spine/pinathotlada_badam.webp",
+				"~/images/monsters/pinathotlada_badam/spine/pinathotlada_badam.json",
+				"~/images/monsters/pinathotlada_badam/spine/pinathotlada_badam.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Green",
+	"skill_name": "Fruit Festival+",
+	"skill_note": "Fruit Festival+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15,
+					"wait": true
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 4,
+					"exclude": ["Berry"],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Berry"
+				}
+			]
+		}
+	]
+}

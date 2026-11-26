@@ -1,0 +1,83 @@
+{
+	"index": 2,
+	"name": "Pelijet",
+	"collector_tag": "003",
+	"skins": [
+		{
+			"name": "Pelijet",
+			"sku": 201,
+			"sprite": "match3battle/monsters/pelijet/pelijet_static.webp",
+			"popup_sprite": "match3battle/monsters/pelijet/pelijet_popup.webp",
+			"hex_sprite": "match3battle/monsters/pelijet/pelijet_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": false,
+			"type": "Base"
+		},
+		{
+			"name": "Garuda Pelijet",
+			"sku": 12152,
+			"sprite": "match3battle/monsters/pelijet_garuda/pelijet_garuda_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/pelijet_garuda/spine/pelijet_garuda.webp",
+				"~/images/monsters/pelijet_garuda/spine/pelijet_garuda.json",
+				"~/images/monsters/pelijet_garuda/spine/pelijet_garuda.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/pelijet_garuda/pelijet_garuda_popup.webp",
+			"hex_sprite": "match3battle/monsters/pelijet_garuda/pelijet_garuda_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		},
+		{
+			"name": "Witch Pelijet",
+			"sku": 12188,
+			"sprite": "match3battle/monsters/pelijet_witch/pelijet_witch_static.webp",
+			"popup_sprite": "match3battle/monsters/pelijet_witch/pelijet_witch_popup.webp",
+			"hex_sprite": "match3battle/monsters/pelijet_witch/pelijet_witch_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+
+	],
+	"mana": 6,
+	"evolutions": [
+		"Sephanix"
+	],
+	"tile_type": "Blue",
+	"tags": ["wings"],
+	"skill_name": "Hydro Rush",
+	"skill_note": "Hydro Rush",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 3,
+					"exclude": [
+						"Blue"
+					],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Blue"
+				}
+			]
+		}
+	]
+}

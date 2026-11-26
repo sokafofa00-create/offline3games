@@ -1,0 +1,46 @@
+{	
+	"name": "Lulabaa",
+	"collector_tag": "036",
+	"skins": [
+		{
+			"name": "Lulabaa",
+			"sku": 12030,
+			"sprite": "match3battle/monsters/lulabaa/lulabaa_static.webp"
+		},
+		{
+			"name": "Oracle Lulabaa",
+			"sku": 12153,
+			"sprite": "match3battle/monsters/lulabaa_oracle/lulabaa_oracle_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lulabaa_oracle/spine/lulabaa_oracle.webp",
+				"~/images/monsters/lulabaa_oracle/spine/lulabaa_oracle.json",
+				"~/images/monsters/lulabaa_oracle/spine/lulabaa_oracle.atlas"
+			]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Purple",
+	"skill_name": "Dream Drain+",
+	"skill_note": "Dream Drain+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "On Move Status Reduce Mana For 2",
+					"charges": 4
+				}
+			]
+		}
+	]
+}

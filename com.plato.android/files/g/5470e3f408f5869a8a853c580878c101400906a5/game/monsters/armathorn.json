@@ -1,0 +1,272 @@
+{
+	"name": "Armathorn",
+	"collector_tag": "058",
+	"skins": [
+		{
+			"name": "Armathorn",
+			"sku": 12122,
+			"sprite": "match3battle/monsters/armathorn/armathorn_static.webp"
+		}
+	],
+	"mana": 4,
+	"tile_type": "Green",
+	"skill_name": "Double-barrel",
+	"skill_note": "Double-barrel",
+	"powers": [
+		{
+			"event": "Evolution",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Ammo",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 4,
+					"output": "reduce_ammo"
+				},
+				{
+					"name": "If",
+					"case": "$reduce_ammo",
+					"effects": [
+						{
+							"name": "Update Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Ammo",
+							"amount": 4
+						},
+						{
+							"name": "Subtract",
+							"a": "$charges",
+							"b": 4,
+							"output": "refill_amount"
+						},
+						{
+							"name": "Get Random Tiles",
+							"w": 1,
+							"h": 1,
+							"amount": "$refill_amount",
+							"exclude": ["Bomb"],
+							"excludeEffects": true,
+							"output": "tiles"
+						},
+						{
+							"name": "Add Tile Effect",
+							"tiles": "$tiles",
+							"effect": "Ammo"
+						}
+					]
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Ammo",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "has_ammo"
+				},
+				{
+					"name": "Do",
+					"while": "has_ammo",
+					"effects": [
+						{
+							"name": "Play Sound",
+							"key": "gun_shot"
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Opponent",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Monster Node",
+							"seat": "Self",
+							"monster": "Self",
+							"output": "monster_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$monster_node",
+							"end": "$enemy_node",
+							"seconds": 0.1,
+							"insideColor": "Green",
+							"outsideColor": "Red",
+							"wait": false
+						},
+						{
+							"name": "Is Equal To",
+							"a": "$charges",
+							"b": 1,
+							"output": "is_last_ammo"
+						},
+						{
+							"name": "Is Greater Than",
+							"a": "$charges",
+							"b": 1,
+							"output": "is_not_last_ammo"
+						},
+						{
+							"name": "If",
+							"case": "$is_last_ammo",
+							"effects": [
+								{
+									"name": "Final Attack",
+									"seat": "Opponent",
+									"damage": 10,
+									"disableAnim": true
+								}
+							]
+						},
+						{
+							"name": "If",
+							"case": "$is_not_last_ammo",
+							"effects": [
+								{
+									"name": "Bullet Attack",
+									"seat": "Opponent",
+									"damage": 10,
+									"disableAnim": true
+								}
+							]
+						},
+						{
+							"name": "Update Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Ammo",
+							"change": -1,
+							"waitTime": 250
+						},
+						{
+							"name": "Get Monster Status Charges",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Ammo",
+							"output": "charges"
+						},
+						{
+							"name": "Is Greater Than",
+							"a": "$charges",
+							"b": 0,
+							"output": "has_ammo"
+						}
+					]
+				},
+				{
+					"name": "Get Monsters",
+					"output": "monsters"
+				},
+				{
+					"name": "Filter",
+					"list": "$monsters",
+					"filter": "has_ammo_status",
+					"output": "monsters_with_ammo",
+					"effects": [
+						{
+							"name": "Get Monster Status Charges",
+							"entity": "$element",
+							"status": "Ammo",
+							"output": "charges"
+						},
+						{
+							"name": "Is Greater Than",
+							"a": "$charges",
+							"b": -1,
+							"output": "has_ammo_status"
+						}
+					]
+				},
+				{
+					"name": "Get List Length",
+					"list": "$monsters_with_ammo",
+					"output": "ammo_drop_multiplier"
+				},
+				{
+					"name": "Multiply",
+					"a": 4,
+					"b": "$ammo_drop_multiplier",
+					"output": "max_ammo"
+				},
+				{
+					"name": "Set",
+					"value": 0,
+					"output": "monsters_charges"
+				},
+				{
+					"name": "For",
+					"iterator": "monster",
+					"list": "$monsters_with_ammo",
+					"effects": [
+						{
+							"name": "Get Monster Status Charges",
+							"entity": "$monster",
+							"status": "Ammo",
+							"output": "monster_charge"
+						},
+						{
+							"name": "Add",
+							"a": "$monster_charge",
+							"b": "$monsters_charges",
+							"output": "monsters_charges"
+						}
+					]
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Ammo",
+					"output": "ammo_tiles"
+				},
+				{
+					"name": "Get List Length",
+					"list": "$ammo_tiles",
+					"output": "ammo_on_board"
+				},
+				{
+					"name": "Subtract",
+					"a": "$max_ammo",
+					"b": "$monsters_charges",
+					"output": "max_ammo"
+				},
+				{
+					"name": "Subtract",
+					"a": "$max_ammo",
+					"b": "$ammo_on_board",
+					"output": "amount_to_drop"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": "$amount_to_drop",
+					"excludeEffects": true,
+					"exclude": ["Bomb"],
+					"output": "refill_tiles"
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$refill_tiles",
+					"effect": "Ammo"
+				}
+			]
+		}
+	]
+}

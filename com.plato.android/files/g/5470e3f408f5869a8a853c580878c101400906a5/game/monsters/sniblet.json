@@ -1,0 +1,68 @@
+{
+	"index": 47,
+	"name": "Sniblet",
+	"collector_tag": "095",
+	"skins": [
+		{
+			"name": "Sniblet",
+			"sku": 12147,
+			"sprite": "match3battle/monsters/sniblet/sniblet_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/sniblet/spine/sniblet.webp",
+				"~/images/monsters/sniblet/spine/sniblet.json",
+				"~/images/monsters/sniblet/spine/sniblet.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/sniblet/sniblet_popup.webp",
+			"hex_sprite": "match3battle/monsters/sniblet/sniblet_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Prism Sniblet",
+			"sku": 12169,
+			"sprite": "match3battle/monsters/sniblet_prism/sniblet_prism_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/sniblet_prism/spine/sniblet_prism.webp",
+				"~/images/monsters/sniblet_prism/spine/sniblet_prism.json",
+				"~/images/monsters/sniblet_prism/spine/sniblet_prism.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/sniblet_prism/sniblet_prism_popup.webp",
+			"hex_sprite": "match3battle/monsters/sniblet_prism/sniblet_prism_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Inknight"
+	],
+	"tile_type": "Purple",
+	"tags": ["shell"],
+	"skill_name": "Dry Well",
+	"skill_note": "DryWell",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "Dry Well",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

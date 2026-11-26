@@ -1,0 +1,33 @@
+{
+	"name": "Doomzy",
+	"collector_tag": "084",
+	"skins": [{
+		"name": "Doomzy",
+		"sku": 12135,
+		"sprite": "match3battle/monsters/doomzy/doomzy_static.webp"
+	}],
+	"mana": 7,
+	"tile_type": "Purple",
+	"skill_name": "Death Mark+",
+	"skill_note": "DeathMark+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Death Mark",
+					"charges": 4
+				}
+			]
+		}			
+	]
+}

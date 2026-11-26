@@ -1,0 +1,52 @@
+{
+	"index": 53,
+	"name": "Hothoof",
+	"collector_tag": "107",
+	"skins": [
+		{
+			"name": "Hothoof",
+			"sku": 12159,
+			"sprite": "match3battle/monsters/hothoof/hothoof_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/hothoof/spine/hothoof.webp",
+				"~/images/monsters/hothoof/spine/hothoof.json",
+				"~/images/monsters/hothoof/spine/hothoof.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/hothoof/hothoof_popup.webp",
+			"hex_sprite": "match3battle/monsters/hothoof/hothoof_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Lavasteed"
+	],
+	"tile_type": "Red",
+	"tags": ["undead"],
+	"skill_name": "Eruption Kick",
+	"skill_note": "EruptionKick",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+                    "name": "Add Monster Status",
+                    "seat": "Self",
+                    "monster": "Self",
+                    "status": "Eruption",
+                    "charges": 1
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				}
+			]
+		}
+	]
+}

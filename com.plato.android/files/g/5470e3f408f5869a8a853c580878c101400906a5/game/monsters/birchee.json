@@ -1,0 +1,45 @@
+{
+	"index": 13,
+	"name": "Birchee",
+	"collector_tag": "025",
+	"skins": [
+		{
+			"name": "Birchee",
+			"sku": 12024,
+			"sprite": "match3battle/monsters/birchee/birchee_static.webp",
+			"popup_sprite": "match3battle/monsters/birchee/birchee_popup.webp",
+			"hex_sprite": "match3battle/monsters/birchee/birchee_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Birchard"
+	],
+	"tile_type": "Green",
+	"tags": ["nature"],
+	"skill_name": "Harvest",
+	"skill_note": "Harvest",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Update Player Berries",
+					"seat": "Self",
+					"change": 1
+				}
+			]
+		}
+	]
+}

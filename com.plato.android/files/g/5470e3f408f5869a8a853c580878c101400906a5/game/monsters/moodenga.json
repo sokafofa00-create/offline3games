@@ -1,0 +1,165 @@
+{
+	"index": 41,
+	"name": "Moodenga",
+	"collector_tag": "085",
+	"skins": [
+		{
+			"name": "Moodenga",
+			"sku": 12136,
+			"sprite": "match3battle/monsters/moodenga/moodenga_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/moodenga/spine/moodenga.webp",
+				"~/images/monsters/moodenga/spine/moodenga.json",
+				"~/images/monsters/moodenga/spine/moodenga.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/moodenga/moodenga_popup.webp",
+			"hex_sprite": "match3battle/monsters/moodenga/moodenga_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Melonpan Moodenga",
+			"sku": 12178,
+			"sprite": "match3battle/monsters/moodenga_melonpan/moodenga_melonpan_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/moodenga_melonpan/spine/moodenga_melonpan.webp",
+				"~/images/monsters/moodenga_melonpan/spine/moodenga_melonpan.json",
+				"~/images/monsters/moodenga_melonpan/spine/moodenga_melonpan.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/moodenga_melonpan/moodenga_melonpan_popup.webp",
+			"hex_sprite": "match3battle/monsters/moodenga_melonpan/moodenga_melonpan_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Mootabak"
+	],
+	"tile_type": "Blue",
+	"tags": ["heavyweight"],
+	"skill_name": "Violence",
+	"skill_note": "Violence",
+	"powers": [
+		{
+			"event": "Turn Start",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Player Health",
+					"seat": "Self",
+					"output": "health"
+				},
+				{
+					"name": "Is Less Than",
+					"a": "$health",
+					"b": 31,
+					"output": "low_hp"
+				},
+				{
+					"name": "Monster Has Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Berserk",
+					"output": "has_berserk"
+				},
+				{
+					"name": "Not",
+					"input": "$has_berserk",
+					"output": "does_not_have_berserk"
+				},
+				{
+					"name": "And",
+					"a": "$low_hp",
+					"b": "$does_not_have_berserk",
+					"output": "needs_berserk"
+				},
+				{
+					"name": "If",
+					"case": "$needs_berserk",
+					"effects": [
+						{
+							"name": "Add Monster Status",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Berserk"
+						},
+						{
+							"name": "Set Monster Animation Keys",
+							"seat": "Self",
+							"monster": "Self",
+							"keys": {
+								"idle": "idle_low_HP"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Player Health",
+					"seat": "Self",
+					"output": "health"
+				},
+				{
+					"name": "Is Less Than",
+					"a": "$health",
+					"b": 31,
+					"output": "low_hp"
+				},
+				{
+					"name": "If",
+					"case": "$low_hp",
+					"effects": [
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": 5
+						},
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": 5
+						},
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": 5
+						},
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 5
+						}
+					]
+				},
+				{
+					"name": "Else",
+					"case": "$low_hp",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 15
+						},
+						{
+							"name": "Add Player Status",
+							"seat": "Opponent",
+							"status": "Reduce Move 1",
+							"charges": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

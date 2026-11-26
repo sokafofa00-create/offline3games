@@ -1,0 +1,41 @@
+{
+	"name": "Serphina",
+	"collector_tag": "094",
+	"skins": [{
+		"name": "Serphina",
+		"sku": 12141,
+		"sprite": "match3battle/monsters/serphina/serphina_static.webp"
+	}],
+	"mana": 9,
+	"tile_type": "Purple",
+	"skill_name": "Gold Fortune+",
+	"skill_note": "GoldFortune+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Prosper",
+					"charges": 2
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Ally",
+					"status": "Prosper",
+					"charges": 2
+				}
+			]
+		}			
+	]
+}

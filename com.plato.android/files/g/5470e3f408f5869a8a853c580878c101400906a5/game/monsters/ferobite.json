@@ -1,0 +1,47 @@
+{
+	"index": 15,
+	"name": "Ferobite",
+	"collector_tag": "029",
+	"skins": [
+		{
+			"name": "Ferobite",
+			"sku": 12028,
+			"sprite": "match3battle/monsters/ferobite/ferobite_static.webp",
+			"popup_sprite": "match3battle/monsters/ferobite/ferobite_popup.webp",
+			"hex_sprite": "match3battle/monsters/ferobite/ferobite_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Fursway"
+	],
+	"tile_type": "Red",
+	"tags": ["bushytail"],
+	"skill_name": "Maim",
+	"skill_note": "Maim",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "Disable Monster While Active",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,53 @@
+{
+	"index": 29,
+	"name": "Voltshard",
+	"collector_tag": "061",
+	"skins": [
+		{
+			"name": "Voltshard",
+			"sku": 12124,
+			"sprite": "match3battle/monsters/voltshard/voltshard_static.webp",
+			"popup_sprite": "match3battle/monsters/voltshard/voltshard_popup.webp",
+			"hex_sprite": "match3battle/monsters/voltshard/voltshard_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Bad Romance Voltshard",
+			"sku": 12183,
+			"sprite": "match3battle/monsters/voltshard_badromance/voltshard_badromance_static.webp",
+			"popup_sprite": "match3battle/monsters/voltshard_badromance/voltshard_badromance_popup.webp",
+			"hex_sprite": "match3battle/monsters/voltshard_badromance/voltshard_badromance_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Voltarmour"
+	],
+	"tile_type": "Yellow",
+	"tags": ["shell"],
+	"skill_name": "Shellshock",
+	"skill_note": "Shellshock",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Shield",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

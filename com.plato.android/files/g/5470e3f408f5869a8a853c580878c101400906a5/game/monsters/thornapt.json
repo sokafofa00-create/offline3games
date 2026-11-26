@@ -1,0 +1,32 @@
+{	
+	"name": "Thornapt",
+	"collector_tag": "040",
+	"skins": [{
+		"name": "Thornapt",
+		"sku": 12031,
+		"sprite": "match3battle/monsters/thornapt/thornapt_static.webp"
+	}],
+	"mana": 6,
+	"tile_type": "Green",
+	"skill_name": "Regenerate",
+	"skill_note": "Regenerate",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 20
+				}
+			]
+		}
+	]
+}

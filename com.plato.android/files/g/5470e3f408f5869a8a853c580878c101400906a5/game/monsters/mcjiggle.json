@@ -1,0 +1,50 @@
+{
+	"index": 36,
+	"name": "MC Jiggle",
+	"collector_tag": "075",
+	"skins": [
+		{
+			"name": "MC Jiggle",
+			"sku": 12131,
+			"sprite": "match3battle/monsters/mcjiggle/mcjiggle_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/mcjiggle/spine/mcjiggle.webp",
+				"~/images/monsters/mcjiggle/spine/mcjiggle.json",
+				"~/images/monsters/mcjiggle/spine/mcjiggle.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/mcjiggle/mcjiggle_popup.webp",
+			"hex_sprite": "match3battle/monsters/mcjiggle/mcjiggle_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 5,
+	"evolutions": [
+		"DJ Puff"
+	],
+	"tile_type": "Purple",
+	"skill_name": "Distortion",
+	"skill_note": "Distortion",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Confusion",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

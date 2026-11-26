@@ -1,0 +1,51 @@
+{	
+	"name": "Phirapt",
+	"collector_tag": "038",
+	"skins": [{
+		"name": "Phirapt",
+		"sku": 12031,
+		"sprite": "match3battle/monsters/phirapt/phirapt_static.webp"
+	}],
+	"mana": 7,
+	"tile_type": "Red",
+	"skill_name": "Engulf",
+	"skill_note": "Engulf",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 7,
+					"h": 1,
+					"amount": 1,
+					"output": "row"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 1,
+					"output": "column"
+				},
+				{
+					"name": "Combine Lists",
+					"a": "$row",
+					"b": "$column",
+					"output": "to_harvest"
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$to_harvest"
+				}
+			]
+		}
+	]
+}

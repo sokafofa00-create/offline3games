@@ -1,0 +1,50 @@
+{	
+	"name": "Noctynx",
+	"collector_tag": "104",
+	"skins": [
+		{
+			"name": "Noctynx",
+			"sku": 12156,
+			"sprite": "match3battle/monsters/noctynx/noctynx_static.webp",
+			"spine_bundle": [
+					"match3battle/monsters/noctynx/spine/noctynx.webp",
+					"~/images/monsters/noctynx/spine/noctynx.json",
+					"~/images/monsters/noctynx/spine/noctynx.atlas"
+			  ]
+		},
+		{
+			"name": "Horangi Noctynx",
+			"sku": 12185,
+			"sprite": "match3battle/monsters/noctynx_horangi/noctynx_horangi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/noctynx_horangi/spine/noctynx_horangi.webp",
+				"~/images/monsters/noctynx_horangi/spine/noctynx_horangi.json",
+				"~/images/monsters/noctynx_horangi/spine/noctynx_horangi.atlas"
+			]
+		}
+	],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"skill_name": "Shadow Step+",
+	"skill_note": "ShadowStep+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Evasion",
+					"charges": 2
+				}
+			]
+		}			
+	]	
+}

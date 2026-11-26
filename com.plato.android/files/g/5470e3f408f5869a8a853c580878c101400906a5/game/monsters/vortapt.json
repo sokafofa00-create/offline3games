@@ -1,0 +1,40 @@
+{	
+	"name": "Vortapt",
+	"collector_tag": "039",
+	"skins": [{
+		"name": "Vortapt",
+		"sku": 12031,
+		"sprite": "match3battle/monsters/vortapt/vortapt_static.webp"
+	}],
+	"mana": 6,
+	"tile_type": "Blue",
+	"skill_name": "Tidal Surge",
+	"skill_note": "Tidal Surge",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 4,
+					"exclude": ["Blue"],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Blue"
+				}
+			]
+		}
+	]
+}

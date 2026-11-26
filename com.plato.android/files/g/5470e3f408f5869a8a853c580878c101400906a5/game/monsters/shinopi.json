@@ -1,0 +1,73 @@
+{
+	"index": 54,
+	"name": "Shinopi",
+	"collector_tag": "112",
+	"skins": [
+		{
+			"name": "Shinopi",
+			"sku": 12170,
+			"sprite": "match3battle/monsters/shinopi/shinopi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/shinopi/spine/shinopi.webp",
+				"~/images/monsters/shinopi/spine/shinopi.json",
+				"~/images/monsters/shinopi/spine/shinopi.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/shinopi/shinopi_popup.webp",
+			"hex_sprite": "match3battle/monsters/shinopi/shinopi_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Subzero Shinopi",
+			"sku": 12171,
+			"sprite": "match3battle/monsters/shinopi_subzero/shinopi_subzero_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/shinopi_subzero/spine/shinopi_subzero.webp",
+				"~/images/monsters/shinopi_subzero/spine/shinopi_subzero.json",
+				"~/images/monsters/shinopi_subzero/spine/shinopi_subzero.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/shinopi_subzero/shinopi_subzero_popup.webp",
+			"hex_sprite": "match3battle/monsters/shinopi_subzero/shinopi_subzero_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"evolutions": [
+		"Zapion"
+	],
+	"mana": 8,
+	"tile_type": "Yellow",
+	"skill_name": "Fatality",
+	"skill_note": "Fatality",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+                {
+                    "name": "Add Monster Status",
+                    "seat": "Self",
+                    "monster": "Ally",
+                    "status": "Finish Him",
+					"charges": 2
+				},
+				{
+                    "name": "Update Mana",
+                    "seat": "Self",
+                    "monster": "Ally",
+                    "change": 1
+                }
+			]
+		}
+	]
+}

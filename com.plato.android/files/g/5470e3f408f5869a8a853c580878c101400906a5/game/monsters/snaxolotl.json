@@ -1,0 +1,52 @@
+{
+	"index": 32,
+	"name": "Snaxolotl",
+	"collector_tag": "067",
+	"skins": [
+		{
+			"name": "Snaxolotl",
+			"sku": 12127,
+			"sprite": "match3battle/monsters/snaxolotl/snaxolotl_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/snaxolotl/spine/snaxolotl.webp",
+				"~/images/monsters/snaxolotl/spine/snaxolotl.json",
+				"~/images/monsters/snaxolotl/spine/snaxolotl.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/snaxolotl/snaxolotl_popup.webp",
+			"hex_sprite": "match3battle/monsters/snaxolotl/snaxolotl_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Axoodle"
+	],
+	"tile_type": "Red",
+	"tags": ["amphibian", "aquatic"],
+	"skill_name": "Mukbang",
+	"skill_note": "Mukbang",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Consume",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

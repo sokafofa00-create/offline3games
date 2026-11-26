@@ -1,0 +1,38 @@
+{
+	"name": "Rockoon",
+	"collector_tag": "096",
+	"skins": [{
+		"name": "Rockoon",
+		"sku": 12144,
+		"sprite": "match3battle/monsters/rockoon/rockoon_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/rockoon/spine/rockoon.webp",
+			"~/images/monsters/rockoon/spine/rockoon.json",
+			"~/images/monsters/rockoon/spine/rockoon.atlas"
+		]
+	}],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"skill_name": "Rebel Encore+",
+	"skill_note": "RebelEncore+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Encore2"
+				}
+			]
+		}			
+	]
+}

@@ -1,0 +1,95 @@
+{	
+	"name": "Toadware",
+	"collector_tag": "117",
+	"skins": [
+		{
+			"name": "Toadware",
+			"sku": 12184,
+			"sprite": "match3battle/monsters/toadware/toadware_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/toadware/spine/toadware.webp",
+				"~/images/monsters/toadware/spine/toadware.json",
+				"~/images/monsters/toadware/spine/toadware.atlas"
+			],
+			"scale": 1,
+			"shadow_offset": { "y": 0.085 }
+		}
+	],
+	"mana": 8,
+	"tile_type": "Purple",
+	"skill_name": "Glitch Goo+",
+	"skill_note": "GlitchGoo+",
+	"powers": [
+		{
+			"event": "Evolution",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+                {
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Glitch Goo",
+					"amount": 4
+				}
+			]
+		},
+				{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+        		{
+					"name": "Count Tiles By Effect",
+					"effect": "GlitchGoo",
+					"output": "glitchgoo_tile_count"
+       			},
+        		{
+					"name": "Is Greater Than",
+					"a": "$glitchgoo_tile_count",
+					"b": 16,
+					"output": "has_more_than_16_glitchgoo"
+				},
+				{
+					"name": "If",
+					"case": "$has_more_than_16_glitchgoo",
+					"effects": [
+						{
+							"name": "Get Random Tiles",
+							"w": 1,
+							"h": 1,
+							"amount": 16,
+							"effect": "GlitchGoo",
+							"output": "glitchgoo_tiles"
+						},
+                		{
+							"name": "Harvest Tiles",
+							"tiles": "$glitchgoo_tiles"
+
+                		}
+            		]
+        		},
+        		{
+					"name": "Else",
+					"case": "$has_more_than_16_glitchgoo",
+					"effects": [
+						{
+							"name": "Get Tiles By Effect",
+							"effect": "GlitchGoo",
+							"output": "glitchgoo_tiles"
+						},
+						{
+							"name": "Harvest Tiles",
+							"tiles": "$glitchgoo_tiles"
+						}
+					]
+				}
+			]
+		}
+	]
+}

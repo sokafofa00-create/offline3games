@@ -1,0 +1,63 @@
+{
+	"index": 17,
+	"name": "Mouskrow",
+	"collector_tag": "033",
+	"skins": [
+		{
+			"name": "Mouskrow",
+			"sku": 12029,
+			"sprite": "match3battle/monsters/mouskrow/mouskrow_static.webp",
+			"popup_sprite": "match3battle/monsters/mouskrow/mouskrow_popup.webp",
+			"hex_sprite": "match3battle/monsters/mouskrow/mouskrow_hex.webp",
+			"selection_status": "Hidden Unless Owned",
+			"label": "Rare",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Coral Mouskrow",
+			"sku": 12149,
+			"sprite": "match3battle/monsters/mouskrow_coral/mouskrow_coral_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/mouskrow_coral/spine/mouskrow_coral.webp",
+				"~/images/monsters/mouskrow_coral/spine/mouskrow_coral.json",
+				"~/images/monsters/mouskrow_coral/spine/mouskrow_coral.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/mouskrow_coral/mouskrow_coral_popup.webp",
+			"hex_sprite": "match3battle/monsters/mouskrow_coral/mouskrow_coral_hex.webp",
+			"selection_status": "Hidden Unless Owned",
+			"label": "Rare",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 8,
+	"evolutions": [
+		"Mousummit"
+	],
+	"tile_type": "Blue",
+	"tags": ["nature"],
+	"skill_name": "Avalanche",
+	"skill_note": "Avalanche",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "Chill Monster While Active",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

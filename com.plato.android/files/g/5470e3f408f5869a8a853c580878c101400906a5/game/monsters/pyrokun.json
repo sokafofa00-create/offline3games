@@ -1,0 +1,65 @@
+{
+	"index": 6,
+	"name": "Pyrokun",
+	"collector_tag": "011",
+	"skins": [
+		{
+			"name": "Pyrokun",
+			"sku": 601,
+			"sprite": "match3battle/monsters/pyrokun/pyrokun_static.webp",
+			"popup_sprite": "match3battle/monsters/pyrokun/pyrokun_popup.webp",
+			"hex_sprite": "match3battle/monsters/pyrokun/pyrokun_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Pyrokun",
+			"sku": 12173,
+			"sprite": "match3battle/monsters/pyrokun_shadow/pyrokun_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/pyrokun_shadow/pyrokun_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/pyrokun_shadow/pyrokun_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 9,
+	"evolutions": [
+		"Magnooki"
+	],
+	"tile_type": "Red",
+	"tags": ["bushytail"],
+	"skill_name": "Pyro Blitz",
+	"skill_note": "Pyro Blitz",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 7,
+					"h": 1,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

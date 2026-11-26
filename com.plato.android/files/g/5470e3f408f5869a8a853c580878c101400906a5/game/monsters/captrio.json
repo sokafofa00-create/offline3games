@@ -1,0 +1,35 @@
+{
+	"name": "Captrio",
+	"collector_tag": "090",
+	"skins": [
+		{
+			"name": "Captrio",
+			"sku": 12139,
+			"sprite": "match3battle/monsters/captrio/captrio_static.webp"
+		}
+	],
+	"mana": 4,
+	"tile_type": "Green",
+	"skill_name": "Soothing Soak+",
+	"skill_note": "SoothingSoak+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Rejuvenation",
+					"charges": 3
+				}
+			]
+		}			
+	]
+}

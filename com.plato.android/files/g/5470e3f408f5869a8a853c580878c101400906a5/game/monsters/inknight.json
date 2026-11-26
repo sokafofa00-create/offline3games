@@ -1,0 +1,51 @@
+{	
+	"name": "Inknight",
+	"collector_tag": "096",
+	"skins": [
+		{
+			"name": "Inknight",
+			"sku": 12147,
+			"sprite": "match3battle/monsters/inknight/inknight_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/inknight/spine/inknight.webp",
+				"~/images/monsters/inknight/spine/inknight.json",
+				"~/images/monsters/inknight/spine/inknight.atlas"
+			]
+		},
+		{
+			"name": "Prism Inknight",
+			"sku": 12169,
+			"sprite": "match3battle/monsters/inknight_prism/inknight_prism_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/inknight_prism/spine/inknight_prism.webp",
+				"~/images/monsters/inknight_prism/spine/inknight_prism.json",
+				"~/images/monsters/inknight_prism/spine/inknight_prism.atlas"
+			]
+		}
+	],
+	"mana": 7,
+	"tile_type": "Purple",
+	"skill_name": "Dry Well+",
+	"skill_note": "DryWell+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "All",
+					"status": "Dry Well",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

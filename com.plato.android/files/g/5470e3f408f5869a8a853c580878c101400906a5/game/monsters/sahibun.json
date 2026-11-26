@@ -1,0 +1,62 @@
+{
+	"index": 26,
+	"name": "Sahibun",
+	"collector_tag": "054",
+	"skins": [
+		{
+			"name": "Sahibun",
+			"sku": 12038,
+			"sprite": "match3battle/monsters/sahibun/sahibun_static.webp",
+			"popup_sprite": "match3battle/monsters/sahibun/sahibun_popup.webp",
+			"hex_sprite": "match3battle/monsters/sahibun/sahibun_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Wedding Sahibun",
+			"sku": 12142,
+			"sprite": "match3battle/monsters/sahibun_wedding/sahibun_wedding_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/sahibun_wedding/spine/sahibun_wedding.webp",
+				"~/images/monsters/sahibun_wedding/spine/sahibun_wedding.json",
+				"~/images/monsters/sahibun_wedding/spine/sahibun_wedding.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/sahibun_wedding/sahibun_wedding_popup.webp",
+			"hex_sprite": "match3battle/monsters/sahibun_wedding/sahibun_wedding_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Maboobun",
+		"Habibun"
+	],
+	"tile_type": "Purple",
+	"tags": ["bushytail"],
+	"skill_name": "Nuzzle",
+	"skill_note": "Nuzzle",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 5
+				}
+			]
+		}
+	]
+}

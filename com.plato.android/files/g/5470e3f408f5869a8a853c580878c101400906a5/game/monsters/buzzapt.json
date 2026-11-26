@@ -1,0 +1,39 @@
+{	
+	"name": "Buzzapt",
+	"collector_tag": "041",
+	"skins": [{
+		"name": "Buzzapt",
+		"sku": 12031,
+		"sprite": "match3battle/monsters/buzzapt/buzzapt_static.webp"
+	}],
+	"mana": 5,
+	"tile_type": "Yellow",
+	"skill_name": "Arc",
+	"skill_note": "Arc",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 3,
+					"h": 3,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

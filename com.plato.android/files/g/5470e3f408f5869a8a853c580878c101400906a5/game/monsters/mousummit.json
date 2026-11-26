@@ -1,0 +1,46 @@
+{	
+	"name": "Mousummit",
+	"collector_tag": "034",
+	"skins": [
+		{
+			"name": "Mousummit",
+			"sku": 12029,
+			"sprite": "match3battle/monsters/mousummit/mousummit_static.webp"
+		},
+		{
+			"name": "Coral Mousummit",
+			"sku": 12149,
+			"sprite": "match3battle/monsters/mousummit_coral/mousummit_coral_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/mousummit_coral/spine/mousummit_coral.webp",
+				"~/images/monsters/mousummit_coral/spine/mousummit_coral.json",
+				"~/images/monsters/mousummit_coral/spine/mousummit_coral.atlas"
+			]
+		}
+	],
+	"mana": 8,
+	"tile_type": "Blue",
+	"skill_name": "Avalanche+",
+	"skill_note": "Avalanche+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "All",
+					"status": "Chill Monster While Active",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

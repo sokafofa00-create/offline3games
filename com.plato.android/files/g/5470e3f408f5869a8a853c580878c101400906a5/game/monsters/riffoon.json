@@ -1,0 +1,50 @@
+{
+	"index": 46,
+	"name": "Riffoon",
+	"collector_tag": "095",
+	"skins": [
+		{
+			"name": "Riffoon",
+			"sku": 12144,
+			"sprite": "match3battle/monsters/riffoon/riffoon_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/riffoon/spine/riffoon.webp",
+				"~/images/monsters/riffoon/spine/riffoon.json",
+				"~/images/monsters/riffoon/spine/riffoon.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/riffoon/riffoon_popup.webp",
+			"hex_sprite": "match3battle/monsters/riffoon/riffoon_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Rockoon"
+	],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"skill_name": "Rebel Encore",
+	"skill_note": "RebelEncore",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Encore"
+				}
+			]
+		}
+	]
+}

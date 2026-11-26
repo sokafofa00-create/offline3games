@@ -1,0 +1,217 @@
+{
+	"index": 31,
+	"name": "Kittea",
+	"collector_tag": "065",
+	"skins": [
+		{
+			"name": "Kittea",
+			"sku": 12126,
+			"sprite": "match3battle/monsters/kittea/kittea_static.webp",
+			"popup_sprite": "match3battle/monsters/kittea/kittea_popup.webp",
+			"hex_sprite": "match3battle/monsters/kittea/kittea_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Prism Kittea",
+			"sku": 12168,
+			"sprite": "match3battle/monsters/kittea_prism/kittea_prism_static.webp",
+			"popup_sprite": "match3battle/monsters/kittea_prism/kittea_prism_popup.webp",
+			"hex_sprite": "match3battle/monsters/kittea_prism/kittea_prism_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Purrtea"
+	],
+	"tile_type": "Purple",
+	"tags": ["wings"],
+	"skill_name": "Hot Tea",
+	"skill_note": "Hot Tea",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"charges": 0
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "has_first_attack"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 6,
+					"output": "uses_bullet_first"
+				},
+				{
+					"name": "Not",
+					"input": "$uses_bullet_first",
+					"output": "is_single_attack"
+				},
+				{
+					"name": "And",
+					"a": "$has_first_attack",
+					"b": "$is_single_attack",
+					"output": "uses_attack_first"
+				},
+				{
+					"name": "If",
+					"case": "$uses_bullet_first",
+					"effects": [
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": 10
+						}
+					]
+				},
+				{
+					"name": "If",
+					"case": "$uses_attack_first",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 10
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "heal"
+				},
+				{
+					"name": "If",
+					"case": "$heal",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 10
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "attack_two"
+				},
+				{
+					"name": "If",
+					"case": "$attack_two",
+					"effects": [
+						{
+							"name": "Attack",
+							"seat": "Opponent",
+							"damage": 10
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				},
+				{
+					"name": "Get Monster Status Charges",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"output": "charges"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$charges",
+					"b": 0,
+					"output": "grant_mana"
+				},
+				{
+					"name": "If",
+					"case": "$grant_mana",
+					"effects": [
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Self",
+							"change": 3
+						},
+						{
+							"name": "Update Mana",
+							"seat": "Self",
+							"monster": "Ally",
+							"change": 3
+						}
+					]
+				},
+				{
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Tea",
+					"change": -3
+				}
+			]
+		}
+	]
+}

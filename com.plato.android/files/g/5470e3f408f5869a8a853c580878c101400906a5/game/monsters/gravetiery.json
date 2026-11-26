@@ -1,0 +1,46 @@
+{
+	"index": 16,
+	"name": "Gravetiery",
+	"collector_tag": "031",
+	"skins": [
+		{
+			"name": "Gravetiery",
+			"sku": 1001,
+			"sprite": "match3battle/monsters/gravetiery/gravetiery_static.webp",
+			"popup_sprite": "match3battle/monsters/gravetiery/gravetiery_popup.webp",
+			"hex_sprite": "match3battle/monsters/gravetiery/gravetiery_hex.webp",
+			"selection_status": "Hidden Unless Owned",
+			"label": "Rare",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 9,
+	"evolutions": [
+		"Necrogeist"
+	],
+	"tile_type": "Purple",
+	"tags":["wings", "dragonkin"],
+	"skill_name": "Soul Curse",
+	"skill_note": "Soul Curse",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "On Ability Damage Self For 10",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

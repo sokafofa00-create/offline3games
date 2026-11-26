@@ -1,0 +1,81 @@
+{
+	"index": 1,
+	"name": "Bonzumi",
+	"collector_tag": "001",
+	"skins": [
+		{
+			"name": "Bonzumi",
+			"sku": 101,
+			"sprite": "match3battle/monsters/bonzumi/bonzumi_static.webp",
+			"popup_sprite": "match3battle/monsters/bonzumi/bonzumi_popup.webp",
+			"hex_sprite": "match3battle/monsters/bonzumi/bonzumi_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": false,
+			"type": "Base"
+		},
+		{
+			"name": "Wukong Bonzumi",
+			"sku": 12137,
+			"sprite": "match3battle/monsters/bonzumi_wukong/bonzumi_wukong_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/bonzumi_wukong/spine/bonzumi_wukong.webp",
+				"~/images/monsters/bonzumi_wukong/spine/bonzumi_wukong.json",
+				"~/images/monsters/bonzumi_wukong/spine/bonzumi_wukong.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/bonzumi_wukong/bonzumi_wukong_popup.webp",
+			"hex_sprite": "match3battle/monsters/bonzumi_wukong/bonzumi_wukong_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		},
+		{
+			"name": "Clown Bonzumi",
+			"sku": 12187,
+			"sprite": "match3battle/monsters/bonzumi_clown/bonzumi_clown_static.webp",
+			"popup_sprite": "match3battle/monsters/bonzumi_clown/bonzumi_clown_popup.webp",
+			"hex_sprite": "match3battle/monsters/bonzumi_clown/bonzumi_clown_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 8,
+	"evolutions": [
+		"Bonzire"
+	],
+	"tile_type": "Red",
+	"tags": ["bushytail"],
+	"skill_name": "Flare",
+	"skill_note": "Flare",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

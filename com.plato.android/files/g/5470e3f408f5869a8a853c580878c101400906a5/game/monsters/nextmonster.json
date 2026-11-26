@@ -1,0 +1,12 @@
+{
+	"name": "Next Monster",
+	"skins": [
+		{
+			"sku": 0,
+			"hex_sprite": "match3battle/monsters/next_monster.webp",
+			"selection_status": "Visible",
+			"label": "Coming Soon",
+			"premium": true
+		}
+	]
+}

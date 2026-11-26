@@ -1,0 +1,58 @@
+{
+	"name": "Slumbro",
+	"collector_tag": "088",
+	"skins": [
+		{
+			"name": "Slumbro",
+			"sku": 12138,
+			"sprite": "match3battle/monsters/slumbro/slumbro_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slumbro/spine/slumbro.webp",
+				"~/images/monsters/slumbro/spine/slumbro.json",
+				"~/images/monsters/slumbro/spine/slumbro.atlas"
+			]
+		},
+		{
+			"name": "Forest Slumbro",
+			"sku": 12180,
+			"sprite": "match3battle/monsters/slumbro_forest/slumbro_forest_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slumbro_forest/spine/slumbro_forest.webp",
+				"~/images/monsters/slumbro_forest/spine/slumbro_forest.json",
+				"~/images/monsters/slumbro_forest/spine/slumbro_forest.atlas"
+			]
+		}
+	],
+	"mana": 5,
+	"tile_type": "Blue",
+	"skill_name": "Snowball Fight+",
+	"skill_note": "SnowballFight+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 4,
+					"output": "tiles",
+					"excludeEffects": ["GlitchGoo"],
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Snow"
+				}
+			]
+		}			
+	]
+}

@@ -1,0 +1,67 @@
+{
+	"index": 51,
+	"name": "Lynix",
+	"collector_tag": "103",
+	"skins": [
+		{
+			"name": "Lynix",
+			"sku": 12156,
+			"sprite": "match3battle/monsters/lynix/lynix_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lynix/spine/lynix.webp",
+				"~/images/monsters/lynix/spine/lynix.json",
+				"~/images/monsters/lynix/spine/lynix.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/lynix/lynix_popup.webp",
+			"hex_sprite": "match3battle/monsters/lynix/lynix_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Horangi Lynix",
+			"sku": 12185,
+			"sprite": "match3battle/monsters/lynix_horangi/lynix_horangi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lynix_horangi/spine/lynix_horangi.webp",
+				"~/images/monsters/lynix_horangi/spine/lynix_horangi.json",
+				"~/images/monsters/lynix_horangi/spine/lynix_horangi.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/lynix_horangi/lynix_horangi_popup.webp",
+			"hex_sprite": "match3battle/monsters/lynix_horangi/lynix_horangi_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Noctynx"
+	],
+	"tile_type": "Yellow",
+	"tags": ["bushytail"],
+	"skill_name": "Shadow Step",
+	"skill_note": "ShadowStep",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Evasion",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

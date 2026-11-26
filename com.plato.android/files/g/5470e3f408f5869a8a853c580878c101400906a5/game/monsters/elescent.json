@@ -1,0 +1,140 @@
+{
+	"index": 24,
+	"name": "Elescent",
+	"collector_tag": "050",
+	"skins": [
+		{
+			"name": "Elescent",
+			"sku": 12036,
+			"sprite": "match3battle/monsters/elescent/elescent_static.webp",
+			"popup_sprite": "match3battle/monsters/elescent/elescent_popup.webp",
+			"hex_sprite": "match3battle/monsters/elescent/elescent_hex.webp",
+			"selection_status": "Hidden Unless Owned",
+			"label": "Rare",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Aromaphant"
+	],
+	"tile_type": "Purple",
+	"tags": ["heavyweight"],
+	"skill_name": "Potent Potpourri",
+	"skill_note": "Potent Potpourri",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Change Flower Status Purple"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Change Flower Status Red",
+						"Change Flower Status Blue",
+						"Change Flower Status Green",
+						"Change Flower Status Purple",
+						"Change Flower Status Yellow"
+					],
+					"output": "flower_status"
+				},
+				{
+					"name": "Switch",
+					"input": "$flower_status",
+					"cases": [
+						{
+							"case": "Change Flower Status Red",
+							"effects": [
+								{
+									"name": "Bullet Attack",
+									"seat": "Opponent",
+									"damage": 10
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Blue",
+							"effects": [
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 2,
+									"exclude": [
+										"Purple"
+									],
+									"output": "tiles"
+								},
+								{
+									"name": "Convert Tiles",
+									"tiles": "$tiles",
+									"type": "Purple"
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Green",
+							"effects": [
+								{
+									"name": "Heal",
+									"seat": "Self",
+									"health": 10
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Purple",
+							"effects": [
+								{
+									"name": "Update Mana",
+									"seat": "Opponent",
+									"monster": "All",
+									"change": -1
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Yellow",
+							"effects": [
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 3,
+									"output": "tiles",
+									"exclude": [
+										"Bomb"
+									]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,127 @@
+{
+	"name": "Rexsaur",
+	"collector_tag": "047",
+	"skins": [
+		{
+			"name": "Rexsaur",
+			"sku": 12034,
+			"sprite": "match3battle/monsters/rexsaur/rexsaur_static.webp"
+		},
+		{
+			"name": "Bowshi Rexsaur",
+			"sku": 12164,
+			"sprite": "match3battle/monsters/rexsaur_bowshi/rexsaur_bowshi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/rexsaur_bowshi/spine/rexsaur_bowshi.webp",
+				"~/images/monsters/rexsaur_bowshi/spine/rexsaur_bowshi.json",
+				"~/images/monsters/rexsaur_bowshi/spine/rexsaur_bowshi.atlas"
+			]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Red",
+	"skill_name": "Rupture+",
+	"skill_note": "Rupture+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Monster Node",
+					"seat": "Self",
+					"monster": "Self",
+					"output": "monster_node"
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Ruptured",
+					"output": "rupture_tiles"
+				},
+				{
+					"name": "For",
+					"list": "$rupture_tiles",
+					"iterator": "rupture_tile",
+					"effects": [
+						{
+							"name": "Get Tile Color",
+							"tile": "$rupture_tile",
+							"output": "tile_color"
+						},
+						{
+							"name": "Get Tile Node",
+							"tile": "$rupture_tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$monster_node",
+							"seconds": 0.4,
+							"insideColor": "$tile_color",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Get List Length",
+					"list": "$rupture_tiles",
+					"output": "tile_amount"
+				},
+				{
+					"name": "Multiply",
+					"a": "$tile_amount",
+					"b": 10,
+					"output": "damage"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$tile_amount",
+					"b": 0,
+					"output": "has_rupture"
+				},
+				{
+					"name": "If",
+					"case": "$has_rupture",
+					"effects": [
+						{
+							"name": "Bullet Attack",
+							"seat": "Opponent",
+							"damage": "$damage",
+							"wait": true
+						}
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$rupture_tiles"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 6,
+					"excludeEffects": true,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Add Tile Effect",
+					"tiles": "$tiles",
+					"effect": "Ruptured"
+				}
+			]
+		}
+	]
+}

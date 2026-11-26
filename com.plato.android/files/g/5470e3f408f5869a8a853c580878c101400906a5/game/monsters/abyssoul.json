@@ -1,0 +1,62 @@
+{
+	"index": 21,
+	"name": "Abyssoul",
+	"collector_tag": "044",
+	"skins": [
+		{
+			"name": "Abyssoul",
+			"sku": 12033,
+			"sprite": "match3battle/monsters/abyssoul/abyssoul_static.webp",
+			"popup_sprite": "match3battle/monsters/abyssoul/abyssoul_popup.webp",
+			"hex_sprite": "match3battle/monsters/abyssoul/abyysoul_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Abyssoul",
+			"sku": 12175,
+			"sprite": "match3battle/monsters/abyssoul_shadow/abyssoul_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/abyssoul_shadow/abyssoul_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/abyssoul_shadow/abyssoul_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 9,
+	"evolutions": [
+		"Voidevour"
+	],
+	"tile_type": "Blue",
+	"tags": ["aquatic"],
+	"skill_name": "Lure",
+	"skill_note": "Lure",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "On Match Harvest Tiles From Match"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				}
+			]
+		}
+	]
+}

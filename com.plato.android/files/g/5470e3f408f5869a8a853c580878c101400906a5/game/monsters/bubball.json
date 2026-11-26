@@ -1,0 +1,124 @@
+{
+	"index": 38,
+	"name": "Bubball",
+	"collector_tag": "079",
+	"skins": [
+		{
+			"name": "Bubball",
+			"sku": 12133,
+			"sprite": "match3battle/monsters/bubball/bubball_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/bubball/spine/bubball.webp",
+				"~/images/monsters/bubball/spine/bubball.json",
+				"~/images/monsters/bubball/spine/bubball.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/bubball/bubball_popup.webp",
+			"hex_sprite": "match3battle/monsters/bubball/bubball_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Buzzeal"
+	],
+	"tile_type": "Yellow",
+	"tags": ["aquatic"],
+	"skill_name": "Electroshift",
+	"skill_note": "Bubball",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "High Voltage"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 2,
+					"h": 2,
+					"amount": 1,
+					"output": "tiles",
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"High Voltage",
+						"Flash"
+					],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "High Voltage",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Flash"
+								}
+							]
+						},
+						{
+							"case": "Flash",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "High Voltage"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

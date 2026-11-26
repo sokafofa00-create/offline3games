@@ -1,0 +1,51 @@
+{
+	"index": 44,
+	"name": "Neblin",
+	"collector_tag": "091",
+	"skins": [
+		{
+			"name": "Neblin",
+			"sku": 12140,
+			"sprite": "match3battle/monsters/neblin/neblin_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/neblin/spine/neblin.webp",
+				"~/images/monsters/neblin/spine/neblin.json",
+				"~/images/monsters/neblin/spine/neblin.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/neblin/neblin_popup.webp",
+			"hex_sprite": "match3battle/monsters/neblin/neblin_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Nebulos"
+	],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"tags": ["wings", "dragonkin"],
+	"skill_name": "Singularity",
+	"skill_note": "Singularity",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Blackhole",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

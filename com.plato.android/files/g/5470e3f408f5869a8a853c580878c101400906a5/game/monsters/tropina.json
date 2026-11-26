@@ -1,0 +1,72 @@
+{
+	"index": 28,
+	"name": "Tropina",
+	"collector_tag": "059",
+	"skins": [
+		{
+			"name": "Tropina",
+			"sku": 12123,
+			"sprite": "match3battle/monsters/tropina/tropina_static.webp",
+			"popup_sprite": "match3battle/monsters/tropina/tropina_popup.webp",
+			"hex_sprite": "match3battle/monsters/tropina/tropina_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Badam Tropina",
+			"sku": 12143,
+			"sprite": "match3battle/monsters/tropina_badam/tropina_badam_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/tropina_badam/spine/tropina_badam.webp",
+				"~/images/monsters/tropina_badam/spine/tropina_badam.json",
+				"~/images/monsters/tropina_badam/spine/tropina_badam.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/tropina_badam/tropina_badam_popup.webp",
+			"hex_sprite": "match3battle/monsters/tropina_badam/tropina_badam_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 4,
+	"evolutions": [
+		"Pinathotlada"
+	],
+	"tile_type": "Green",
+	"tags": ["nature"],
+	"skill_name": "Fruit Festival",
+	"skill_note": "Fruit Festival",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10,
+					"wait": true
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 3,
+					"exclude": [
+						"Berry"
+					],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Berry"
+				}
+			]
+		}
+	]
+}

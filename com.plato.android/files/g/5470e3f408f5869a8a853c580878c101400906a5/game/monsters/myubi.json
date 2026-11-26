@@ -1,0 +1,80 @@
+{
+	"index": 48,
+	"name": "Myubi",
+	"collector_tag": "097",
+	"skins": [
+		{
+			"name": "Myubi",
+			"sku": 12150,
+			"sprite": "match3battle/monsters/myubi/myubi_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/myubi/spine/myubi.webp",
+				"~/images/monsters/myubi/spine/myubi.json",
+				"~/images/monsters/myubi/spine/myubi.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/myubi/myubi_popup.webp",
+			"hex_sprite": "match3battle/monsters/myubi/myubi_hex.webp",
+			"selection_status": "Selectable",
+			"shadow_offset": { "y": 0.085 },
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Sakura Myubi",
+			"sku": 12165,
+			"sprite": "match3battle/monsters/myubi_sakura/myubi_sakura_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/myubi_sakura/spine/myubi_sakura.webp",
+				"~/images/monsters/myubi_sakura/spine/myubi_sakura.json",
+				"~/images/monsters/myubi_sakura/spine/myubi_sakura.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/myubi_sakura/myubi_sakura_popup.webp",
+			"hex_sprite": "match3battle/monsters/myubi_sakura/myubi_sakura_hex.webp",
+			"selection_status": "Selectable",
+			"shadow_offset": { "y": 0.085 },
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"evolutions": [
+		"Kyuubi"
+	],
+	"mana": 6,
+	"tile_type": "Red",
+	"tags": ["bushytail"],
+	"skill_name": "Fire Trickster",
+	"skill_note": "FireTrickster",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 1,
+					"output": "tiles"
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Shuffle",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

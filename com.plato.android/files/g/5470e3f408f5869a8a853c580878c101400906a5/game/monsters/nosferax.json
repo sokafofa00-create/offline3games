@@ -1,0 +1,62 @@
+{
+	"index": 39,
+	"name": "Nosferax",
+	"collector_tag": "081",
+	"skins": [
+		{
+			"name": "Nosferax",
+			"sku": 12134,
+			"sprite": "match3battle/monsters/nosferax/nosferax_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/nosferax/spine/nosferax.webp",
+				"~/images/monsters/nosferax/spine/nosferax.json",
+				"~/images/monsters/nosferax/spine/nosferax.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/nosferax/nosferax_popup.webp",
+			"hex_sprite": "match3battle/monsters/nosferax/nosferax_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 8,
+	"tags": ["healer", "wings", "dragonkin"],
+	"evolutions": [
+		"Nosfyretu"
+	],
+	"tile_type": "Red",
+	"skill_name": "Bloodflame",
+	"skill_note": "Bloodflame",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 5
+				}
+			]
+		},
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Countdown",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

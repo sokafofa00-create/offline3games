@@ -1,0 +1,114 @@
+{
+	"index": 30,
+	"name": "Echomori",
+	"collector_tag": "063",
+	"skins": [
+		{
+			"name": "Echomori",
+			"sku": 12125,
+			"sprite": "match3battle/monsters/echomori/echomori_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/echomori/spine/echomori.webp",
+				"~/images/monsters/echomori/spine/echomori.json",
+				"~/images/monsters/echomori/spine/echomori.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/echomori/echomori_popup.webp",
+			"hex_sprite": "match3battle/monsters/echomori/echomori_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Echomento"
+	],
+	"tile_type": "Yellow",
+	"tags": ["wings"],
+	"skill_name": "Screech",
+	"skill_note": "Screech",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Echo",
+					"charges": 2
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Node",
+					"seat": "Self",
+					"monster": "Self",
+					"output": "monster_node"
+				},
+				{
+					"name": "Get Tiles By Effect",
+					"effect": "Echo",
+					"output": "echo_tiles"
+				},
+				{
+					"name": "For",
+					"list": "$echo_tiles",
+					"iterator": "echo_tile",
+					"effects": [
+						{
+							"name": "Get Tile Color",
+							"tile": "$echo_tile",
+							"output": "tile_color"
+						},
+						{
+							"name": "Get Tile Node",
+							"tile": "$echo_tile",
+							"output": "tile_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$tile_node",
+							"end": "$monster_node",
+							"seconds": 0.4,
+							"insideColor": "$tile_color",
+							"outsideColor": "Red",
+							"scale": 1
+						}
+					]
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.4
+				},
+				{
+					"name": "Get List Length",
+					"list": "$echo_tiles",
+					"output": "tile_amount"
+				},
+				{
+					"name": "Multiply",
+					"a": "$tile_amount",
+					"b": 5,
+					"output": "damage"
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": "$damage",
+					"wait": true
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$echo_tiles"
+				}
+			]
+		}
+	]
+}

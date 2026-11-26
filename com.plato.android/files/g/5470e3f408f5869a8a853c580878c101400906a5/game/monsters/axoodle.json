@@ -1,0 +1,79 @@
+{
+	"name": "Axoodle",
+	"collector_tag": "068",
+	"skins": [{
+		"name": "Axoodle",
+		"sku": 12127,
+		"sprite": "match3battle/monsters/axoodle/axoodle_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/axoodle/spine/axoodle.webp",
+			"~/images/monsters/axoodle/spine/axoodle.json",
+			"~/images/monsters/axoodle/spine/axoodle.atlas"
+		  ]
+	}],
+	"mana": 7,
+	"tile_type": "Red",
+	"skill_name": "Mukbang+",
+	"skill_note": "Mukbang+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+                {
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Consume",
+					"charges": 4
+				}
+			]
+		},
+		{
+			"event": "Status Update",
+			"seat": "Self",
+			"monster": "Self",
+			"status": "Consume",
+			"effects": [
+				{
+					"name": "If",
+					"case": "^removed",
+					"effects": [
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player"
+						},
+						{
+							"name": "Get Monster Status Node",
+							"seat": "Self",
+							"monster": "Self",
+							"status": "Consume",
+							"output": "status"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$status",
+							"end": "$player",
+							"insideColor": "green",
+							"outsideColor": "red",
+							"wait": true
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"monster": "Self",
+							"change": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

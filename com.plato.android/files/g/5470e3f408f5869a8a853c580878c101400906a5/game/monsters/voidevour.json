@@ -1,0 +1,34 @@
+{	
+	"name": "Voidevour",
+	"collector_tag": "045",
+	"skins": [
+		{
+			"name": "Voidevour",
+			"sku": 12033,
+			"sprite": "match3battle/monsters/voidevour/voidevour_static.webp"
+		},
+		{
+			"name": "Shadow Voidevour",
+			"sku": 12175,
+			"sprite": "match3battle/monsters/voidevour_shadow/voidevour_shadow_static.webp"
+		}
+	],
+	"mana": 9,
+	"tile_type": "Blue",
+	"skill_name": "Lure+",
+	"skill_note": "Lure+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				}
+			]
+		}
+	]
+}

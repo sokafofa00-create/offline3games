@@ -1,0 +1,62 @@
+{
+	"index": 18,
+	"name": "Lilabaa",
+	"collector_tag": "035",
+	"skins": [
+		{
+			"name": "Lilabaa",
+			"sku": 12030,
+			"sprite": "match3battle/monsters/lilabaa/lilabaa_static.webp",
+			"popup_sprite": "match3battle/monsters/lilabaa/lilabaa_popup.webp",
+			"hex_sprite": "match3battle/monsters/lilabaa/lilabaa_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Oracle Lilabaa",
+			"sku": 12153,
+			"sprite": "match3battle/monsters/lilabaa_oracle/lilabaa_oracle_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lilabaa_oracle/spine/lilabaa_oracle.webp",
+				"~/images/monsters/lilabaa_oracle/spine/lilabaa_oracle.json",
+				"~/images/monsters/lilabaa_oracle/spine/lilabaa_oracle.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/lilabaa_oracle/lilabaa_oracle_popup.webp",
+			"hex_sprite": "match3battle/monsters/lilabaa_oracle/lilabaa_oracle_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Lulabaa"
+	],
+	"tile_type": "Purple",
+	"skill_name": "Dream Drain",
+	"skill_note": "Dream Drain",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Opponent",
+					"monster": "Random",
+					"status": "On Move Status Reduce Mana For 1",
+					"charges": 4
+				}
+			]
+		}
+	]
+}

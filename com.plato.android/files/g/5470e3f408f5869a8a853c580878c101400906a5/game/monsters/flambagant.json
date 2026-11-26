@@ -1,0 +1,40 @@
+{	
+	"name": "Flambagant",
+	"collector_tag": "020",
+	"skins": [
+		{
+			"name": "Flambagant",
+			"sku": 1101,
+			"sprite": "match3battle/monsters/flambagant/flambagant_static.webp"
+		},
+		{
+			"name": "Prism Flambagant",
+			"sku": 12174,
+			"sprite": "match3battle/monsters/flambagant_prism/flambagant_prism_static.webp"
+		}
+	],
+	"mana": 7,
+	"tile_type": "Red",
+	"skill_name": "Hugs+",
+	"skill_note": "Hugs+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Update Mana",
+					"seat": "Self",
+					"monster": "Ally",
+					"change": 3
+				}
+			]
+		}
+	]
+}

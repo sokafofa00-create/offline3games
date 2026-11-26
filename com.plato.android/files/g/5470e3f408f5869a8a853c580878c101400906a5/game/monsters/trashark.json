@@ -1,0 +1,66 @@
+{
+	"index": 7,
+	"name": "Trashark",
+	"collector_tag": "013",
+	"skins": [
+		{
+			"name": "Trashark",
+			"sku": 701,
+			"sprite": "match3battle/monsters/trashark/trashark_static.webp",
+			"popup_sprite": "match3battle/monsters/trashark/trashark_popup.webp",
+			"hex_sprite": "match3battle/monsters/trashark/trashark_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Shadow Trashark",
+			"sku": 12167,
+			"sprite": "match3battle/monsters/trashark_shadow/trashark_shadow_static.webp",
+			"popup_sprite": "match3battle/monsters/trashark_shadow/trashark_shadow_popup.webp",
+			"hex_sprite": "match3battle/monsters/trashark_shadow/trashark_shadow_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 8,
+	"evolutions": [
+		"Shardivore"
+	],
+	"tile_type": "Blue",
+	"tags": ["aquatic"],
+	"skill_name": "Aqua Blast",
+	"skill_note": "Aqua Blast",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 2,
+					"exclude": [
+						"Blue"
+					],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Blue"
+				}
+			]
+		}
+	]
+}

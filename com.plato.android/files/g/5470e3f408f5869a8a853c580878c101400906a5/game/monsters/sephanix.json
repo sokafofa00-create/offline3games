@@ -1,0 +1,57 @@
+{	
+	"name": "Sephanix",
+	"collector_tag": "004",
+	"skins": [
+		{
+			"name": "Sephanix",
+			"sku": 201,
+			"sprite": "match3battle/monsters/sephanix/sephanix_static.webp"
+		},
+		{
+			"name": "Garuda Pelijet",
+			"sku": 12152,
+			"sprite": "match3battle/monsters/sephanix_garuda/sephanix_garuda_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/sephanix_garuda/spine/sephanix_garuda.webp",
+				"~/images/monsters/sephanix_garuda/spine/sephanix_garuda.json",
+				"~/images/monsters/sephanix_garuda/spine/sephanix_garuda.atlas"
+			]
+		},
+		{
+			"name": "Witch Sephanix",
+			"sku": 12188,
+			"sprite": "match3battle/monsters/sephanix_witch/sephanix_witch_static.webp"
+		}
+	],
+	"mana": 6,
+	"tile_type": "Blue",
+	"skill_name": "Hydro Rush+",
+	"skill_note": "Hydro Rush+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 3,
+					"exclude": ["Blue"],
+					"output": "tiles"
+				},
+				{
+					"name": "Convert Tiles",
+					"tiles": "$tiles",
+					"type": "Blue"
+				}
+			]
+		}
+	]
+}

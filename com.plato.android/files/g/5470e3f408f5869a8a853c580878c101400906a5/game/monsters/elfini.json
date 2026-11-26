@@ -1,0 +1,46 @@
+{
+	"index": 8,
+	"name": "Elfini",
+	"collector_tag": "015",
+	"skins": [
+		{
+			"name": "Elfini",
+			"sku": 801,
+			"sprite": "match3battle/monsters/elfini/elfini_static.webp",
+			"popup_sprite": "match3battle/monsters/elfini/elfini_popup.webp",
+			"hex_sprite": "match3battle/monsters/elfini/elfini_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"		
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Eidelf"
+	],
+	"tile_type": "Green",
+	"tags": ["healer", "nature"],
+	"skill_name": "Flower Dance",
+	"skill_note": "Flower Dance",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Regen For 5",
+					"charges": 3
+				}
+			]
+		}
+	]
+}

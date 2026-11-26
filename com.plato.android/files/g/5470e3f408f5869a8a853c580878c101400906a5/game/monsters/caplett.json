@@ -1,0 +1,46 @@
+{
+	"index": 43,
+	"name": "Caplett",
+	"collector_tag": "089",
+	"skins": [
+		{
+			"name": "Caplett",
+			"sku": 12139,
+			"sprite": "match3battle/monsters/caplett/caplett_static.webp",
+			"popup_sprite": "match3battle/monsters/caplett/caplett_popup.webp",
+			"hex_sprite": "match3battle/monsters/caplett/caplett_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Captrio"
+	],
+	"mana": 4,
+	"tile_type": "Green",
+	"tags": ["healer", "chillax"],
+	"skill_name": "Soothing Soak",
+	"skill_note": "SoothingSoak",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Rejuvenation",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

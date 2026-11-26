@@ -1,0 +1,57 @@
+{
+	"index": 9,
+	"name": "Winklit",
+	"collector_tag": "017",
+	"skins": [
+		{
+			"name": "Winklit",
+			"sku": 901,
+			"sprite": "match3battle/monsters/winklit/winklit_static.webp",
+			"popup_sprite": "match3battle/monsters/winklit/winklit_popup.webp",
+			"hex_sprite": "match3battle/monsters/winklit/winklit_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Astro Winklit",
+			"sku": 12145,
+			"sprite": "match3battle/monsters/winklit_astro/winklit_astro_static.webp",
+			"popup_sprite": "match3battle/monsters/winklit_astro/winklit_astro_popup.webp",
+			"hex_sprite": "match3battle/monsters/winklit_astro/winklit_astro_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Gleamur"
+	],
+	"tile_type": "Yellow",
+	"tags": ["bushytail"],
+	"skill_name": "Starblitz",
+	"skill_note": "Starblitz",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Add Bonus Move 1",
+					"charges": 1
+				}
+			]
+		}
+	]
+}

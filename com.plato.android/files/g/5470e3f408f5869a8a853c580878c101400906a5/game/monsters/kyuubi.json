@@ -1,0 +1,62 @@
+{
+	"name": "Kyuubi",
+	"collector_tag": "098",
+	"skins": [
+		{
+			"name": "Kyuubi",
+			"sku": 12150,
+			"sprite": "match3battle/monsters/kyuubi/kyuubi_static.webp",
+			"spine_bundle": [
+					"match3battle/monsters/kyuubi/spine/kyuubi.webp",
+					"~/images/monsters/kyuubi/spine/kyuubi.json",
+					"~/images/monsters/kyuubi/spine/kyuubi.atlas"
+				]
+		},
+		{
+			"name": "Sakura Kyuubi",
+			"sku": 12165,
+			"sprite": "match3battle/monsters/kyuubi_sakura/kyuubi_sakura_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/kyuubi_sakura/spine/kyuubi_sakura.webp",
+				"~/images/monsters/kyuubi_sakura/spine/kyuubi_sakura.json",
+				"~/images/monsters/kyuubi_sakura/spine/kyuubi_sakura.atlas"
+			]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Red",
+	"skill_name": "Fire Trickster+",
+	"skill_note": "FireTrickster+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+                {
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 2,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Shuffle",
+					"charges": 3
+				}
+			]
+		}			
+	]
+}

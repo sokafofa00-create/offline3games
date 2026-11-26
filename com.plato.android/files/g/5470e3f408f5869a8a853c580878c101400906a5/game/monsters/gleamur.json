@@ -1,0 +1,40 @@
+{	
+	"name": "Gleamur",
+	"collector_tag": "018",
+	"skins": [
+		{
+			"name": "Gleamur",
+			"sku": 901,
+			"sprite": "match3battle/monsters/gleamur/gleamur_static.webp"
+		},
+		{
+			"name": "Astro Gleamur",
+			"sku": 12145,
+			"sprite": "match3battle/monsters/gleamur_astro/gleamur_astro_static.webp"
+		}
+	],
+	"mana": 7,
+	"tile_type": "Yellow",
+	"skill_name": "Starblitz+",
+	"skill_note": "Starblitz+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "Add Bonus Move 1",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

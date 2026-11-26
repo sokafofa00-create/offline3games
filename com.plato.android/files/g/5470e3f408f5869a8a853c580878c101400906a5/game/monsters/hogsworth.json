@@ -1,0 +1,110 @@
+{	
+	"name": "Hogsworth",
+	"collector_tag": "106",
+	"skins": [
+		{
+			"name": "Hogsworth",
+			"sku": 12158,
+			"sprite": "match3battle/monsters/hogsworth/hogsworth_static.webp",
+			"spine_bundle": [
+					"match3battle/monsters/hogsworth/spine/hogsworth.webp",
+					"~/images/monsters/hogsworth/spine/hogsworth.json",
+					"~/images/monsters/hogsworth/spine/hogsworth.atlas"
+				]
+		},
+		{
+			"name": "Cowboy Hogsworth",
+			"sku": 12176,
+			"sprite": "match3battle/monsters/hogsworth_cowboy/hogsworth_cowboy_static.webp",
+			"spine_bundle": [
+					"match3battle/monsters/hogsworth_cowboy/spine/hogsworth_cowboy.webp",
+					"~/images/monsters/hogsworth_cowboy/spine/hogsworth_cowboy.json",
+					"~/images/monsters/hogsworth_cowboy/spine/hogsworth_cowboy.atlas"
+				]
+		}
+	],
+	"mana": 5,
+	"tile_type": "Green",
+	"skill_name": "Piggy Payback+",
+	"skill_note": "PiggyPayback+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+                    "name": "Get Player Health",
+                    "seat": "Opponent",
+                    "output": "enemy_hp"
+                },
+				{
+                    "name": "Get Player Health",
+                    "seat": "Self",
+                    "output": "self_hp"
+                },
+				{
+					"name": "Is Greater Than",
+					"a": "$enemy_hp",
+					"b": "$self_hp",
+					"output": "enemy_has_more_hp"
+				},
+				{
+					"name": "If",
+					"case": "$enemy_has_more_hp",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 15
+						}
+                    ]
+                },
+				{
+					"name": "Else",
+					"case": "$enemy_has_more_hp",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 10
+						}
+					]
+				},
+								{
+                    "name": "Get Player Berries",
+                    "seat": "Opponent",
+                    "output": "enemy_berry"
+                },
+				{
+                    "name": "Get Player Berries",
+                    "seat": "Self",
+                    "output": "self_berry"
+                },
+				{
+					"name": "Is Greater Than",
+					"a": "$enemy_berry",
+					"b": "$self_berry",
+					"output": "enemy_has_more_berry"
+				},
+				{
+					"name": "If",
+					"case": "$enemy_has_more_berry",
+					"effects": [
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"monster": "Self",
+							"change": 2
+						}
+                    ]
+                }
+			]
+		}
+	]				
+}

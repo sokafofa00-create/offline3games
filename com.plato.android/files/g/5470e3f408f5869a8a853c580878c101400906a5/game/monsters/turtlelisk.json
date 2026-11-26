@@ -1,0 +1,72 @@
+{
+	"index": 3,
+	"name": "Turtlelisk",
+	"collector_tag": "005",
+	"skins": [
+		{
+			"name": "Turtlelisk",
+			"sku": 301,
+			"sprite": "match3battle/monsters/turtlelisk/turtlelisk_static.webp",
+			"popup_sprite": "match3battle/monsters/turtlelisk/turtlelisk_popup.webp",
+			"hex_sprite": "match3battle/monsters/turtlelisk/turtlelisk_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": false,
+			"type": "Base"
+		},
+		{
+			"name": "Waverider Turtlelisk",
+			"sku": 12151,
+			"sprite": "match3battle/monsters/turtlelisk_waverider/turtlelisk_waverider_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/turtlelisk_waverider/spine/turtlelisk_waverider.webp",
+				"~/images/monsters/turtlelisk_waverider/spine/turtlelisk_waverider.json",
+				"~/images/monsters/turtlelisk_waverider/spine/turtlelisk_waverider.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/turtlelisk_waverider/turtlelisk_waverider_popup.webp",
+			"hex_sprite": "match3battle/monsters/turtlelisk_waverider/turtlelisk_waverider_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		},
+		{
+			"name": "Hockey Turtlelisk",
+			"sku": 12189,
+			"sprite": "match3battle/monsters/turtlelisk_hockey/turtlelisk_hockey_static.webp",
+			"popup_sprite": "match3battle/monsters/turtlelisk_hockey/turtlelisk_hockey_popup.webp",
+			"hex_sprite": "match3battle/monsters/turtlelisk_hockey/turtlelisk_hockey_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 6,
+	"evolutions": [
+		"Karaggon"
+	],
+	"tile_type": "Green",
+	"tags": ["healer", "shell", "aquatic"],
+	"skill_name": "Heal Leaf",
+	"skill_note": "Heal Leaf",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 10
+				}
+			]
+		}
+	]
+}

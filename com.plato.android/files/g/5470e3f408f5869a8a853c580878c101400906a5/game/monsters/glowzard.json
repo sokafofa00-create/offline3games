@@ -1,0 +1,69 @@
+{
+	"index": 14,
+	"name": "Glowzard",
+	"collector_tag": "027",
+	"skins": [
+		{
+			"name": "Glowzard",
+			"sku": 12026,
+			"sprite": "match3battle/monsters/glowzard/glowzard_static.webp",
+			"popup_sprite": "match3battle/monsters/glowzard/glowzard_popup.webp",
+			"hex_sprite": "match3battle/monsters/glowzard/glowzard_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Dark Ops Glowzard",
+			"sku": 12182,
+			"sprite": "match3battle/monsters/glowzard_darkops/glowzard_darkops_static.webp",
+			"popup_sprite": "match3battle/monsters/glowzard_darkops/glowzard_darkops_popup.webp",
+			"hex_sprite": "match3battle/monsters/glowzard_darkops/glowzard_darkops_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 9,
+	"evolutions": [
+		"Radiaze"
+	],
+	"tile_type": "Yellow",
+	"skill_name": "Overload",
+	"skill_note": "Overload",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Reduce Opponent Move 1"
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 1,
+					"amount": 4,
+					"output": "tiles",
+					"exclude": [
+						"Bomb"
+					]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

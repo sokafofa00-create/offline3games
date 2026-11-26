@@ -1,0 +1,13 @@
+fx_blackhole.webp
+size:279,279
+filter:Linear,Linear
+blackhole_bg
+bounds:2,3,132,132
+ring
+bounds:2,137,140,140
+spiral
+bounds:144,26,119,122
+offsets:3,3,125,127
+rotate:90
+spiral2
+bounds:144,147,133,130

@@ -1,0 +1,41 @@
+{	
+	"name": "Lavasteed",
+	"collector_tag": "108",
+	"skins": [
+		{
+			"name": "Lavasteed",
+			"sku": 12159,
+			"sprite": "match3battle/monsters/lavasteed/lavasteed_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/lavasteed/spine/lavasteed.webp",
+				"~/images/monsters/lavasteed/spine/lavasteed.json",
+				"~/images/monsters/lavasteed/spine/lavasteed.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Red",
+	"skill_name": "Eruption Kick+",
+	"skill_note": "EruptionKick+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+                    "name": "Add Monster Status",
+                    "seat": "Self",
+                    "monster": "Self",
+                    "status": "Eruption",
+                    "charges": 1
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				}
+			]
+		}
+	]
+}

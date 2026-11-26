@@ -1,0 +1,112 @@
+{
+	"name": "Aromaphant",
+	"collector_tag": "051",
+	"skins": [{
+		"name": "Aromaphant",
+		"sku": 12036,
+		"sprite": "match3battle/monsters/aromaphant/aromaphant_static.webp"
+	}],
+	"mana": 4,
+	"tile_type": "Purple",
+	"skill_name": "Potent Potpourri+",
+	"skill_note": "Potent Potpourri+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Change Flower Status Red",
+						"Change Flower Status Blue",
+						"Change Flower Status Green",
+						"Change Flower Status Purple",
+						"Change Flower Status Yellow"
+					],
+					"output": "flower_status"
+				},
+				{
+					"name": "Switch",
+					"input": "$flower_status",
+					"cases": [
+						{
+							"case": "Change Flower Status Red",
+							"effects": [
+								{
+									"name": "Bullet Attack",
+									"seat": "Opponent",
+									"damage": 15
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Blue",
+							"effects": [
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 4,
+									"exclude": ["Purple"],
+									"output": "tiles"
+								},
+								{
+									"name": "Convert Tiles",
+									"tiles": "$tiles",
+									"type": "Purple"
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Green",
+							"effects": [
+								{
+									"name": "Heal",
+									"seat": "Self",
+									"health": 15
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Purple",
+							"effects": [
+								{
+									"name": "Update Mana",
+									"seat": "Opponent",
+									"monster": "All",
+									"change": -2
+								}
+							]
+						},
+						{
+							"case": "Change Flower Status Yellow",
+							"effects": [
+								{
+									"name": "Get Random Tiles",
+									"w": 1,
+									"h": 1,
+									"amount": 6,
+									"output": "tiles",
+									"exclude": ["Bomb"]
+								},
+								{
+									"name": "Harvest Tiles",
+									"tiles": "$tiles"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

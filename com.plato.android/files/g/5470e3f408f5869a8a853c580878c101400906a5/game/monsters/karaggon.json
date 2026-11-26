@@ -1,0 +1,51 @@
+{	
+	"name": "Karaggon",
+	"collector_tag": "006",
+	"skins": [
+		{
+			"name": "Karaggon",
+			"sku": 301,
+			"sprite": "match3battle/monsters/karaggon/karaggon_static.webp"
+		},
+		{
+			"name": "Waverider Karaggon",
+			"sku": 12151,
+			"sprite": "match3battle/monsters/karaggon_waverider/karaggon_waverider_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/karaggon_waverider/spine/karaggon_waverider.webp",
+				"~/images/monsters/karaggon_waverider/spine/karaggon_waverider.json",
+				"~/images/monsters/karaggon_waverider/spine/karaggon_waverider.atlas"
+			]
+		},
+		{
+			"name": "Hockey Karaggon",
+			"sku": 12189,
+			"sprite": "match3battle/monsters/karaggon_hockey/karaggon_hockey_static.webp",
+			"popup_sprite": "match3battle/monsters/karaggon_hockey/karaggon_hockey_popup.webp",
+			"hex_sprite": "match3battle/monsters/karaggon_hockey/karaggon_hockey_hex.webp"
+		}
+	],
+	"mana": 6,
+	"tile_type": "Green",
+	"skill_name": "Heal Leaf+",
+	"skill_note": "Heal Leaf+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 15
+				}
+			]
+		}
+	]
+}

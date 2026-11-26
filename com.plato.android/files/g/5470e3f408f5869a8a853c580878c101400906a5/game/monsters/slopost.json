@@ -1,0 +1,173 @@
+{	
+	"name": "Slopost",
+	"collector_tag": "100",
+	"skins": [
+		{
+			"name": "Slopost",
+			"sku": 12154,
+			"sprite": "match3battle/monsters/slopost/slopost_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/slopost/spine/slopost.webp",
+				"~/images/monsters/slopost/spine/slopost.json",
+				"~/images/monsters/slopost/spine/slopost.atlas"
+			]
+		},
+		{
+			"name": "Goalie Slopost",
+			"sku": 12177,
+			"sprite": "match3battle/monsters/slopost_goalie/slopost_goalie_static.webp",
+			"spine_bundle": [
+					"match3battle/monsters/slopost_goalie/spine/slopost_goalie.webp",
+					"~/images/monsters/slopost_goalie/spine/slopost_goalie.json",
+					"~/images/monsters/slopost_goalie/spine/slopost_goalie.atlas"
+				]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Green",
+	"skill_name": "Cash on Delivery+",
+	"skill_note": "CashonDelivery+",
+	"powers": [
+        {
+			"event": ["Monster Attack", "Final Attack"],
+            "seat": "Opponent",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Get Player Node",
+					"seat": "Self",
+					"output": "damaged_player"
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Return To Sender",
+					"charges": 1,
+					"start": "$damaged_player"
+				}
+			]
+		},		
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Opponent",
+					"output": "berries"
+				},
+				{	
+					"name": "Is Greater Or Equal",
+					"a": "$berries",
+					"b": 3,
+					"output": "has_3berries"
+				},
+				{
+					"name": "If",
+					"case": "$has_3berries",
+					"effects": [
+						{
+							"name": "Wait",
+							"seconds": 1
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Opponent",
+							"change": -3
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Opponent",
+							"output": "enemy_node"
+						},
+						{
+							"name": "Get Player Node",
+							"seat": "Self",
+							"output": "player_node"
+						},
+						{
+							"name": "Spawn Rocket",
+							"start": "$enemy_node",
+							"end": "$player_node",
+							"seconds": 0.4,
+							"insideColor": "Red",
+							"outsideColor": "Green",
+							"scale": 1,
+							"wait": true
+						},
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"change": 3
+						}						
+					]
+				},
+				{
+					"name": "Else",
+					"case": "$has_3berries",
+					"effects": [
+						{
+							"name": "Is Greater Than",
+							"a": "$berries",
+							"b": 0,
+							"output": "has_berries"
+						},
+						{
+							"name": "If",
+							"case": "$has_berries",
+							"effects": [
+								{
+									"name": "Multiply",
+									"a": "$berries",
+									"b": -1,
+									"output": "deducted_berries"
+								},
+								{
+									"name": "Wait",
+									"seconds": 1
+								},
+								{
+									"name": "Update Player Berries",
+									"seat": "Opponent",
+									"change": "$deducted_berries"
+								},
+								{
+									"name": "Get Player Node",
+									"seat": "Opponent",
+									"output": "enemy_node"
+								},
+								{
+									"name": "Get Player Node",
+									"seat": "Self",
+									"output": "player_node"
+								},
+								{
+									"name": "Spawn Rocket",
+									"start": "$enemy_node",
+									"end": "$player_node",
+									"seconds": 0.4,
+									"insideColor": "Red",
+									"outsideColor": "Green",
+									"scale": 1,
+									"wait": true
+								},
+								{
+									"name": "Update Player Berries",
+									"seat": "Self",
+									"change": "$berries"
+								}								
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

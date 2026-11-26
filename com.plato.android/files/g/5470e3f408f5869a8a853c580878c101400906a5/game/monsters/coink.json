@@ -1,0 +1,127 @@
+{
+	"index": 52,
+	"name": "Coink",
+	"collector_tag": "105",
+	"skins": [
+		{
+			"name": "Coink",
+			"sku": 12158,
+			"sprite": "match3battle/monsters/coink/coink_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/coink/spine/coink.webp",
+				"~/images/monsters/coink/spine/coink.json",
+				"~/images/monsters/coink/spine/coink.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/coink/coink_popup.webp",
+			"hex_sprite": "match3battle/monsters/coink/coink_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Cowboy Coink",
+			"sku": 12176,
+			"sprite": "match3battle/monsters/coink_cowboy/coink_cowboy_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/coink_cowboy/spine/coink_cowboy.webp",
+				"~/images/monsters/coink_cowboy/spine/coink_cowboy.json",
+				"~/images/monsters/coink_cowboy/spine/coink_cowboy.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/coink_cowboy/coink_cowboy_popup.webp",
+			"hex_sprite": "match3battle/monsters/coink_cowboy/coink_cowboy_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 5,
+	"evolutions": [
+		"Hogsworth"
+	],
+	"tile_type": "Green",
+	"tags": ["healer"],
+	"skill_name": "Piggy Payback",
+	"skill_note": "PiggyPayback",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 10
+				},
+				{
+					"name": "Get Player Health",
+					"seat": "Opponent",
+					"output": "enemy_hp"
+				},
+				{
+					"name": "Get Player Health",
+					"seat": "Self",
+					"output": "self_hp"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$enemy_hp",
+					"b": "$self_hp",
+					"output": "enemy_has_more_hp"
+				},
+				{
+					"name": "If",
+					"case": "$enemy_has_more_hp",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 10
+						}
+					]
+				},
+				{
+					"name": "Else",
+					"case": "$enemy_has_more_hp",
+					"effects": [
+						{
+							"name": "Heal",
+							"seat": "Self",
+							"health": 5
+						}
+					]
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Opponent",
+					"output": "enemy_berry"
+				},
+				{
+					"name": "Get Player Berries",
+					"seat": "Self",
+					"output": "self_berry"
+				},
+				{
+					"name": "Is Greater Than",
+					"a": "$enemy_berry",
+					"b": "$self_berry",
+					"output": "enemy_has_more_berry"
+				},
+				{
+					"name": "If",
+					"case": "$enemy_has_more_berry",
+					"effects": [
+						{
+							"name": "Update Player Berries",
+							"seat": "Self",
+							"monster": "Self",
+							"change": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}

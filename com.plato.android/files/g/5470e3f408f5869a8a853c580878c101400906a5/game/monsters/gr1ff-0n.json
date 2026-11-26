@@ -1,0 +1,51 @@
+{
+	"name": "Gr1ff-0n",
+	"collector_tag": "072",
+	"skins": [
+		{
+			"name": "Gr1ff-0n",
+			"sku": 12129,
+			"sprite": "match3battle/monsters/gr1ff-0n/gr1ff-0n_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/gr1ff-0n/spine/gr1ff-0n.webp",
+				"~/images/monsters/gr1ff-0n/spine/gr1ff-0n.json",
+				"~/images/monsters/gr1ff-0n/spine/gr1ff-0n.atlas"
+			]
+		},
+		{
+			"name": "Cobalt Gr1ff-0n",
+			"sku": 12163,
+			"sprite": "match3battle/monsters/gr1ff-0n_cobalt/gr1ff-0n_cobalt_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/gr1ff-0n_cobalt/spine/gr1ff-0n_cobalt.webp",
+				"~/images/monsters/gr1ff-0n_cobalt/spine/gr1ff-0n_cobalt.json",
+				"~/images/monsters/gr1ff-0n_cobalt/spine/gr1ff-0n_cobalt.atlas"
+			]
+		}
+	],
+	"mana": 5,
+	"tile_type": "Blue",
+	"skill_name": "Scalar Beam+",
+	"skill_note": "Scalar Beam+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 5
+				},
+                {
+					"name": "Update Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Charge",
+					"change": 2
+				}
+			]
+		}
+	]
+}

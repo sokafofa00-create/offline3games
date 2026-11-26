@@ -1,0 +1,76 @@
+{	
+	"name": "Mirrage",
+	"collector_tag": "119",
+	"skins": [
+		{
+			"name": "Mirrage",
+			"sku": 12186,
+			"sprite": "match3battle/monsters/mirrage/mirrage_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/mirrage/spine/mirrage.webp",
+				"~/images/monsters/mirrage/spine/mirrage.json",
+				"~/images/monsters/mirrage/spine/mirrage.atlas"
+			]
+		}
+	],
+	"mana": 6,
+	"tile_type": "Blue",
+	"skill_name": "Soul Echo+",
+	"skill_note": "SoulEcho+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 15
+				}
+			]
+		},
+		{
+			"event": "Both Max Mana",
+			"seat": "Self",
+			"monster": "All",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Reduce Opponent Move 1",
+					"charges": 2
+				}
+			]
+		},
+		{
+			"event": "Mana Add",
+			"seat": "Self",
+            "monster": "Ally ",
+			"effects":  [
+				{
+					"name": "Update Mana",
+					"seat": "Self",
+					"monster": "Self",
+                    "change": 1
+				}
+			]
+		},
+        {
+            "event": "After Monster Attack",
+            "seat": "Self",
+            "monster": "Ally",
+            "effects": [
+				{
+ 					"name": "Wait",
+  					"seconds": 0.5
+				},
+                {
+                    "name": "Attack",
+                    "seat": "Opponent",
+                    "damage": 10
+                }
+            ]
+        }
+	]
+}

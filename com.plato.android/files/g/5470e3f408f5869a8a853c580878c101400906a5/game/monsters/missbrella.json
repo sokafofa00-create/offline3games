@@ -1,0 +1,68 @@
+{
+	"index": 37,
+	"name": "Missbrella",
+	"collector_tag": "077",
+	"skins": [
+		{
+			"name": "Missbrella",
+			"sku": 12132,
+			"sprite": "match3battle/monsters/missbrella/missbrella_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/missbrella/spine/missbrella.webp",
+				"~/images/monsters/missbrella/spine/missbrella.json",
+				"~/images/monsters/missbrella/spine/missbrella.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/missbrella/missbrella_popup.webp",
+			"hex_sprite": "match3battle/monsters/missbrella/missbrella_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		},
+		{
+			"name": "Sea-Maiden Missbrella",
+			"sku": 12148,
+			"sprite": "match3battle/monsters/missbrella_seamaiden/missbrella_seamaiden_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/missbrella_seamaiden/spine/missbrella_seamaiden.webp",
+				"~/images/monsters/missbrella_seamaiden/spine/missbrella_seamaiden.json",
+				"~/images/monsters/missbrella_seamaiden/spine/missbrella_seamaiden.atlas"
+			],
+			"popup_sprite": "match3battle/monsters/missbrella_seamaiden/missbrella_seamaiden_popup.webp",
+			"hex_sprite": "match3battle/monsters/missbrella_seamaiden/missbrella_seamaiden_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Skin"
+		}
+	],
+	"mana": 7,
+	"evolutions": [
+		"Madambrella"
+	],
+	"tile_type": "Red",
+	"tags": ["undead"],
+	"skill_name": "Fiery Twirl",
+	"skill_note": "Fiery Twirl",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Add Player Status",
+					"seat": "Opponent",
+					"status": "Burn",
+					"charges": 1
+				},
+				{
+					"name": "Add Player Status",
+					"seat": "Self",
+					"status": "NoReflectShield",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,128 @@
+{
+	"index": 25,
+	"name": "Gargice",
+	"collector_tag": "052",
+	"skins": [
+		{
+			"name": "Gargice",
+			"sku": 12037,
+			"sprite": "match3battle/monsters/gargice/gargice_static.webp",
+			"popup_sprite": "match3battle/monsters/gargice/gargice_popup.webp",
+			"hex_sprite": "match3battle/monsters/gargice/gargice_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Frostoyle"
+	],
+	"mana": 8,
+	"tile_type": "Blue",
+	"tags": ["wings"],
+	"skill_name": "Frostbite",
+	"skill_note": "Gargice",
+	"powers": [
+		{
+			"event": "Game Start",
+			"effects": [
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Ice Flesh"
+				}
+			]
+		},
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Ice Flesh",
+						"Anger Flesh"
+					],
+					"output": "current_status"
+				},
+				{
+					"name": "Is Equal To",
+					"a": "$current_status",
+					"b": "Anger Flesh",
+					"output": "has_anger"
+				},
+				{
+					"name": "Branch",
+					"case": "$has_anger",
+					"true": 20,
+					"false": 10,
+					"output": "attack_damage"
+				},
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": "$attack_damage"
+				}
+			]
+		},
+		{
+			"event": "Turn End",
+			"seat": "Self",
+			"effects": [
+				{
+					"name": "Get Monster Status From List",
+					"seat": "Self",
+					"monster": "Self",
+					"statuses": [
+						"Ice Flesh",
+						"Anger Flesh"
+					],
+					"output": "old_status"
+				},
+				{
+					"name": "Remove Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "$old_status"
+				},
+				{
+					"name": "Wait",
+					"seconds": 0.25
+				},
+				{
+					"name": "Switch",
+					"input": "$old_status",
+					"cases": [
+						{
+							"case": "Ice Flesh",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Anger Flesh"
+								}
+							]
+						},
+						{
+							"case": "Anger Flesh",
+							"effects": [
+								{
+									"name": "Add Monster Status",
+									"seat": "Self",
+									"monster": "Self",
+									"status": "Ice Flesh"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

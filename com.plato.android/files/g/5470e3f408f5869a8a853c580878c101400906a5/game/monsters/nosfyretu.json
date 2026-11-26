@@ -1,0 +1,37 @@
+{
+	"name": "Nosfyretu",
+	"collector_tag": "082",
+	"skins": [{
+		"name": "Nosfyretu",
+		"sku": 12134,
+		"sprite": "match3battle/monsters/nosfyretu/nosfyretu_static.webp",
+		"spine_bundle": [
+			"match3battle/monsters/nosfyretu/spine/nosfyretu.webp",
+			"~/images/monsters/nosfyretu/spine/nosfyretu.json",
+			"~/images/monsters/nosfyretu/spine/nosfyretu.atlas"
+		]
+	}],
+	"mana": 8,
+	"tile_type": "Red",
+	"skill_name": "Bloodflame+",
+	"skill_note": "Bloodflame+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 10
+				}
+			]
+		}
+	]
+}

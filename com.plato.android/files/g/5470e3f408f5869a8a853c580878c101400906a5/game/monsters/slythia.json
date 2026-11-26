@@ -1,0 +1,47 @@
+{
+	"index": 45,
+	"name": "Slythia",
+	"collector_tag": "093",
+	"skins": [
+		{
+			"name": "Slythia",
+			"sku": 12141,
+			"sprite": "match3battle/monsters/slythia/slythia_static.webp",
+			"popup_sprite": "match3battle/monsters/slythia/slythia_popup.webp",
+			"hex_sprite": "match3battle/monsters/slythia/slythia_hex.webp",
+			"selection_status": "Selectable",
+			"label": "None",
+			"premium": true,
+			"type": "Base"
+		}
+	],
+	"evolutions": [
+		"Serphina"
+	],
+	"mana": 9,
+	"tile_type": "Purple",
+	"tags": ["dragonkin"],
+	"skill_name": "Gold Fortune",
+	"skill_note": "GoldFortune",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Add Monster Status",
+					"seat": "Self",
+					"monster": "Self",
+					"status": "Prosper",
+					"charges": 2
+				}
+			]
+		}
+	]
+}

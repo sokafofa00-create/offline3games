@@ -1,0 +1,56 @@
+{	
+	"name": "Bonzire",
+	"collector_tag": "002",
+	"skins": [
+		{
+			"name": "Bonzire",
+			"sku": 101,
+			"sprite": "match3battle/monsters/bonzire/bonzire_static.webp"
+		},
+		{
+			"name": "Wukong Bonzire",
+			"sku": 12137,
+			"sprite": "match3battle/monsters/bonzire_wukong/bonzire_wukong_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/bonzire_wukong/spine/bonzire_wukong.webp",
+				"~/images/monsters/bonzire_wukong/spine/bonzire_wukong.json",
+				"~/images/monsters/bonzire_wukong/spine/bonzire_wukong.atlas"
+			]
+		},
+		{
+			"name": "Clown Bonzire",
+			"sku": 12187,
+			"sprite": "match3battle/monsters/bonzire_clown/bonzire_clown_static.webp"
+		}
+	],
+	"mana": 8,
+	"tile_type": "Red",
+	"skill_name": "Flare+",
+	"skill_note": "Flare+",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 25
+				},
+				{
+					"name": "Get Random Tiles",
+					"w": 1,
+					"h": 5,
+					"amount": 2,
+					"output": "tiles",
+					"exclude": ["Bomb"]
+				},
+				{
+					"name": "Harvest Tiles",
+					"tiles": "$tiles"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,47 @@
+{
+	"name": "Maboobun",
+	"collector_tag": "055",
+	"skins": [
+		{
+			"name": "Maboobun",
+			"sku": 12038,
+			"sprite": "match3battle/monsters/maboobun/maboobun_static.webp"
+		},
+		{
+			"name": "Wedding Maboobun",
+			"sku": 12142,
+			"sprite": "match3battle/monsters/maboobun_wedding/maboobun_wedding_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/maboobun_wedding/spine/maboobun_wedding.webp",
+				"~/images/monsters/maboobun_wedding/spine/maboobun_wedding.json",
+				"~/images/monsters/maboobun_wedding/spine/maboobun_wedding.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Purple",
+	"skill_name": "Smooch",
+	"skill_note": "Smooch",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Heal",
+					"seat": "Self",
+					"health": 25
+				},
+                {
+					"name": "Swap Monster",
+					"seat": "Self",
+					"monster": "Self",
+					"new_monster": "Habibun",
+					"direction": "Up",
+					"wait": true
+				}
+			]
+		}
+	]
+}

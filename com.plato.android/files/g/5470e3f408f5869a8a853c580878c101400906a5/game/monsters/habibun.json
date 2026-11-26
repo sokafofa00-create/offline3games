@@ -1,0 +1,51 @@
+{
+	"name": "Habibun",
+	"collector_tag": "056",
+	"skins": [
+		{
+			"name": "Habibun",
+			"sku": 12038,
+			"sprite": "match3battle/monsters/habibun/habibun_static.webp"
+		},
+		{
+			"name": "Wedding Habibun",
+			"sku": 12142,
+			"sprite": "match3battle/monsters/habibun_wedding/habibun_wedding_static.webp",
+			"spine_bundle": [
+				"match3battle/monsters/habibun_wedding/spine/habibun_wedding.webp",
+				"~/images/monsters/habibun_wedding/spine/habibun_wedding.json",
+				"~/images/monsters/habibun_wedding/spine/habibun_wedding.atlas"
+			]
+		}
+	],
+	"mana": 4,
+	"tile_type": "Purple",
+	"skill_name": "Glomp",
+	"skill_note": "Glomp",
+	"powers": [
+		{
+			"event": "Max Mana",
+			"seat": "Self",
+			"monster": "Self",
+			"effects": [
+				{
+					"name": "Attack",
+					"seat": "Opponent",
+					"damage": 20
+				},
+				{
+					"name": "Wait",
+					"seconds": 1
+				},
+                {
+					"name": "Swap Monster",
+					"seat": "Self",
+					"monster": "Self",
+					"new_monster": "Maboobun",
+					"direction": "Back",
+					"wait": true
+				}
+			]
+		}
+	]
+}
