@@ -190,6 +190,12 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       for (let w = 0; w < 14 && res.draft.final.phase !== 3; w++) { if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn"); await page.waitForTimeout(1500); res.draft.final = await st2(); }
       res.draft.reachedCombat = res.draft.final.phase === 3;
       if (res.draft.final.phase === 3) {
+        // REAL TOUCH: dismiss the in-canvas tutorial popup ("OK" button, found from the after-draft screenshot) before touching the board.
+        res.draft.realTouch = { okTap: [206, 722] };
+        res.draft.realTouch.beforeOk = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, seat: l._localSeat, moves: l.moveCount, board: l.board ? [l.board.width, l.board.height] : null }; });
+        await page.touchscreen.tap(206, 722);
+        await page.waitForTimeout(2000);
+        await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1d2-after-ok-tap.png` });
         res.draft.geo = await page.evaluate(() => {
           const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { canvas: null };
           const c = document.getElementById("game-canvas"); const r = c.getBoundingClientRect(); o.canvas = { x: r.x, y: r.y, w: r.width, h: r.height, cw: c.width, ch: c.height, dpr: window.devicePixelRatio };
