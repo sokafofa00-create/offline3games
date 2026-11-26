@@ -45,8 +45,35 @@ function safeJoin(base, rel) {
   return target;
 }
 
+// --- Dev/CI only: a stand-in for the native LAN transport so two browser contexts can exercise the lobby protocol. ---
+// It is NOT packaged into the APK path that matters (the app uses the native LanNet there).
+const lanPeers = new Map(); // id -> { id, name, state, seen, events: [] }
+function lanRoute(req, res, urlPath) {
+  let body = "";
+  req.on("data", (c) => (body += c));
+  req.on("end", () => {
+    let b = {};
+    try { b = JSON.parse(body || "{}"); } catch (_e) {}
+    const now = Date.now();
+    for (const [k, p] of lanPeers) if (now - p.seen > 8000) lanPeers.delete(k);
+    const out = (o) => { res.writeHead(200, { "content-type": "application/json" }); res.end(JSON.stringify(o)); };
+    if (urlPath === "/__lan/hello") { const p = lanPeers.get(b.id) || { id: b.id, events: [] }; Object.assign(p, { name: b.name, state: b.state || "available", seen: now }); lanPeers.set(b.id, p); return out({ ok: true }); }
+    if (urlPath === "/__lan/bye") { lanPeers.delete(b.id); return out({ ok: true }); }
+    if (urlPath === "/__lan/poll") {
+      const me = lanPeers.get(b.id); if (me) me.seen = now;
+      const peers = [...lanPeers.values()].filter((p) => p.id !== b.id).map((p) => ({ id: p.id, name: p.name, ip: "test:" + p.id, state: p.state }));
+      const events = me ? me.events.splice(0) : [];
+      return out({ me: { id: b.id, name: me?.name, ip: "test:" + b.id }, peers, events });
+    }
+    if (urlPath === "/__lan/send") { const t = lanPeers.get(b.to); if (t) t.events.push(b.msg); return out({ ok: !!t }); }
+    if (urlPath === "/__lan/broadcast") { let n = 0; for (const p of lanPeers.values()) if (p.id !== b.from) { p.events.push(b.msg); n++; } return out({ n }); }
+    res.writeHead(404); res.end();
+  });
+}
+
 const server = http.createServer((req, res) => {
   const urlPath = decodeURIComponent((req.url || "/").split("?")[0]);
+  if (urlPath.startsWith("/__lan/")) return lanRoute(req, res, urlPath);
   const cleanPath = urlPath === "/" ? "/index.html" : urlPath;
 
   let filePath = null;
