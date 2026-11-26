@@ -14,14 +14,15 @@ const snap = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__
 for (const game of GAMES) {
   const vp = game === "brawlbots" ? { width: 860, height: 412 } : { width: 412, height: 860 };
   const errors = [];
-  const res = { game, steps: {}, errors };
+  const dialogs = [];
+  const res = { game, steps: {}, errors, dialogs };
   const mk = async (name) => {
     const ctx = await browser.newContext({ viewport: { width: 412, height: 860 }, hasTouch: true });
     const page = await ctx.newPage();
     page.on("pageerror", (e) => errors.push(name + " pageerror: " + e.message.slice(0, 140)));
     page.on("console", (m) => { if (m.type() === "error") errors.push(name + " console: " + m.text().slice(0, 140)); });
     page.on("worker", (w) => w.on("console", (m) => { if (m.type() === "error") errors.push(name + " worker: " + m.text().slice(0, 140)); }));
-    page.on("dialog", async (d) => { errors.push(name + " dialog: " + d.message().slice(0, 100)); await d.dismiss(); });
+    page.on("dialog", async (d) => { dialogs.push(name + ": " + d.message().slice(0, 100)); await d.dismiss(); });
     await page.goto(`http://localhost:${PORT}/`);
     await page.fill("#p1-name", name);
     await page.click('.mode-tab[data-mode="lan"]');
@@ -63,7 +64,12 @@ for (const game of GAMES) {
     res.steps.movesAdvanced = game === "pool" ? null : (chg(res.end.A, res.start.A) && chg(res.end.B, res.start.B));
     await A.page.screenshot({ path: `shots/lan-${game}-host.png` });
     await B.page.screenshot({ path: `shots/lan-${game}-guest.png` });
-    await A.ctx.close(); await B.ctx.close();
+    if (game === "pool") {
+      // Connection loss: the guest phone vanishes (context closed). The host must notice, tell the player and return to the menu.
+      await B.ctx.close();
+      try { await A.page.waitForSelector("#setup-screen.active", { timeout: 40000 }); res.steps.disconnect = dialogs.some((d) => d.startsWith("Host:") && d.includes("انقطع")); } catch (e) { res.steps.disconnect = false; }
+      await A.ctx.close();
+    } else { await A.ctx.close(); await B.ctx.close(); }
   } catch (e) { res.steps.exception = String(e && e.message).slice(0, 300); }
   out.push(res);
 }
@@ -71,5 +77,5 @@ await browser.close(); server.kill();
 const txt = JSON.stringify(out, null, 1);
 console.log("LAN_MATCH_RESULTS " + txt);
 if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## LAN match test (relay stand-in, two contexts, internal-API actions)\n```json\n" + txt + "\n```\n");
-const bad = out.filter((r) => r.steps.exception || !r.steps.seats || !r.steps.sameState || r.steps.movesAdvanced === false);
+const bad = out.filter((r) => r.steps.exception || !r.steps.seats || !r.steps.sameState || r.steps.movesAdvanced === false || r.steps.disconnect === false);
 if (bad.length) { console.log("FAILED LAN match for: " + bad.map((r) => r.game).join(",")); process.exit(1); }
