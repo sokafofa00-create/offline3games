@@ -47,8 +47,18 @@ for (const sc of scenarios) {
         await page.screenshot({ path: `shots-end/${sc.name}-a-after-resign-click.png` });
     // Confirm the in-canvas popup with a REAL touch tap (coordinates read from the popup screenshots; viewport 412x860).
     const TAP = { pool: [283, 599], monsters: [103, 460], brawlbots: [309, 823] }[sc.game];
-    await page.touchscreen.tap(TAP[0], TAP[1]);
     res.tap = TAP;
+    res.tapAttempts = [];
+    const pointerSeen = await page.evaluate(() => { window.__pt = []; const c = document.getElementById("game-canvas"); for (const ev of ["pointerdown", "pointerup", "touchstart", "mousedown", "click"]) c.addEventListener(ev, (e) => window.__pt.push(ev + ":" + (e.pointerType || "") + ":" + Math.round(e.clientX) + "," + Math.round(e.clientY))); return true; });
+    for (const mode of ["mouse", "touch", "mouse-slow"]) {
+      if (mode === "touch") await page.touchscreen.tap(TAP[0], TAP[1]);
+      else if (mode === "mouse") await page.mouse.click(TAP[0], TAP[1]);
+      else { await page.mouse.move(TAP[0], TAP[1]); await page.mouse.down(); await page.waitForTimeout(150); await page.mouse.up(); }
+      await page.waitForTimeout(2500);
+      const sn = await snap(page);
+      res.tapAttempts.push({ mode, gameOver: sn.gameOver, bar: sn.barVisible, pt: await page.evaluate(() => (window.__pt || []).splice(0).slice(0, 8)) });
+      if (sn.gameOver || sn.barVisible) break;
+    }
     let over = null;
     for (let w = 0; w < 12; w++) { await page.waitForTimeout(1000); over = await snap(page); if (over.gameOver || over.barVisible) break; }
     res.afterConfirm = over;
