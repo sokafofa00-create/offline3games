@@ -335,7 +335,7 @@ self.onmessage = (ev) => {
     // The game's logic.animateWorld() calls this.executeAnimation(). The client class defines it (-> its animator) but the
     // server logic here has no animator, so a shot completed by resign/disconnect threw "executeAnimation is not a function".
     // Mirror the game's own WorldAnimatorServer.executeAnimation (fixed-step loop, then the animation-finished signals).
-    if (typeof serverLogic.executeAnimation !== "function") {
+    if (typeof serverLogic.executeAnimation !== "function" && typeof serverLogic.canSelectTank === "function") { // Brawlbots only (Monsters LAN regressed when this was applied to every game)
       serverLogic.executeAnimation = function () {
         const l = serverLogic; const MAX = 200000;
         if (typeof l.getNOAnimations !== "function" || !l.world) return;
