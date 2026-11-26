@@ -8,6 +8,7 @@
 
 ## هيكلة المشروع
 - `OFFLINE_APP_SPECIFICATIONS.md`: التوثيق الهندسي الكامل للبيئة والجسور الأربعة (`plato`, `GL`, `audio`, `pmath`) وآلية اللعب المتعاقب.
+- pool_assets/: موارد وأصول لعبة Pool (البلياردو) الكاملة المستخرجة وفقاً لسيرفر الموارد (صور، أصوات، أشكال، شيدرات، نماذج Spine).
 - `match_monsters_assets/`: موارد وأصول لعبة Match Monsters الكاملة المستخرجة وفقاً لسيرفر الموارد.
 - `brawlbots_assets/`: موارد وأصول لعبة Brawlbots (الدبابات) الكاملة المستخرجة وفقاً لسيرفر الموارد (صور، أصوات، أشكال، شيدرات).
 - `web/`: واجهة التطبيق ومحرك التشغيل (`WebGL2` + `WebAudio` + `Local Server Worker` + `Hotseat Controller`).

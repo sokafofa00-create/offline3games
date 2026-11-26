@@ -1,0 +1,15 @@
+Yayoi_dots.png
+size:148,148
+filter:Linear,Linear
+circle_black
+bounds:2,20,47,47
+circle_red
+bounds:88,99,47,47
+circle_white
+bounds:51,20,47,47
+flower1
+bounds:2,69,84,77
+flower2
+bounds:100,49,46,48
+flower3
+bounds:100,5,46,42
