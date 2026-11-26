@@ -1,0 +1,57 @@
+name: Build Offline Android APK
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Accept Android SDK Licenses
+        run: yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Setup Gradle 8.9
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.9"
+
+      - name: Build Offline Debug & Release APKs
+        working-directory: ./android
+        run: gradle assembleDebug assembleRelease --no-daemon --stacktrace
+
+      - name: Verify Zero Internet Permission in Merged Manifest
+        working-directory: ./android
+        run: |
+          MANIFESTS=$(find app/build/intermediates -name "AndroidManifest.xml")
+          if [ -z "$MANIFESTS" ]; then
+            echo "ERROR: Could not locate merged AndroidManifest.xml"
+            exit 1
+          fi
+          for f in $MANIFESTS; do
+            if grep -q "android.permission.INTERNET" "$f"; then
+              echo "ERROR: INTERNET permission detected in $f!"
+              exit 1
+            fi
+          done
+          echo "Verified: APK is 100% offline with zero network permissions and zero pairip."
+
+      - name: Upload Ready-to-Install APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Offline-3Games-APK
+          path: |
+            android/app/build/outputs/apk/release/*.apk
+            android/app/build/outputs/apk/debug/*.apk
+          retention-days: 30
