@@ -11,7 +11,7 @@ const PORT = Number(process.env.PORT || 8090);
 
 // Resource folders uploaded by file name (not by hash). Each one has a __assets.json manifest (name -> SHA-1);
 // /assets/<hash> is answered from the named file. Same mapping the Android build uses. No network involved.
-const NAMED_ASSET_DIRS = ["match_monsters_assets", "brawlbots_assets"];
+const NAMED_ASSET_DIRS = ["match_monsters_assets", "brawlbots_assets", "pool_assets"];
 const hashToFile = new Map();
 for (const dir of NAMED_ASSET_DIRS) {
   const manifest = path.join(__dirname, dir, "__assets.json");
