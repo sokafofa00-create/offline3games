@@ -34,8 +34,8 @@ jobs:
         run: |
           echo "baseline $(git -C ../base rev-parse HEAD) current $(git rev-parse HEAD)" | tee -a "$GITHUB_STEP_SUMMARY"
           ls ../base | head -20 | tee -a "$GITHUB_STEP_SUMMARY"
-          node tests/compare.mjs ../base ../out-base 2>&1 | grep -E "COMPARE|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
-          node tests/compare.mjs . ../out-cur 2>&1 | grep -E "COMPARE|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          node tests/compare.mjs ../base ../out-base 2>&1 | grep -E "COMPARE|TEXFMT|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
+          node tests/compare.mjs . ../out-cur 2>&1 | grep -E "COMPARE|TEXFMT|Error" | tee -a "$GITHUB_STEP_SUMMARY" || true
       - name: Publish to ci-compare branch
         if: always()
         run: |
