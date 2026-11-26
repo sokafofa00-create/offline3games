@@ -136,7 +136,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     if (sc.game === "monsters") {
       const snap = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
       res.monstersBefore = await snap();
-      res.monstersPlugins = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return l.plugins().map((p) => ({ name: p.constructor && p.constructor.name, keys: Object.keys(p).slice(0, 25), moveVal: p.onMoveValidation ? String(p.onMoveValidation).replace(/\s+/g, " ").slice(0, 900) : null, proto: Object.getOwnPropertyNames(Object.getPrototypeOf(p)).slice(0, 30) })); } catch (e) { return String(e); } });
+      res.monstersPlugins = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return l.plugins().map((p) => ({ name: p.constructor && p.constructor.name, keys: Object.keys(p).slice(0, 25), moveVal: undefined, proto: Object.getOwnPropertyNames(Object.getPrototypeOf(p)).slice(0, 30), state: { selecting: JSON.stringify(p.selecting)?.slice(0, 200), confirmed: JSON.stringify(p.confirmed)?.slice(0, 120), mode: p.mode, selectable: JSON.stringify(p.selectable)?.slice(0, 200), complete: p.complete }, fns: Object.fromEntries(["validSelect", "validConfirm", "moveSelect", "moveConfirm", "control_seat", "local_control", "local_confirm", "select", "validSwap", "moveSwap"].filter((n) => { try { return typeof p[n] === "function"; } catch (e) { return false; } }).map((n) => [n, String(p[n]).replace(/\s+/g, " ").slice(0, 700)])) })); } catch (e) { return String(e); } });
       res.monstersPhaseSrc = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = {}; for (const n of ["onMove", "startReadyCheck", "turnExpireWaitingForBattleReady", "_ready", "turnExpireBattlePrep"]) if (typeof l[n] === "function") o[n] = String(l[n]).replace(/\s+/g, " ").slice(0, 700); return o; });
     }
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1-start.png` });
@@ -172,7 +172,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
 }
 await browser.close();
 server.kill();
-if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Smoke results\n```json\n" + JSON.stringify(results, null, 1).slice(0, 60000) + "\n```\n");
+if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Smoke results\n```json\n" + JSON.stringify(results, (k, v) => (k === "props" || k === "methods" || k === "src" || k === "tankKeys") ? undefined : v, 1).slice(0, 200000) + "\n```\n");
 console.log("SMOKE_RESULTS " + JSON.stringify(results, null, 1));
 const bad = results.filter((r) => r.errors.length || r.cover?.ok === false || r.externalRequests.length || !r.steps.rematchClicked);
 if (bad.length) { console.log("FAILED: " + bad.map((b) => b.name).join(", ")); process.exit(1); }
