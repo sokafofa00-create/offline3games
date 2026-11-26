@@ -1,4 +1,5 @@
 import { preloadGameBundle, launchPlatoOfflineSession } from "./runtime/plato-bridge.js";
+import { startBots } from "./bots.js";
 
 const GAMES = {
   pool: {
@@ -51,6 +52,12 @@ const pInputs = [
 ];
 
 const startBtn = document.getElementById("start-btn");
+const playModeEl = document.getElementById("play-mode");
+const difficultyBox = document.getElementById("difficulty-box");
+const botDifficultyEl = document.getElementById("bot-difficulty");
+const modeBox = document.getElementById("mode-box");
+playModeEl.addEventListener("change", () => { difficultyBox.classList.toggle("hidden", playModeEl.value !== "bot"); });
+let activeBots = null;
 const loadingBox = document.getElementById("loading-box");
 const progressFill = document.getElementById("progress-fill");
 const loadingText = document.getElementById("loading-text");
@@ -198,7 +205,8 @@ async function startMatch(params) {
 
     let currentHudInfo = { seat: 0, turns: [0], simultaneous: false };
     // Pass-the-phone cover: only for games with hidden information (not Pool).
-    const coverEnabled = params.gameId !== GAMES.pool.id && params.playerNames.length > 1;
+    const humanCount = params.playerNames.length - (params.botSeats ? params.botSeats.length : 0);
+    const coverEnabled = params.gameId !== GAMES.pool.id && humanCount > 1;
     let coveredSeat = -1;
     let coverTimer = null;
     const hideCover = () => passCover.classList.add("hidden");
@@ -254,6 +262,11 @@ async function startMatch(params) {
       activeSession.manualSwitchSeat(nextSeat);
     };
 
+    if (activeBots) { activeBots.stop(); activeBots = null; }
+    if (params.botSeats && params.botSeats.length) {
+      activeBots = startBots({ getLogic: () => activeSession?.getClientLogic?.(), botSeats: params.botSeats, difficulty: params.difficulty, game: params.gameKey });
+      window.__BOTS__ = activeBots;
+    }
     // Expose debug handle for automated verification
     window.__ACTIVE_SESSION__ = activeSession;
   } catch (err) {
@@ -277,16 +290,33 @@ startBtn.addEventListener("click", () => {
     playerNames.push(val || (language === "ar" ? `اللاعب ${i + 1}` : `Player ${i + 1}`));
   }
 
+  const mode = playModeEl.value;
+  if (mode === "bot" && selectedGameKey === "pool") {
+    alert("اللعب ضد الكمبيوتر في البلياردو غير متاح بعد. اختر وضع نفس الجهاز.");
+    return;
+  }
+  const botSeats = [];
+  if (mode === "bot") {
+    for (let i = 1; i < count; i++) {
+      botSeats.push(i);
+      playerNames[i] = language === "ar" ? `الكمبيوتر ${count > 2 ? i : ""}`.trim() : `Computer ${count > 2 ? i : ""}`.trim();
+    }
+  }
   lastLaunchParams = {
     gameId: GAMES[selectedGameKey].id,
     settings: buildGameSettings(),
     playerNames,
     language,
+    mode,
+    botSeats,
+    difficulty: botDifficultyEl.value,
+    gameKey: selectedGameKey,
   };
   startMatch(lastLaunchParams);
 });
 
 function exitToSetup() {
+  if (activeBots) { activeBots.stop(); activeBots = null; }
   setHostOrientation("portrait");
   if (activeSession) {
     activeSession.destroy();
