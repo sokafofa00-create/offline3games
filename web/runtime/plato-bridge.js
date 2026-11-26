@@ -57,7 +57,7 @@ export async function preloadGameBundle(gameId, onProgress) {
           if (/\.(webp|png|jpg|jpeg)$/i.test(name)) {
             const blob = await res.blob();
             const bmp = await createImageBitmap(blob, {
-              premultiplyAlpha: "none",
+              premultiplyAlpha: "premultiply",
               colorSpaceConversion: "none",
             });
             bitmaps.set(name, bmp);
@@ -286,7 +286,7 @@ export async function launchPlatoOfflineSession({
           return;
         }
         const blob = await res.blob();
-        const bmp = await createImageBitmap(blob, { premultiplyAlpha: "none", colorSpaceConversion: "none" });
+        const bmp = await createImageBitmap(blob, { premultiplyAlpha: "premultiply", colorSpaceConversion: "none" });
         const texInfo = glBridge.registerExternalBitmap(bmp);
         bmp.close();
         if (okCb) okCb(hash, texInfo);
