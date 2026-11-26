@@ -258,6 +258,7 @@ function scheduleServerAlarm(durationMs, alarmId) {
       type: "serverAlarm",
       alarmId,
       reveal: rev,
+          revealBySeat: allReveals(),
       turns: serverLogic.turn ? serverLogic.turn.slice() : [],
       gameOver: serverLogic.gameOver,
     });
@@ -266,6 +267,13 @@ function scheduleServerAlarm(durationMs, alarmId) {
 }
 
 const pendingReveals = new Map();
+
+// Per-seat reveals for LAN matches (one client per seat). Hotseat ignores this extra field.
+function allReveals() {
+  const o = {};
+  for (let s = 0; s < numSeats; s++) o[s] = collectRevealForSeat(s) || null;
+  return o;
+}
 
 function collectRevealForSeat(seat) {
   const globalRev = pendingReveals.get(-1);
@@ -378,6 +386,7 @@ self.onmessage = (ev) => {
           seat,
           packet: { __info: 1 },
           reveal: rev,
+          revealBySeat: allReveals(),
           turns: serverLogic.turn ? serverLogic.turn.slice() : [],
           gameOver: serverLogic.gameOver,
         });
@@ -406,6 +415,7 @@ self.onmessage = (ev) => {
       seat,
       packet,
       reveal: rev,
+          revealBySeat: allReveals(),
       turns: serverLogic.turn ? serverLogic.turn.slice() : [],
       gameOver: serverLogic.gameOver,
     });
