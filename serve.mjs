@@ -12,12 +12,15 @@ const PORT = Number(process.env.PORT || 8090);
 // Resource folders uploaded by file name (not by hash). Each one has a __assets.json manifest (name -> SHA-1);
 // /assets/<hash> is answered from the named file. Same mapping the Android build uses. No network involved.
 const NAMED_ASSET_DIRS = ["match_monsters_assets", "brawlbots_assets", "pool_assets"];
+// Files in a named folder that are known not to be the real asset (e.g. generated placeholder images) are never served.
+const QUARANTINE = new Set();
+try { const q = JSON.parse(fs.readFileSync(path.join(__dirname, "asset-quarantine.json"), "utf8")); for (const [d, names] of Object.entries(q)) for (const n of names) QUARANTINE.add(d + "/" + n); } catch (_e) {}
 const hashToFile = new Map();
 for (const dir of NAMED_ASSET_DIRS) {
   const manifest = path.join(__dirname, dir, "__assets.json");
   if (!fs.existsSync(manifest)) continue;
   const map = JSON.parse(fs.readFileSync(manifest, "utf8"));
-  for (const [name, hash] of Object.entries(map)) hashToFile.set(hash, path.join(__dirname, dir, name));
+  for (const [name, hash] of Object.entries(map)) { if (QUARANTINE.has(dir + "/" + name)) continue; hashToFile.set(hash, path.join(__dirname, dir, name)); }
 }
 
 const MIME_TYPES = {
