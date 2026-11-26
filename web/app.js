@@ -148,6 +148,21 @@ function renderDynamicMenu(items) {
   }
 }
 
+// Asks the Android host to rotate (no-op in a plain browser). Resolves after the window resize, or after 1.5s.
+async function setHostOrientation(mode) {
+  window.__ORIENTATION_CALLS__ = (window.__ORIENTATION_CALLS__ || []).concat(mode);
+  const host = window.AndroidHost;
+  if (!host || typeof host.setOrientation !== "function") return;
+  const wantLandscape = mode === "landscape";
+  if ((window.innerWidth > window.innerHeight) === wantLandscape) { host.setOrientation(mode); return; }
+  await new Promise((resolve) => {
+    const done = () => { window.removeEventListener("resize", done); resolve(); };
+    window.addEventListener("resize", done);
+    setTimeout(done, 1500);
+    host.setOrientation(mode);
+  });
+}
+
 async function startMatch(params) {
   if (activeSession) {
     activeSession.destroy();
@@ -176,6 +191,8 @@ async function startMatch(params) {
       bundleCache.set(params.gameId, bundle);
     }
 
+    // Brawlbots is landscape; rotate the host first and wait for the resize so the surface is created at the right size.
+    await setHostOrientation(params.gameId === GAMES.brawlbots.id ? "landscape" : "portrait");
     setupScreen.classList.remove("active");
     gameScreen.classList.add("active");
 
@@ -242,6 +259,7 @@ async function startMatch(params) {
   } catch (err) {
     console.error("Failed to launch match:", err);
     alert("حدث خطأ أثناء تشغيل اللعبة: " + err.message);
+    setHostOrientation("portrait");
     gameScreen.classList.remove("active");
     setupScreen.classList.add("active");
   } finally {
@@ -269,6 +287,7 @@ startBtn.addEventListener("click", () => {
 });
 
 function exitToSetup() {
+  setHostOrientation("portrait");
   if (activeSession) {
     activeSession.destroy();
     activeSession = null;
