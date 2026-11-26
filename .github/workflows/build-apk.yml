@@ -37,7 +37,7 @@ jobs:
         working-directory: ./android
         run: gradle assembleDebug assembleRelease --no-daemon --stacktrace
 
-      - name: Verify Zero Internet Permission in Merged Manifest
+      - name: Verify merged manifest permissions (LAN-only allow-list)
         working-directory: ./android
         run: |
           MANIFESTS=$(find app/build/intermediates -name "AndroidManifest.xml")
@@ -45,13 +45,16 @@ jobs:
             echo "ERROR: Could not locate merged AndroidManifest.xml"
             exit 1
           fi
+          ALLOWED="android.permission.INTERNET android.permission.ACCESS_WIFI_STATE android.permission.VIBRATE com.local.offlinegames.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
           for f in $MANIFESTS; do
-            if grep -q "android.permission.INTERNET" "$f"; then
-              echo "ERROR: INTERNET permission detected in $f!"
-              exit 1
-            fi
+            for p in $(grep -o 'uses-permission[^>]*android:name="[^"]*"' "$f" | sed 's/.*android:name="//; s/"$//' | sort -u); do
+              case " $ALLOWED " in *" $p "*) ;; *) echo "ERROR: unexpected permission $p in $f"; exit 1;; esac
+            done
+            for p in android.permission.ACCESS_NETWORK_STATE android.permission.CHANGE_WIFI_MULTICAST_STATE android.permission.ACCESS_FINE_LOCATION; do
+              if grep -q "$p" "$f"; then echo "ERROR: forbidden permission $p in $f"; exit 1; fi
+            done
           done
-          echo "Verified: APK is 100% offline with zero network permissions and zero pairip."
+          echo "Verified: merged manifests only use the LAN allow-list (INTERNET, ACCESS_WIFI_STATE, VIBRATE)."
 
       - name: Verify packaged APKs (permissions, forbidden libraries, signature)
         run: |
@@ -67,7 +70,14 @@ jobs:
             PERMS=$($BT/aapt2 dump permissions "$apk")
             echo "$PERMS"
             echo '```' >> "$GITHUB_STEP_SUMMARY"; echo "$PERMS" >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
-            for p in android.permission.INTERNET android.permission.ACCESS_NETWORK_STATE android.permission.ACCESS_WIFI_STATE; do
+            ALLOWED="android.permission.INTERNET android.permission.ACCESS_WIFI_STATE android.permission.VIBRATE com.local.offlinegames.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+            for p in $(echo "$PERMS" | grep -o "name='[^']*'" | sed "s/name='//; s/'$//" | sort -u); do
+              case " $ALLOWED " in *" $p "*) ;; *) echo "UNEXPECTED permission $p in $apk"; FAIL=1;; esac
+            done
+            for p in android.permission.INTERNET android.permission.ACCESS_WIFI_STATE; do
+              echo "$PERMS" | grep -q "$p" || { echo "MISSING required LAN permission $p in $apk"; FAIL=1; }
+            done
+            for p in android.permission.ACCESS_NETWORK_STATE android.permission.CHANGE_WIFI_MULTICAST_STATE; do
               if echo "$PERMS" | grep -q "$p"; then echo "FORBIDDEN permission $p in $apk"; FAIL=1; fi
             done
             rm -rf /tmp/apkx && mkdir /tmp/apkx && unzip -q "$apk" -d /tmp/apkx
