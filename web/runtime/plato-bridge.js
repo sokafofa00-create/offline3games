@@ -367,6 +367,7 @@ export async function launchPlatoOfflineSession({
       const origReady = logic.localReady.bind(logic);
       let inExtra = false;
       logic.localReady = function (...args) {
+        if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "localReady", seat: logic._localSeat, type: "localReady", aw: [0, 1].map((s) => { try { return logic.isSeatAwaitingReady(s); } catch (e) { return null; } }) });
         const res = origReady(...args);
         if (inExtra) return res;
         const cur = logic._localSeat;
