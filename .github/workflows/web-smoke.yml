@@ -27,6 +27,8 @@ jobs:
         run: node tests/verify-assets.mjs match_monsters_assets
       - name: Verify Brawlbots named assets (presence and SHA-1 against __assets.json)
         run: node tests/verify-assets.mjs brawlbots_assets
+      - name: Verify Pool named assets (presence and SHA-1 against __assets.json)
+        run: node tests/verify-assets.mjs pool_assets
       - name: Run smoke test (load, start, input, menu, rematch)
         run: node tests/smoke.mjs
       - name: Renderer comparison (Mesa GL via Xvfb, same scenarios)
