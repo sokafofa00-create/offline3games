@@ -27,5 +27,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: tap-scan-shots
+          name: tap-scan-shots2
           path: shots/*.png
+# rerun mirrored
