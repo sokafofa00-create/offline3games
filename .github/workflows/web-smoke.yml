@@ -23,6 +23,8 @@ jobs:
         run: |
           npm i --no-save --no-package-lock playwright@1.49.1
           npx playwright install --with-deps chromium
+      - name: Verify Match Monsters named assets (presence and SHA-1 against __assets.json)
+        run: node tests/verify-assets.mjs match_monsters_assets
       - name: Run smoke test (load, start, input, menu, rematch)
         run: node tests/smoke.mjs
       - name: Renderer comparison (Mesa GL via Xvfb, same scenarios)
