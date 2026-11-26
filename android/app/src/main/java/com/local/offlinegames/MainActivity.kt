@@ -128,6 +128,15 @@ class MainActivity : ComponentActivity() {
     }
 
     class AndroidHostBridge(private val context: Context) {
+        private val lan = LanNet()
+        @JavascriptInterface fun lanStart(id: String, name: String) { lan.start(id.take(40), name.take(24)) }
+        @JavascriptInterface fun lanStop() { lan.stop() }
+        @JavascriptInterface fun lanSetState(state: String) { lan.setState(state.take(16)) }
+        @JavascriptInterface fun lanPeers(): String = lan.peersJson()
+        @JavascriptInterface fun lanSend(ip: String, json: String): Boolean = lan.send(ip, json)
+        @JavascriptInterface fun lanBroadcast(json: String): Int = lan.broadcast(json)
+        @JavascriptInterface fun lanPoll(): String = lan.poll()
+
         // Per-game orientation: Brawlbots is a landscape game, Pool and Match Monsters stay portrait.
         @JavascriptInterface
         fun setOrientation(mode: String) {
