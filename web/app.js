@@ -222,7 +222,7 @@ async function startMatch(params) {
         } else {
           turnText.textContent =
             params.language === "ar" ? `دور: ${info.playerName}` : `Turn: ${info.playerName}`;
-          switchSeatBtn.classList.toggle("hidden", !info.simultaneous);
+          switchSeatBtn.classList.toggle("hidden", !info.simultaneous || params.gameId === GAMES.brawlbots.id);
         }
       },
       onGameOverHud() {
