@@ -387,10 +387,6 @@ startBtn.addEventListener("click", () => {
   }
 
   const mode = playModeEl.value;
-  if (mode === "bot" && selectedGameKey === "pool") {
-    alert("اللعب ضد الكمبيوتر في البلياردو غير متاح بعد. اختر وضع نفس الجهاز.");
-    return;
-  }
   const botSeats = [];
   if (mode === "bot") {
     for (let i = 1; i < count; i++) {
