@@ -338,6 +338,7 @@ export async function launchPlatoOfflineSession({
 
     sendMove(packet) {
       const seatForMove = clientLogic?._localSeat ?? activeLocalSeat;
+      if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "cli", seat: seatForMove, a: packet?.a ?? packet?.m?.a, t2: packet?.t, keys: Object.keys(packet || {}).join(",") });
       serverWorker.postMessage({
         type: "clientMove",
         seat: seatForMove,
@@ -572,6 +573,7 @@ export async function launchPlatoOfflineSession({
     serverWorker.onmessage = (ev) => {
       const msg = ev.data;
       if (!msg) return;
+      if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "srv", type: msg.type, seat: msg.seat, a: msg.packet?.m?.a, turns: msg.turns, over: msg.gameOver });
 
       if (msg.type === "error") {
         reject(new Error(msg.message));
