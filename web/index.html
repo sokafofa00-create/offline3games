@@ -173,6 +173,16 @@
       <canvas id="game-canvas"></canvas>
     </div>
 
+    <!-- غطاء تمرير الهاتف: يخفي اللوحة بين اللاعبين في الألعاب ذات المعلومات المخفية -->
+    <div id="pass-cover" class="pass-cover hidden" role="dialog" aria-live="assertive">
+      <div class="pass-cover-box">
+        <div id="pass-cover-dot" class="pass-cover-dot"></div>
+        <div id="pass-cover-title" class="pass-cover-title"></div>
+        <div class="pass-cover-sub">مرّر الهاتف ثم اضغط عندما تكون جاهزاً</div>
+        <button type="button" id="pass-cover-btn" class="rematch-btn">أنا جاهز</button>
+      </div>
+    </div>
+
     <!-- شريط إعادة اللعب السريع عند انتهاء المباراة -->
     <div id="gameover-bar" class="gameover-bar hidden">
       <button type="button" id="rematch-btn" class="rematch-btn">🔄 مباراة جديدة بنفس الإعدادات</button>
