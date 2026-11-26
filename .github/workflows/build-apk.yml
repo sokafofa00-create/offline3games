@@ -8,6 +8,8 @@ on:
 jobs:
   build-apk:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -86,3 +88,18 @@ jobs:
             android/app/build/outputs/apk/release/*.apk
             android/app/build/outputs/apk/debug/*.apk
           retention-days: 30
+
+      - name: Publish latest test build as a private pre-release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          cp android/app/build/outputs/apk/debug/app-debug.apk /tmp/offline3games-debug.apk
+          cp android/app/build/outputs/apk/release/app-release.apk /tmp/offline3games-release.apk
+          gh release delete latest-test -y --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+          gh release create latest-test /tmp/offline3games-debug.apk /tmp/offline3games-release.apk \
+            --repo "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
+            --title "Latest test build ($GITHUB_SHA)" \
+            --notes "Debug-key signed test build from commit $GITHUB_SHA. Install the debug APK on a phone for direct testing. Not a store release."
+          echo "Release: https://github.com/$GITHUB_REPOSITORY/releases/tag/latest-test" >> "$GITHUB_STEP_SUMMARY"
