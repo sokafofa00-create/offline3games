@@ -129,6 +129,7 @@ export async function launchPlatoOfflineSession({
   onMenuUpdated,
   onTurnHudUpdate,
   onGameOverHud,
+  lan = null, // { role: "host"|"guest", seat, guestSeat, send(msg), onRecv(cb) } for one-seat-per-device LAN matches
 }) {
   const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
   const glBridge = createGLBridge(canvas, bundle);
@@ -183,7 +184,46 @@ export async function launchPlatoOfflineSession({
   }
 
   // Spawn dedicated Local Server Worker
-  const serverWorker = new Worker(new URL("./server-worker.js", import.meta.url));
+  let serverWorker;
+  if (lan && lan.role === "guest") {
+    // Guest phone: no local game server. Client messages go to the host; host server messages come back here.
+    serverWorker = {
+      onmessage: null,
+      postMessage(m) { if (m && m.type === "init") lan.send({ k: "hello" }); else lan.send({ k: "w", m }); },
+      terminate() {},
+      addEventListener() {},
+    };
+    lan.onRecv((msg) => { if (msg && msg.k === "w" && serverWorker.onmessage) serverWorker.onmessage({ data: msg.m }); });
+  } else {
+    serverWorker = new Worker(new URL("./server-worker.js", import.meta.url));
+  }
+  if (lan && lan.role === "host") {
+    // Host phone runs the one authoritative server for both seats and forwards the guest's share over the LAN.
+    let hostInit = null;
+    let helloPending = false;
+    serverWorker.addEventListener("message", (ev) => {
+      const m = ev.data;
+      if (!m) return;
+      if (m.type === "initialized") {
+        hostInit = m;
+        if (helloPending) { helloPending = false; lan.send({ k: "w", m: { ...hostInit, initialSeat: lan.guestSeat } }); }
+        return;
+      }
+      if ((m.type === "resyncState" || m.type === "serverNetMessage") && m.seat !== lan.guestSeat) return;
+      lan.send({ k: "w", m });
+    });
+    lan.onRecv((msg) => {
+      if (!msg) return;
+      if (msg.k === "hello") {
+        if (hostInit) lan.send({ k: "w", m: { ...hostInit, initialSeat: lan.guestSeat } }); else helloPending = true;
+      } else if (msg.k === "w" && msg.m) {
+        const m = msg.m;
+        // Both phones simulate the same world; the host's world-state report is delivered for every seat, so the guest's duplicate is dropped.
+        if (m.type === "clientMove" && m.packet && m.packet.__info && m.packet.__info.a === -1) return;
+        serverWorker.postMessage({ ...m, seat: lan.guestSeat, activeClientSeat: lan.guestSeat });
+      }
+    });
+  }
   const clientNetListeners = [];
 
   const plato = {
@@ -333,7 +373,7 @@ export async function launchPlatoOfflineSession({
 
     setGameLogic(logic) {
       clientLogic = logic;
-      installHotseatHooks(logic);
+      if (!lan) installHotseatHooks(logic);
     },
 
     sendMove(packet) {
@@ -444,6 +484,7 @@ export async function launchPlatoOfflineSession({
 
   let syncPending = false;
   function scheduleHotseatSeatSync() {
+    if (lan) return;
     if (syncPending || destroyed) return;
     syncPending = true;
     queueMicrotask(() => {
@@ -604,6 +645,12 @@ export async function launchPlatoOfflineSession({
       if (!msg) return;
       if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG ||= []).push({ t: Math.round(performance.now()), dir: "srv", type: msg.type, seat: msg.seat, a: msg.packet?.m?.a, turns: msg.turns, over: msg.gameOver });
 
+      if (lan) {
+        // One local seat per device: pick this seat's private reveal; ignore other seats' private updates.
+        if (msg.revealBySeat) msg.reveal = msg.revealBySeat[lan.seat] || undefined;
+        if ((msg.type === "resyncState" || msg.type === "serverNetMessage") && msg.seat !== lan.seat) return;
+      }
+
       if (msg.type === "error") {
         reject(new Error(msg.message));
         return;
@@ -611,7 +658,7 @@ export async function launchPlatoOfflineSession({
 
       if (msg.type === "initialized") {
         numSeats = msg.numSeats;
-        activeLocalSeat = msg.initialSeat ?? 0;
+        activeLocalSeat = lan ? lan.seat : (msg.initialSeat ?? 0);
 
         // 1. Hydrate clientLogic from authoritative server snapshot FIRST (matches native Plato startup order!)
         if (clientLogic) {
@@ -633,6 +680,8 @@ export async function launchPlatoOfflineSession({
 
         scheduleHotseatSeatSync();
         renderRequested = true;
+        // LAN: the initial snapshot is serialized for whichever seat moves first; fetch this device's own private view.
+        if (lan) serverWorker.postMessage({ type: "requestResync", seat: lan.seat });
         resolve();
         return;
       }
