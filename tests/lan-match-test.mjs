@@ -88,7 +88,8 @@ for (const game of GAMES) {
       await A.page.waitForTimeout(2500);
       res.poolTurns.push(await probe("after-guest-shot"));
       const t = res.poolTurns;
-      res.steps.poolOwnership = t.every((x) => x.idleStable) && t[0].hostStickMoved === false && t[0].guestStickMoved === true && t[1].turn !== t[0].turn ? (t[1].hostStickMoved === true && t[1].guestStickMoved === false) : false;
+      res.poolOwnerSeats = t.map((x) => { try { return JSON.parse(x.A.turn)[0]; } catch (e) { return null; } });
+      res.steps.poolOwnership = t.every((x, k) => x.idleStable && (res.poolOwnerSeats[k] === 0 ? (x.hostStickMoved === true && x.guestStickMoved === false) : res.poolOwnerSeats[k] === 1 ? (x.hostStickMoved === false && x.guestStickMoved === true) : false));
     }
     if (game === "pool") {
       // Connection loss: the guest phone vanishes (context closed). The host must notice, tell the player and return to the menu.
