@@ -401,7 +401,9 @@ export async function launchPlatoOfflineSession({
   // --- Hotseat Pass-and-Play Controller (Same Device Player 1 vs Player 2 / 3 / 4) ---
   function installHotseatHooks(logic) {
     // 1. Keep displaySeat pinned to 0 in Pool so avatars & pocketed ball racks NEVER flip left/right between turns!
-    if ("displaySeat" in logic) {
+    // Pool only: Monsters and Brawlbots show the active player's own private picks/board, so their displaySeat must follow
+    // the local seat (pinning it made the tank-select view read a hidden pick and throw, and mirrored seat-specific layout).
+    if ("displaySeat" in logic && typeof logic.canMoveCueBall === "function") {
       Object.defineProperty(logic, "displaySeat", {
         get() { return 0; },
         set(_v) {},
