@@ -96,6 +96,27 @@ export async function preloadGameBundle(gameId, onProgress) {
     } catch (_) {}
   }
 
+  // Offline build: there is no store or account, so every item that ships in the game files counts as owned.
+  // Collect every SKU the bundle declares: `sku = N` / "sku": N in toml/json, and numeric-keyed equipment manifests
+  // (Pool cues, tables, effects: {"1001":{"assets":[],"data":{...}}}).
+  {
+    const skuSet = new Set(unlockedInventory);
+    const re = /["']?\bsku["']?\s*[:=]\s*(\d+)/g;
+    for (const [name, txt] of textFiles.entries()) {
+      if (typeof txt !== "string" || txt.length > 600000 || !/\.(json|toml)$/i.test(name)) continue;
+      let m; re.lastIndex = 0;
+      while ((m = re.exec(txt))) skuSet.add(Number(m[1]));
+      if (/^\s*\{\s*"\d+"\s*:\s*\{/.test(txt) && /\.json$/i.test(name)) {
+        try {
+          const o = JSON.parse(txt);
+          const keys = Object.keys(o);
+          if (keys.length && keys.every((k) => /^\d+$/.test(k) && o[k] && typeof o[k] === "object" && ("data" in o[k] || "assets" in o[k]))) keys.forEach((k) => skuSet.add(Number(k)));
+        } catch (_) {}
+      }
+    }
+    unlockedInventory = Array.from(skuSet).filter((n) => Number.isFinite(n));
+  }
+
   const plainTextObj = {};
   for (const [k, v] of textFiles.entries()) plainTextObj[k] = v;
 
