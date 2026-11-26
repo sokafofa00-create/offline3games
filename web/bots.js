@@ -83,12 +83,78 @@ function brawlbotsAct(l, seat, diff) {
   return false;
 }
 
+
+// ---- Pool: ghost-ball aiming. Same client calls the on-screen controls use (requestCueBallMove / requestShot). ----
+// Table coordinates: angle = atan2(dy, dx) from the cue ball (the game's own getAngleFromVector), strength 0..1.
+function poolAct(l, seat, diff, st) {
+  if (!l.canShoot(seat)) return false;
+  const tb = l.table; const cue = tb && tb.cueBall;
+  if (!cue) return false;
+  if (typeof l.canMoveCueBall === "function" && l.canMoveCueBall(seat) && !st.placed) {
+    st.placed = true;
+    l.requestCueBallMove([cue.position[0], cue.position[1]]); // the game clamps this to a legal spot
+    return true;
+  }
+  st.placed = false;
+  const live = (b) => b && !b.isPocketed();
+  const gt = typeof l.is8BallGame === "function" && l.is8BallGame() ? 0 : 1;
+  const first = l.getShootingFor(seat);
+  let nums = [];
+  if (gt === 0) {
+    if (first >= 1 && first <= 7) nums = [1, 2, 3, 4, 5, 6, 7];
+    else if (first >= 9) nums = [9, 10, 11, 12, 13, 14, 15];
+    else if (first === 8) nums = [8];
+    else nums = [1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15];
+  } else nums = first ? [first] : [];
+  const balls = nums.map((n) => ({ n, b: tb.balls[n - 1] })).filter((x) => live(x.b));
+  if (!balls.length) return false;
+  const pockets = (tb.pockets || []).map((p) => p.position).filter(Boolean);
+  const cx = cue.position[0], cy = cue.position[1], r = cue.radius || 0.03;
+  const others = tb.balls.filter(live);
+  let span = 1; for (const a of pockets) for (const c of pockets) span = Math.max(span, Math.hypot(a[0] - c[0], a[1] - c[1]));
+  const segDist = (px, py, ax, ay, bx, by) => { const dx = bx - ax, dy = by - ay; const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy || 1))); return Math.hypot(px - (ax + t * dx), py - (ay + t * dy)); };
+  const shots = [];
+  for (const { b } of balls) {
+    const bx = b.position[0], by = b.position[1];
+    for (const p of pockets) {
+      const dx = p[0] - bx, dy = p[1] - by, d = Math.hypot(dx, dy) || 1;
+      const gx = bx - (dx / d) * 2 * r, gy = by - (dy / d) * 2 * r;
+      const vx = gx - cx, vy = gy - cy, vd = Math.hypot(vx, vy) || 1;
+      const cos = (vx * dx + vy * dy) / (vd * d);
+      if (cos < 0.25) continue; // too thin a cut
+      let blocked = 0;
+      for (const o of others) { if (o === b) continue; if (segDist(o.position[0], o.position[1], cx, cy, gx, gy) < 2 * r) blocked++; }
+      shots.push({ ang: Math.atan2(vy, vx), score: vd + d + (1 - cos) * span * 2 + blocked * span, total: vd + d, blocked });
+    }
+  }
+  if (!shots.length) {
+    // No clean line: hit the nearest legal ball hard enough to move the pack.
+    let nb = balls[0].b, nd = 1e9;
+    for (const { b } of balls) { const d = Math.hypot(b.position[0] - cx, b.position[1] - cy); if (d < nd) { nd = d; nb = b; } }
+    const a = Math.atan2(nb.position[1] - cy, nb.position[0] - cx) + rnd(-0.05, 0.05);
+    l.requestShot(0.7, a, [0, 0]);
+    return true;
+  }
+  shots.sort((a, c) => a.score - c.score);
+  let pick = shots[0];
+  if (diff === "easy") pick = pickRandom(shots);
+  else if (diff === "medium") pick = pickRandom(shots.slice(0, 3));
+  const err = { easy: 0.1, medium: 0.035, hard: 0.01 }[diff] ?? 0.035;
+  const ang = pick.ang + rnd(-err, err);
+  const breaking = typeof l.isBreaking === "function" && l.isBreaking();
+  const strength = breaking ? 0.95 : Math.max(0.3, Math.min(0.95, 0.38 + 0.55 * (pick.total / span)));
+  st.last = { ang: Math.round(ang * 1000) / 1000, strength: Math.round(strength * 100) / 100, cue: [Math.round(cx * 100) / 100, Math.round(cy * 100) / 100], blocked: pick.blocked };
+  l.requestShot(strength, ang, [0, 0]);
+  return true;
+}
+
 // Starts the bot driver. Returns { stop, log }.
 export function startBots({ getLogic, botSeats, difficulty, game }) {
   const seats = new Set(botSeats);
   const log = [];
   let lastKey = "";
   let lastAt = 0;
+  const poolState = { placed: false };
   const tick = () => {
     const l = getLogic();
     if (!l || !l.started || l.gameOver || l.paused) return;
@@ -104,8 +170,9 @@ export function startBots({ getLogic, botSeats, difficulty, game }) {
     try {
       if (game === "monsters") acted = l.gamePhase === 0 ? monstersDraft(l, seat, difficulty) : monstersSwap(l, seat, difficulty);
       else if (game === "brawlbots") acted = brawlbotsAct(l, seat, difficulty);
+      else if (game === "pool") acted = poolAct(l, seat, difficulty, poolState);
     } catch (e) { log.push({ err: String(e && e.message).slice(0, 120), seat }); }
-    if (log.length < 200) log.push({ t: now, seat, acted, phase: l.gamePhase });
+    if (log.length < 200) log.push({ t: now, seat, acted, phase: l.gamePhase, shot: game === "pool" ? poolState.last : undefined });
     lastKey = key; lastAt = now;
   };
   const id = setInterval(tick, 350);

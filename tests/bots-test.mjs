@@ -13,12 +13,13 @@ const scenarios = [
   { name: "brawlbots-bot-hard", game: "brawlbots", diff: "hard", vp: { width: 860, height: 412 } },
   { name: "monsters-bot-medium", game: "monsters", diff: "medium", vp: { width: 412, height: 860 } },
 ];
+import { splitKnownMissing } from "./known-missing.mjs";
 const results = [];
 for (const sc of scenarios) {
   const ctx = await browser.newContext({ viewport: sc.vp, hasTouch: true });
   const page = await ctx.newPage();
   const errors = [], failed = [], ext = [];
-  page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+  page.on("pageerror", (e) => { errors.push("pageerror: " + e.message); console.log("PAGEERROR_STACK " + String(e.stack || "").split("\n").slice(0, 6).join(" | ").slice(0, 700)); });
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
   page.on("worker", (w) => w.on("console", (m) => { if (m.type() === "error") errors.push("worker-console: " + m.text()); }));
   page.on("request", (r) => { if (!r.url().startsWith(`http://localhost:${PORT}/`) && !r.url().startsWith("data:") && !r.url().startsWith("blob:")) ext.push(r.url()); });
@@ -59,7 +60,7 @@ for (const sc of scenarios) {
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}.png` });
     res.steps.hudText = (await page.textContent("#turn-text"))?.trim();
   } catch (e) { res.steps.exception = String(e && e.message).slice(0, 300); }
-  res.errors = errors; res.failedUrls = failed.slice(0, 20); res.externalRequests = ext;
+  { const sp = splitKnownMissing(errors, failed); res.knownMissing404Console = sp.knownMissing404Console; res.errors = sp.errors; } res.failedUrls = failed.slice(0, 20); res.externalRequests = ext;
   results.push(res);
   await ctx.close();
 }

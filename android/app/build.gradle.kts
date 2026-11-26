@@ -27,10 +27,16 @@ val syncOfflineAssets by tasks.registering(Sync::class) {
         if (manifestFile.exists()) {
             @Suppress("UNCHECKED_CAST")
             val hashByName = groovy.json.JsonSlurper().parseText(manifestFile.readText()) as Map<String, String>
+            // Files known not to be the real asset (generated placeholders) are not packaged; see asset-quarantine.json.
+            val quarantineFile = file("../../asset-quarantine.json")
+            @Suppress("UNCHECKED_CAST")
+            val quarantined: List<String> = if (quarantineFile.exists())
+                ((groovy.json.JsonSlurper().parseText(quarantineFile.readText()) as Map<String, List<String>>)[dirName] ?: emptyList())
+            else emptyList()
             from("../../$dirName") {
                 eachFile {
                     val hash = hashByName[this.path]
-                    if (hash == null) {
+                    if (hash == null || quarantined.contains(this.path)) {
                         this.exclude()
                     } else {
                         this.relativePath = RelativePath(true, "assets", hash)

@@ -57,7 +57,7 @@ export async function preloadGameBundle(gameId, onProgress) {
           if (/\.(webp|png|jpg|jpeg)$/i.test(name)) {
             const blob = await res.blob();
             const bmp = await createImageBitmap(blob, {
-              premultiplyAlpha: "none",
+              premultiplyAlpha: "premultiply",
               colorSpaceConversion: "none",
             });
             bitmaps.set(name, bmp);
@@ -94,6 +94,27 @@ export async function preloadGameBundle(gameId, onProgress) {
         .map((m, idx) => Number(m?.id ?? m?.sku ?? idx))
         .filter((n) => !Number.isNaN(n));
     } catch (_) {}
+  }
+
+  // Offline build: there is no store or account, so every item that ships in the game files counts as owned.
+  // Collect every SKU the bundle declares: `sku = N` / "sku": N in toml/json, and numeric-keyed equipment manifests
+  // (Pool cues, tables, effects: {"1001":{"assets":[],"data":{...}}}).
+  {
+    const skuSet = new Set(unlockedInventory);
+    const re = /["']?\bsku["']?\s*[:=]\s*(\d+)/g;
+    for (const [name, txt] of textFiles.entries()) {
+      if (typeof txt !== "string" || txt.length > 600000 || !/\.(json|toml)$/i.test(name)) continue;
+      let m; re.lastIndex = 0;
+      while ((m = re.exec(txt))) skuSet.add(Number(m[1]));
+      if (/^\s*\{\s*"\d+"\s*:\s*\{/.test(txt) && /\.json$/i.test(name)) {
+        try {
+          const o = JSON.parse(txt);
+          const keys = Object.keys(o);
+          if (keys.length && keys.every((k) => /^\d+$/.test(k) && o[k] && typeof o[k] === "object" && ("data" in o[k] || "assets" in o[k]))) keys.forEach((k) => skuSet.add(Number(k)));
+        } catch (_) {}
+      }
+    }
+    unlockedInventory = Array.from(skuSet).filter((n) => Number.isFinite(n));
   }
 
   const plainTextObj = {};
@@ -286,7 +307,7 @@ export async function launchPlatoOfflineSession({
           return;
         }
         const blob = await res.blob();
-        const bmp = await createImageBitmap(blob, { premultiplyAlpha: "none", colorSpaceConversion: "none" });
+        const bmp = await createImageBitmap(blob, { premultiplyAlpha: "premultiply", colorSpaceConversion: "none" });
         const texInfo = glBridge.registerExternalBitmap(bmp);
         bmp.close();
         if (okCb) okCb(hash, texInfo);
@@ -401,7 +422,9 @@ export async function launchPlatoOfflineSession({
   // --- Hotseat Pass-and-Play Controller (Same Device Player 1 vs Player 2 / 3 / 4) ---
   function installHotseatHooks(logic) {
     // 1. Keep displaySeat pinned to 0 in Pool so avatars & pocketed ball racks NEVER flip left/right between turns!
-    if ("displaySeat" in logic) {
+    // Pool only: Monsters and Brawlbots show the active player's own private picks/board, so their displaySeat must follow
+    // the local seat (pinning it made the tank-select view read a hidden pick and throw, and mirrored seat-specific layout).
+    if ("displaySeat" in logic && typeof logic.canMoveCueBall === "function") {
       Object.defineProperty(logic, "displaySeat", {
         get() { return 0; },
         set(_v) {},
@@ -750,9 +773,12 @@ export async function launchPlatoOfflineSession({
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / Math.max(1, rect.width);
     const scaleY = canvas.height / Math.max(1, rect.height);
+    // The game's InputManager computes y = surfaceHeight - y itself. Measured on this runtime (tap-scan CI run, and the
+    // user's phone report "to press something at the bottom I tap at the top"): top-down CSS y reaches the game mirrored,
+    // so hand it the already-mirrored y.
     return {
       x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY,
+      y: canvas.height - (clientY - rect.top) * scaleY,
     };
   }
 

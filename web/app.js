@@ -70,13 +70,26 @@ let lanChan = null;
 let pendingHost = null;
 let pendingJoin = null;
 function leaveLan() {
+  if (lanChan && lanChan.stop) lanChan.stop();
   lanChan = null; pendingHost = null; pendingJoin = null;
   if (window.__LOBBY__ && window.__LOBBY__.lan) { window.__LOBBY__.lan.fast(false); window.__LOBBY__.setState("available"); }
 }
 // Reliable ordered channel to one peer: chunks big frames, queues frames that arrive before the game session is ready.
 function makeChannel(lan, peer, matchId) {
   const q = []; let handler = null; let chain = Promise.resolve(); const chunks = new Map();
-  return {
+  // Connection watch: a ping every 1.5s; no frame from the other phone for 8s (25s before the first frame, while the game loads) = lost.
+  const born = Date.now(); let lastSeen = 0; let stopped = false;
+  const watch = setInterval(() => {
+    if (stopped) return;
+    const idle = Date.now() - (lastSeen || born);
+    if (idle > (lastSeen ? 8000 : 25000)) {
+      stopped = true; clearInterval(watch); clearInterval(beat);
+      if (lanChan === ch) { lanChan = null; alert("انقطع الاتصال باللاعب الآخر. سيتم الرجوع للقائمة."); exitToSetup(); }
+    }
+  }, 1000);
+  const beat = setInterval(() => { if (!stopped) ch.send({ k: "ping" }); }, 1500);
+  const ch = {
+    stop() { stopped = true; clearInterval(watch); clearInterval(beat); },
     send(msg) {
       const str = JSON.stringify(msg); const id = Math.random().toString(36).slice(2); const N = 30000; const n = Math.max(1, Math.ceil(str.length / N));
       for (let i = 0; i < n; i++) { const frame = { t: "lan", m: matchId, c: id, i, n, d: str.slice(i * N, (i + 1) * N) }; chain = chain.then(() => lan.sendTo(peer, frame)).catch(() => {}); }
@@ -86,9 +99,10 @@ function makeChannel(lan, peer, matchId) {
       if (m.m !== matchId || m.c === undefined) return;
       let e = chunks.get(m.c); if (!e) { e = { n: m.n, parts: [], got: 0 }; chunks.set(m.c, e); }
       if (e.parts[m.i] === undefined) { e.parts[m.i] = m.d; e.got++; }
-      if (e.got === e.n) { chunks.delete(m.c); const obj = JSON.parse(e.parts.join("")); if (handler) handler(obj); else q.push(obj); }
+      if (e.got === e.n) { chunks.delete(m.c); const obj = JSON.parse(e.parts.join("")); lastSeen = Date.now(); if (obj.k === "ping") return; if (handler) handler(obj); else q.push(obj); }
     },
   };
+  return ch;
 }
 function startLanMatch(role, card, names, peer, lan) {
   const ch = makeChannel(lan, peer, card.matchId); lanChan = ch;
@@ -373,10 +387,6 @@ startBtn.addEventListener("click", () => {
   }
 
   const mode = playModeEl.value;
-  if (mode === "bot" && selectedGameKey === "pool") {
-    alert("اللعب ضد الكمبيوتر في البلياردو غير متاح بعد. اختر وضع نفس الجهاز.");
-    return;
-  }
   const botSeats = [];
   if (mode === "bot") {
     for (let i = 1; i < count; i++) {

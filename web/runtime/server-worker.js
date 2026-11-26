@@ -332,6 +332,21 @@ self.onmessage = (ev) => {
     }
 
     wireServerCallbacks(serverLogic);
+    // The game's logic.animateWorld() calls this.executeAnimation(). The client class defines it (-> its animator) but the
+    // server logic here has no animator, so a shot completed by resign/disconnect threw "executeAnimation is not a function".
+    // Mirror the game's own WorldAnimatorServer.executeAnimation (fixed-step loop, then the animation-finished signals).
+    if (typeof serverLogic.executeAnimation !== "function" && typeof serverLogic.canSelectTank === "function") { // Brawlbots only (Monsters LAN regressed when this was applied to every game)
+      serverLogic.executeAnimation = function () {
+        const l = serverLogic; const MAX = 200000;
+        if (typeof l.getNOAnimations !== "function" || !l.world) return;
+        l.world.resetAnimationTime(); l.world.resetBodiesTimes(); l.world.resetAnimationStepsCount();
+        do { l.onBeforeStep.emit(); l.world.step(l.getFixedTimeStep()); l.onAfterStep.emit(); }
+        while (!l.isAnimationFinished() && l.world.getAnimationStepsCount() <= MAX);
+        if (l.world.getAnimationStepsCount() > MAX) l.cancelAnimation(true);
+        else { l.onPreAnimationFinished.emit(); l.onAnimationFinished.emit(); }
+        l.world.resetAnimationStepsCount();
+      };
+    }
     serverLogic.seed = msg.seed || Math.floor(Math.random() * 0x7fffffff);
 
     // Initialize authoritative server (localSeat = undefined -> server === true)

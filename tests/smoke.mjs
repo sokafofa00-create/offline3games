@@ -27,13 +27,14 @@ const browser = await chromium.launch(
     ? { headless: false, args: ["--use-gl=angle", "--use-angle=gl", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] }
     : { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] },
 );
+import { splitKnownMissing } from "./known-missing.mjs";
 const results = [];
 for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name))) {
   const ctx = await browser.newContext({ viewport: sc.game === "brawlbots" ? { width: 860, height: 412 } : { width: 412, height: 860 }, hasTouch: true });
   const page = await ctx.newPage();
   const errors = [];
   const requests = [];
-  page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+  page.on("pageerror", (e) => { errors.push("pageerror: " + e.message); console.log("PAGEERROR_STACK " + String(e.stack || "").split("\n").slice(0, 6).join(" | ").slice(0, 700)); });
   const warnLines = [];
   page.on("console", (m) => { if (m.type() === "warning" && /Missing preloaded|\[GL\]|WebGL/i.test(m.text())) warnLines.push(m.text().slice(0, 160)); });
   page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text()); });
@@ -202,6 +203,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         res.draft.realTouch.variants = [];
         const h0 = await region();
         const variants = [
+          ...(process.env.TAPSCAN ? [40,80,110,130,138,150,170,200,250,300,340].map((yy) => ["scan-y" + yy, async () => { await page.touchscreen.tap(206, yy); }]) : []),
           ["cdp-touch-100ms", async () => { await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [{ x: 206, y: 722 }] }); await page.waitForTimeout(100); await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] }); }],
           ["mouse-100ms-move", async () => { await page.mouse.move(206, 722); await page.mouse.down(); await page.waitForTimeout(50); await page.mouse.move(207, 722); await page.waitForTimeout(50); await page.mouse.up(); }],
           ["tap-y700", async () => { await page.touchscreen.tap(206, 700); }],
@@ -278,7 +280,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
   } catch (e) {
     errors.push("test-exception: " + String(e.message).split("\n")[0]);
   }
-  res.errors = errors.slice(0, 15);
+  { const sp = splitKnownMissing(errors, failedUrls); res.knownMissing404Console = sp.knownMissing404Console; res.errors = sp.errors.slice(0, 15); }
   res.externalRequests = requests;
   res.glWarnings = [...new Set(warnLines)].slice(0, 25);
   res.failedUrls = [...new Set(failedUrls)].slice(0, 20);
