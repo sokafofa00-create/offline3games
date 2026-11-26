@@ -110,10 +110,11 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       // One legal shot per seat (impulse length 3 is below the validator limit; seats follow the automatic handoff).
       res.lockin.shotLog = [];
       for (let k = 0; k < nSeats; k++) {
+        const t0w = Date.now(); const canShootWait = await page.waitForFunction(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return !!l.canShoot(l._localSeat, true); } catch (e) { return false; } }, null, { timeout: 90000, polling: 500 }).then(() => true, () => false); const waitedMs = Date.now() - t0w;
         const r = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const allowed = l.canSelectWeapon(seat, 0); const ok = allowed ? l.localMove({ a: 5, i: [2.476, 1.694], p: 0, f: 0, u: false }, false) : false; return { seat, allowed, ok, readyLocal: l.isShotReady(seat) }; });
         await page.waitForTimeout(2500);
         const after = await st();
-        res.lockin.shotLog.push({ k, ...r, after, moves: await page.evaluate(() => window.__mv.slice(-4)) });
+        res.lockin.shotLog.push({ k, canShootWait, waitedMs, ...r, after, moves: await page.evaluate(() => window.__mv.slice(-4)) });
         if (after.cover) await page.click("#pass-cover-btn");
       }
       // Wait for the round to resolve: shots animate (paused true) then the next round starts (paused false).
