@@ -207,7 +207,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
         res.draft.swapStates = [];
         const seatStart = res.draft.final.seat; res.draft.swaps = [mv];
         for (let w = 0; w < 75; w++) {
-          await page.waitForTimeout(1500); const sn = await st2(); res.draft.swapStates.push(sn);
+          await page.waitForTimeout(1500); const sn = await st2(); sn.aw = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { return { a: [0, 1].map((x) => l.isSeatAwaitingReady(x)), rs: Array.from(l._readySeats || []), alarm: l._alarmState, paused: l._paused }; } catch (e) { return String(e).slice(0, 80); } }); res.draft.swapStates.push(sn);
           if (sn.cover) { res.draft.seatChangedWithCover = { from: seatStart, to: sn.seat, phase: sn.phase, paused: sn.paused }; break; }
           if (!sn.paused && sn.phase === 3 && sn.seat === seatStart && res.draft.swaps.length < 6) {
             const mv2 = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const b = l.board; const out = { seat: l._localSeat }; try { let found = null; for (let y = 0; y < b.height && !found; y++) for (let x = 0; x < b.width && !found; x++) for (const [dx, dy] of [[1, 0], [0, 1]]) { const x2 = x + dx, y2 = y + dy; if (x2 >= b.width || y2 >= b.height || !b.areTilesAdjacent(x, y, x2, y2)) continue; b.swapTiles(x, y, x2, y2); const t = b.tiles[y2][x2]; const ms = b.getMatches(t); b.swapTiles(x2, y2, x, y); if (ms && ms.length) { found = { x1: x, y1: y, x2, y2 }; break; } } out.found = found; if (found) out.ok = l.localMove({ t: 6, ...found }, true); } catch (e) { out.err = String(e && e.message).slice(0, 160); } return out; });
