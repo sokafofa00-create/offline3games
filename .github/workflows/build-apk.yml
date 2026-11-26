@@ -5,6 +5,10 @@ on:
     branches: [ "main", "master" ]
   workflow_dispatch:
 
+concurrency:
+  group: build-apk-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-apk:
     runs-on: ubuntu-latest
@@ -95,11 +99,13 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -e
+          HEAD_SHA=$(gh api "repos/$GITHUB_REPOSITORY/commits/main" --jq .sha)
+          if [ "$HEAD_SHA" != "$GITHUB_SHA" ]; then echo "Skipping publish: $GITHUB_SHA is not main head $HEAD_SHA" >> "$GITHUB_STEP_SUMMARY"; exit 0; fi
           cp android/app/build/outputs/apk/debug/app-debug.apk /tmp/offline3games-debug.apk
           cp android/app/build/outputs/apk/release/app-release.apk /tmp/offline3games-release.apk
           gh release delete latest-test -y --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
           gh release create latest-test /tmp/offline3games-debug.apk /tmp/offline3games-release.apk \
             --repo "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" \
             --title "Latest test build ($GITHUB_SHA)" \
-            --notes "Debug-key signed test build from commit $GITHUB_SHA. Install the debug APK on a phone for direct testing. Not a store release."
+            --notes "Debug-key signed test build from commit $GITHUB_SHA (run $GITHUB_RUN_ID). debug sha256 $(sha256sum /tmp/offline3games-debug.apk | cut -d' ' -f1). release sha256 $(sha256sum /tmp/offline3games-release.apk | cut -d' ' -f1). Install the debug APK on a phone for direct testing. Not a store release."
           echo "Release: https://github.com/$GITHUB_REPOSITORY/releases/tag/latest-test" >> "$GITHUB_STEP_SUMMARY"
