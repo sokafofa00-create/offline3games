@@ -1,0 +1,47 @@
+[stats]
+health = 8
+accuracy = 3
+weight = 9
+
+[physics]
+height = 166
+size = [449, 369]
+shape = [[-185, -66], [-156, -103], [-139, -142], [-112, -172], [-85, -182], [-84, -154], [-68, -152], [-40, -175],[-10, -185], [-11, -155], [6, -152], [39, -168], [71, -170], [63, -145], [74, -133], [112, -135], [123, -130],[106, -109], [117, -88], [142, -84], [144, -75], [133, -65], [133, -46], [187, -37], [200, -44], [210, -66],[220, -66], [224, -22], [192, 21], [192, 34], [162, 72], [136, 75], [133, 97], [155, 117], [131, 134],[136, 165], [99, 162], [84, 184], [63, 159], [34, 164], [2, 143], [-20, 166], [-39, 143], [-76, 151],[-74, 164], [-106, 160], [-126, 184], [-147, 159], [-177, 163], [-173, 134], [-225, 93], [-225, 59], [-196, 20],[-171, 10], [-187, -14]]
+
+[cannon]
+uri = "~/imported/2snp7s2m6o6nz.webp"
+size = 150
+position = [-20, -25]
+displacement = [0.53, 0.65]
+
+[[parts]]
+uri = "~/imported/2snp7s254yqvr.webp"
+animation = "No"
+position = [0.4543, 0.7831]
+
+[[parts]]
+uri = "~/imported/vzyujz7446m1b.webp"
+animation = "Platform"
+position = [0.8641, 0.4593]
+
+[[parts]]
+uri = "~/imported/rex_z2.webp"
+animation = "Cockpit"
+position = [0.4532, 0.3076]
+[parts.cockpit]
+uri = "~/imported/rex_bg.webp"
+position = [164, 138]
+avatar_size = 71
+
+[[parts]]
+uri = "~/imported/4tz83tb5fqy7v.webp"
+animation = "No"
+position = [0.4643, 0.5813]
+
+[[abilities]]
+cooldown = 3
+id = "4"
+
+[[abilities]]
+cooldown = 2
+id = "500"

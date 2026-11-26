@@ -1,0 +1,45 @@
+[stats]
+health = 7
+accuracy = 4
+weight = 4
+
+[physics]
+height = 175
+uri = "~/content/bots/riptide/shape.txt"
+
+[cannon]
+uri = "~/imported/shark_cannon.webp"
+size = 210
+position = [0, 1]
+displacement = [0.44, -30.0]
+
+[[parts]]
+uri = "~/imported/shark_z0_thruster_effect.webp"
+animation = "Platform"
+position = [0.5, 0.6771]
+
+[[parts]]
+uri = "~/imported/shark_z1_thrusters.webp"
+animation = "Platform"
+position = [0.4415, 0.6643]
+
+[[parts]]
+uri = "~/imported/shark_z2_top_fin.webp"
+animation = "Platform"
+position = [0.7976, 0.18]
+
+[[parts]]
+uri = "~/imported/shark_z3_chassis.webp"
+animation = "Cockpit"
+position = [0.5, 0.4929]
+[parts.cockpit]
+uri = "~/imported/shark_bg.webp"
+position = [136, 124]
+
+[[abilities]]
+cooldown = 2
+id = "5"
+
+[[abilities]]
+cooldown = 3
+id = "3018"

@@ -1,0 +1,47 @@
+[stats]
+health = 8
+accuracy = 8
+weight = 4
+
+[physics]
+height = 152
+size = [ 380, 343 ]
+shape = [[ -18.5, 172.0 ],[ -32.5, 122.0 ],[ -93.5, 116.0 ],[ -158.5, 172.0 ],[ -182.5, 172.0 ],[ -188.5, 157.0 ],[ -126.5, 35.0 ],[ -77.5, 31.0 ],[ -142.5, -11.0 ],[ -142.5, -90.0 ],[ -81.5, -136.0 ],[ -54.5, -136.0 ],[ 4.5, -172.0 ],[ 39.5, -172.0 ],[ 49.5, -164.0 ],[ 49.5, -136.0 ],[ 76.5, -136.0 ],[ 118.5, -93.0 ],[ 118.5, -76.0 ],[ 148.5, -43.0 ],[ 148.5, -18.0 ],[ 141.5, -12.0 ],[ 120.5, -12.0 ],[ 84.5, 30.0 ],[ 124.5, 33.0 ],[ 188.5, 157.0 ],[ 182.5, 172.0 ],[ 158.5, 172.0 ],[ 92.5, 115.0 ],[ 36.5, 121.0 ],[ 22.5, 172.0 ]]
+
+[cannon]
+uri = "~/imported/vzyujz5q3y3j5.webp"
+size = 143
+position = [ 0, -28 ]
+displacement = [ 0.46, 0.85 ]
+
+[[parts]]
+uri = "~/imported/nano_z0.webp"
+animation = "Cockpit"
+position = [ 0.5, 0.3352 ]
+[parts.cockpit]
+uri = "~/imported/nano_bg.webp"
+position = [150, 118]
+avatar_size = 68
+
+[[parts]]
+uri = "~/imported/qyzbry8pprnnz.webp"
+animation = "No"
+position = [ 0.5, 0.7959 ]
+
+[[parts]]
+uri = "~/imported/6obqzo1f49ulz.webp"
+animation = "Platform"
+position = [ 0.5, 0.7186 ]
+
+[[parts]]
+uri = "~/imported/8mb9smo7o31b5.webp"
+animation = "No"
+position = [ 0.5171, 0.7944 ]
+
+[[abilities]]
+cooldown = 2
+id = "3"
+
+[[abilities]]
+cooldown = 3
+id = "3004"
