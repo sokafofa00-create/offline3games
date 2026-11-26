@@ -20,7 +20,7 @@ val syncOfflineAssets by tasks.registering(Sync::class) {
 
     // Resource folders uploaded by file name. Each manifest (__assets.json: name -> SHA-1) maps a file to the
     // /assets/<hash> path the games request; files not listed in a manifest are not packaged. Fully offline.
-    listOf("match_monsters_assets").forEach { dirName ->
+    listOf("match_monsters_assets", "brawlbots_assets").forEach { dirName ->
         val manifestFile = file("../../$dirName/__assets.json")
         if (manifestFile.exists()) {
             @Suppress("UNCHECKED_CAST")
