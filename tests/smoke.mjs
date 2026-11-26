@@ -79,27 +79,45 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
       res.cover.hiddenAfterTap = !(await coverVisible());
     }
     res.cover.ok = res.cover.atStart === res.cover.expected && (!res.cover.expected || res.cover.hiddenAfterTap);
-    if (sc.game === "brawlbots") {
-      // REAL control: the visible "switch player" button should move the active seat and re-show the cover.
-      const seatOf = () => page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._localSeat);
-      const before = await seatOf();
-      await page.click("#switch-seat-btn");
-      await page.waitForTimeout(2500);
-      res.switch = { before, after: await seatOf(), coverShown: await coverVisible(), hud: (await page.textContent("#turn-text"))?.trim() };
-      if (res.switch.coverShown) await page.click("#pass-cover-btn");
-    }
+    if (sc.game === "brawlbots") res.switch = { buttonHidden: !(await page.locator("#switch-seat-btn").isVisible()) };
     if (sc.game === "brawlbots") {
       // INTERNAL API (labelled): select each seat's tank through localMove and record the automatic handoff.
       const st = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused, cover: !document.getElementById("pass-cover").classList.contains("hidden"), hud: document.getElementById("turn-text").textContent.trim() }; });
       const pick = () => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const seat = l._localSeat; const own = []; for (let i = 0; i < 16; i++) { try { if (l.isTankOwned(seat, i)) own.push(i); } catch (e) {} } let ok = null; if (own.length) ok = l.localMove({ a: 1, t: own[0] }); return { seat, own, ok }; });
-      res.lockin = { start: await st() };
-      res.lockin.pick0 = await pick();
-      await page.waitForTimeout(3500);
-      res.lockin.afterPick0 = await st();
-      if (res.lockin.afterPick0.cover) await page.click("#pass-cover-btn");
-      res.lockin.pick1 = await pick();
-      await page.waitForTimeout(3500);
-      res.lockin.afterPick1 = await st();
+      const nSeats = await page.evaluate(() => window.__ACTIVE_SESSION__.getClientLogic()._seats);
+      // Boundary check: record whether the cover is already visible whenever the next seat's state is loaded.
+      await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); window.__deser = []; const o = l.deserialize.bind(l); l.deserialize = (...a) => { window.__deser.push({ seatArg: a[1], coverVisible: !document.getElementById("pass-cover").classList.contains("hidden"), prevSeat: l._localSeat }); return o(...a); }; });
+      res.lockin = { nSeats, start: await st(), picks: [], shots: [] };
+      for (let k = 0; k < nSeats; k++) {
+        const p = await pick();
+        await page.waitForTimeout(3000);
+        const after = await st();
+        res.lockin.picks.push({ seat: p.seat, ok: p.ok, after });
+        if (after.cover) await page.click("#pass-cover-btn");
+      }
+      for (let k = 0; k < nSeats; k++) {
+        const r = await page.evaluate(() => {
+          const l = window.__ACTIVE_SESSION__.getClientLogic();
+          const seat = l._localSeat;
+          const out = { seat, canShoot: null, tankKeys: null, wp: null, err: null, ready: null };
+          try {
+            out.canShoot = l.canShoot(seat, true);
+            const tank = l.worldMap.tanks[seat];
+            out.tankKeys = Object.keys(tank).slice(0, 40);
+            const wl = tank.weapons || tank.weaponList || (tank.getWeapons && tank.getWeapons()) || [];
+            const w = Array.isArray(wl) ? wl[0] : Object.values(wl)[0];
+            out.wp = w ? Object.keys(w).slice(0, 25) : null;
+            if (w) { l.fire(false, w, [20, 6], 0); }
+            out.ready = l.isShotReady(seat);
+          } catch (e) { out.err = String(e && e.message).slice(0, 160); }
+          return out;
+        });
+        await page.waitForTimeout(3500);
+        const after = await st();
+        res.lockin.shots.push({ ...r, after });
+        if (after.cover) await page.click("#pass-cover-btn");
+      }
+      res.lockin.deserializeBoundary = await page.evaluate(() => window.__deser);
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1c-after-picks.png` });
     }
     if (sc.game !== "pool") {
