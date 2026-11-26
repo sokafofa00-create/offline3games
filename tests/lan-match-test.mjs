@@ -68,6 +68,7 @@ for (const game of GAMES) {
       // Turn ownership per seat (user report: on the other player's turn this phone could still move the cue).
       const crypto = await import("node:crypto");
       const caps = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const o = { turn: JSON.stringify(l.turn), seat: l._localSeat, paused: l.paused }; for (const s of [0, 1]) { try { o["canShoot" + s] = !!l.canShoot(s); } catch (e) { o["canShoot" + s] = "err"; } } return o; });
+      const rot = (page) => page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const c = l.sceneMgr && l.sceneMgr.cueStick; return c ? { r: c.rotation, en: !!(l.sceneMgr.powerMeter && l.sceneMgr.powerMeter.enabled !== undefined ? l.sceneMgr.powerMeter.enabled : null), loc: !!l.isLocalPlayerTurn() } : null; });
       const hash = async (page) => crypto.createHash("md5").update(await page.screenshot({ clip: { x: 20, y: 260, width: 372, height: 480 } })).digest("hex");
       const drag = async (page) => { await page.mouse.move(206, 640); await page.mouse.down(); await page.mouse.move(300, 600, { steps: 8 }); await page.mouse.move(120, 560, { steps: 8 }); await page.mouse.up(); await page.waitForTimeout(1200); };
       const probe = async (label) => {
@@ -75,10 +76,10 @@ for (const game of GAMES) {
         const ha0 = await hash(A.page); await A.page.waitForTimeout(800); const ha1 = await hash(A.page);
         const hb0 = await hash(B.page); await B.page.waitForTimeout(800); const hb1 = await hash(B.page);
         o.idleStable = ha0 === ha1 && hb0 === hb1;
-        await drag(A.page); o.hostStickMoved = (await hash(A.page)) !== ha1;
+        o.hostRot0 = await rot(A.page); await drag(A.page); o.hostRot1 = await rot(A.page); o.hostStickMoved = (await hash(A.page)) !== ha1;
         await A.page.waitForTimeout(1500);
         const hb2 = await hash(B.page); await B.page.waitForTimeout(800); const hb3 = await hash(B.page); o.guestStableBeforeDrag = hb2 === hb3;
-        await drag(B.page); o.guestStickMoved = (await hash(B.page)) !== hb3;
+        o.guestRot0 = await rot(B.page); await drag(B.page); o.guestRot1 = await rot(B.page); o.guestStickMoved = (await hash(B.page)) !== hb3;
         return o;
       };
       res.poolTurns = [];
