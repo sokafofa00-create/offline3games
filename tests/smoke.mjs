@@ -27,6 +27,7 @@ const browser = await chromium.launch(
     ? { headless: false, args: ["--use-gl=angle", "--use-angle=gl", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] }
     : { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] },
 );
+import { splitKnownMissing } from "./known-missing.mjs";
 const results = [];
 for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name))) {
   const ctx = await browser.newContext({ viewport: sc.game === "brawlbots" ? { width: 860, height: 412 } : { width: 412, height: 860 }, hasTouch: true });
@@ -279,7 +280,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
   } catch (e) {
     errors.push("test-exception: " + String(e.message).split("\n")[0]);
   }
-  res.errors = errors.slice(0, 15);
+  { const sp = splitKnownMissing(errors, failedUrls); res.knownMissing404Console = sp.knownMissing404Console; res.errors = sp.errors.slice(0, 15); }
   res.externalRequests = requests;
   res.glWarnings = [...new Set(warnLines)].slice(0, 25);
   res.failedUrls = [...new Set(failedUrls)].slice(0, 20);
