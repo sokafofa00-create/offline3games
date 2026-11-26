@@ -80,7 +80,7 @@ for (const game of GAMES) {
         o.hostRot0 = await rot(A.page); await drag(A.page); o.hostRot1 = await rot(A.page); o.hostStickMoved = (await hash(A.page)) !== ha1;
         await A.page.waitForTimeout(1500);
         const hb2 = await hash(B.page); await B.page.waitForTimeout(800); const hb3 = await hash(B.page); o.guestStableBeforeDrag = hb2 === hb3;
-        o.guestRot0 = await rot(B.page); await drag(B.page); o.guestRot1 = await rot(B.page); o.guestStickMoved = (await hash(B.page)) !== hb3;
+        o.guestRot0 = await rot(B.page); await drag(B.page); o.guestRot1 = await rot(B.page); o.guestStickMoved = (await hash(B.page)) !== hb3; o.hostAfter = await caps(A.page); o.guestAfter = await caps(B.page);
         return o;
       };
       res.poolTurns = [];
