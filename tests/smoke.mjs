@@ -73,6 +73,7 @@ for (const sc of scenarios) {
 }
 await browser.close();
 server.kill();
+if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, "## Smoke results\n```json\n" + JSON.stringify(results, null, 1).slice(0, 60000) + "\n```\n");
 console.log("SMOKE_RESULTS " + JSON.stringify(results, null, 1));
 const bad = results.filter((r) => r.errors.length || r.externalRequests.length || !r.steps.rematchClicked);
 if (bad.length) { console.log("FAILED: " + bad.map((b) => b.name).join(", ")); process.exit(1); }
