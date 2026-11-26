@@ -7,7 +7,10 @@ import fs from "node:fs";
 const PORT = 8090;
 const server = spawn("node", ["serve.mjs"], { env: { ...process.env, PORT: String(PORT) }, stdio: "inherit" });
 await new Promise((r) => setTimeout(r, 2000));
-fs.mkdirSync("shots", { recursive: true });
+const SHOT_DIR = process.env.SHOT_DIR || "shots";
+const ONLY = (process.env.SCEN || "").split(",").filter(Boolean);
+const BACKEND = process.env.BACKEND || "swiftshader";
+fs.mkdirSync(SHOT_DIR, { recursive: true });
 
 const scenarios = [
   { name: "pool-8ball", game: "pool" },
@@ -19,11 +22,13 @@ const scenarios = [
   { name: "brawlbots-4p", game: "brawlbots", set: { "#bb-players": "2" } },
 ];
 
-const browser = await chromium.launch({
-  args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"],
-});
+const browser = await chromium.launch(
+  BACKEND === "gl"
+    ? { headless: false, args: ["--use-gl=angle", "--use-angle=gl", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] }
+    : { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--autoplay-policy=no-user-gesture-required"] },
+);
 const results = [];
-for (const sc of scenarios) {
+for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name))) {
   const ctx = await browser.newContext({ viewport: { width: 412, height: 860 }, hasTouch: true });
   const page = await ctx.newPage();
   const errors = [];
@@ -37,7 +42,7 @@ for (const sc of scenarios) {
   page.on("dialog", async (d) => { errors.push("dialog: " + d.message()); await d.dismiss(); });
   const failedUrls = [];
   page.on("response", (r) => { if (r.status() >= 400) failedUrls.push(r.status() + " " + r.url().replace(`http://localhost:${PORT}`, "")); });
-  const res = { name: sc.name, steps: {} };
+  const res = { name: sc.name, backend: BACKEND, steps: {} };
   try {
     await page.goto(`http://localhost:${PORT}/`);
     await page.click(`.game-tab[data-game="${sc.game}"]`);
@@ -48,7 +53,7 @@ for (const sc of scenarios) {
     await page.waitForTimeout(6000);
     res.steps.started = true;
     res.steps.hud1 = (await page.textContent("#turn-text"))?.trim();
-    await page.screenshot({ path: `shots/${sc.name}-1-start.png` });
+    await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1-start.png` });
     const box = await page.locator("#game-canvas").boundingBox();
     if (box) {
       await page.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.6);
@@ -58,14 +63,14 @@ for (const sc of scenarios) {
     }
     await page.waitForTimeout(3000);
     res.steps.hud2 = (await page.textContent("#turn-text"))?.trim();
-    await page.screenshot({ path: `shots/${sc.name}-2-after-input.png` });
+    await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-2-after-input.png` });
     await page.click("#menu-btn");
     await page.waitForTimeout(500);
-    await page.screenshot({ path: `shots/${sc.name}-3-menu.png` });
+    await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-3-menu.png` });
     await page.click("#menu-rematch-btn");
     await page.waitForTimeout(6000);
     res.steps.hud3 = (await page.textContent("#turn-text"))?.trim();
-    await page.screenshot({ path: `shots/${sc.name}-4-after-rematch.png` });
+    await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-4-after-rematch.png` });
     res.steps.rematchClicked = true;
   } catch (e) {
     errors.push("test-exception: " + String(e.message).split("\n")[0]);
