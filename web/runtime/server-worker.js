@@ -241,7 +241,7 @@ function setupHeadlessGlobals() {
 function scheduleServerAlarm(durationMs, alarmId) {
   // Clear existing alarm with same id if any
   for (const [id, info] of serverAlarms.entries()) {
-    if (id === alarmId || alarmId !== 4294967043) {
+    if (id === alarmId) {
       clearTimeout(info.handle);
       serverAlarms.delete(id);
     }
@@ -347,6 +347,29 @@ self.onmessage = (ev) => {
         l.world.resetAnimationStepsCount();
       };
     }
+    // Pool: the class HAS an executeAnimation that is a headless no-op on the server, so the typeof-guard above
+    // never engages. Override it unconditionally: run the synchronous fixed-step settle (immune to rAF/frame
+    // starvation on slow devices, unlike the client animator), then evaluate shot consequences server-side via
+    // preAnimationFinished() (-> shotCompleted -> nextTurnAfterShotCompleted -> setTurn -> onTurnChanged broadcast).
+    // Without this the turn only advances if a CLIENT scene finishes its animation and stays alive long enough to
+    // report; under CPU starvation clients wedge mid-animation and the match desyncs (turn never passes).
+    if (msg.gameId === "7c5d2aa05094dbee8753108c59f617b2f4b1e7ae") { // Pool only
+      serverLogic.executeAnimation = function () {
+        const l = serverLogic; const MAX = 200000;
+        if (typeof l.getNOAnimations !== "function" || !l.world) return;
+        l.world.resetAnimationTime(); l.world.resetBodiesTimes(); l.world.resetAnimationStepsCount();
+        do { l.onBeforeStep.emit(); l.world.step(l.getFixedTimeStep()); l.onAfterStep.emit(); }
+        while (!l.isAnimationFinished() && l.world.getAnimationStepsCount() <= MAX);
+        l.__shimLastSettleMs = Math.min(20000, Math.ceil(l.world.getAnimationStepsCount() * (typeof l.getFixedTimeStep === "function" ? l.getFixedTimeStep() : 1 / 60) * 1000));
+        if (l.world.getAnimationStepsCount() > MAX) l.cancelAnimation(true);
+        else {
+          l.onPreAnimationFinished.emit();
+          if (typeof l.preAnimationFinished === "function") l.preAnimationFinished();
+          l.onAnimationFinished.emit();
+        }
+        l.world.resetAnimationStepsCount();
+      };
+    }
     serverLogic.seed = msg.seed || Math.floor(Math.random() * 0x7fffffff);
 
     // Initialize authoritative server (localSeat = undefined -> server === true)
@@ -412,6 +435,34 @@ self.onmessage = (ev) => {
     // Standard game move (shot, cue ball move, stick rotation, power, ready, resign, etc.)
     const moveCopy = JSON.parse(JSON.stringify(packet));
     const accepted = serverLogic.move(seat, moveCopy);
+    // Pool: the server only QUEUES the shot's world-animation and executes it after client WorldState reports
+    // validate (ServerTotalTrust). Under CPU starvation a client may never finish its animation/report, which
+    // deadlocks the match (turn never passes). The server is authoritative: execute every queued animation move
+    // immediately; the synchronous settle in the executeAnimation override above is immune to frame starvation
+    // and preAnimationFinished() evaluates consequences + broadcasts the turn. Late client reports then hit an
+    // already-executed (deleted) entry and are harmless.
+    if (accepted && msg.gameId === "7c5d2aa05094dbee8753108c59f617b2f4b1e7ae" && typeof serverLogic.executeQueuedAnimationMoves === "function") {
+      try {
+        const __keys = Object.keys(serverLogic.animValidation || {}).sort((x, y) => Number(x) - Number(y));
+        for (const __k of __keys) serverLogic.executeQueuedAnimationMoves(Number(__k));
+        if (__keys.length) {
+          // Repair broadcast: a client whose own scene animation wedges under CPU starvation would never apply
+          // the consequences otherwise. After the real-time animation length + margin, push the authoritative
+          // snapshot to every seat; healthy clients snap to an identical state, wedged clients recover.
+          const __delay = (serverLogic.__shimLastSettleMs || 8000) + 3000;
+          setTimeout(() => {
+            try {
+              if (!serverLogic || serverLogic.gameOver) return;
+              if (Object.keys(serverLogic.animValidation || {}).length) return; // a newer shot is in flight; its own repair will follow
+              if (typeof serverLogic.isAnimationFinished === "function" && !serverLogic.isAnimationFinished()) return;
+              for (let __s = 0; __s < (numSeats || 2); __s++) {
+                self.postMessage({ type: "resyncState", seat: __s, state: serverLogic.serialize(__s) });
+              }
+            } catch (e) {}
+          }, __delay);
+        }
+      } catch (e) {}
+    }
     if (!accepted) {
       // Send authoritative resync snapshot if move was rejected
       const targetSeat = serverLogic.turn && serverLogic.turn.length > 0 ? serverLogic.turn[0] : (activeClientSeat ?? seat);
