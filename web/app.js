@@ -338,6 +338,19 @@ async function startMatch(params) {
       onMenuUpdated: renderDynamicMenu,
       onTurnHudUpdate(info) {
         currentHudInfo = info;
+        // vs-bot: while the computer's seat is active, swallow touches on the game area so the human cannot play the bot's turn.
+        {
+          let lock = document.getElementById("bot-lock");
+          if (!lock) {
+            lock = document.createElement("div"); lock.id = "bot-lock";
+            lock.style.cssText = "position:fixed;left:0;right:0;top:56px;bottom:0;z-index:40;background:transparent;touch-action:none;display:none";
+            ["pointerdown", "pointerup", "pointermove", "touchstart", "touchmove", "touchend", "mousedown", "mouseup", "click"].forEach((ev) => lock.addEventListener(ev, (e) => { e.stopPropagation(); e.preventDefault(); }, { passive: false }));
+            document.body.appendChild(lock);
+          }
+          const botTurn = !!(params.botSeats && params.botSeats.includes(info.seat)) && !info.gameOver;
+          lock.style.display = botTurn ? "block" : "none";
+          window.__BOT_LOCK__ = botTurn;
+        }
         if (info.gameOver) { clearTimeout(coverTimer); hideCover(); } else maybeShowCover(info);
         turnDot.style.background = SEAT_COLORS[info.seat % SEAT_COLORS.length];
         if (info.gameOver) {
