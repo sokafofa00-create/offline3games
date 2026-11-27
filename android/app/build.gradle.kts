@@ -77,6 +77,8 @@ android {
             storePassword = "android"
             keyAlias = "androiddebugkey"
             keyPassword = "android"
+            enableV1Signing = true  // compatibility hedge for MIUI installer
+            enableV2Signing = true
         }
     }
 
