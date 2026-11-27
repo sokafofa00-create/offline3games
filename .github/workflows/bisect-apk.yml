@@ -15,10 +15,10 @@ jobs:
       matrix:
         include:
           - name: a1-2b20daf-pinned-v1v2
-            ref: 2b20daf
+            ref: 2b20daf18dc4702169705d3d8ca7003a219786b8
             v1: "true"
           - name: a2-2b20daf-pinned-v2only
-            ref: 2b20daf
+            ref: 2b20daf18dc4702169705d3d8ca7003a219786b8
             v1: "false"
           - name: b-slim-pinned-v1v2
             ref: 2d67af1c425d4a7c5c024b58c72a3c744466866a
