@@ -84,6 +84,27 @@ export async function preloadGameBundle(gameId, onProgress) {
     return s.startsWith("~/") ? s.slice(2) : s.replace(/^\.\//, "");
   }
 
+  // User request (Pool): choosing a table style changes only the background (and music), never the table/head-line art.
+  // Theme manifests ({sku:{assets,data:{background,table,head_line,music}}}) get the standard theme's table and head line.
+  for (const [name, txt] of Array.from(textFiles.entries())) {
+    if (typeof txt !== "string" || !/\.json$/i.test(name) || txt.length < 200 || txt.charCodeAt(0) !== 123) continue;
+    try {
+      const o = JSON.parse(txt);
+      const keys = Object.keys(o);
+      if (!keys.length || !keys.every((k) => o[k] && o[k].data && Array.isArray(o[k].data.background) && Array.isArray(o[k].data.table) && Array.isArray(o[k].data.head_line))) continue;
+      const stdTable = [{ key: "th_basic_table", uri: "~/images/imported/themes/th_basic_table.webp" }];
+      const stdHead = [{ key: "th_basic_head_line", uri: "~/images/imported/themes/th_basic_head_line.webp" }];
+      for (const k of keys) {
+        const e = o[k];
+        const drop = new Set([...e.data.table, ...e.data.head_line].map((a) => a.key));
+        if (Array.isArray(e.assets)) e.assets = e.assets.filter((a) => !drop.has(a.key));
+        e.data.table = stdTable;
+        e.data.head_line = stdHead;
+      }
+      textFiles.set(name, JSON.stringify(o));
+    } catch (_) {}
+  }
+
   // Extract unlocked monster IDs if monsters.json is present (for Match Monsters)
   let unlockedInventory = [];
   if (textFiles.has("monsters.json")) {
