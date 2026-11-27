@@ -1,0 +1,32 @@
+name: Turn probe (system Chrome)
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/turn-probe.yml"
+      - "tests/turn-probe.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install Playwright and Chrome
+        run: |
+          npm i --no-save --no-package-lock playwright@1.49.1
+          npx playwright install --with-deps chrome
+      - name: Probe
+        run: mkdir -p shots && node --import ./tests/chrome-shim.mjs tests/turn-probe.mjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: turn-probe-shots
+          path: shots/*.png

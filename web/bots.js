@@ -36,7 +36,19 @@ function monstersSwap(l, seat, diff) {
     b.swapTiles(x2, y2, x, y);
     if (ms && ms.length) moves.push({ x1: x, y1: y, x2, y2, score: ms.length });
   }
-  if (!moves.length) return false;
+  if (!moves.length) {
+    // No match-producing swap exists on this board. moveSwapTiles accepts ANY adjacent swap (no match
+    // required), so play a harmless legal one instead of never acting and stalling the turn forever
+    // (offline turn duration is 24h, so nothing else would ever advance the game).
+    const legal = [];
+    for (let y = 0; y < b.height; y++) for (let x = 0; x < b.width; x++) for (const [dx, dy] of [[1, 0], [0, 1]]) {
+      const x2 = x + dx, y2 = y + dy;
+      if (x2 < b.width && y2 < b.height && b.areTilesAdjacent(x, y, x2, y2)) legal.push({ x1: x, y1: y, x2, y2 });
+    }
+    if (!legal.length) return false;
+    const f = pickRandom(legal);
+    return !!l.localMove({ t: 6, x1: f.x1, y1: f.y1, x2: f.x2, y2: f.y2 }, true);
+  }
   moves.sort((a, c) => c.score - a.score);
   let m;
   if (diff === "hard") m = moves[0];

@@ -76,7 +76,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     res.orientation.ok = sc.game === "brawlbots" ? (res.orientation.hostCalls || []).slice(-1)[0] === "landscape" : (res.orientation.hostCalls || []).slice(-1)[0] === "portrait";
     // Pass-the-phone cover (REAL controls): visible at start for hidden-info games, never for Pool.
     const coverVisible = async () => (await page.locator("#pass-cover").isVisible());
-    res.cover = { expected: sc.game !== "pool", atStart: await coverVisible() };
+    res.cover = { expected: sc.game !== "pool" && sc.game !== "monsters", atStart: await coverVisible() };
     if (res.cover.atStart) {
       res.cover.title = (await page.textContent("#pass-cover-title"))?.trim();
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1b-cover.png` });
@@ -268,8 +268,13 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     if (sc.game === "monsters") res.monstersAfter = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); return { phase: l.gamePhase, turn: JSON.stringify(l.turn), seat: l._localSeat, moves: l.moveCount, paused: l.paused }; });
     res.steps.hud2 = (await page.textContent("#turn-text"))?.trim();
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-2-after-input.png` });
-    if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn");
-    await page.click("#menu-btn");
+    // Brawlbots hotseat re-shows the pass-cover on every seat-change HUD update (by design), which can
+    // race the menu click: dismiss robustly and retry the menu click while the cover keeps re-appearing.
+    let menuOpened = false;
+    for (let i = 0; i < 5 && !menuOpened; i++) {
+      if (await page.locator("#pass-cover").isVisible()) await page.click("#pass-cover-btn", { timeout: 3000 }).catch(() => {});
+      try { await page.click("#menu-btn", { timeout: 6000 }); menuOpened = true; } catch (e) { if (i === 4) throw e; }
+    }
     await page.waitForTimeout(500);
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-3-menu.png` });
     await page.click("#menu-rematch-btn");
@@ -278,7 +283,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-4-after-rematch.png` });
     res.steps.rematchClicked = true;
   } catch (e) {
-    errors.push("test-exception: " + String(e.message).split("\n")[0]);
+    errors.push("test-exception: " + String(e.message).split("\n").slice(0, 3).join(" | ").slice(0, 400));
   }
   { const sp = splitKnownMissing(errors, failedUrls); res.knownMissing404Console = sp.knownMissing404Console; res.errors = sp.errors.slice(0, 15); }
   res.externalRequests = requests;

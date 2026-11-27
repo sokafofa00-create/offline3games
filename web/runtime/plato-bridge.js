@@ -84,6 +84,27 @@ export async function preloadGameBundle(gameId, onProgress) {
     return s.startsWith("~/") ? s.slice(2) : s.replace(/^\.\//, "");
   }
 
+  // User request (Pool): choosing a table style changes only the background (and music), never the table/head-line art.
+  // Theme manifests ({sku:{assets,data:{background,table,head_line,music}}}) get the standard theme's table and head line.
+  for (const [name, txt] of Array.from(textFiles.entries())) {
+    if (typeof txt !== "string" || !/\.json$/i.test(name) || txt.length < 200 || txt.charCodeAt(0) !== 123) continue;
+    try {
+      const o = JSON.parse(txt);
+      const keys = Object.keys(o);
+      if (!keys.length || !keys.every((k) => o[k] && o[k].data && Array.isArray(o[k].data.background) && Array.isArray(o[k].data.table) && Array.isArray(o[k].data.head_line))) continue;
+      const stdTable = [{ key: "th_basic_table", uri: "~/images/imported/themes/th_basic_table.webp" }];
+      const stdHead = [{ key: "th_basic_head_line", uri: "~/images/imported/themes/th_basic_head_line.webp" }];
+      for (const k of keys) {
+        const e = o[k];
+        const drop = new Set([...e.data.table, ...e.data.head_line].map((a) => a.key));
+        if (Array.isArray(e.assets)) e.assets = e.assets.filter((a) => !drop.has(a.key));
+        e.data.table = stdTable;
+        e.data.head_line = stdHead;
+      }
+      textFiles.set(name, JSON.stringify(o));
+    } catch (_) {}
+  }
+
   // Extract unlocked monster IDs if monsters.json is present (for Match Monsters)
   let unlockedInventory = [];
   if (textFiles.has("monsters.json")) {
@@ -432,6 +453,25 @@ export async function launchPlatoOfflineSession({
       });
     }
 
+    // Match Monsters only: pin the VIEW to seat 0 during battle phases so monster rows, avatars and
+    // splashes NEVER mirror when the active seat changes (the bridge switches _localSeat to perform
+    // moves as the active seat, and the scene used to re-layout around it). Draft (gamePhase 0) keeps
+    // per-seat views so each seat privately picks its own monsters. Turn/permission checks keep using
+    // the real active seat via the isLocalTurn override below (localMove/localReady already use the
+    // raw _localSeat, so moves and ready acks are unaffected).
+    if (typeof logic.seatShouldBeOnTheRight === "function" && typeof logic.getLocalSeatAsNumber === "function") {
+      Object.defineProperty(logic, "localSeat", {
+        get() {
+          return this.gamePhase === 0 ? this._localSeat : 0;
+        },
+        configurable: true,
+      });
+      logic.isLocalTurn = function isLocalTurnHotseat() {
+        return this._localSeat === undefined ? false : this.isTurn(this._localSeat);
+      };
+      logic.__viewPinned = true;
+    }
+
     // 2. Patch _localMoves queue matching so local moves always match the seat that originated them
     // even if activeLocalSeat switches right after a move.
     const origMove = logic.move.bind(logic);
@@ -496,7 +536,12 @@ export async function launchPlatoOfflineSession({
               const prev = logic._localSeat;
               if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG = window.__SRV_LOG || []).push({ dir: "bridge", type: "readySync", seat: s, prev });
               logic._localSeat = s;
-              try { logic.onSynchronize.emit(); } finally { logic._localSeat = prev; }
+              try {
+                logic.onSynchronize.emit();
+                // View-pinned games (Monsters battle): the game's own onSync ready-ack reads the pinned
+                // localSeat (0), so ack the awaited seat directly here instead.
+                if (logic.__viewPinned && logic.gamePhase !== 0 && logic.isSeatAwaitingReady(s)) logic.localReady();
+              } finally { logic._localSeat = prev; }
             }
           } catch (_e) { /* ignore */ }
         }, 0);
