@@ -298,9 +298,12 @@ async function startMatch(params) {
     gameScreen.classList.add("active");
 
     let currentHudInfo = { seat: 0, turns: [0], simultaneous: false };
+    // User request: no black "Turn: Player N" box at the top of Pool; the original game's own avatars/pill show the turn.
+    document.getElementById("turn-pill").classList.toggle("hidden", params.gameId === GAMES.pool.id);
     // Pass-the-phone cover: only for games with hidden information (not Pool).
     const humanCount = params.playerNames.length - (params.botSeats ? params.botSeats.length : 0);
-    const coverEnabled = params.gameId !== GAMES.pool.id && humanCount > 1 && !params.lan;
+    // User request (device retest): no pass-the-phone interstitial in Monsters either; the game's own graphics show whose turn it is.
+    const coverEnabled = params.gameId !== GAMES.pool.id && params.gameId !== GAMES.monsters.id && humanCount > 1 && !params.lan;
     let coveredSeat = -1;
     let coverTimer = null;
     const hideCover = () => passCover.classList.add("hidden");
