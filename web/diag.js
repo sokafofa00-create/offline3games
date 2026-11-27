@@ -4,8 +4,9 @@
   function mk() {
     if (box) return box;
     box = document.createElement("pre");
-    box.style.cssText = "position:fixed;left:0;top:0;right:0;max-height:60vh;overflow:auto;margin:0;padding:6px;z-index:2147483647;font:11px monospace;color:#fff;background:rgba(120,0,0,.85);white-space:pre-wrap;pointer-events:auto;direction:ltr;text-align:left";
-    box.addEventListener("click", function () { box.style.display = "none"; });
+    // pointer-events:none: the overlay must never block game UI (it covered the top-right menu button
+    // for the whole 90s window on Brawlbots, breaking the smoke test and the on-device menu).
+    box.style.cssText = "position:fixed;left:0;top:0;right:0;max-height:60vh;overflow:auto;margin:0;padding:6px;z-index:2147483647;font:11px monospace;color:#fff;background:rgba(120,0,0,.85);white-space:pre-wrap;pointer-events:none;direction:ltr;text-align:left";
     (document.body || document.documentElement).appendChild(box);
     return box;
   }
