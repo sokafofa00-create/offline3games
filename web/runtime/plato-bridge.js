@@ -453,6 +453,25 @@ export async function launchPlatoOfflineSession({
       });
     }
 
+    // Match Monsters only: pin the VIEW to seat 0 during battle phases so monster rows, avatars and
+    // splashes NEVER mirror when the active seat changes (the bridge switches _localSeat to perform
+    // moves as the active seat, and the scene used to re-layout around it). Draft (gamePhase 0) keeps
+    // per-seat views so each seat privately picks its own monsters. Turn/permission checks keep using
+    // the real active seat via the isLocalTurn override below (localMove/localReady already use the
+    // raw _localSeat, so moves and ready acks are unaffected).
+    if (typeof logic.seatShouldBeOnTheRight === "function" && typeof logic.getLocalSeatAsNumber === "function") {
+      Object.defineProperty(logic, "localSeat", {
+        get() {
+          return this.gamePhase === 0 ? this._localSeat : 0;
+        },
+        configurable: true,
+      });
+      logic.isLocalTurn = function isLocalTurnHotseat() {
+        return this._localSeat === undefined ? false : this.isTurn(this._localSeat);
+      };
+      logic.__viewPinned = true;
+    }
+
     // 2. Patch _localMoves queue matching so local moves always match the seat that originated them
     // even if activeLocalSeat switches right after a move.
     const origMove = logic.move.bind(logic);
@@ -517,7 +536,12 @@ export async function launchPlatoOfflineSession({
               const prev = logic._localSeat;
               if (window.__DEBUG_HOTSEAT__) (window.__SRV_LOG = window.__SRV_LOG || []).push({ dir: "bridge", type: "readySync", seat: s, prev });
               logic._localSeat = s;
-              try { logic.onSynchronize.emit(); } finally { logic._localSeat = prev; }
+              try {
+                logic.onSynchronize.emit();
+                // View-pinned games (Monsters battle): the game's own onSync ready-ack reads the pinned
+                // localSeat (0), so ack the awaited seat directly here instead.
+                if (logic.__viewPinned && logic.gamePhase !== 0 && logic.isSeatAwaitingReady(s)) logic.localReady();
+              } finally { logic._localSeat = prev; }
             }
           } catch (_e) { /* ignore */ }
         }, 0);
