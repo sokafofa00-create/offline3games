@@ -155,11 +155,11 @@ export async function preloadGameBundle(gameId, onProgress) {
       if (typeof txt !== "string" || txt.length > 600000 || !/\.(json|toml)$/i.test(name)) continue;
       let m; re.lastIndex = 0;
       while ((m = re.exec(txt))) skuSet.add(Number(m[1]));
-      if (/^\s*\{\s*"\d+"\s*:\s*\{/.test(txt) && /\.json$/i.test(name)) {
+      if (/^\s*\{\s*"-?\d+"\s*:\s*\{/.test(txt) && /\.json$/i.test(name)) {
         try {
           const o = JSON.parse(txt);
           const keys = Object.keys(o);
-          if (keys.length && keys.every((k) => /^\d+$/.test(k) && o[k] && typeof o[k] === "object" && ("data" in o[k] || "assets" in o[k]))) keys.forEach((k) => skuSet.add(Number(k)));
+          if (keys.length && keys.every((k) => /^-?\d+$/.test(k) && o[k] && typeof o[k] === "object" && ("data" in o[k] || "assets" in o[k]))) keys.forEach((k) => skuSet.add(Number(k)));
         } catch (_) {}
       }
     }
@@ -589,6 +589,32 @@ export async function launchPlatoOfflineSession({
     });
   }
 
+  // Pool same-device play: the equipped cue/table/effect applies only to the seat that was local at start, so the
+  // other seat showed the default table and effects (the themed table flipped back every other turn). One phone
+  // serves every seat, so copy the equipped items to all seats (bounded retries, never loops).
+  const equipMirrorTries = {};
+  function mirrorEquipmentToAllSeats() {
+    try {
+      const l = clientLogic;
+      if (!l || lan || typeof l.plugins !== "function") return;
+      const ps = l.plugins().filter((p) => p && p.manifest && typeof p.equipped === "function" && typeof p.move === "function" && typeof p.isEmpty === "function");
+      for (const p of ps) {
+        let src;
+        for (let s = 0; s < numSeats; s++) { if (!p.isEmpty(s)) { src = p.equipped(s); break; } }
+        if (src === undefined) continue;
+        for (let s = 0; s < numSeats; s++) {
+          if (p.equipped(s) === src) continue;
+          const key = p.manifest.key + ":" + s;
+          if ((equipMirrorTries[key] || 0) >= 3) continue;
+          equipMirrorTries[key] = (equipMirrorTries[key] || 0) + 1;
+          const prev = l._localSeat;
+          l._localSeat = s;
+          try { p.move(src); } finally { l._localSeat = prev; }
+        }
+      }
+    } catch (_e) { /* ignore */ }
+  }
+
   function applyHotseatSeatSync() {
     if (!clientLogic || destroyed || clientLogic.gameOver || !clientLogic.started) {
       updateTopHud();
@@ -600,6 +626,8 @@ export async function launchPlatoOfflineSession({
       updateTopHud();
       return;
     }
+
+    mirrorEquipmentToAllSeats();
 
     const turns = Array.isArray(clientLogic.turn) ? clientLogic.turn : [];
     if (turns.length === 0) {
