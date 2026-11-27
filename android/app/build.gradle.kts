@@ -110,6 +110,10 @@ android {
     // Do not compress audio/webp files so WebViewAssetLoader streams them at zero-copy speed
     androidResources {
         noCompress += listOf("m4a", "mp3", "ogg", "wav", "webp", "png")
+        // aapt2's default ignore pattern drops any asset directory whose name starts with "_" ("<dir>_*"),
+        // which silently removed Brawlbots' g/<id>/game/_revamp/content/bots/* (atlas/json/webp/audio).
+        // Same default minus that "<dir>_*" entry.
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
     }
 
     sourceSets {
