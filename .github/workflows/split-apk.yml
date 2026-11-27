@@ -1,0 +1,36 @@
+name: Split slim APK into verifiable parts
+
+on:
+  push:
+    branches: [ "split-ci" ]
+  workflow_dispatch:
+
+jobs:
+  split:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Split latest-test debug APK into 7z volumes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          sudo apt-get install -y p7zip-full >/dev/null
+          mkdir -p /tmp/w && cd /tmp/w
+          gh release download latest-test --repo "$GITHUB_REPOSITORY" -p offline3games-debug.apk
+          sha256sum offline3games-debug.apk | tee SOURCE_APK_SHA256.txt
+          stat -c %s offline3games-debug.apk
+          7z a -mx0 -v20m offline3games-debug.7z offline3games-debug.apk
+          7z t offline3games-debug.7z.001
+          mkdir chk && cd chk && 7z x ../offline3games-debug.7z.001 >/dev/null && sha256sum offline3games-debug.apk && cd ..
+          rm -rf chk offline3games-debug.apk
+          sha256sum offline3games-debug.7z.* > PARTS_SHA256.txt
+          cat PARTS_SHA256.txt
+          cat > README.txt <<'TXT'
+          Install: put ALL .7z.00N parts in one folder, open the .001 with ZArchiver (or any 7z app), extract offline3games-debug.apk, install it.
+          Each part has its own sha256 in PARTS_SHA256.txt. 7z also checks CRC on extract. Re-download only a part that fails.
+          The extracted APK sha256 must equal SOURCE_APK_SHA256.txt.
+          TXT
+          gh release delete split-slim-debug -y --cleanup-tag --repo "$GITHUB_REPOSITORY" || true
+          gh release create split-slim-debug offline3games-debug.7z.* PARTS_SHA256.txt SOURCE_APK_SHA256.txt README.txt --repo "$GITHUB_REPOSITORY" --prerelease --target "$GITHUB_SHA" --title split-slim-debug --notes "20 MB 7z parts of the latest-test debug APK, each independently verifiable."
