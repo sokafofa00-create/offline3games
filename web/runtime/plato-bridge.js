@@ -828,6 +828,7 @@ export async function launchPlatoOfflineSession({
 
     serverWorker.postMessage({
       type: "init",
+      gameId: bundle.gameId,
       mainCode: bundle.mainCode,
       textFiles: bundle.plainTextObj,
       dictionary: bundle.dictionary,
