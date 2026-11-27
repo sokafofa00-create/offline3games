@@ -507,7 +507,6 @@ export async function launchPlatoOfflineSession({
 
   let syncPending = false;
   function scheduleHotseatSeatSync() {
-    suppressTurnBanner();
     if (lan) return;
     if (syncPending || destroyed) return;
     syncPending = true;
@@ -567,26 +566,7 @@ export async function launchPlatoOfflineSession({
     renderRequested = true;
   }
 
-  // User request (Monsters): no white "Player N's turn" strip over the field. The game's flow and its own waits stay unchanged; only the strip is kept invisible.
-  function suppressTurnBanner() {
-    const scene = clientLogic?.sceneMgr;
-    if (!scene || scene.__noTurnBanner || typeof scene.getTurnNode !== "function" || !("boardNode" in scene)) return;
-    scene.__noTurnBanner = true;
-    const hide = (n) => {
-      if (!n || n.__noBanner) return n;
-      n.__noBanner = true;
-      n.fadeInPromise = async () => {};
-      n.fadeOutPromise = async () => {};
-      try { Object.defineProperty(n, "visible", { get() { return false; }, set() {}, configurable: true }); } catch (_e) {}
-      return n;
-    };
-    const orig = scene.getTurnNode.bind(scene);
-    scene.getTurnNode = function () { return hide(orig()); };
-    if (scene.turnNode) hide(scene.turnNode);
-  }
-
   function refreshSceneControls(seat) {
-    suppressTurnBanner();
     const scene = clientLogic?.sceneMgr;
     if (!scene) return;
     if (scene.avatars) {
