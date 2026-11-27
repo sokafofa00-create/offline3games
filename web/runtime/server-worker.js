@@ -252,7 +252,10 @@ function scheduleServerAlarm(durationMs, alarmId) {
     serverAlarms.delete(alarmId);
     if (!serverLogic || serverLogic.gameOver) return;
     pendingReveals.clear();
-    serverLogic.alarm({}, alarmId);
+    // A stale timer (server already advanced past this id) is rejected by the logic; broadcasting it makes the
+    // client see an "unexpected alarm" and force-resync (board snaps, no animations). Drop it silently.
+    const __alarmOk = serverLogic.alarm({}, alarmId);
+    if (__alarmOk === false) { pendingReveals.clear(); return; }
     const rev = collectRevealForSeat(0);
     self.postMessage({
       type: "serverAlarm",
