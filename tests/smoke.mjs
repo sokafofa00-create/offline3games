@@ -76,7 +76,7 @@ for (const sc of scenarios.filter((x) => !ONLY.length || ONLY.includes(x.name)))
     res.orientation.ok = sc.game === "brawlbots" ? (res.orientation.hostCalls || []).slice(-1)[0] === "landscape" : (res.orientation.hostCalls || []).slice(-1)[0] === "portrait";
     // Pass-the-phone cover (REAL controls): visible at start for hidden-info games, never for Pool.
     const coverVisible = async () => (await page.locator("#pass-cover").isVisible());
-    res.cover = { expected: sc.game !== "pool", atStart: await coverVisible() };
+    res.cover = { expected: sc.game !== "pool" && sc.game !== "monsters", atStart: await coverVisible() };
     if (res.cover.atStart) {
       res.cover.title = (await page.textContent("#pass-cover-title"))?.trim();
       await page.screenshot({ path: `${SHOT_DIR}/${sc.name}-1b-cover.png` });
