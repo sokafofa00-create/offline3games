@@ -27,6 +27,12 @@ val syncOfflineAssets by tasks.registering(Sync::class) {
         if (manifestFile.exists()) {
             @Suppress("UNCHECKED_CAST")
             val hashByName = groovy.json.JsonSlurper().parseText(manifestFile.readText()) as Map<String, String>
+            // Slim build (Pool, user request): pack only the golden asset set; repo content stays complete.
+            val goldenFile = file("../../web/pool-golden.json")
+            @Suppress("UNCHECKED_CAST")
+            val goldenKeys: Set<String> = if (dirName == "pool_assets" && goldenFile.exists())
+                ((groovy.json.JsonSlurper().parseText(goldenFile.readText()) as Map<String, Object>)["keys"] as List<String>).toSet()
+            else emptySet()
             // Files known not to be the real asset (generated placeholders) are not packaged; see asset-quarantine.json.
             val quarantineFile = file("../../asset-quarantine.json")
             @Suppress("UNCHECKED_CAST")
@@ -36,7 +42,7 @@ val syncOfflineAssets by tasks.registering(Sync::class) {
             from("../../$dirName") {
                 eachFile {
                     val hash = hashByName[this.path]
-                    if (hash == null || quarantined.contains(this.path)) {
+                    if (hash == null || quarantined.contains(this.path) || (goldenKeys.isNotEmpty() && !goldenKeys.contains(this.path))) {
                         this.exclude()
                     } else {
                         this.relativePath = RelativePath(true, "assets", hash)

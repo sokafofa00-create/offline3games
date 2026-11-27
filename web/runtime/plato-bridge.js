@@ -105,6 +105,34 @@ export async function preloadGameBundle(gameId, onProgress) {
     } catch (_) {}
   }
 
+  // Slim build (Pool, user request): keep only golden-set shop items so the cue/table/effects UI lists
+  // exactly the items whose assets are packed in the APK. Default entries always survive: every item with
+  // data.standard === true, plus the "-1" no-effect entry, so the default loadout always resolves.
+  if (gameId === "7c5d2aa05094dbee8753108c59f617b2f4b1e7ae") {
+    try {
+      const goldenResp = await fetch("./pool-golden.json");
+      if (goldenResp.ok) {
+        const golden = await goldenResp.json();
+        const keep = new Set([...(golden.skus?.cues || []), ...(golden.skus?.tables || []), ...(golden.skus?.effects || [])]);
+        for (const [name, txt] of Array.from(textFiles.entries())) {
+          if (typeof txt !== "string" || !/\.json$/i.test(name) || !/^\s*\{\s*"-?\d+"\s*:\s*\{/.test(txt)) continue;
+          try {
+            const o = JSON.parse(txt);
+            const keys = Object.keys(o);
+            if (!keys.length || !keys.every((k) => /^-?\d+$/.test(k) && o[k] && typeof o[k] === "object" && ("data" in o[k] || "assets" in o[k]))) continue;
+            let changed = false;
+            for (const k of keys) {
+              if (k === "-1") continue;
+              if (o[k].data && o[k].data.standard === true) continue;
+              if (!keep.has(Number(k))) { delete o[k]; changed = true; }
+            }
+            if (changed) textFiles.set(name, JSON.stringify(o));
+          } catch (_) {}
+        }
+      }
+    } catch (_) {}
+  }
+
   // Extract unlocked monster IDs if monsters.json is present (for Match Monsters)
   let unlockedInventory = [];
   if (textFiles.has("monsters.json")) {
@@ -800,6 +828,7 @@ export async function launchPlatoOfflineSession({
 
     serverWorker.postMessage({
       type: "init",
+      gameId: bundle.gameId,
       mainCode: bundle.mainCode,
       textFiles: bundle.plainTextObj,
       dictionary: bundle.dictionary,
@@ -976,4 +1005,4 @@ export async function launchPlatoOfflineSession({
       audioBridge.destroy();
     },
   };
-}
+      }
