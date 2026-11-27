@@ -84,9 +84,9 @@ export async function preloadGameBundle(gameId, onProgress) {
     return s.startsWith("~/") ? s.slice(2) : s.replace(/^\.\//, "");
   }
 
-  // User request (Pool): choosing a table style changes only the background (and music), never the table/head-line art.
-  // Theme manifests ({sku:{assets,data:{background,table,head_line,music}}}) get the standard theme's table and head line.
-  for (const [name, txt] of Array.from(textFiles.entries())) {
+  // Pool table styles: a style now applies its own table and head-line art (user request, replaces the earlier
+  // background-only behaviour). The old override loop is kept disabled for reference.
+  for (const [name, txt] of (false ? Array.from(textFiles.entries()) : [])) {
     if (typeof txt !== "string" || !/\.json$/i.test(name) || txt.length < 200 || txt.charCodeAt(0) !== 123) continue;
     try {
       const o = JSON.parse(txt);
