@@ -9,7 +9,7 @@ const browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=sw
 const ctx = await browser.newContext({ viewport: { width: 412, height: 860 }, hasTouch: true });
 const page = await ctx.newPage();
 const errors = [];
-page.on("pageerror", (e) => errors.push("pageerror: " + e.message));
+page.on("pageerror", (e) => errors.push("pageerror: " + (e && e.stack ? String(e.stack).slice(0,300) : JSON.stringify(e).slice(0,300))));
 page.on("console", (m) => { if (m.type() === "error") errors.push("console: " + m.text().slice(0, 140)); });
 fs.mkdirSync("shots", { recursive: true });
 const res = { errors, breaks: [], shop: [] };
@@ -40,6 +40,11 @@ try {
   for (const [name, x, y] of [["elements", 25, 440]]) {
     await page.touchscreen.tap(x, y); await page.waitForTimeout(3000);
     await page.screenshot({ path: `shots/probe-4-shop-${name}.png` });
+    res.shop.push({ name, x, y });
+  }
+  for (const [name, x, y] of [["themes", 205, 192], ["fx", 340, 192]]) {
+    await page.touchscreen.tap(x, y); await page.waitForTimeout(5000);
+    await page.screenshot({ path: `shots/probe-5-tab-${name}.png` });
     res.shop.push({ name, x, y });
   }
 } catch (e) { res.exception = String(e && e.message).slice(0, 300); }
