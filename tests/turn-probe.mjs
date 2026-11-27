@@ -30,11 +30,11 @@ try {
   await page.evaluate(async () => { const m = await import("/bots.js"); window.__HB__ = m.startBots({ getLogic: () => window.__ACTIVE_SESSION__?.getClientLogic?.(), botSeats: [0], difficulty: "medium", game: "monsters" }); });
   let last = "", shots = 0;
   const t0 = Date.now();
-  while (Date.now() - t0 < 110000) {
-    const s = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const lock = document.getElementById("bot-lock"); return { seat: l._localSeat, disp: l.displaySeat, turn: JSON.stringify(l.turn), phase: l.gamePhase, moves: l.moveCount, lock: lock ? lock.style.display : "none", over: l.gameOver }; });
+  while (Date.now() - t0 < 100000) {
+    const s = await page.evaluate(() => { const l = window.__ACTIVE_SESSION__.getClientLogic(); const lock = document.getElementById("bot-lock"); return { seat: l._localSeat, disp: l.displaySeat, turn: JSON.stringify(l.turn), phase: l.gamePhase, moves: l.moveCount, hb: JSON.stringify((window.__HB__?.log||[]).slice(-2)).slice(0,200), bb: JSON.stringify((window.__BOTS__?.log||[]).slice(-1)).slice(0,120), lock: lock ? lock.style.display : "none", over: l.gameOver }; });
     const key = [s.seat, s.turn, s.phase].join("|");
-    log(Math.round((Date.now() - t0) / 1000), JSON.stringify(s));
-    if (key !== last && shots < 10) { last = key; await page.waitForTimeout(600); await page.screenshot({ path: `shots/mon-${String(shots++).padStart(2, "0")}-seat${s.seat}-ph${s.phase}.png` }); }
+    if (key !== last || Math.round((Date.now() - t0) / 1000) % 15 === 0) log(Math.round((Date.now() - t0) / 1000), JSON.stringify(s));
+    if (key !== last && shots < 18) { last = key; for (const d of [600, 2500, 4000]) { await page.waitForTimeout(d); await page.screenshot({ path: `shots/mon-${String(shots++).padStart(2, "0")}-seat${s.seat}-ph${s.phase}-d${d}.png` }); } }
     await page.waitForTimeout(1500);
   }
 } catch (e) { log("A exception", String(e && e.message).slice(0, 300)); }
@@ -51,7 +51,7 @@ try {
     const r = await page.evaluate((n) => { const l = window.__ACTIVE_SESSION__.getClientLogic(); try { if (!l.canShoot(l._localSeat)) return { skip: true }; const nb = l.table.balls.filter((b) => !b.isPocketed())[0]; const c = l.table.cueBall.position; const ang = Math.atan2(nb.position[1] - c[1], nb.position[0] - c[0]); l.requestShot(n === 1 ? 0.95 : 0.3, ang, [0, 0]); return { shot: true, as: l._localSeat }; } catch (e) { return { err: String(e && e.message).slice(0, 100) }; } }, n);
     log("B shot", n, JSON.stringify(r));
     if (!r.shot) break;
-    for (let k = 0; k < 16; k++) { await page.waitForTimeout(700); log("B t", n, k, JSON.stringify(await st())); }
+    for (let k = 0; k < 16; k++) { await page.waitForTimeout(700); if (k % 4 === 0 || k > 12) log("B t", n, k, JSON.stringify(await st())); }
     await page.screenshot({ path: `shots/pool-after-shot${n}.png` });
   }
 } catch (e) { log("B exception", String(e && e.message).slice(0, 300)); }
