@@ -300,6 +300,7 @@ async function startMatch(params) {
     let currentHudInfo = { seat: 0, turns: [0], simultaneous: false };
     // User request: no black "Turn: Player N" box at the top of Pool; the original game's own avatars/pill show the turn.
     document.getElementById("turn-pill").classList.toggle("hidden", params.gameId === GAMES.pool.id);
+    if (params.gameId === GAMES.brawlbots.id && window.__diagShow) window.__diagShow();
     // Pass-the-phone cover: only for games with hidden information (not Pool).
     const humanCount = params.playerNames.length - (params.botSeats ? params.botSeats.length : 0);
     // User request (device retest): no pass-the-phone interstitial in Monsters either; the game's own graphics show whose turn it is.
